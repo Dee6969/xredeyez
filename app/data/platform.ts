@@ -1,6 +1,15 @@
 export type ListingTier = "free" | "featured" | "premium";
 export type ClaimStatus = "unclaimed" | "claimed" | "partner";
 
+export interface VenueBrand {
+  primaryColor: string;
+  accentColor: string;
+  aesthetic: "dark" | "light" | "warm-dark" | "minimal";
+  tagline?: string;
+  logoText?: string;
+  foundedYear?: number;
+}
+
 export interface Vibe {
   id: string;
   slug: string;
@@ -39,6 +48,7 @@ export interface Venue {
   referralCode?: string;
   bookingUrl?: string;
   claimStatus: ClaimStatus;
+  brand?: VenueBrand;
 }
 
 export interface FeaturedPlacement {
@@ -287,6 +297,14 @@ export const venues: Venue[] = [
     partnerUrl: "https://www.greyarea.nl/",
     referralCode: "xred-grey-area",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#C8102E",
+      accentColor: "#E8E0D0",
+      aesthetic: "dark",
+      tagline: "The American Dream in Amsterdam",
+      logoText: "GREY AREA",
+      foundedYear: 1993,
+    },
   },
   {
     id: "boerejongens",
@@ -313,6 +331,14 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.boerejongens.com",
     referralCode: "xred-boerejongens",
     claimStatus: "partner",
+    brand: {
+      primaryColor: "#1A1614",
+      accentColor: "#C5A46A",
+      aesthetic: "dark",
+      tagline: "High class. Exclusief. Amsterdam.",
+      logoText: "BOEREJONGENS",
+      foundedYear: 2009,
+    },
   },
   {
     id: "paradox",
@@ -335,6 +361,14 @@ export const venues: Venue[] = [
     partnerUrl: "https://www.coffeeshopparadox.com/",
     referralCode: "xred-paradox",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#2D4A35",
+      accentColor: "#C8B88A",
+      aesthetic: "warm-dark",
+      tagline: "The Jordaan's quiet room.",
+      logoText: "PARADOX",
+      foundedYear: 1982,
+    },
   },
   {
     id: "the-stud",
@@ -357,6 +391,13 @@ export const venues: Venue[] = [
     partnerUrl: "https://www.coffeeshopthestud.com/",
     referralCode: "xred-stud",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#1A1410",
+      accentColor: "#D4A84C",
+      aesthetic: "warm-dark",
+      tagline: "East Amsterdam. Local rhythm.",
+      logoText: "THE STUD",
+    },
   },
   {
     id: "coffeeshop-amsterdam",
@@ -379,6 +420,13 @@ export const venues: Venue[] = [
     partnerUrl: "https://coffeeshopamsterdam.com/",
     referralCode: "xred-cs-amsterdam",
     claimStatus: "claimed",
+    brand: {
+      primaryColor: "#1A1010",
+      accentColor: "#E05020",
+      aesthetic: "dark",
+      tagline: "Central. Accessible. Amsterdam.",
+      logoText: "COFFEESHOP AMSTERDAM",
+    },
   },
   {
     id: "siberie",
@@ -402,6 +450,14 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.coffeeshopsiberie.nl/",
     referralCode: "xred-siberie",
     claimStatus: "partner",
+    brand: {
+      primaryColor: "#1A2030",
+      accentColor: "#C8A85A",
+      aesthetic: "warm-dark",
+      tagline: "Canal-side. Creative. Jordaan.",
+      logoText: "SIBERIE",
+      foundedYear: 1990,
+    },
   },
   {
     id: "dampkring",
@@ -427,6 +483,14 @@ export const venues: Venue[] = [
     partnerUrl: "https://ogdampkring.com",
     referralCode: "xred-dampkring",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#1E1608",
+      accentColor: "#C8943A",
+      aesthetic: "warm-dark",
+      tagline: "A cinematic classic since 1993.",
+      logoText: "ORIGINAL DAMPKRING",
+      foundedYear: 1993,
+    },
   },
   {
     id: "prix-dami",
@@ -453,6 +517,14 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.prixdami.nl/en",
     referralCode: "xred-prix-dami",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#D4237A",
+      accentColor: "#1A1A1A",
+      aesthetic: "light",
+      tagline: "Pink is more than a colour.",
+      logoText: "PRIX D'AMI",
+      foundedYear: 2008,
+    },
   },
   {
     id: "bulldog-first",
@@ -479,6 +551,14 @@ export const venues: Venue[] = [
     bookingUrl: "https://thebulldog.com",
     referralCode: "xred-bulldog-first",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#C8102E",
+      accentColor: "#F4B800",
+      aesthetic: "dark",
+      tagline: "The Living Room of the World.",
+      logoText: "THE BULLDOG",
+      foundedYear: 1975,
+    },
   },
   {
     id: "bulldog-energy",
@@ -504,6 +584,14 @@ export const venues: Venue[] = [
     partnerUrl: "https://thebulldog.com",
     referralCode: "xred-bulldog-energy",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#C8102E",
+      accentColor: "#F4B800",
+      aesthetic: "dark",
+      tagline: "Est. 1975 Amsterdam.",
+      logoText: "THE BULLDOG",
+      foundedYear: 1975,
+    },
   },
   {
     id: "green-house-centrum",
@@ -530,6 +618,14 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.greenhouse.org",
     referralCode: "xred-green-house-centrum",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#1A3520",
+      accentColor: "#C8A83A",
+      aesthetic: "dark",
+      tagline: "Cannabis culture. Award-winning genetics.",
+      logoText: "THE GREEN HOUSE",
+      foundedYear: 1985,
+    },
   },
   {
     id: "green-house-pijp",
@@ -556,6 +652,14 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.greenhouse.org",
     referralCode: "xred-green-house-pijp",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#1A3520",
+      accentColor: "#C8A83A",
+      aesthetic: "dark",
+      tagline: "De Pijp. Genetics. Green House.",
+      logoText: "THE GREEN HOUSE",
+      foundedYear: 1985,
+    },
   },
   {
     id: "abraxas",
@@ -582,6 +686,14 @@ export const venues: Venue[] = [
     bookingUrl: "https://abraxas.amsterdam",
     referralCode: "xred-abraxas",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#1E1030",
+      accentColor: "#C89A3A",
+      aesthetic: "dark",
+      tagline: "Cosmic. Central. Amsterdam.",
+      logoText: "ABRAXAS",
+      foundedYear: 1989,
+    },
   },
   {
     id: "tweede-kamer",
@@ -608,6 +720,14 @@ export const venues: Venue[] = [
     bookingUrl: "https://tweedekamercoffeeshop.nl",
     referralCode: "xred-tweede-kamer",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#2E2010",
+      accentColor: "#8B6930",
+      aesthetic: "warm-dark",
+      tagline: "Cannabis sommeliers since 1985.",
+      logoText: "TWEEDE KAMER",
+      foundedYear: 1985,
+    },
   },
   {
     id: "katsu",
@@ -634,6 +754,14 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.katsu.nl",
     referralCode: "xred-katsu",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#1E1610",
+      accentColor: "#C06840",
+      aesthetic: "warm-dark",
+      tagline: "Gallery. Coffee. De Pijp.",
+      logoText: "KATSU",
+      foundedYear: 1996,
+    },
   },
   {
     id: "boerejongens-centrum",
@@ -660,6 +788,14 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.boerejongens.com",
     referralCode: "xred-boerejongens-centrum",
     claimStatus: "partner",
+    brand: {
+      primaryColor: "#1A1614",
+      accentColor: "#C5A46A",
+      aesthetic: "dark",
+      tagline: "High class. Central Amsterdam.",
+      logoText: "BOEREJONGENS",
+      foundedYear: 2009,
+    },
   },
   {
     id: "the-plug-utopia",
@@ -686,6 +822,13 @@ export const venues: Venue[] = [
     bookingUrl: "https://theplugcoffeeshops.com",
     referralCode: "xred-plug-utopia",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#0A0A0A",
+      accentColor: "#E03020",
+      aesthetic: "dark",
+      tagline: "The Plug. Central. Modern.",
+      logoText: "THE PLUG",
+    },
   },
   {
     id: "de-pijp-culture-walk",
@@ -708,6 +851,13 @@ export const venues: Venue[] = [
     bookingUrl: "/partners/claim?collection=de-pijp-culture-walk",
     referralCode: "xred-de-pijp",
     claimStatus: "claimed",
+    brand: {
+      primaryColor: "#1A1E14",
+      accentColor: "#8AAA70",
+      aesthetic: "warm-dark",
+      tagline: "Neighbourhood. Culture. De Pijp.",
+      logoText: "DE PIJP",
+    },
   },
   {
     id: "foodhallen-reset",
@@ -730,6 +880,13 @@ export const venues: Venue[] = [
     partnerUrl: "https://foodhallen.nl/amsterdam/",
     referralCode: "xred-foodhallen",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#1A1410",
+      accentColor: "#E8A820",
+      aesthetic: "warm-dark",
+      tagline: "Food. Reset. Oud-West.",
+      logoText: "FOODHALLEN",
+    },
   },
   {
     id: "vondel-reset",
@@ -752,6 +909,13 @@ export const venues: Venue[] = [
     bookingUrl: "/trips?seed=vondel-reset",
     referralCode: "xred-vondel",
     claimStatus: "claimed",
+    brand: {
+      primaryColor: "#121A14",
+      accentColor: "#5A8A5A",
+      aesthetic: "warm-dark",
+      tagline: "Green space. Recovery. Vondelpark.",
+      logoText: "VONDEL",
+    },
   },
   {
     id: "ndsm-culture-yard",
@@ -774,6 +938,13 @@ export const venues: Venue[] = [
     partnerUrl: "https://www.ndsm.nl/en/",
     referralCode: "xred-ndsm",
     claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#0D0D0D",
+      accentColor: "#E84C10",
+      aesthetic: "dark",
+      tagline: "Industrial. Creative. Noord.",
+      logoText: "NDSM",
+    },
   },
   {
     id: "pllek-waterfront",
@@ -797,6 +968,13 @@ export const venues: Venue[] = [
     bookingUrl: "https://pllek.nl/",
     referralCode: "xred-pllek",
     claimStatus: "partner",
+    brand: {
+      primaryColor: "#141E20",
+      accentColor: "#4A8A8A",
+      aesthetic: "minimal",
+      tagline: "Waterfront. Food. Music. Noord.",
+      logoText: "PLLEK",
+    },
   },
 ];
 

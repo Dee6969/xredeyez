@@ -55,25 +55,29 @@ export default function SiteFooter() {
               <div
                 style={{
                   fontFamily: "var(--font-playfair, Georgia, serif)",
-                  fontSize: "20px",
+                  fontSize: "22px",
                   fontWeight: "700",
-                  color: "var(--text-inverse)",
                   letterSpacing: "-0.01em",
+                  display: "flex",
+                  alignItems: "baseline",
+                  gap: "1px",
                 }}
               >
-                XRED EYEZ
+                <span style={{ color: "var(--text-inverse)" }}>XRED </span>
+                <span style={{ color: "#84C51F" }}>EYEZ</span>
               </div>
               <div
                 style={{
                   marginTop: "6px",
                   fontFamily: "'Courier New', monospace",
-                  fontSize: "10px",
-                  letterSpacing: "0.2em",
-                  color: "rgba(245,240,230,0.28)",
+                  fontSize: "9px",
+                  letterSpacing: "0.22em",
+                  color: "#84C51F",
+                  opacity: 0.6,
                   textTransform: "uppercase",
                 }}
               >
-                Seen differently
+                Powered by hemp
               </div>
               <p
                 style={{
@@ -192,7 +196,7 @@ export default function SiteFooter() {
               letterSpacing: "0.1em",
             }}
           >
-            © XRED EYEZ 2026 · redeyez.co.uk · P11 Digital
+            © XRED EYEZ 2026 · redeyez.co.uk · <span style={{ color: "#84C51F", opacity: 0.7 }}>Powered by Hemp</span>
           </div>
         </div>
       </div>
