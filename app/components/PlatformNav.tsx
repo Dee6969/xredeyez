@@ -58,21 +58,24 @@ const icons: Record<string, React.ReactNode> = {
 export default function PlatformNav() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const [heroNav, setHeroNav] = useState(isHome);
+  const [heroNav, setHeroNav] = useState(true);
 
   useEffect(() => {
-    if (!isHome) { setHeroNav(false); return; }
+    if (!isHome) return;
     const threshold = window.innerHeight * 0.72;
     const onScroll = () => setHeroNav(window.scrollY < threshold);
-    onScroll();
+    const frame = window.requestAnimationFrame(onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [isHome]);
 
   return (
     <>
       {/* Desktop top bar */}
-      <nav className={`platform-top-nav${heroNav ? " is-hero" : ""}`} aria-label="Primary navigation">
+      <nav className={`platform-top-nav${isHome && heroNav ? " is-hero" : ""}`} aria-label="Primary navigation">
         <Link href="/" className="platform-brand" aria-label="XRED EYEZ — home">
           <span className="platform-brand-xred">XRED </span>
           <span className="platform-brand-eyez">EYEZ</span>

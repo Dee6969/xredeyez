@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Map, { Marker, NavigationControl } from "react-map-gl/mapbox";
 import { useMemo, useState, useCallback } from "react";
-import type { City, Venue, Vibe } from "../data/platform";
+import { discoveryLayers, getVenueLayer, type City, type DiscoveryLayer, type Venue, type Vibe } from "../data/platform";
 import SaveButton from "./SaveButton";
 import VenueCard from "./VenueCard";
 
@@ -22,13 +22,17 @@ export default function CityMapExperience({
   vibes: Vibe[];
 }) {
   const [activeVibe, setActiveVibe] = useState<string>("all");
+  const [activeLayer, setActiveLayer] = useState<DiscoveryLayer | "all">("all");
   const [view, setView] = useState<"map" | "list">("map");
   const [selectedId, setSelectedId] = useState<string>(venues[0]?.id || "");
 
   const filteredVenues = useMemo(() => {
-    if (activeVibe === "all") return venues;
-    return venues.filter((venue) => venue.vibeIds.includes(activeVibe));
-  }, [activeVibe, venues]);
+    return venues.filter((venue) => {
+      const layerMatch = activeLayer === "all" || getVenueLayer(venue) === activeLayer;
+      const vibeMatch = activeVibe === "all" || venue.vibeIds.includes(activeVibe);
+      return layerMatch && vibeMatch;
+    });
+  }, [activeLayer, activeVibe, venues]);
 
   const selected = filteredVenues.find((venue) => venue.id === selectedId) || filteredVenues[0];
 
@@ -131,10 +135,25 @@ export default function CityMapExperience({
           <button
             type="button"
             className={`vibe-chip ${activeVibe === "all" ? "is-active" : ""}`}
-            onClick={() => setActiveVibe("all")}
+            onClick={() => {
+              setActiveLayer("all");
+              setActiveVibe("all");
+            }}
           >
             All
           </button>
+          {discoveryLayers.map((layer) => (
+            <button
+              key={layer.id}
+              type="button"
+              className={`vibe-chip ${activeLayer === layer.id ? "is-active" : ""}`}
+              onClick={() => setActiveLayer(layer.id)}
+            >
+              {layer.label}
+            </button>
+          ))}
+        </div>
+        <div className="map-filter-strip">
           {vibes.slice(0, 8).map((vibe) => (
             <button
               key={vibe.id}

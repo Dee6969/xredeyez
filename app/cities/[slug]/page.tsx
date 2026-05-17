@@ -5,7 +5,7 @@ import FeaturedPlacementSlot from "../../components/FeaturedPlacementSlot";
 import PlatformShell from "../../components/PlatformShell";
 import SaveButton from "../../components/SaveButton";
 import VenueCard from "../../components/VenueCard";
-import { cities, getCity, getFeaturedPlacements, getSortedVenuesByCity, getVibe } from "../../data/platform";
+import { cities, discoveryLayers, getCity, getFeaturedPlacements, getSortedVenuesByCity, getVenueLayer, getVibe } from "../../data/platform";
 
 interface CityPageProps {
   params: Promise<{ slug: string }>;
@@ -33,6 +33,11 @@ export default async function CityPage({ params }: CityPageProps) {
   const cityVenues = getSortedVenuesByCity(city.id);
   const placements = getFeaturedPlacements(city.id).slice(0, 2);
   const isLive = city.status === "flagship" || city.status === "live";
+  const layerGroups = discoveryLayers.map((layer) => ({
+    ...layer,
+    venues: cityVenues.filter((venue) => getVenueLayer(venue) === layer.id),
+  }));
+  const activeLayerGroups = layerGroups.filter((layer) => layer.venues.length > 0);
 
   return (
     <PlatformShell>
@@ -69,12 +74,36 @@ export default async function CityPage({ params }: CityPageProps) {
           </div>
           <div>
             <span>What can I do?</span>
-            <strong>{isLive ? "Map, vibes, venues, routes" : "Preview market guide"}</strong>
+            <strong>{isLive ? "Cannabis, stay, eat, do, routes" : "Preview market guide"}</strong>
           </div>
           <div>
             <span>Tap next</span>
             <strong>{isLive ? "Open Map" : "Save City"}</strong>
           </div>
+        </div>
+      </section>
+
+      <section className="platform-section">
+        <div className="platform-section-head">
+          <div>
+            <div className="eyebrow">CITY LAYERS</div>
+            <h2 className="platform-section-title">Move through the city naturally.</h2>
+          </div>
+          {isLive && (
+            <Link href={`/cities/${city.slug}/map`} data-hover className="platform-inline-link">
+              Filter on map
+            </Link>
+          )}
+        </div>
+        <div className="platform-layer-grid">
+          {layerGroups.map((layer) => (
+            <Link key={layer.id} href={isLive ? `/cities/${city.slug}/map` : "/cities"} className="platform-layer-card">
+              <span>{layer.label}</span>
+              <strong>{layer.venues.length || "Soon"}</strong>
+              <p>{layer.description}</p>
+              <em>{layer.shortAction}</em>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -148,24 +177,26 @@ export default async function CityPage({ params }: CityPageProps) {
         </section>
       )}
 
-      {cityVenues.length > 0 && (
-        <section className="platform-section">
+      {activeLayerGroups.map((layer) => (
+        <section key={layer.id} className="platform-section">
           <div className="platform-section-head">
             <div>
-              <div className="eyebrow">VENUES</div>
-              <h2 className="platform-section-title">Featured places.</h2>
+              <div className="eyebrow">{layer.label}</div>
+              <h2 className="platform-section-title">
+                {layer.id === "cannabis" ? "Cannabis intelligence." : `${layer.label} picks.`}
+              </h2>
             </div>
             <Link href={`/cities/${city.slug}/map`} data-hover className="platform-inline-link">
               Map mode
             </Link>
           </div>
           <div className="platform-card-grid">
-            {cityVenues.map((venue) => (
+            {layer.venues.map((venue) => (
               <VenueCard key={venue.id} venue={venue} />
             ))}
           </div>
         </section>
-      )}
+      ))}
 
       {city.routes.length > 0 && (
         <section className="platform-section">

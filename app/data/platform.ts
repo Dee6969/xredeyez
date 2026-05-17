@@ -1,5 +1,6 @@
 export type ListingTier = "free" | "featured" | "premium";
 export type ClaimStatus = "unclaimed" | "claimed" | "partner";
+export type DiscoveryLayer = "cannabis" | "stay" | "eat" | "do";
 
 export interface VenueBrand {
   primaryColor: string;
@@ -31,6 +32,10 @@ export interface Venue {
   country?: string;
   neighborhood: string;
   type: string;
+  layer?: DiscoveryLayer;
+  dayParts?: ("day" | "night")[];
+  planTypes?: ("solo" | "couples" | "social" | "mixed")[];
+  cannabisFriendly?: boolean;
   image: string;
   description: string;
   highlights: string[];
@@ -131,6 +136,38 @@ export const vibes: Vibe[] = [
   { id: "origin", slug: "origin-culture", name: "Origin Culture", description: "Genetics, cultivation history, source stories, and the long arc of cannabis culture.", accent: "#b6df5c" },
 ];
 
+export const discoveryLayers: {
+  id: DiscoveryLayer;
+  label: string;
+  description: string;
+  shortAction: string;
+}[] = [
+  {
+    id: "cannabis",
+    label: "Cannabis",
+    description: "Coffeeshops, social clubs, lounges, cannabis culture spots, genetics, and market-specific guides.",
+    shortAction: "Find the core layer",
+  },
+  {
+    id: "stay",
+    label: "Stay",
+    description: "Hotels, boutique stays, apartments, design-led accommodation, and cannabis-friendly options where lawful.",
+    shortAction: "Plan the base",
+  },
+  {
+    id: "eat",
+    label: "Eat",
+    description: "Cafes, brunch, restaurants, late-night food, hidden gems, and social dining spots.",
+    shortAction: "Reset and refuel",
+  },
+  {
+    id: "do",
+    label: "Do",
+    description: "Galleries, walks, spas, beaches, nightlife, architecture, shopping, wellness, and local experiences.",
+    shortAction: "Build the day",
+  },
+];
+
 export const cities: City[] = [
   {
     id: "amsterdam",
@@ -177,15 +214,26 @@ export const cities: City[] = [
     slug: "barcelona",
     name: "Barcelona",
     country: "Spain",
-    status: "coming",
+    status: "live",
     summary: "Social club culture, design, food, late nights, and member-led access.",
     legalContext: "Cannabis social club rules are membership-based and local. Access expectations can vary.",
     heroImage: "/cities/barcelona-terrace.png",
     vibeIds: ["social", "creative", "late", "hidden"],
     sponsorshipSlots: ["barcelona-city-sponsor"],
-    featuredCollectionIds: [],
-    neighborhoods: [],
-    routes: [],
+    featuredCollectionIds: ["barcelona-member-route"],
+    neighborhoods: [
+      { name: "Eixample", mood: "Member-led city rhythm", note: "Central grids, private clubs, food, design stores, and easy cross-city movement." },
+      { name: "Sagrada Familia", mood: "Landmark access", note: "Useful for visitors planning a club stop around daytime sightseeing and food." },
+      { name: "Sant Gervasi", mood: "Discreet social", note: "More local, quieter, and better for members who want a less obvious route." },
+    ],
+    routes: [
+      {
+        title: "Member Route",
+        duration: "Afternoon into evening",
+        description: "A simple Barcelona loop built around club access, food, and a clean reset between stops.",
+        stops: ["Eixample arrival", "Club check-in", "Design walk", "Late food"],
+      },
+    ],
   },
   {
     id: "tenerife",
@@ -330,6 +378,11 @@ export const venues: Venue[] = [
     coordinates: { x: 36, y: 52, lat: 52.3660, lng: 4.8540 },
     guideNote: "Boerejongens set the standard for what cannabis retail looks like when it takes itself seriously. The Amsterdam School interiors and two-year staff training programme make this the closest thing to a luxury dispensary in the city.",
     openingHours: "Check boerejongens.com for current hours",
+    galleryImages: [
+      "https://www.boerejongens.com/wp-content/webp-express/webp-images/uploads/2024/06/BOEREJONGENS-142.jpg.webp",
+      "https://www.boerejongens.com/wp-content/webp-express/webp-images/uploads/2024/08/boerejongens_west_sfeerimpressie-29.jpg.webp",
+      "https://www.boerejongens.com/wp-content/webp-express/webp-images/uploads/2024/06/boerejongens_west_BG_entree-scaled.jpg.webp",
+    ],
     listingTier: "premium",
     isFeatured: true,
     featuredWeight: 98,
@@ -492,7 +545,10 @@ export const venues: Venue[] = [
     coordinates: { x: 55, y: 42, lat: 52.3694, lng: 4.8947 },
     guideNote: "Dampkring is a working coffeeshop and a cultural monument in equal measure. Scenes from Ocean's Twelve were filmed inside. Treat it seriously — then balance the route with food, air, and a quieter next move.",
     openingHours: "Daily 10:00–01:00",
-    galleryImages: ["https://ogdampkring.com/wp-content/uploads/elementor/thumbs/interior-rn082yzjag4kwn6jpaww8nh66fybmp7o2ubpmtjzw0.jpg"],
+    galleryImages: [
+      "https://ogdampkring.com/wp-content/uploads/elementor/thumbs/interior-rn082yzjag4kwn6jpaww8nh66fybmp7o2ubpmtjzw0.jpg",
+      "https://ogdampkring.com/wp-content/uploads/2026/05/13F50E36-3060-47E2-9FB5-5E7510953C4F-1024x436.jpeg",
+    ],
     listingTier: "featured",
     isFeatured: true,
     featuredWeight: 82,
@@ -739,8 +795,10 @@ export const venues: Venue[] = [
     guideNote: "One of Amsterdam's oldest and most respected shops. The 1930s interior feels like a living museum of Dutch cannabis culture. Paul and Jeroen built a genuine second living room — the warmest, most considered atmosphere on this guide.",
     openingHours: "Daily 08:00–01:00 · 365 days per year",
     galleryImages: [
-      "https://tweedekamercoffeeshops.nl/wp-content/uploads/2025/07/coffeeshop_tweede_kamer_image.jpg",
-      "https://tweedekamercoffeeshops.nl/wp-content/uploads/2025/07/banner_coffeeshop_tweede_kamer_amsterdam_01.jpg",
+      "https://tweedekamercoffeeshop.nl/wp-content/uploads/2025/07/coffeeshop_tweede_kamer_image.jpg",
+      "https://tweedekamercoffeeshop.nl/wp-content/uploads/2025/07/sfeerimpressie_coffeeshop_tweede_kamer_amsterdam_01.jpg",
+      "https://tweedekamercoffeeshop.nl/wp-content/uploads/2025/07/sfeerimpressie_coffeeshop_tweede_kamer_amsterdam_02.jpg",
+      "https://tweedekamercoffeeshop.nl/wp-content/uploads/2025/09/drawing_coffeeshop_tweede_kamer_website_image.jpg",
     ],
     listingTier: "premium",
     isFeatured: true,
@@ -816,6 +874,11 @@ export const venues: Venue[] = [
     coordinates: { x: 53, y: 48, lat: 52.3630, lng: 4.9010 },
     guideNote: "Same Boerejongens standard as the West flagship — ideal if your route keeps you in the centre. The Utrechtsestraat location adds street-level Amsterdam character alongside the retail polish.",
     openingHours: "Check boerejongens.com for current hours",
+    galleryImages: [
+      "https://www.boerejongens.com/wp-content/webp-express/webp-images/uploads/2024/06/coffeeshop_boerejongens_centrum_amsterdam-07.jpg.webp",
+      "https://www.boerejongens.com/wp-content/webp-express/webp-images/uploads/2024/06/coffeeshop_boerejongens_centrum_amsterdam-01.jpg.webp",
+      "https://www.boerejongens.com/wp-content/webp-express/webp-images/uploads/2024/06/coffeeshop_boerejongens_centrum_amsterdam-59.jpg.webp",
+    ],
     listingTier: "premium",
     isFeatured: true,
     featuredWeight: 93,
@@ -853,6 +916,11 @@ export const venues: Venue[] = [
     coordinates: { x: 49, y: 34, lat: 52.3752, lng: 4.8929 },
     guideNote: "The Plug shows what the next generation of cannabis retail looks like. Lab testing, dosing labels, and product transparency over mystique. A smart modern counterpoint to the legacy shop experience.",
     openingHours: "Daily ~10:00–midnight",
+    galleryImages: [
+      "https://theplugcoffeeshops.com/wp-content/uploads/2025/03/about-2.jpg",
+      "https://theplugcoffeeshops.com/wp-content/uploads/2025/05/Exceptional-Service.jpg",
+      "https://theplugcoffeeshops.com/wp-content/uploads/2025/05/The-Plug.jpg",
+    ],
     listingTier: "featured",
     isFeatured: true,
     featuredWeight: 81,
@@ -878,6 +946,7 @@ export const venues: Venue[] = [
     city: "Amsterdam",
     neighborhood: "De Pijp",
     type: "Lifestyle Route",
+    layer: "do",
     image: "/banners/the-right-room.png",
     description: "A non-cannabis crossover route for food, coffee, streets, and reset time.",
     highlights: ["Food", "Coffee", "Walkable"],
@@ -907,6 +976,7 @@ export const venues: Venue[] = [
     city: "Amsterdam",
     neighborhood: "Oud-West",
     type: "Food / Recovery",
+    layer: "eat",
     image: "/banners/between-sessions.png",
     description: "Founded 2014 in Oud-West, Foodhallen brings 33 food stands under one roof — 'unique, cozy, tasty, diverse, and welcoming'. Global cuisines, real kitchen quality, and enough variety to reset any group after a long city route. The go-to Amsterdam food hall for diversity and atmosphere.",
     highlights: ["33 food stands", "Founded 2014", "Global cuisines", "Group reset venue"],
@@ -917,6 +987,7 @@ export const venues: Venue[] = [
     galleryImages: [
       "https://flagship-cms.foodhallen.nl/assets/FHA-SLIDER-4.jpg",
       "https://flagship-cms.foodhallen.nl/assets/Amsterdam_2022-10-27-112219_kdqx.jpg",
+      "https://flagship-cms.foodhallen.nl/assets/23.-Poolbar-staffparty.jpg",
     ],
     listingTier: "free",
     isFeatured: false,
@@ -941,6 +1012,7 @@ export const venues: Venue[] = [
     city: "Amsterdam",
     neighborhood: "Oud-West",
     type: "Recovery Space",
+    layer: "do",
     image: "/dna/silence-room.png",
     description: "A park-led reset for water, food, walking, and lowering the volume.",
     highlights: ["Green space", "Recovery", "Easy reset"],
@@ -970,6 +1042,7 @@ export const venues: Venue[] = [
     city: "Amsterdam",
     neighborhood: "Noord",
     type: "Culture Spot",
+    layer: "do",
     image: "/banners/seen-differently.png",
     description: "A 10-hectare former shipyard in Amsterdam-Noord transformed into Europe's most ambitious creative district. STRAAT Museum (street art and graffiti), the IJ-Hallen flea market, music festivals (PIV, Festifest, Tropikali), public art at monumental scale, and artist studios. Reach it by a 10-minute free ferry from Central Station.",
     highlights: ["10-hectare former shipyard", "STRAAT Museum", "IJ-Hallen flea market", "Free ferry from Central", "PIV & Festifest festivals"],
@@ -977,6 +1050,11 @@ export const venues: Venue[] = [
     vibeIds: ["creative", "design", "hidden"],
     coordinates: { x: 62, y: 21, lat: 52.4003, lng: 4.9019 },
     guideNote: "NDSM earns its place on this guide by being everything a cannabis culture platform should cover: creativity, movement, neighbourhood evolution, and a clear point of view on how cities use space. Free ferry. No excuse not to go.",
+    galleryImages: [
+      "https://cdn.prod.website-files.com/6909cf96cf3cd5be51dbc4c9/69a5cc434b049c83ccdf3235_10-DGL_the_Essence_STRAAT-hoofdbeeld-bijgesneden%20(1).webp",
+      "https://cdn.prod.website-files.com/6909cf96cf3cd5be51dbc4c9/69e76b6a5c5c319f87a555e5_ijhallen%20(1).webp",
+      "https://cdn.prod.website-files.com/6909cf96cf3cd5be51dbc4c9/69e884888b940aef264c13ea_011.NDSM-WERF-CONTAINERBOOG%202026-PH.GJ.vanROOIJ%20(3).webp",
+    ],
     listingTier: "featured",
     isFeatured: true,
     featuredWeight: 76,
@@ -1003,6 +1081,7 @@ export const venues: Venue[] = [
     country: "Netherlands",
     neighborhood: "Noord",
     type: "Food / Lounge",
+    layer: "eat",
     image: "/dna/space-architecture.png",
     description: "Founded by Sjoerd Steenbeek on the IJ waterfront of Amsterdam-Noord. Built from salvaged shipping containers, Pllek is a 'feel good food' restaurant and event space — sustainably sourced, chef-led kitchen, Sunday yoga sessions, Laidback Live music on weekends, and outdoor cinema on the beach in summer. Best sunset views in Amsterdam.",
     highlights: ["Shipping container architecture", "Outdoor cinema on the beach", "Sunday yoga", "Laidback Live weekends", "IJ waterfront views"],
@@ -1012,7 +1091,9 @@ export const venues: Venue[] = [
     guideNote: "The full Noord evening: ferry across the IJ, sunset at Pllek, food from a quality kitchen, music after. This is why XRED EYEZ covers more than cannabis — the full day and evening is the experience.",
     openingHours: "Mon–Thu & Sun 09:30–01:00 · Fri–Sat 09:30–02:00",
     galleryImages: [
+      "https://pllek.nl/wp-content/uploads/2024/04/3Z7A8636-2-scaled.jpg",
       "https://pllek.nl/wp-content/uploads/2022/02/Home-feel-good-food.jpg",
+      "https://pllek.nl/wp-content/uploads/2026/04/Laidback-Live-Stardog-Picture.jpg",
       "https://pllek.nl/wp-content/uploads/2022/02/verhuur-trouwlocatie.jpg",
     ],
     listingTier: "premium",
@@ -1061,6 +1142,239 @@ export const venues: Venue[] = [
       logoText: "TERPS ARMY",
     },
   },
+  {
+    id: "the-hoxton-amsterdam",
+    slug: "the-hoxton-amsterdam",
+    name: "The Hoxton Amsterdam",
+    cityId: "amsterdam",
+    city: "Amsterdam",
+    address: "Herengracht 255",
+    postcode: "1016 BJ",
+    country: "Netherlands",
+    neighborhood: "Canal Belt",
+    type: "Boutique Hotel",
+    layer: "stay",
+    image: "/cities/amsterdam-canal-day.png",
+    description: "A design-led canal-house stay with strong lobby culture, food, and easy access to the city centre without feeling like a generic hotel base.",
+    highlights: ["Canal-house setting", "Design-led stay", "Central base", "Lobby culture"],
+    bestFor: ["Couples", "Weekend base", "Design-conscious visitors"],
+    vibeIds: ["design", "luxury", "social"],
+    coordinates: { x: 45, y: 45, lat: 52.3701, lng: 4.8846 },
+    guideNote: "Use the stay layer to anchor the whole trip: sleep well, move cleanly, and build cannabis, food, and culture routes around a proper base.",
+    listingTier: "featured",
+    isFeatured: true,
+    featuredWeight: 72,
+    partnerUrl: "https://thehoxton.com/amsterdam/",
+    bookingUrl: "https://thehoxton.com/amsterdam/",
+    referralCode: "xred-hoxton-amsterdam",
+    claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#16120E",
+      accentColor: "#CFAE7C",
+      aesthetic: "warm-dark",
+      tagline: "Canal-house base. Design-led city movement.",
+      logoText: "THE HOXTON",
+    },
+  },
+  {
+    id: "conservatorium-amsterdam",
+    slug: "conservatorium-hotel-amsterdam",
+    name: "Conservatorium Hotel",
+    cityId: "amsterdam",
+    city: "Amsterdam",
+    address: "Paulus Potterstraat 50",
+    postcode: "1071 DB",
+    country: "Netherlands",
+    neighborhood: "Museum Quarter",
+    type: "Luxury Hotel",
+    layer: "stay",
+    image: "/cities/amsterdam-canal-day.png",
+    description: "A premium Museum Quarter base for travellers who want wellness, architecture, galleries, and a higher-touch Amsterdam weekend.",
+    highlights: ["Museum Quarter", "Wellness base", "Luxury stay", "Architecture"],
+    bestFor: ["Premium weekends", "Couples", "Wellness-led trips"],
+    vibeIds: ["luxury", "design", "recovery"],
+    coordinates: { x: 39, y: 68, lat: 52.3582, lng: 4.8798 },
+    guideNote: "This is the premium weekend logic: stay, wellness, gallery movement, then selective cannabis stops instead of a chaotic route.",
+    listingTier: "premium",
+    isFeatured: true,
+    featuredWeight: 71,
+    partnerUrl: "https://www.conservatoriumhotel.com/",
+    bookingUrl: "https://www.conservatoriumhotel.com/",
+    referralCode: "xred-conservatorium",
+    claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#161615",
+      accentColor: "#D9C7A3",
+      aesthetic: "minimal",
+      tagline: "Museum Quarter. Wellness. Premium weekend.",
+      logoText: "CONSERVATORIUM",
+    },
+  },
+  {
+    id: "marisana-barcelona",
+    slug: "marisana-cannabis-association-barcelona",
+    name: "Marisana Cannabis Association Barcelona",
+    cityId: "barcelona",
+    city: "Barcelona",
+    address: "597 Valencia Street",
+    postcode: "08026",
+    country: "Spain",
+    neighborhood: "Eixample",
+    type: "Cannabis Social Club",
+    image: "/cities/barcelona-terrace.png",
+    description: "A Barcelona cannabis association positioned around member access, city movement, and a more considered social club rhythm.",
+    highlights: ["Member access", "Eixample route", "Barcelona club culture"],
+    bestFor: ["Members", "Barcelona visitors", "Social club research"],
+    vibeIds: ["social", "hidden", "tourist"],
+    coordinates: { x: 62, y: 44, lat: 41.4100, lng: 2.1810 },
+    guideNote: "Treat this as a membership-led stop rather than a walk-in retail visit. Confirm access steps before travelling.",
+    listingTier: "featured",
+    isFeatured: true,
+    featuredWeight: 78,
+    partnerUrl: "https://marisana.es/en/",
+    bookingUrl: "https://marisana.es/en/",
+    referralCode: "xred-marisana",
+    claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#10261F",
+      accentColor: "#B6D35F",
+      aesthetic: "minimal",
+      tagline: "Member-led cannabis association in Barcelona.",
+      logoText: "MARISANA",
+    },
+  },
+  {
+    id: "barcelona-weed-club",
+    slug: "barcelona-weed-club",
+    name: "Barcelona Weed Club",
+    cityId: "barcelona",
+    city: "Barcelona",
+    address: "Carrer de Casanova, 33",
+    postcode: "08011",
+    country: "Spain",
+    neighborhood: "Eixample",
+    type: "Cannabis Social Club",
+    image: "/cities/barcelona-terrace.png",
+    description: "A central Barcelona club signal for members who want simple access, city convenience, and a social route through Eixample.",
+    highlights: ["Central Eixample", "Member route", "Visitor-friendly planning"],
+    bestFor: ["First Barcelona club research", "Central stays", "Groups"],
+    vibeIds: ["social", "tourist", "late"],
+    coordinates: { x: 44, y: 56, lat: 41.3840, lng: 2.1590 },
+    guideNote: "The central address makes it easy to pair with food, galleries, or a late city route. Confirm membership requirements first.",
+    listingTier: "premium",
+    isFeatured: true,
+    featuredWeight: 84,
+    partnerUrl: "https://www.barcelonaweedclub.com/",
+    bookingUrl: "https://www.barcelonaweedclub.com/",
+    referralCode: "xred-barcelona-weed-club",
+    claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#111111",
+      accentColor: "#39B54A",
+      aesthetic: "dark",
+      tagline: "Central Barcelona club access.",
+      logoText: "BARCELONA WEED CLUB",
+    },
+  },
+  {
+    id: "la-selecta-barcelona",
+    slug: "la-selecta-weed-club-barcelona",
+    name: "La Selecta Weed Club Barcelona",
+    cityId: "barcelona",
+    city: "Barcelona",
+    address: "Carrer de Sagues, 14",
+    postcode: "08021",
+    country: "Spain",
+    neighborhood: "Sant Gervasi",
+    type: "Cannabis Social Club",
+    image: "/cities/barcelona-terrace.png",
+    description: "A more discreet Barcelona club option for members who prefer a calmer, less central social setting.",
+    highlights: ["Sant Gervasi", "Discreet route", "Member-first"],
+    bestFor: ["Quiet access", "Local-feeling routes", "Repeat visitors"],
+    vibeIds: ["hidden", "quiet", "social"],
+    coordinates: { x: 36, y: 39, lat: 41.3970, lng: 2.1450 },
+    guideNote: "Best framed as a planned appointment within a calmer neighbourhood route rather than an impulsive central stop.",
+    listingTier: "featured",
+    isFeatured: true,
+    featuredWeight: 74,
+    partnerUrl: "https://www.laselectaclub.es/",
+    bookingUrl: "https://www.laselectaclub.es/",
+    referralCode: "xred-la-selecta",
+    claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#17130F",
+      accentColor: "#C9A66B",
+      aesthetic: "warm-dark",
+      tagline: "Discreet Barcelona membership energy.",
+      logoText: "LA SELECTA",
+    },
+  },
+  {
+    id: "club-311-barcelona",
+    slug: "club-311-barcelona",
+    name: "Club 311 Barcelona",
+    cityId: "barcelona",
+    city: "Barcelona",
+    address: "Carrer de Lepant, 311",
+    postcode: "08025",
+    country: "Spain",
+    neighborhood: "Sagrada Familia",
+    type: "Cannabis Social Club",
+    image: "/cities/barcelona-terrace.png",
+    description: "A Sagrada Familia area club listing that works naturally for visitors building a clean daytime route.",
+    highlights: ["Sagrada Familia area", "Day route", "Member access"],
+    bestFor: ["Sightseeing pairings", "Daytime planning", "First-time city route"],
+    vibeIds: ["tourist", "social", "beginner"],
+    coordinates: { x: 58, y: 42, lat: 41.4060, lng: 2.1770 },
+    guideNote: "Useful for pairing club research with a landmark-heavy route. Keep the practical check-in steps clear before arrival.",
+    listingTier: "free",
+    isFeatured: false,
+    featuredWeight: 62,
+    partnerUrl: "https://www.club311barcelona.com/en",
+    bookingUrl: "https://www.club311barcelona.com/en",
+    referralCode: "xred-club-311",
+    claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#101820",
+      accentColor: "#D6C39A",
+      aesthetic: "minimal",
+      tagline: "Sagrada Familia route. Member access.",
+      logoText: "CLUB 311",
+    },
+  },
+  {
+    id: "smoke-signals-barcelona",
+    slug: "smoke-signals-barcelona",
+    name: "Smoke Signals",
+    cityId: "barcelona",
+    city: "Barcelona",
+    address: "Carrer d'Ausias Marc, 13",
+    postcode: "08010",
+    country: "Spain",
+    neighborhood: "Eixample",
+    type: "Cannabis Social Club",
+    image: "/cities/barcelona-terrace.png",
+    description: "A central Barcelona club signal with a sharper cultural edge, useful for members planning a night-led city route.",
+    highlights: ["Central", "Culture-led", "Night route"],
+    bestFor: ["After-dark routes", "Creative visitors", "Member discovery"],
+    vibeIds: ["creative", "late", "social"],
+    coordinates: { x: 52, y: 50, lat: 41.3900, lng: 2.1760 },
+    guideNote: "A strong fit for users who want the club layer to sit beside music, food, and a sharper night-city feeling.",
+    listingTier: "featured",
+    isFeatured: true,
+    featuredWeight: 76,
+    partnerUrl: "https://smokesignals.club/",
+    bookingUrl: "https://smokesignals.club/",
+    referralCode: "xred-smoke-signals",
+    claimStatus: "unclaimed",
+    brand: {
+      primaryColor: "#0F0F0F",
+      accentColor: "#E7562A",
+      aesthetic: "dark",
+      tagline: "Barcelona signals after dark.",
+      logoText: "SMOKE SIGNALS",
+    },
+  },
 ];
 
 export const featuredPlacements: FeaturedPlacement[] = [
@@ -1088,6 +1402,26 @@ export function getVibe(id: string) {
 
 export function getVenuesByCity(cityId: string) {
   return venues.filter((venue) => venue.cityId === cityId);
+}
+
+export function getVenueLayer(venue: Venue): DiscoveryLayer {
+  if (venue.layer) return venue.layer;
+
+  const type = venue.type.toLowerCase();
+  if (type.includes("hotel") || type.includes("stay") || type.includes("apartment")) return "stay";
+  if (type.includes("food") || type.includes("restaurant") || type.includes("cafe") || type.includes("brunch")) return "eat";
+  if (
+    type.includes("gallery") ||
+    type.includes("culture") ||
+    type.includes("walk") ||
+    type.includes("wellness") ||
+    type.includes("nightlife") ||
+    ["ndsm-werf", "pllek-noord"].includes(venue.id)
+  ) {
+    return "do";
+  }
+
+  return "cannabis";
 }
 
 export function getSortedVenuesByCity(cityId: string) {

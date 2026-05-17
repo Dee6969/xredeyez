@@ -4,7 +4,7 @@ import CityLightRail from "../components/CityLightRail";
 import FeaturedPlacementSlot from "../components/FeaturedPlacementSlot";
 import PlatformShell from "../components/PlatformShell";
 import VenueCard from "../components/VenueCard";
-import { cities, getFeaturedPlacements, getSortedVenuesByCity, vibes } from "../data/platform";
+import { cities, discoveryLayers, getFeaturedPlacements, getSortedVenuesByCity, vibes } from "../data/platform";
 
 export const metadata = {
   title: "Explore | XRED EYEZ",
@@ -22,7 +22,7 @@ export default function ExplorePage() {
         <div className="eyebrow">Explore</div>
         <h1 className="platform-title">Find the room. Read the city.</h1>
         <p className="platform-lede">
-          Start with Amsterdam, browse by vibe, save places, and discover the world&apos;s best cannabis culture destinations.
+          Start with Amsterdam, browse by Cannabis, Stay, Eat, Do, or vibe, save places, and build better city routes with cannabis culture built in.
         </p>
         <div className="platform-action-row">
           <Link href="/cities/amsterdam/map" className="platform-primary-action">
@@ -71,6 +71,28 @@ export default function ExplorePage() {
           </div>
         </section>
       )}
+
+      <section className="platform-section">
+        <div className="platform-section-head">
+          <div>
+            <div className="eyebrow">Platform layers</div>
+            <h2 className="platform-section-title">Cannabis culture, full city utility.</h2>
+          </div>
+          <Link href="/cities/amsterdam/map" className="platform-inline-link">
+            Try Amsterdam
+          </Link>
+        </div>
+        <div className="platform-layer-grid">
+          {discoveryLayers.map((layer) => (
+            <Link key={layer.id} href="/cities/amsterdam/map" className="platform-layer-card">
+              <span>{layer.label}</span>
+              <strong>{layer.id === "cannabis" ? "Core" : "Layer"}</strong>
+              <p>{layer.description}</p>
+              <em>{layer.shortAction}</em>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section className="platform-section">
         <div className="platform-section-head">

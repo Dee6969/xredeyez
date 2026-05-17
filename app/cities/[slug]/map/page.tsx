@@ -42,7 +42,7 @@ export default async function CityMapPage({ params }: MapPageProps) {
               {city.name}
             </h1>
             <p className="mt-3 text-[15px] leading-6 text-white/58">
-              Tap a marker, filter by vibe, save what matters. List and map stay connected.
+              Tap a marker, filter by Cannabis, Stay, Eat, Do, or vibe, then save what matters. List and map stay connected.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -61,7 +61,7 @@ export default async function CityMapPage({ params }: MapPageProps) {
             </div>
             <div>
               <span>What can I do?</span>
-              <strong>Filter, preview, save</strong>
+              <strong>Filter layers, preview, save</strong>
             </div>
             <div>
               <span>Tap next</span>

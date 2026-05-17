@@ -1,9 +1,17 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element -- Venue tiles intentionally support remote partner brand assets without remote image config friction. */
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { getVibe, type Venue } from "../data/platform";
 import SaveButton from "./SaveButton";
 
 export default function VenueCard({ venue }: { venue: Venue }) {
+  const brand = venue.brand;
+  const tileImage = brand?.bannerUrl || venue.galleryImages?.[0] || venue.image;
+  const brandName = brand?.logoText || venue.name;
+  const cardStyle = {
+    "--venue-primary": brand?.primaryColor || "#18160F",
+    "--venue-accent": brand?.accentColor || "var(--accent-gold)",
+  } as CSSProperties;
   const tierLabel =
     venue.listingTier === "premium"
       ? "Premium Partner"
@@ -12,40 +20,28 @@ export default function VenueCard({ venue }: { venue: Venue }) {
       : "";
 
   return (
-    <article className={`platform-card venue-card overflow-hidden is-${venue.listingTier}`}>
+    <article className={`platform-card venue-card overflow-hidden is-${venue.listingTier}`} style={cardStyle}>
       <Link href={`/venues/${venue.slug}`} style={{ textDecoration: "none", display: "block" }}>
-        <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", background: "#1A1814" }}>
-          <Image
-            src={venue.image}
-            alt={venue.name}
-            fill
-            sizes="(max-width: 768px) 100vw, 33vw"
-            style={{ objectFit: "cover", objectPosition: "center" }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(180deg, transparent 44%, rgba(24,22,15,0.72))" }}
-          />
-          <div className="absolute left-4 top-4">
-            <span
-              style={{
-                background: "rgba(255,255,255,0.92)",
-                backdropFilter: "blur(8px)",
-                padding: "5px 11px",
-                borderRadius: "99px",
-                fontSize: "10px",
-                fontWeight: "600",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "var(--text-primary)",
-              }}
-            >
-              {venue.type}
+        <div className="venue-tile-media">
+          <img src={venue.image} alt="" className="venue-tile-backdrop" aria-hidden="true" />
+          <img src={tileImage} alt={`${venue.name} brand preview`} className="venue-tile-img" />
+          <div className="venue-tile-shade" />
+          <div className="venue-tile-accent" />
+
+          <div className="venue-tile-type">{venue.type}</div>
+          {tierLabel && <div className="listing-badge venue-tile-badge">{tierLabel}</div>}
+
+          <div className="venue-tile-brand-panel">
+            <span className="venue-tile-kicker">Official brand room</span>
+            {brand?.logoUrl ? (
+              <img src={brand.logoUrl} alt={`${venue.name} logo`} className="venue-tile-logo" />
+            ) : (
+              <span className="venue-tile-wordmark">{brandName}</span>
+            )}
+            <span className="venue-tile-tagline">
+              {brand?.tagline || `${venue.neighborhood} / ${venue.type}`}
             </span>
           </div>
-          {tierLabel && (
-            <div className="listing-badge absolute right-4 top-4">{tierLabel}</div>
-          )}
         </div>
       </Link>
 
@@ -53,7 +49,7 @@ export default function VenueCard({ venue }: { venue: Venue }) {
         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
           <div>
             <div className="eyebrow">
-              {venue.city} · {venue.neighborhood}
+              {venue.city} / {venue.neighborhood}
             </div>
             <Link href={`/venues/${venue.slug}`} style={{ textDecoration: "none" }}>
               <h3
@@ -72,7 +68,7 @@ export default function VenueCard({ venue }: { venue: Venue }) {
         </p>
 
         {venue.address && (
-          <p style={{ fontSize: "12px", color: "var(--text-muted)", fontFamily: "'Courier New', monospace" }}>
+          <p className="venue-address-line">
             {venue.address}{venue.postcode ? ` · ${venue.postcode}` : ""}
           </p>
         )}
@@ -94,7 +90,7 @@ export default function VenueCard({ venue }: { venue: Venue }) {
 
         <div className="venue-card-actions">
           <Link href={`/venues/${venue.slug}`} className="platform-inline-link">
-            Open profile
+            Open brand room
           </Link>
           <Link href={`/partners/claim?venue=${venue.slug}`} className="platform-inline-link">
             Claim
