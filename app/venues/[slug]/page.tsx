@@ -1,12 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PartnerActions from "../../components/PartnerActions";
-import PlatformShell from "../../components/PlatformShell";
 import SaveButton from "../../components/SaveButton";
 import VenueCard from "../../components/VenueCard";
+import VenueShell from "../../components/VenueShell";
 import { getSortedVenuesByCity, getVenue, getVibe, venues } from "../../data/platform";
-import type { VenueBrand } from "../../data/platform";
 
 interface VenuePageProps {
   params: Promise<{ slug: string }>;
@@ -32,302 +30,323 @@ function hexToRgb(hex: string): string {
   return `${r},${g},${b}`;
 }
 
-function BrandHeroOverlay({ brand }: { brand: VenueBrand }) {
-  const rgb = hexToRgb(brand.primaryColor);
-  const overlay =
-    brand.aesthetic === "light"
-      ? `linear-gradient(90deg, rgba(${rgb},0.62), rgba(24,22,15,0.08)), linear-gradient(0deg, rgba(24,22,15,0.88), transparent 58%)`
-      : `linear-gradient(90deg, rgba(${rgb},0.54), rgba(24,22,15,0.14)), linear-gradient(0deg, rgba(24,22,15,0.9), transparent 56%)`;
-  return (
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        background: overlay,
-        borderRadius: "20px",
-        zIndex: 1,
-      }}
-    />
-  );
-}
-
 export default async function VenuePage({ params }: VenuePageProps) {
   const { slug } = await params;
   const venue = getVenue(slug);
-
   if (!venue) notFound();
 
   const related = getSortedVenuesByCity(venue.cityId)
     .filter((item) => item.id !== venue.id)
     .slice(0, 3);
 
+  const brand = venue.brand;
+  const primaryRgb = brand ? hexToRgb(brand.primaryColor) : "24,22,15";
+  const accentRgb = brand ? hexToRgb(brand.accentColor) : "181,36,38";
+
   const tierLabel =
     venue.listingTier === "premium"
-      ? "Premium partner"
+      ? "Premium Partner"
       : venue.listingTier === "featured"
-        ? "Featured listing"
-        : "Free listing";
+        ? "Featured Listing"
+        : "Free Listing";
 
-  const brand = venue.brand;
-  const accentRgb = brand ? hexToRgb(brand.accentColor) : null;
+  const hasBanner = !!brand?.bannerUrl;
+  const heroStyle: React.CSSProperties = {
+    backgroundColor: brand?.primaryColor || "#18160F",
+  };
 
   return (
-    <PlatformShell>
-      {/* Brand-aware CSS custom properties injected at page level */}
-      {brand && (
-        <style>{`
-          .venue-brand-accent { color: ${brand.accentColor}; }
-          .venue-brand-border { border-color: rgba(${hexToRgb(brand.accentColor)},0.32); }
-          .venue-brand-bg { background: rgba(${hexToRgb(brand.primaryColor)},0.06); }
-          .venue-brand-glow { box-shadow: 0 0 0 1px rgba(${hexToRgb(brand.accentColor)},0.18); }
-        `}</style>
-      )}
-
-      {/* Hero */}
-      <section className="platform-city-hero" style={brand ? { boxShadow: `0 24px 64px rgba(${hexToRgb(brand.primaryColor)},0.22)` } : {}}>
-        <Image
-          src={venue.image}
-          alt={venue.name}
-          fill
-          priority
-          sizes="100vw"
-          style={{ objectFit: "cover", filter: "brightness(0.7) contrast(1.1)" }}
-        />
-        {brand ? (
-          <BrandHeroOverlay brand={brand} />
-        ) : (
-          <div className="platform-city-hero-overlay" />
+    <VenueShell>
+      {/* ── HERO: real banner image + brand overlay + logo ── */}
+      <section className="venue-lp-hero" style={heroStyle}>
+        {/* Layer 1: real banner photo from business website */}
+        {hasBanner && (
+          <div
+            className="venue-lp-hero-banner-img"
+            style={{ backgroundImage: `url(${brand!.bannerUrl})` }}
+          />
         )}
 
-        <div className="relative z-10">
-          <div className="eyebrow">{venue.city} / {venue.neighborhood}</div>
+        {/* Layer 2: brand color overlay for identity + readability */}
+        <div
+          className="venue-lp-hero-overlay"
+          style={brand ? {
+            background: hasBanner
+              ? `linear-gradient(to bottom, rgba(${primaryRgb},0.55) 0%, rgba(0,0,0,0.88) 100%)`
+              : `radial-gradient(ellipse at 40% 50%, rgba(${primaryRgb},0.9) 0%, #050505 100%)`,
+          } : {
+            background: "linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(0,0,0,0.9) 100%)",
+          }}
+        />
 
-          {/* Brand identity lockup */}
-          {brand && (
-            <div className="venue-hero-brand-lockup">
-              <span
-                className="venue-hero-brand-name"
-                style={{ color: brand.accentColor }}
-              >
-                {brand.logoText || venue.name}
-              </span>
-              {brand.foundedYear && (
-                <span className="venue-hero-brand-year">Est. {brand.foundedYear}</span>
-              )}
+        {/* Layer 3: subtle grain */}
+        <div className="venue-lp-hero-grain" />
+
+        <div className="venue-lp-hero-inner">
+          {/* Logo image OR brand name typography */}
+          {brand?.logoUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={brand.logoUrl}
+              alt={`${venue.name} logo`}
+              className="venue-lp-logo"
+            />
+          ) : (
+            <div
+              className="venue-lp-brand-wordmark"
+              style={{ color: brand?.accentColor || "#84C51F" }}
+            >
+              {brand?.logoText || venue.name}
             </div>
           )}
 
-          <h1 className="platform-title">{venue.name}</h1>
+          {/* Tagline */}
           {brand?.tagline && (
-            <p className="venue-hero-tagline">&ldquo;{brand.tagline}&rdquo;</p>
+            <p className="venue-lp-tagline">
+              &ldquo;{brand.tagline}&rdquo;
+            </p>
           )}
-          <p className="platform-lede">{venue.description}</p>
-          <div className="platform-action-row">
-            <SaveButton itemType="venue" itemId={venue.id} label="Save Place" />
-            <Link href={`/cities/${venue.cityId}/map`} className="platform-secondary-action">
-              Back to Map
+
+          {/* CTAs */}
+          <div className="venue-lp-cta-row">
+            {venue.partnerUrl && (
+              <a
+                href={venue.partnerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="venue-lp-visit-btn"
+                style={{
+                  background: brand?.accentColor || "#84C51F",
+                  color: brand && brand.aesthetic === "light" ? "#fff" : "#000",
+                }}
+              >
+                Visit Website ↗
+              </a>
+            )}
+            <SaveButton itemType="venue" itemId={venue.id} label="Save" />
+            <Link
+              href={`/cities/${venue.cityId}/map`}
+              className="venue-lp-map-btn"
+            >
+              Map
             </Link>
           </div>
+
           <PartnerActions venue={venue} sourcePage="venue-detail" />
+
+          {/* Meta strip */}
+          <div className="venue-lp-hero-meta">
+            <span>{venue.city}</span>
+            <span className="venue-lp-hero-meta-sep">·</span>
+            <span>{venue.neighborhood}</span>
+            <span className="venue-lp-hero-meta-sep">·</span>
+            <span>{venue.type}</span>
+            {brand?.foundedYear && (
+              <>
+                <span className="venue-lp-hero-meta-sep">·</span>
+                <span>Est. {brand.foundedYear}</span>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* XRED EYEZ badge — bottom-left */}
+        <div className="venue-lp-xred-badge">
+          <span style={{ color: "#fff", fontFamily: "var(--font-playfair, Georgia, serif)", fontWeight: 700, fontSize: "13px" }}>XRED </span>
+          <span style={{ color: "#84C51F", fontFamily: "var(--font-playfair, Georgia, serif)", fontWeight: 700, fontSize: "13px" }}>EYEZ</span>
+          <span className="venue-lp-xred-powered">POWERED BY HEMP</span>
+        </div>
+
+        {/* Listing tier badge — bottom-right */}
+        <div
+          className="venue-lp-tier-badge"
+          style={{
+            borderColor: `rgba(${accentRgb},0.4)`,
+            color: brand?.accentColor || "#84C51F",
+          }}
+        >
+          {tierLabel}
+          {venue.claimStatus === "partner" && <span className="venue-lp-verified">✓</span>}
         </div>
       </section>
 
-      {/* Brand identity strip — only for venues with brand data */}
-      {brand && (
-        <section className="venue-brand-strip">
-          <div className="venue-brand-strip-inner">
-            {/* XRED EYEZ attribution */}
-            <div className="venue-xred-badge" aria-label="Listed on XRED EYEZ">
-              <span className="venue-xred-badge-text">
-                <span style={{ color: "var(--text-primary)" }}>XRED </span>
-                <span style={{ color: "#84C51F" }}>EYEZ</span>
-              </span>
-              <span className="venue-xred-badge-sub">Powered by Hemp</span>
-            </div>
-            <div className="venue-brand-palette">
-              <div
-                className="venue-brand-swatch"
-                style={{ background: brand.primaryColor }}
-                title={`Primary: ${brand.primaryColor}`}
-              />
-              <div
-                className="venue-brand-swatch"
-                style={{ background: brand.accentColor }}
-                title={`Accent: ${brand.accentColor}`}
-              />
-            </div>
-            <div className="venue-brand-meta">
-              <span className="eyebrow">Brand identity</span>
-              <strong className="venue-brand-title" style={{ color: brand.accentColor }}>
-                {brand.logoText || venue.name}
+      {/* ── ABOUT ── */}
+      <section className="venue-lp-about">
+        <div className="venue-lp-about-inner">
+          <div className="eyebrow" style={{ marginBottom: "24px" }}>The room.</div>
+          <blockquote
+            className="venue-lp-pull-quote"
+            style={brand ? { borderLeftColor: brand.accentColor } : {}}
+          >
+            {venue.guideNote}
+          </blockquote>
+          <p className="venue-lp-description">{venue.description}</p>
+        </div>
+
+        {/* Info grid */}
+        <div className="venue-lp-info-grid">
+          {venue.address && (
+            <div className="venue-lp-info-cell">
+              <span className="eyebrow">Address</span>
+              <strong>
+                {venue.address}
+                {venue.postcode ? `, ${venue.postcode}` : ""}
               </strong>
-              {brand.tagline && (
-                <em className="venue-brand-tagline-small">{brand.tagline}</em>
-              )}
             </div>
-            <div className="venue-brand-tier">
-              <span
-                className="venue-brand-tier-badge"
-                style={{
-                  background: `rgba(${accentRgb},0.1)`,
-                  borderColor: `rgba(${accentRgb},0.3)`,
-                  color: brand.accentColor,
-                }}
-              >
-                {tierLabel}
-              </span>
-              {venue.claimStatus === "partner" && (
-                <span className="venue-verified-badge">✓ Verified Partner</span>
-              )}
+          )}
+          <div className="venue-lp-info-cell">
+            <span className="eyebrow">Type</span>
+            <strong>{venue.type}</strong>
+          </div>
+          <div className="venue-lp-info-cell">
+            <span className="eyebrow">Neighbourhood</span>
+            <strong>{venue.neighborhood}</strong>
+          </div>
+          {brand?.foundedYear && (
+            <div className="venue-lp-info-cell">
+              <span className="eyebrow">Founded</span>
+              <strong>{brand.foundedYear}</strong>
+            </div>
+          )}
+          {venue.openingHours && (
+            <div className="venue-lp-info-cell">
+              <span className="eyebrow">Opening Hours</span>
+              <strong>{venue.openingHours}</strong>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ── GALLERY ── real photos from venue */}
+      {venue.galleryImages && venue.galleryImages.length > 0 && (
+        <section className="venue-lp-gallery">
+          <div className="venue-lp-about-inner">
+            <div className="eyebrow" style={{ marginBottom: "20px" }}>Inside.</div>
+            <div className="venue-lp-gallery-grid">
+              {venue.galleryImages.map((src, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={i}
+                  src={src}
+                  alt={`${venue.name} — photo ${i + 1}`}
+                  className="venue-lp-gallery-img"
+                />
+              ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* Powered by badge for non-brand venues */}
-      {!brand && (
-        <div className="venue-plain-badge">
-          <span style={{ color: "var(--text-primary)", fontFamily: "var(--font-playfair, Georgia, serif)", fontWeight: 700 }}>XRED </span>
-          <span style={{ color: "#84C51F", fontFamily: "var(--font-playfair, Georgia, serif)", fontWeight: 700 }}>EYEZ</span>
-          <span style={{ color: "var(--text-muted)", fontSize: "11px", marginLeft: "8px", fontFamily: "'Courier New', monospace", letterSpacing: "0.12em" }}>POWERED BY HEMP</span>
-        </div>
-      )}
-
-      <section className="platform-section">
-        <div
-          className="platform-info-strip"
-          style={brand ? { borderTopColor: brand.accentColor, borderTopWidth: "2px" } : {}}
-        >
-          <div>
-            <span>Where am I?</span>
-            <strong>{venue.type} / {venue.neighborhood}</strong>
-          </div>
-          <div>
-            <span>Address</span>
-            <strong>
-              {venue.address
-                ? `${venue.address}${venue.postcode ? `, ${venue.postcode}` : ""}`
-                : "Save, visit, enquire"}
-            </strong>
-          </div>
-          <div>
-            <span>Tap next</span>
-            <strong>Map or partner action</strong>
-          </div>
-        </div>
-      </section>
-
-      <section className="platform-section">
-        <div className="platform-module-grid">
-          <article
-            className={`platform-card p-5${brand ? " venue-brand-glow" : ""}`}
-            style={brand ? { borderTopColor: brand.accentColor, borderTopWidth: "2px" } : {}}
-          >
-            <div className="eyebrow">LISTING</div>
-            <h2 className="mt-4 font-display text-[32px] leading-none" style={brand ? { color: brand.accentColor } : {}}>
-              {tierLabel}
-            </h2>
-            <p className="mt-4 text-[14px] leading-6 text-[var(--text-secondary)]">
-              {venue.claimStatus === "partner"
-                ? "Partner profile is active and referral-ready."
-                : venue.claimStatus === "claimed"
-                  ? "Claimed profile. Partner upgrades can add richer placement."
-                  : "This venue can claim its profile and upgrade placement."}
-            </p>
-            <div className="mt-5">
-              <Link href={`/partners/claim?venue=${venue.slug}`} className="platform-inline-link">
-                Claim or upgrade →
-              </Link>
-            </div>
-          </article>
-
-          <article className="platform-card p-5">
-            <div className="eyebrow">BEST FOR</div>
-            <div className="mt-5 flex flex-wrap gap-2">
+      {/* ── CHIPS: Best For + Highlights ── */}
+      <section className="venue-lp-chips-section">
+        <div className="venue-lp-chips-inner">
+          <div className="venue-lp-chip-group">
+            <div className="eyebrow" style={{ marginBottom: "16px" }}>Best For</div>
+            <div className="venue-lp-chips">
               {venue.bestFor.map((item) => (
                 <span
                   key={item}
                   className="vibe-chip"
-                  style={brand ? { borderColor: `rgba(${accentRgb},0.3)` } : {}}
+                  style={brand ? { borderColor: `rgba(${accentRgb},0.32)` } : {}}
                 >
                   {item}
                 </span>
               ))}
             </div>
-          </article>
-
-          <article className="platform-card p-5">
-            <div className="eyebrow">HIGHLIGHTS</div>
-            <div className="mt-5 flex flex-wrap gap-2">
+          </div>
+          <div className="venue-lp-chip-group">
+            <div className="eyebrow" style={{ marginBottom: "16px" }}>Highlights</div>
+            <div className="venue-lp-chips">
               {venue.highlights.map((item) => (
                 <span key={item} className="vibe-chip">
                   {item}
                 </span>
               ))}
             </div>
-          </article>
+          </div>
         </div>
       </section>
 
-      <section className="platform-section">
-        <div className="platform-section-head">
-          <div>
-            <div className="eyebrow">GUIDE NOTE</div>
-            <h2
-              className="platform-section-title"
-              style={brand ? { color: `rgba(${hexToRgb(brand.primaryColor)},0.9)` } : {}}
-            >
-              Read the room.
-            </h2>
+      {/* ── VIBES ── */}
+      <section className="venue-lp-vibes-section">
+        <div className="venue-lp-about-inner">
+          <div className="eyebrow" style={{ marginBottom: "16px" }}>Vibes</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+            {venue.vibeIds.map((vibeId) => {
+              const vibe = getVibe(vibeId);
+              return (
+                <Link
+                  key={vibeId}
+                  href={`/vibes?vibe=${vibeId}`}
+                  className="vibe-chip"
+                  style={{ borderColor: `${vibe?.accent || "#fff"}55` }}
+                >
+                  {vibe?.name || vibeId}
+                </Link>
+              );
+            })}
           </div>
-        </div>
-        <div
-          className="platform-panel"
-          style={brand ? { borderLeftColor: brand.accentColor, borderLeftWidth: "3px" } : {}}
-        >
-          <p>{venue.guideNote}</p>
         </div>
       </section>
 
-      <section className="platform-section">
-        <div className="platform-section-head">
-          <div>
-            <div className="eyebrow">VIBES</div>
-            <h2 className="platform-section-title">Why it matches.</h2>
+      {/* ── PARTNER CTA — dark section ── */}
+      <section
+        className="venue-lp-partner-section"
+        style={brand ? { borderTop: `1px solid rgba(${accentRgb},0.15)` } : {}}
+      >
+        <div className="venue-lp-partner-inner">
+          <div className="venue-lp-partner-badge">
+            <span style={{ color: "#fff", fontFamily: "var(--font-playfair, Georgia, serif)", fontWeight: 700 }}>XRED </span>
+            <span style={{ color: "#84C51F", fontFamily: "var(--font-playfair, Georgia, serif)", fontWeight: 700 }}>EYEZ</span>
           </div>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {venue.vibeIds.map((vibeId) => {
-            const vibe = getVibe(vibeId);
-            return (
-              <Link
-                key={vibeId}
-                href={`/vibes?vibe=${vibeId}`}
-                className="vibe-chip"
-                style={{ borderColor: `${vibe?.accent || "#fff"}66` }}
+          <h2 className="venue-lp-partner-heading">
+            {venue.claimStatus === "partner"
+              ? "Active Partner"
+              : "List with XRED EYEZ"}
+          </h2>
+          <p className="venue-lp-partner-sub">
+            {venue.claimStatus === "partner"
+              ? "This venue is a verified XRED EYEZ partner. Referral, placement, and discovery — active."
+              : "Claim this profile, add your brand identity, and unlock referral placement across our city guides."}
+          </p>
+          <div className="venue-lp-partner-actions">
+            {venue.partnerUrl && (
+              <a
+                href={venue.partnerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="venue-lp-visit-btn"
+                style={{ background: "#84C51F", color: "#000" }}
               >
-                {vibe?.name || vibeId}
-              </Link>
-            );
-          })}
+                Visit {brand?.logoText || venue.name} ↗
+              </a>
+            )}
+            <Link
+              href={`/partners/claim?venue=${venue.slug}`}
+              className="venue-lp-claim-btn"
+            >
+              {venue.claimStatus === "partner" ? "Partner dashboard →" : "Claim or upgrade →"}
+            </Link>
+          </div>
         </div>
       </section>
 
+      {/* ── RELATED VENUES ── */}
       {related.length > 0 && (
-        <section className="platform-section">
-          <div className="platform-section-head">
-            <div>
-              <div className="eyebrow">NEARBY</div>
-              <h2 className="platform-section-title">Keep moving.</h2>
+        <section className="venue-lp-related">
+          <div className="venue-lp-about-inner">
+            <div className="eyebrow" style={{ marginBottom: "8px" }}>Nearby</div>
+            <h2 className="platform-section-title" style={{ marginBottom: "32px" }}>
+              Keep moving.
+            </h2>
+            <div className="platform-card-grid">
+              {related.map((item) => (
+                <VenueCard key={item.id} venue={item} />
+              ))}
             </div>
-          </div>
-          <div className="platform-card-grid">
-            {related.map((item) => (
-              <VenueCard key={item.id} venue={item} />
-            ))}
           </div>
         </section>
       )}
-    </PlatformShell>
+    </VenueShell>
   );
 }

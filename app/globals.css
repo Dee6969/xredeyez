@@ -1719,6 +1719,388 @@ body {
 }
 
 /* =====================================================
+   VENUE LANDING PAGE (brand-as-banner)
+   ===================================================== */
+
+/* Hero: full-bleed, brand color bg, logo centered */
+.venue-lp-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 88vh;
+  padding: 120px 24px 80px;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Banner image — fills hero, behind everything */
+.venue-lp-hero-banner-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Brand color overlay — sits above image */
+.venue-lp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Grain texture */
+.venue-lp-hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.venue-lp-hero-inner {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 680px;
+  width: 100%;
+}
+
+/* Logo image */
+.venue-lp-logo {
+  max-height: 160px;
+  max-width: 340px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 36px;
+  filter: drop-shadow(0 8px 32px rgba(0,0,0,0.6));
+}
+
+/* Brand name when no logo */
+.venue-lp-brand-wordmark {
+  font-family: var(--font-playfair, 'Georgia', serif);
+  font-size: clamp(42px, 9vw, 100px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 32px rgba(0,0,0,0.5);
+}
+
+.venue-lp-tagline {
+  font-family: var(--font-playfair, 'Georgia', serif);
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-style: italic;
+  color: rgba(245,240,230,0.64);
+  margin-bottom: 40px;
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+.venue-lp-cta-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.venue-lp-visit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 13px 26px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+  cursor: pointer;
+}
+
+.venue-lp-visit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.venue-lp-map-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 22px;
+  border-radius: 8px;
+  border: 1px solid rgba(245,240,230,0.2);
+  background: rgba(245,240,230,0.06);
+  color: rgba(245,240,230,0.72);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.venue-lp-map-btn:hover {
+  background: rgba(245,240,230,0.12);
+  border-color: rgba(245,240,230,0.36);
+  color: #f5f0e6;
+}
+
+/* Meta strip below CTAs */
+.venue-lp-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,230,0.36);
+}
+
+.venue-lp-hero-meta span { color: rgba(245,240,230,0.56); }
+
+.venue-lp-hero-meta-sep { color: rgba(245,240,230,0.22); }
+
+/* XRED EYEZ badge — bottom-left of hero */
+.venue-lp-xred-badge {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  display: flex;
+  flex-direction: column;
+  z-index: 4;
+}
+
+.venue-lp-xred-powered {
+  font-family: 'Courier New', monospace;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: #84C51F;
+  opacity: 0.5;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+/* Listing tier badge — bottom-right of hero */
+.venue-lp-tier-badge {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid;
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.venue-lp-verified {
+  font-size: 10px;
+  color: #84C51F;
+}
+
+/* ── About section ── */
+.venue-lp-about {
+  padding: 72px 24px 48px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.venue-lp-about-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.venue-lp-pull-quote {
+  font-family: var(--font-playfair, 'Georgia', serif);
+  font-size: clamp(20px, 2.8vw, 30px);
+  font-style: italic;
+  line-height: 1.48;
+  color: var(--text-primary);
+  border-left: 3px solid var(--accent-red);
+  padding-left: 24px;
+  margin-bottom: 28px;
+}
+
+.venue-lp-description {
+  font-size: 15px;
+  line-height: 1.72;
+  color: var(--text-secondary);
+  max-width: 640px;
+}
+
+/* Info grid */
+.venue-lp-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--border-light);
+  margin-top: 48px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.venue-lp-info-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  background: var(--bg-card);
+}
+
+.venue-lp-info-cell strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── Chips section ── */
+.venue-lp-chips-section {
+  padding: 48px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.venue-lp-chips-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.venue-lp-chip-group { display: flex; flex-direction: column; }
+
+.venue-lp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── Vibes section ── */
+.venue-lp-vibes-section {
+  padding: 48px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* ── Partner CTA — dark ── */
+.venue-lp-partner-section {
+  background: var(--bg-dark);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.venue-lp-partner-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.venue-lp-partner-badge {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.venue-lp-partner-heading {
+  font-family: var(--font-playfair, 'Georgia', serif);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  color: var(--text-inverse);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.venue-lp-partner-sub {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(245,240,230,0.5);
+  max-width: 440px;
+}
+
+.venue-lp-partner-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.venue-lp-claim-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 22px;
+  border-radius: 8px;
+  border: 1px solid rgba(245,240,230,0.18);
+  background: transparent;
+  color: rgba(245,240,230,0.62);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.venue-lp-claim-btn:hover {
+  border-color: rgba(245,240,230,0.42);
+  color: #f5f0e6;
+}
+
+/* ── Gallery ── */
+.venue-lp-gallery {
+  padding: 0 24px 64px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.venue-lp-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.venue-lp-gallery-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+}
+
+@media (min-width: 640px) {
+  .venue-lp-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .venue-lp-gallery-img {
+    height: 320px;
+  }
+}
+
+/* ── Related venues ── */
+.venue-lp-related {
+  padding: 72px 24px;
+}
+
+/* Responsive */
+@media (min-width: 760px) {
+  .venue-lp-info-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .venue-lp-chips-inner {
+    gap: 48px;
+  }
+}
+
+/* =====================================================
    EXTERIOR / DOOR SCENE (legacy — ExteriorScene.tsx)
    ===================================================== */
 .red-ambient {
