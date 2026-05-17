@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Explore", href: "/explore" },
@@ -56,11 +57,22 @@ const icons: Record<string, React.ReactNode> = {
 
 export default function PlatformNav() {
   const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [heroNav, setHeroNav] = useState(isHome);
+
+  useEffect(() => {
+    if (!isHome) { setHeroNav(false); return; }
+    const threshold = window.innerHeight * 0.72;
+    const onScroll = () => setHeroNav(window.scrollY < threshold);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   return (
     <>
       {/* Desktop top bar */}
-      <nav className="platform-top-nav" aria-label="Primary navigation">
+      <nav className={`platform-top-nav${heroNav ? " is-hero" : ""}`} aria-label="Primary navigation">
         <Link href="/" className="platform-brand">
           XRED EYEZ
         </Link>

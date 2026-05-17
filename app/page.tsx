@@ -13,28 +13,27 @@ export default function Home() {
     <>
       <PlatformNav />
 
-      {/* Hero */}
+      {/* Hero — full viewport, cinematic */}
       <section className="home-hero" aria-label="Welcome to XRED EYEZ">
         <div className="home-hero-image">
           <Image
             src="/cities/amsterdam-canal-day.png"
-            alt="Amsterdam canal — premium cannabis culture discovery"
+            alt="Amsterdam — XRED EYEZ city guide"
             fill
             priority
             sizes="100vw"
-            style={{ objectFit: "cover", objectPosition: "center 40%" }}
+            style={{ objectFit: "cover", objectPosition: "center 38%" }}
           />
         </div>
         <div className="home-hero-overlay" aria-hidden="true" />
-        <div className="home-hero-bar home-hero-bar-top" aria-hidden="true" />
 
         <div className="home-hero-content">
           <p className="home-hero-city-label anim-fade-up">Amsterdam · Netherlands</p>
           <h1 className="home-hero-headline anim-fade-up delay-2">
-            Find the city<br />that moves you.
+            Know where<br />to go.
           </h1>
           <Link href="/explore" className="home-hero-cta anim-fade-up delay-4">
-            Explore Now
+            Start exploring
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -44,20 +43,13 @@ export default function Home() {
         <p className="home-hero-scroll" aria-hidden="true">Scroll</p>
       </section>
 
-      {/* Value strip */}
-      <div className="home-value-strip" role="list" aria-label="Platform stats">
-        <div className="home-value-cell" role="listitem">
-          <strong>42</strong>
-          <span>Cities mapped</span>
-        </div>
-        <div className="home-value-cell" role="listitem">
-          <strong>200+</strong>
-          <span>Curated venues</span>
-        </div>
-        <div className="home-value-cell" role="listitem">
-          <strong>Free</strong>
-          <span>Always to browse</span>
-        </div>
+      {/* Scene interlude — world-setting */}
+      <div className="scene-interlude" aria-hidden="true">
+        <p className="scene-statement">
+          Cannabis culture deserves a platform built around{" "}
+          <strong>place, ritual, and atmosphere</strong> — not just a list of shops.
+        </p>
+        <span className="scene-divider" />
       </div>
 
       {/* City discovery rail */}
@@ -66,7 +58,9 @@ export default function Home() {
           <div className="home-section-header">
             <div>
               <p className="eyebrow">City guides</p>
-              <h2 className="home-section-title" style={{ marginTop: "8px" }}>Start with a city.</h2>
+              <h2 className="home-section-title" style={{ marginTop: "8px" }}>
+                Choose your city.
+              </h2>
             </div>
             <Link href="/cities" className="platform-inline-link">All cities →</Link>
           </div>
@@ -76,12 +70,23 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Scene interlude — vibe transition */}
+      <div className="scene-interlude" aria-hidden="true">
+        <p className="scene-statement">
+          Every place has a feeling. Every culture has a room.{" "}
+          <strong>Find yours.</strong>
+        </p>
+        <span className="scene-divider" />
+      </div>
+
       {/* Vibe filters */}
       <section className="home-section" aria-label="Browse by vibe">
         <div className="home-section-header">
           <div>
             <p className="eyebrow">Browse by mood</p>
-            <h2 className="home-section-title" style={{ marginTop: "8px" }}>How do you want to feel?</h2>
+            <h2 className="home-section-title" style={{ marginTop: "8px" }}>
+              How do you want to feel?
+            </h2>
           </div>
           <Link href="/vibes" className="platform-inline-link">All vibes →</Link>
         </div>
@@ -94,13 +99,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Map teaser */}
+      {/* Map teaser — dark atmospheric section */}
       <section className="home-map-teaser" aria-label="Explore the live map">
         <div className="home-map-inner">
           <div className="home-map-mock" aria-hidden="true">
             <div className="home-map-mock-grid" />
             <div className="home-map-mock-overlay" />
-            {/* Mock venue pins */}
             {[
               { x: 48, y: 38, featured: true },
               { x: 36, y: 54 },
@@ -121,9 +125,10 @@ export default function Home() {
 
           <div className="home-map-copy">
             <p className="eyebrow">Live city maps</p>
-            <h2>Explore every venue in one view.</h2>
+            <h2>See every venue. In one view.</h2>
             <p>
-              Filter by vibe, tap a pin, read the guide, save it. The Amsterdam map is live now — more cities coming.
+              Filter by vibe, tap a pin, read the full guide, save it for later.
+              The Amsterdam map is live now — more cities in progress.
             </p>
             <div className="platform-action-row">
               <Link href="/cities/amsterdam/map" className="btn-ghost">
