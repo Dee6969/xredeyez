@@ -4,10 +4,12 @@ import PlatformNav from "./components/PlatformNav";
 import CityLightRail from "./components/CityLightRail";
 import MembershipTeaser from "./components/MembershipTeaser";
 import SiteFooter from "./components/SiteFooter";
-import { vibes } from "./data/platform";
+import HomepageMapClient from "./components/HomepageMapClient";
+import { vibes, getSortedVenuesByCity } from "./data/platform";
 
 export default function Home() {
   const displayVibes = vibes.slice(0, 8);
+  const amsterdamVenues = getSortedVenuesByCity("amsterdam");
 
   return (
     <>
@@ -99,43 +101,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Map teaser — dark atmospheric section */}
+      {/* Map teaser — real live map */}
       <section className="home-map-teaser" aria-label="Explore the live map">
-        <div className="home-map-inner">
-          <div className="home-map-mock" aria-hidden="true">
-            <div className="home-map-mock-grid" />
-            <div className="home-map-mock-overlay" />
-            {[
-              { x: 48, y: 38, featured: true },
-              { x: 36, y: 54 },
-              { x: 55, y: 42, featured: true },
-              { x: 62, y: 26 },
-              { x: 44, y: 62 },
-            ].map((pin, i) => (
-              <div
-                key={i}
-                className={`platform-map-pin${pin.featured ? " is-featured" : ""}`}
-                style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-              >
-                <span />
-              </div>
-            ))}
-            <div className="platform-map-label">Amsterdam · Live</div>
-          </div>
-
-          <div className="home-map-copy">
-            <p className="eyebrow">Live city maps</p>
-            <h2>See every venue. In one view.</h2>
-            <p>
-              Filter by vibe, tap a pin, read the full guide, save it for later.
-              The Amsterdam map is live now — more cities in progress.
-            </p>
-            <div className="platform-action-row">
-              <Link href="/cities/amsterdam/map" className="btn-ghost">
-                Open Amsterdam Map →
-              </Link>
-            </div>
-          </div>
+        <div className="home-map-teaser-head">
+          <p className="eyebrow" style={{ color: "rgba(245,240,230,0.44)" }}>Live city maps</p>
+          <h2 className="home-map-teaser-title">Every venue. One map.</h2>
+          <p className="home-map-teaser-lede">
+            Filter by vibe, tap a pin, read the guide. Amsterdam is live now.
+          </p>
+        </div>
+        <div className="home-real-map-section">
+          <HomepageMapClient venues={amsterdamVenues} />
+        </div>
+        <div className="home-map-teaser-foot">
+          <Link href="/cities/amsterdam/map" className="btn-ghost">
+            Open full map →
+          </Link>
         </div>
       </section>
 

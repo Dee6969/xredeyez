@@ -1374,20 +1374,154 @@ body {
    ===================================================== */
 .home-map-teaser {
   background: var(--bg-dark);
-  padding: 80px 24px;
+  padding: 72px 24px;
 }
 
-.home-map-inner {
+.home-map-teaser-head {
+  max-width: 1180px;
+  margin: 0 auto 32px;
+}
+
+.home-map-teaser-title {
+  margin-top: 12px;
+  font-family: var(--font-playfair, 'Georgia', serif);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-inverse);
+  line-height: 1.05;
+}
+
+.home-map-teaser-lede {
+  margin-top: 12px;
+  color: rgba(245,240,230,0.56);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 440px;
+}
+
+.home-real-map-section {
   max-width: 1180px;
   margin: 0 auto;
-  display: grid;
-  gap: 48px;
-  align-items: center;
+  height: 480px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.07);
 }
 
+.home-real-map-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.home-real-map-badge {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 10;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(24,22,15,0.72);
+  backdrop-filter: blur(10px);
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: rgba(245,240,230,0.52);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+}
+
+.home-map-teaser-foot {
+  max-width: 1180px;
+  margin: 28px auto 0;
+}
+
+/* Real map pins */
+.home-map-real-pin {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  border: 2px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 0 8px rgba(158,139,106,0.4);
+}
+
+.home-map-real-pin.is-featured {
+  background: var(--accent-red);
+  border-color: rgba(255,255,255,0.5);
+  box-shadow: 0 0 12px rgba(181,36,38,0.6);
+  width: 22px;
+  height: 22px;
+}
+
+.home-map-real-pin:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 16px rgba(158,139,106,0.7);
+}
+
+.home-map-real-pin.is-featured:hover {
+  box-shadow: 0 0 20px rgba(181,36,38,0.8);
+}
+
+/* Mapbox popup override */
+.home-map-popup .mapboxgl-popup-content {
+  background: rgba(18,16,11,0.94) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+}
+
+.home-map-popup .mapboxgl-popup-tip {
+  border-top-color: rgba(18,16,11,0.94) !important;
+}
+
+.home-map-popup-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  min-width: 180px;
+}
+
+.home-map-popup-meta {
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245,240,230,0.38);
+}
+
+.home-map-popup-name {
+  display: block;
+  font-family: var(--font-playfair, 'Georgia', serif);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-inverse);
+  letter-spacing: -0.01em;
+}
+
+.home-map-popup-link {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--accent-gold);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.home-map-popup-link:hover { color: white; }
+
+/* Legacy mock map (fallback) */
 .home-map-mock {
   position: relative;
-  height: 260px;
   border-radius: 16px;
   overflow: hidden;
   background: #0D110F;
@@ -1407,26 +1541,6 @@ body {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at center, transparent 28%, rgba(13,17,15,0.82) 100%);
-}
-
-.home-map-copy .eyebrow { color: rgba(245,240,230,0.42); }
-
-.home-map-copy h2 {
-  margin-top: 16px;
-  font-family: var(--font-playfair, 'Georgia', serif);
-  font-size: clamp(26px, 4vw, 44px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text-inverse);
-  line-height: 1.05;
-}
-
-.home-map-copy p {
-  margin-top: 14px;
-  color: rgba(245,240,230,0.58);
-  font-size: 16px;
-  line-height: 1.65;
-  max-width: 440px;
 }
 
 /* =====================================================
