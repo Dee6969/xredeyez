@@ -20,6 +20,35 @@ const activeMarkerIcon = L.divIcon({
   popupAnchor: [0, -24],
 });
 
+const hotelMarkerIcon = L.divIcon({
+  className: "xred-leaflet-marker is-hotel",
+  html: '<span></span>',
+  iconSize: [38, 38],
+  iconAnchor: [19, 19],
+  popupAnchor: [0, -22],
+});
+
+const activeHotelMarkerIcon = L.divIcon({
+  className: "xred-leaflet-marker is-hotel is-active",
+  html: '<span></span>',
+  iconSize: [44, 44],
+  iconAnchor: [22, 22],
+  popupAnchor: [0, -24],
+});
+
+function buildBookingLink(venue: Venue): string {
+  const params = new URLSearchParams({
+    destination: `${venue.name}, ${venue.city}`,
+    city: venue.city.toLowerCase(),
+    venue: venue.id,
+    source: "map-pin",
+  });
+  if (venue.bookingUrl && venue.bookingUrl.includes("booking.com")) {
+    params.set("url", venue.bookingUrl);
+  }
+  return `/partners/booking?${params.toString()}`;
+}
+
 const cityMarkerIcon = L.divIcon({
   className: "xred-leaflet-city-marker",
   html: "<span></span><b></b>",
@@ -69,21 +98,33 @@ export default function LeafletCityMap({
         attribution="&copy; OpenStreetMap contributors"
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {venues.map((venue) => (
-        <Marker
-          key={venue.id}
-          position={[venue.coordinates.lat!, venue.coordinates.lng!]}
-          icon={selectedId === venue.id ? activeMarkerIcon : markerIcon}
-          eventHandlers={{
-            click: () => onSelect(venue.id),
-          }}
-        >
-          <Popup closeButton={false} className="xred-leaflet-popup">
-            <strong>{venue.name}</strong>
-            <span>{venue.type} / {venue.neighborhood}</span>
-          </Popup>
-        </Marker>
-      ))}
+      {venues.map((venue) => {
+        const isHotel = venue.layer === "stay";
+        const isSelected = selectedId === venue.id;
+        const icon = isHotel
+          ? (isSelected ? activeHotelMarkerIcon : hotelMarkerIcon)
+          : (isSelected ? activeMarkerIcon : markerIcon);
+
+        return (
+          <Marker
+            key={venue.id}
+            position={[venue.coordinates.lat!, venue.coordinates.lng!]}
+            icon={icon}
+            zIndexOffset={isHotel ? 50 : 0}
+            eventHandlers={{ click: () => onSelect(venue.id) }}
+          >
+            <Popup closeButton={false} className={`xred-leaflet-popup${isHotel ? " is-hotel-popup" : ""}`}>
+              <strong>{venue.name}</strong>
+              <span>{venue.type} / {venue.neighborhood}</span>
+              {isHotel && (
+                <a href={buildBookingLink(venue)} target="_blank" rel="noreferrer">
+                  Book on Booking.com →
+                </a>
+              )}
+            </Popup>
+          </Marker>
+        );
+      })}
       {cities.map((city) => {
         const cityCenter = cityCenters[city.slug];
         if (!cityCenter || city.id === activeCityId) return null;

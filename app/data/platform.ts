@@ -1206,7 +1206,7 @@ export const venues: Venue[] = [
     isFeatured: true,
     featuredWeight: 72,
     partnerUrl: "https://thehoxton.com/amsterdam/",
-    bookingUrl: "https://thehoxton.com/amsterdam/",
+    bookingUrl: "https://www.booking.com/hotel/nl/the-hoxton-amsterdam.html",
     referralCode: "xred-hoxton-amsterdam",
     claimStatus: "unclaimed",
     brand: {
@@ -1240,7 +1240,7 @@ export const venues: Venue[] = [
     isFeatured: true,
     featuredWeight: 71,
     partnerUrl: "https://www.conservatoriumhotel.com/",
-    bookingUrl: "https://www.conservatoriumhotel.com/",
+    bookingUrl: "https://www.booking.com/hotel/nl/conservatorium.html",
     referralCode: "xred-conservatorium",
     claimStatus: "unclaimed",
     brand: {
