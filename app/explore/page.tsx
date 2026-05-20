@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BookingHotelStrip from "../components/BookingHotelStrip";
 import CityCard from "../components/CityCard";
 import CityLightRail from "../components/CityLightRail";
 import FeaturedPlacementSlot from "../components/FeaturedPlacementSlot";
@@ -13,6 +14,7 @@ export const metadata = {
 
 export default function ExplorePage() {
   const featuredCities = cities.slice(0, 4);
+  const flagshipCity = cities.find((city) => city.slug === "amsterdam") || cities[0];
   const featuredVenues = getSortedVenuesByCity("amsterdam").slice(0, 3);
   const placements = getFeaturedPlacements("amsterdam").slice(0, 2);
 
@@ -54,6 +56,10 @@ export default function ExplorePage() {
             <strong>Amsterdam Map</strong>
           </div>
         </div>
+      </section>
+
+      <section className="platform-section">
+        <BookingHotelStrip city={flagshipCity} />
       </section>
 
       {placements.length > 0 && (

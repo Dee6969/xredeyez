@@ -23,6 +23,17 @@ function referralHref(url: string, venue: Venue, sourcePage: string) {
   }
 }
 
+function bookingAffiliateHref(venue: Venue, sourcePage: string) {
+  const params = new URLSearchParams({
+    destination: `${venue.name}, ${venue.city}`,
+    city: venue.cityId,
+    venue: venue.slug,
+    source: sourcePage,
+  });
+  if (venue.referralCode) params.set("ref", venue.referralCode);
+  return `/partners/booking?${params.toString()}`;
+}
+
 export default function PartnerActions({
   venue,
   sourcePage,
@@ -31,7 +42,11 @@ export default function PartnerActions({
   sourcePage: string;
 }) {
   const partnerHref = venue.partnerUrl ? referralHref(venue.partnerUrl, venue, sourcePage) : null;
-  const bookingHref = venue.bookingUrl ? referralHref(venue.bookingUrl, venue, sourcePage) : null;
+  const bookingHref = venue.layer === "stay"
+    ? bookingAffiliateHref(venue, sourcePage)
+    : venue.bookingUrl
+      ? referralHref(venue.bookingUrl, venue, sourcePage)
+      : null;
 
   return (
     <div className="partner-actions">
@@ -42,7 +57,7 @@ export default function PartnerActions({
       )}
       {bookingHref && (
         <a href={bookingHref} target={bookingHref.startsWith("/") ? undefined : "_blank"} rel={bookingHref.startsWith("/") ? undefined : "noreferrer"} data-hover className="platform-secondary-action">
-          Book / Enquire
+          {venue.layer === "stay" ? "Book Hotel" : "Book / Enquire"}
         </a>
       )}
       <Link href={`/partners/claim?venue=${venue.slug}`} data-hover className="platform-secondary-action">

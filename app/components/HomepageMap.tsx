@@ -1,105 +1,103 @@
 "use client";
-import Map, { Marker, Popup, NavigationControl } from "react-map-gl/mapbox";
-import { useState, useCallback } from "react";
+
 import Link from "next/link";
-import type { Venue } from "../data/platform";
+import L from "leaflet";
+import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
+import type { City, Venue } from "../data/platform";
 
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-const AMSTERDAM = { longitude: 4.8977, latitude: 52.3707, zoom: 13 };
+const NETWORK_CENTER = { lat: 44.6, lng: -8.2, zoom: 3 };
 
-export default function HomepageMap({ venues }: { venues: Venue[] }) {
-  const [popup, setPopup] = useState<Venue | null>(null);
+const venueIcon = L.divIcon({
+  className: "xred-leaflet-marker",
+  html: "<span></span>",
+  iconSize: [38, 38],
+  iconAnchor: [19, 19],
+  popupAnchor: [0, -22],
+});
 
-  const geoVenues = venues.filter((v) => v.coordinates.lat && v.coordinates.lng);
+const cityIcon = L.divIcon({
+  className: "xred-leaflet-city-marker",
+  html: "<span></span><b></b>",
+  iconSize: [54, 54],
+  iconAnchor: [27, 27],
+  popupAnchor: [0, -28],
+});
 
-  const closePopup = useCallback(() => setPopup(null), []);
+const londonBrandIcon = L.divIcon({
+  className: "xred-leaflet-logo-marker",
+  html: '<img src="/redeyez-logo.jpeg" alt="" />',
+  iconSize: [82, 52],
+  iconAnchor: [41, 52],
+  popupAnchor: [0, -54],
+});
 
-  if (!MAPBOX_TOKEN) {
-    return <MapFallback />;
-  }
+const LONDON_CENTER = { lat: 51.5074, lng: -0.1278 };
+
+const CITY_CENTERS: Record<string, { lat: number; lng: number }> = {
+  amsterdam: { lat: 52.3707, lng: 4.8977 },
+  barcelona: { lat: 41.3851, lng: 2.1734 },
+  tenerife: { lat: 28.2916, lng: -16.6291 },
+  marbella: { lat: 36.5101, lng: -4.8824 },
+  thailand: { lat: 13.7563, lng: 100.5018 },
+  germany: { lat: 52.52, lng: 13.405 },
+  usa: { lat: 39.8283, lng: -98.5795 },
+  "czech-republic": { lat: 50.0755, lng: 14.4378 },
+  "south-africa": { lat: -33.9249, lng: 18.4241 },
+};
+
+export default function HomepageMap({ venues, cities }: { venues: Venue[]; cities: City[] }) {
+  const geoVenues = venues.filter((venue) => venue.coordinates.lat && venue.coordinates.lng);
 
   return (
     <div className="home-real-map-wrap">
-      <Map
-        mapboxAccessToken={MAPBOX_TOKEN}
-        initialViewState={AMSTERDAM}
-        style={{ width: "100%", height: "100%" }}
-        mapStyle="mapbox://styles/mapbox/dark-v11"
-        attributionControl={false}
-        reuseMaps
+      <MapContainer
+        center={[NETWORK_CENTER.lat, NETWORK_CENTER.lng]}
+        zoom={NETWORK_CENTER.zoom}
+        minZoom={2}
+        maxZoom={18}
+        zoomControl={false}
+        scrollWheelZoom
+        className="home-leaflet-map"
       >
+        <TileLayer
+          attribution="&copy; OpenStreetMap contributors"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
         {geoVenues.map((venue) => (
-          <Marker
-            key={venue.id}
-            longitude={venue.coordinates.lng!}
-            latitude={venue.coordinates.lat!}
-            anchor="center"
-          >
-            <button
-              type="button"
-              aria-label={venue.name}
-              className={`home-map-real-pin${venue.isFeatured ? " is-featured" : ""}`}
-              onClick={() => setPopup((p) => (p?.id === venue.id ? null : venue))}
-            />
+          <Marker key={venue.id} position={[venue.coordinates.lat!, venue.coordinates.lng!]} icon={venueIcon}>
+            <Popup closeButton={false} className="xred-leaflet-popup">
+              <strong>{venue.name}</strong>
+              <span>{venue.city} / {venue.type}</span>
+              <Link href={`/venues/${venue.slug}`}>Open guide</Link>
+            </Popup>
           </Marker>
         ))}
+        {cities.map((city) => {
+          const center = CITY_CENTERS[city.slug];
+          if (!center) return null;
 
-        {popup && popup.coordinates.lat && popup.coordinates.lng && (
-          <Popup
-            longitude={popup.coordinates.lng}
-            latitude={popup.coordinates.lat}
-            anchor="bottom"
-            onClose={closePopup}
-            closeButton={false}
-            offset={16}
-            className="home-map-popup"
-          >
-            <div className="home-map-popup-inner">
-              <span className="home-map-popup-meta">
-                {popup.type} · {popup.neighborhood}
-              </span>
-              <strong className="home-map-popup-name">{popup.name}</strong>
-              <Link
-                href={`/venues/${popup.slug}`}
-                className="home-map-popup-link"
-              >
-                View guide →
-              </Link>
-            </div>
+          return (
+            <Marker key={city.id} position={[center.lat, center.lng]} icon={cityIcon} zIndexOffset={-100}>
+              <Popup closeButton={false} className="xred-leaflet-popup is-city-popup">
+                <strong>{city.name}</strong>
+                <span>{city.country} / {city.status === "coming" ? "Coming soon" : "Live guide"}</span>
+                <Link href={`/cities/${city.slug}`}>Open city guide</Link>
+              </Popup>
+            </Marker>
+          );
+        })}
+        <Marker position={[LONDON_CENTER.lat, LONDON_CENTER.lng]} icon={londonBrandIcon} zIndexOffset={500}>
+          <Popup closeButton={false} className="xred-leaflet-popup is-brand-popup">
+            <strong>XRED EYEZ</strong>
+            <span>London signal / powered by hemp</span>
           </Popup>
-        )}
-
-        <NavigationControl position="bottom-right" showCompass={false} />
-      </Map>
-
+        </Marker>
+        <ZoomControl position="bottomright" />
+      </MapContainer>
+      <div className="platform-map-sheen" />
       <div className="home-real-map-badge" aria-hidden="true">
-        Amsterdam · {geoVenues.length} venues mapped
+        Global network / {geoVenues.length} places mapped
       </div>
-    </div>
-  );
-}
-
-function MapFallback() {
-  return (
-    <div className="home-map-mock" style={{ height: "100%" }}>
-      <div className="home-map-mock-grid" />
-      <div className="home-map-mock-overlay" />
-      {[
-        { x: 48, y: 38, featured: true },
-        { x: 36, y: 54 },
-        { x: 55, y: 42, featured: true },
-        { x: 62, y: 26 },
-        { x: 44, y: 62 },
-      ].map((pin, i) => (
-        <div
-          key={i}
-          className={`platform-map-pin${pin.featured ? " is-featured" : ""}`}
-          style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-        >
-          <span />
-        </div>
-      ))}
-      <div className="platform-map-label">Amsterdam · Add MAPBOX_TOKEN to unlock</div>
     </div>
   );
 }

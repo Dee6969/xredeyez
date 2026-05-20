@@ -1,9 +1,9 @@
 "use client";
 import dynamic from "next/dynamic";
-import type { Venue } from "../data/platform";
+import type { City, Venue } from "../data/platform";
 
 const HomepageMap = dynamic(() => import("./HomepageMap"), { ssr: false });
 
-export default function HomepageMapClient({ venues }: { venues: Venue[] }) {
-  return <HomepageMap venues={venues} />;
+export default function HomepageMapClient({ venues, cities }: { venues: Venue[]; cities: City[] }) {
+  return <HomepageMap venues={venues} cities={cities} />;
 }

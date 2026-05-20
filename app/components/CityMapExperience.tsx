@@ -1,24 +1,37 @@
 "use client";
 import Link from "next/link";
-import Map, { Marker, NavigationControl } from "react-map-gl/mapbox";
+import dynamic from "next/dynamic";
 import { useMemo, useState, useCallback } from "react";
 import { discoveryLayers, getVenueLayer, type City, type DiscoveryLayer, type Venue, type Vibe } from "../data/platform";
 import SaveButton from "./SaveButton";
 import VenueCard from "./VenueCard";
 
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+const LeafletCityMap = dynamic(() => import("./LeafletCityMap"), {
+  ssr: false,
+  loading: () => <div className="platform-map-loading">Loading street map...</div>,
+});
 
-const CITY_CENTERS: Record<string, { longitude: number; latitude: number; zoom: number }> = {
-  amsterdam: { longitude: 4.8977, latitude: 52.3707, zoom: 13 },
+const CITY_CENTERS: Record<string, { lat: number; lng: number; zoom: number }> = {
+  amsterdam: { lat: 52.3707, lng: 4.8977, zoom: 13 },
+  barcelona: { lat: 41.3851, lng: 2.1734, zoom: 12 },
+  tenerife: { lat: 28.2916, lng: -16.6291, zoom: 10 },
+  marbella: { lat: 36.5101, lng: -4.8824, zoom: 11 },
+  thailand: { lat: 13.7563, lng: 100.5018, zoom: 11 },
+  germany: { lat: 52.5200, lng: 13.4050, zoom: 11 },
+  usa: { lat: 39.8283, lng: -98.5795, zoom: 4 },
+  "czech-republic": { lat: 50.0755, lng: 14.4378, zoom: 12 },
+  "south-africa": { lat: -33.9249, lng: 18.4241, zoom: 11 },
 };
 
 export default function CityMapExperience({
   city,
   venues,
+  networkCities,
   vibes,
 }: {
   city: City;
   venues: Venue[];
+  networkCities: City[];
   vibes: Vibe[];
 }) {
   const [activeVibe, setActiveVibe] = useState<string>("all");
@@ -41,86 +54,28 @@ export default function CityMapExperience({
     setView("map");
   }, []);
 
-  const center = CITY_CENTERS[city.slug] ?? { longitude: 4.8977, latitude: 52.3707, zoom: 12 };
-  const geoVenues = filteredVenues.filter((v) => v.coordinates.lat && v.coordinates.lng);
+  const center = CITY_CENTERS[city.slug] || CITY_CENTERS.amsterdam;
+  const geoVenues = filteredVenues.filter((venue) => venue.coordinates.lat && venue.coordinates.lng);
 
   return (
-    <div className="platform-map-shell">
-      {/* Map canvas */}
-      <div
-        className={`platform-map-canvas ${view === "list" ? "is-mobile-collapsed" : ""}`}
-        aria-label={`${city.name} map`}
-        style={{ position: "relative" }}
-      >
-        {MAPBOX_TOKEN ? (
-          <Map
-            mapboxAccessToken={MAPBOX_TOKEN}
-            initialViewState={center}
-            style={{ width: "100%", height: "100%" }}
-            mapStyle="mapbox://styles/mapbox/dark-v11"
-            attributionControl={false}
-            reuseMaps
-          >
-            {geoVenues.map((venue) => (
-              <Marker
-                key={venue.id}
-                longitude={venue.coordinates.lng!}
-                latitude={venue.coordinates.lat!}
-                anchor="center"
-              >
-                <button
-                  type="button"
-                  aria-label={`Select ${venue.name}`}
-                  className={`platform-map-pin ${venue.isFeatured ? "is-featured" : ""} ${selected?.id === venue.id ? "is-active" : ""}`}
-                  onClick={() => handleSelect(venue.id)}
-                >
-                  <span />
-                </button>
-              </Marker>
-            ))}
-            <NavigationControl position="top-right" showCompass={false} />
-          </Map>
-        ) : (
-          <>
-            <div className="platform-map-grid" />
-            {filteredVenues.map((venue) => (
-              <button
-                key={venue.id}
-                type="button"
-                className={`platform-map-pin ${venue.isFeatured ? "is-featured" : ""} ${selected?.id === venue.id ? "is-active" : ""}`}
-                style={{ left: `${venue.coordinates.x}%`, top: `${venue.coordinates.y}%` }}
-                aria-label={`Preview ${venue.name}`}
-                onClick={() => handleSelect(venue.id)}
-              >
-                <span />
-              </button>
-            ))}
-          </>
-        )}
+    <div className={`platform-map-shell ${view === "list" ? "is-list-view" : ""}`}>
+      <div className="platform-map-canvas" aria-label={`${city.name} map`}>
+        <LeafletCityMap
+          center={center}
+          venues={geoVenues}
+          cities={networkCities}
+          cityCenters={CITY_CENTERS}
+          activeCityId={city.id}
+          selectedId={selected?.id || ""}
+          onSelect={handleSelect}
+        />
+        <div className="platform-map-sheen" />
 
-        {/* Overlays — sit above the map */}
-        <div className="platform-map-label" style={{ zIndex: 10 }}>
-          {geoVenues.length > 0 ? "Live map" : "Preview map"} · {filteredVenues.length} places
+        <div className="platform-map-label">
+          Live street map / {geoVenues.length} places
         </div>
-
-        {selected && (
-          <article className="map-preview-card" style={{ zIndex: 10 }}>
-            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/40">
-              {selected.type} / {selected.neighborhood}
-            </div>
-            <h2>{selected.name}</h2>
-            <p>{selected.description}</p>
-            <div className="platform-action-row">
-              <Link href={`/venues/${selected.slug}`} className="platform-primary-action">
-                Open
-              </Link>
-              <SaveButton itemType="venue" itemId={selected.id} />
-            </div>
-          </article>
-        )}
       </div>
 
-      {/* Sidebar */}
       <aside className="platform-map-panel">
         <div className="platform-map-tabs" role="tablist" aria-label="Map view">
           <button type="button" className={view === "map" ? "is-active" : ""} onClick={() => setView("map")}>
@@ -131,10 +86,32 @@ export default function CityMapExperience({
           </button>
           <Link href="/saved">Saved</Link>
         </div>
+
+        {selected && (
+          <article className="map-selected-card">
+            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/45">
+              {selected.type} / {selected.neighborhood}
+            </div>
+            <h2>{selected.name}</h2>
+            {selected.address && (
+              <p className="map-selected-address">
+                {selected.address}{selected.postcode ? ` / ${selected.postcode}` : ""}
+              </p>
+            )}
+            <p>{selected.description}</p>
+            <div className="platform-action-row">
+              <Link href={`/venues/${selected.slug}`} className="platform-primary-action">
+                Open brand room
+              </Link>
+              <SaveButton itemType="venue" itemId={selected.id} />
+            </div>
+          </article>
+        )}
+
         <div className="map-filter-strip">
           <button
             type="button"
-            className={`vibe-chip ${activeVibe === "all" ? "is-active" : ""}`}
+            className={`vibe-chip ${activeLayer === "all" && activeVibe === "all" ? "is-active" : ""}`}
             onClick={() => {
               setActiveLayer("all");
               setActiveVibe("all");
@@ -166,7 +143,8 @@ export default function CityMapExperience({
             </button>
           ))}
         </div>
-        <div className="grid gap-4">
+
+        <div className="map-list-stack">
           {filteredVenues.map((venue) => (
             <button
               key={venue.id}
@@ -185,7 +163,6 @@ export default function CityMapExperience({
         </div>
       </aside>
 
-      {/* Full cards below */}
       <section className="platform-section px-0 md:col-span-2">
         <div className="platform-section-head">
           <div>

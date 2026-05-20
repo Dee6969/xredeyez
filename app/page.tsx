@@ -1,15 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
+import BookingHotelStrip from "./components/BookingHotelStrip";
 import PlatformNav from "./components/PlatformNav";
 import CityLightRail from "./components/CityLightRail";
 import MembershipTeaser from "./components/MembershipTeaser";
 import SiteFooter from "./components/SiteFooter";
 import HomepageMapClient from "./components/HomepageMapClient";
-import { vibes, getSortedVenuesByCity } from "./data/platform";
+import { cities, vibes, venues } from "./data/platform";
 
 export default function Home() {
   const displayVibes = vibes.slice(0, 8);
-  const amsterdamVenues = getSortedVenuesByCity("amsterdam");
+  const flagshipCity = cities.find((city) => city.slug === "amsterdam") || cities[0];
 
   return (
     <>
@@ -81,6 +82,10 @@ export default function Home() {
         <span className="scene-divider" />
       </div>
 
+      <div className="home-section" style={{ paddingTop: "40px", paddingBottom: "40px" }}>
+        <BookingHotelStrip city={flagshipCity} />
+      </div>
+
       {/* Vibe filters */}
       <section className="home-section" aria-label="Browse by vibe">
         <div className="home-section-header">
@@ -107,11 +112,11 @@ export default function Home() {
           <p className="eyebrow" style={{ color: "rgba(245,240,230,0.44)" }}>Live city maps</p>
           <h2 className="home-map-teaser-title">Every venue. One map.</h2>
           <p className="home-map-teaser-lede">
-            Filter by vibe, tap a pin, read the guide. Amsterdam is live now.
+            Zoom out for the full network, tap a pin, then open the city or venue guide.
           </p>
         </div>
         <div className="home-real-map-section">
-          <HomepageMapClient venues={amsterdamVenues} />
+          <HomepageMapClient venues={venues} cities={cities} />
         </div>
         <div className="home-map-teaser-foot">
           <Link href="/cities/amsterdam/map" className="btn-ghost">

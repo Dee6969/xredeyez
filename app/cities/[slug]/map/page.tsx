@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CityMapExperience from "../../../components/CityMapExperience";
-import FeaturedPlacementSlot from "../../../components/FeaturedPlacementSlot";
 import PlatformShell from "../../../components/PlatformShell";
 import SaveButton from "../../../components/SaveButton";
-import { cities, getCity, getFeaturedPlacements, getSortedVenuesByCity, vibes } from "../../../data/platform";
+import { cities, getCity, getFeaturedPlacements, getSortedVenuesByCity, venues, vibes } from "../../../data/platform";
 
 interface MapPageProps {
   params: Promise<{ slug: string }>;
@@ -30,6 +29,10 @@ export default async function CityMapPage({ params }: MapPageProps) {
   if (!city) notFound();
 
   const cityVenues = getSortedVenuesByCity(city.id);
+  const networkVenues =
+    city.id === "amsterdam"
+      ? [...cityVenues, ...venues.filter((venue) => venue.cityId !== city.id)]
+      : cityVenues;
   const placements = getFeaturedPlacements(city.id).slice(0, 2);
 
   return (
@@ -53,6 +56,8 @@ export default async function CityMapPage({ params }: MapPageProps) {
           </div>
         </header>
 
+        <CityMapExperience city={city} venues={networkVenues} networkCities={cities} vibes={vibes} />
+
         <section className="platform-section px-0">
           <div className="platform-info-strip">
             <div>
@@ -64,21 +69,11 @@ export default async function CityMapPage({ params }: MapPageProps) {
               <strong>Filter layers, preview, save</strong>
             </div>
             <div>
-              <span>Tap next</span>
-              <strong>Open a venue</strong>
+              <span>Commercial layer</span>
+              <strong>{placements.length} featured slots ready</strong>
             </div>
           </div>
         </section>
-
-        {placements.length > 0 && (
-          <section className="platform-commercial-grid">
-            {placements.map((placement) => (
-              <FeaturedPlacementSlot key={placement.id} placement={placement} />
-            ))}
-          </section>
-        )}
-
-        <CityMapExperience city={city} venues={cityVenues} vibes={vibes} />
       </section>
     </PlatformShell>
   );

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import BookingHotelStrip from "../../components/BookingHotelStrip";
 import FeaturedPlacementSlot from "../../components/FeaturedPlacementSlot";
 import PlatformShell from "../../components/PlatformShell";
 import SaveButton from "../../components/SaveButton";
 import VenueCard from "../../components/VenueCard";
-import { cities, discoveryLayers, getCity, getFeaturedPlacements, getSortedVenuesByCity, getVenueLayer, getVibe } from "../../data/platform";
+import { cities, discoveryLayers, getCity, getFeaturedPlacements, getSortedVenuesByCity, getVenueLayer } from "../../data/platform";
 
 interface CityPageProps {
   params: Promise<{ slug: string }>;
@@ -127,6 +128,10 @@ export default async function CityPage({ params }: CityPageProps) {
       )}
 
       <section className="platform-section">
+        <BookingHotelStrip city={city} />
+      </section>
+
+      <section className="platform-section">
         <div className="platform-section-head">
           <div>
             <div className="eyebrow">CONTEXT</div>
@@ -138,41 +143,44 @@ export default async function CityPage({ params }: CityPageProps) {
         </div>
       </section>
 
-      <section className="platform-section">
-        <div className="platform-section-head">
-          <div>
-            <div className="eyebrow">VIBES</div>
-            <h2 className="platform-section-title">Best moods here.</h2>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {city.vibeIds.map((vibeId) => {
-            const vibe = getVibe(vibeId);
-            return (
-              <Link key={vibeId} href={`/vibes?vibe=${vibeId}`} data-hover className="vibe-chip" style={{ borderColor: `${vibe?.accent || "#fff"}66` }}>
-                {vibe?.name || vibeId}
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      {city.neighborhoods.length > 0 && (
+      {city.routes.length > 0 && (
         <section className="platform-section">
           <div className="platform-section-head">
             <div>
-              <div className="eyebrow">NEIGHBORHOODS</div>
-              <h2 className="platform-section-title">Browse by zone.</h2>
+              <div className="eyebrow">CITY FLOWS</div>
+              <h2 className="platform-section-title">Choose a route, not a random list.</h2>
             </div>
+            {isLive && (
+              <Link href={`/cities/${city.slug}/map`} data-hover className="platform-inline-link">
+                Open live map
+              </Link>
+            )}
           </div>
-          <div className="platform-module-grid">
-            {city.neighborhoods.map((area) => (
-              <article key={area.name} className="platform-card p-5">
-                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">{area.mood}</div>
-                <h3 className="mt-3 font-display text-[28px] leading-none text-[var(--bone)]">{area.name}</h3>
-                <p className="mt-4 text-[14px] leading-6 text-white/58">{area.note}</p>
-              </article>
+          <div className="platform-flow-grid">
+            {city.routes.map((route) => (
+              <Link key={route.title} href={isLive ? `/cities/${city.slug}/map` : "/cities"} className="platform-flow-card">
+                <span>{route.duration}</span>
+                <h3>{route.title}</h3>
+                <p>{route.description}</p>
+                <div className="platform-flow-stops">
+                  {route.stops.slice(0, 4).map((stop) => (
+                    <b key={stop}>{stop}</b>
+                  ))}
+                </div>
+                <em>Build this route</em>
+              </Link>
             ))}
+            <Link href="/partners/claim" className="platform-flow-card is-commercial">
+              <span>PARTNER READY</span>
+              <h3>Own a city moment.</h3>
+              <p>Feature a hotel, restaurant, social club, lounge, route, or experience inside the guide without making the product feel crowded.</p>
+              <div className="platform-flow-stops">
+                <b>Featured slot</b>
+                <b>Route sponsor</b>
+                <b>Premium listing</b>
+              </div>
+              <em>Claim / sponsor</em>
+            </Link>
           </div>
         </section>
       )}
@@ -198,30 +206,6 @@ export default async function CityPage({ params }: CityPageProps) {
         </section>
       ))}
 
-      {city.routes.length > 0 && (
-        <section className="platform-section">
-          <div className="platform-section-head">
-            <div>
-              <div className="eyebrow">ROUTES</div>
-              <h2 className="platform-section-title">Suggested movement.</h2>
-            </div>
-          </div>
-          <div className="platform-module-grid">
-            {city.routes.map((route) => (
-              <article key={route.title} className="platform-card p-5">
-                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--xred-hot)]">{route.duration}</div>
-                <h3 className="mt-3 font-display text-[28px] leading-none text-[var(--bone)]">{route.title}</h3>
-                <p className="mt-4 text-[14px] leading-6 text-white/58">{route.description}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {route.stops.map((stop) => (
-                    <span key={stop} className="vibe-chip">{stop}</span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
     </PlatformShell>
   );
 }

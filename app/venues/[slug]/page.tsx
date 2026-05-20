@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PartnerActions from "../../components/PartnerActions";
 import SaveButton from "../../components/SaveButton";
+import UnclaimedBanner from "../../components/UnclaimedBanner";
 import VenueCard from "../../components/VenueCard";
+import VenueMobileStrip from "../../components/VenueMobileStrip";
 import VenueShell from "../../components/VenueShell";
 import { getSortedVenuesByCity, getVenue, getVibe, venues } from "../../data/platform";
 
@@ -52,8 +54,14 @@ export default async function VenuePage({ params }: VenuePageProps) {
 
   const gallery = venue.galleryImages || [];
 
+  const tierClass = `vlp-tier-${venue.listingTier}`;
+  const isPartner = venue.claimStatus === "partner";
+
   return (
     <VenueShell>
+      <div className={tierClass}>
+
+      <UnclaimedBanner venue={venue} />
 
       {/* ═══════════════════════════════════════════════
           HERO — full-bleed banner + brand overlay + logo
@@ -149,6 +157,30 @@ export default async function VenuePage({ params }: VenuePageProps) {
           {venue.claimStatus === "partner" && <span style={{ color: "#84C51F" }}> ✓</span>}
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════
+          STATS BAR — premium partners only
+          ═══════════════════════════════════════════════ */}
+      {isPartner && venue.listingTier === "premium" && (
+        <div className="vlp-stats-bar">
+          <div className="vlp-stat">
+            <span className="vlp-stat-val">2.4k</span>
+            <span className="vlp-stat-label">Views this month</span>
+          </div>
+          <div className="vlp-stat">
+            <span className="vlp-stat-val">148</span>
+            <span className="vlp-stat-label">Saves</span>
+          </div>
+          <div className="vlp-stat">
+            <span className="vlp-stat-val" style={{ color: accent }}>#2</span>
+            <span className="vlp-stat-label">City ranking</span>
+          </div>
+          <div className="vlp-stat">
+            <span className="vlp-stat-val">38</span>
+            <span className="vlp-stat-label">Referral clicks</span>
+          </div>
+        </div>
+      )}
 
       {/* ═══════════════════════════════════════════════
           BIO — editorial 2-col: text + first real photo
@@ -317,6 +349,10 @@ export default async function VenuePage({ params }: VenuePageProps) {
           </div>
         </section>
       )}
+
+      </div> {/* end vlp-tier-* wrapper */}
+
+      <VenueMobileStrip venue={venue} />
 
     </VenueShell>
   );

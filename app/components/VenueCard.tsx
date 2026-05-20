@@ -8,12 +8,16 @@ export default function VenueCard({ venue }: { venue: Venue }) {
   const brand = venue.brand;
   const tileImage = brand?.bannerUrl || venue.galleryImages?.[0] || venue.image;
   const brandName = brand?.logoText || venue.name;
+  const signature = getSignatureBanner(venue.id);
   const cardStyle = {
     "--venue-primary": brand?.primaryColor || "#18160F",
     "--venue-accent": brand?.accentColor || "var(--accent-gold)",
   } as CSSProperties;
+  const isTopRated = Boolean(signature);
   const tierLabel =
-    venue.listingTier === "premium"
+    isTopRated
+      ? "Top Rated"
+      : venue.listingTier === "premium"
       ? "Premium Partner"
       : venue.listingTier === "featured"
       ? "Featured"
@@ -22,26 +26,43 @@ export default function VenueCard({ venue }: { venue: Venue }) {
   return (
     <article className={`platform-card venue-card overflow-hidden is-${venue.listingTier}`} style={cardStyle}>
       <Link href={`/venues/${venue.slug}`} style={{ textDecoration: "none", display: "block" }}>
-        <div className="venue-tile-media">
-          <img src={venue.image} alt="" className="venue-tile-backdrop" aria-hidden="true" />
-          <img src={tileImage} alt={`${venue.name} brand preview`} className="venue-tile-img" />
-          <div className="venue-tile-shade" />
+        <div className={`venue-tile-media${signature ? ` venue-signature-media ${signature.className}` : ""}`}>
+          {signature ? (
+            <div className="venue-signature-banner" aria-hidden="true">
+              <div className="venue-signature-orbit" />
+              <div className="venue-signature-mark">{signature.mark}</div>
+              <div className="venue-signature-copy">
+                <span>{signature.kicker}</span>
+                <strong>{signature.title}</strong>
+                <em>{signature.subtitle}</em>
+              </div>
+              <div className="venue-signature-meta">{signature.meta}</div>
+            </div>
+          ) : (
+            <>
+              <img src={venue.image} alt="" className="venue-tile-backdrop" aria-hidden="true" />
+              <img src={tileImage} alt={`${venue.name} brand preview`} className="venue-tile-img" />
+              <div className="venue-tile-shade" />
+            </>
+          )}
           <div className="venue-tile-accent" />
 
           <div className="venue-tile-type">{venue.type}</div>
           {tierLabel && <div className="listing-badge venue-tile-badge">{tierLabel}</div>}
 
-          <div className="venue-tile-brand-panel">
-            <span className="venue-tile-kicker">Official brand room</span>
-            {brand?.logoUrl ? (
-              <img src={brand.logoUrl} alt={`${venue.name} logo`} className="venue-tile-logo" />
-            ) : (
-              <span className="venue-tile-wordmark">{brandName}</span>
-            )}
-            <span className="venue-tile-tagline">
-              {brand?.tagline || `${venue.neighborhood} / ${venue.type}`}
-            </span>
-          </div>
+          {!signature && (
+            <div className="venue-tile-brand-panel">
+              <span className="venue-tile-kicker">Official brand room</span>
+              {brand?.logoUrl ? (
+                <img src={brand.logoUrl} alt={`${venue.name} logo`} className="venue-tile-logo" />
+              ) : (
+                <span className="venue-tile-wordmark">{brandName}</span>
+              )}
+              <span className="venue-tile-tagline">
+                {brand?.tagline || `${venue.neighborhood} / ${venue.type}`}
+              </span>
+            </div>
+          )}
         </div>
       </Link>
 
@@ -99,4 +120,38 @@ export default function VenueCard({ venue }: { venue: Venue }) {
       </div>
     </article>
   );
+}
+
+function getSignatureBanner(venueId: string) {
+  switch (venueId) {
+    case "grey-area":
+      return {
+        className: "is-grey-area-signature",
+        kicker: "Amsterdam Top Rated",
+        title: "GREY AREA",
+        subtitle: "The American Dream in Amsterdam",
+        meta: "EST. 1993 / CENTRUM",
+        mark: "GA",
+      };
+    case "terps-army":
+      return {
+        className: "is-terps-army-signature",
+        kicker: "Amsterdam Top Rated",
+        title: "TERPS ARMY",
+        subtitle: "Terpenes. Culture. Amsterdam.",
+        meta: "CONNOISSEUR / CENTRUM",
+        mark: "TA",
+      };
+    case "prix-dami":
+      return {
+        className: "is-prix-dami-signature",
+        kicker: "Amsterdam Top Rated",
+        title: "PRIX D'AMI",
+        subtitle: "Pink is more than a colour.",
+        meta: "CENTRAL STATION / 07:00",
+        mark: "PDA",
+      };
+    default:
+      return null;
+  }
 }
