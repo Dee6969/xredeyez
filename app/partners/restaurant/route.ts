@@ -52,6 +52,32 @@ const ALLOWED_HOSTS = [
   "thetestkitchen.co.za",
   "lacolombe.co.za",
   "thepotluckclub.co.za",
+  // USA — Los Angeles
+  "noburestaurants.com",
+  "n-naka.com",
+  "ilovemole.com",
+  // USA — New York
+  "le-bernardin.com",
+  "carbonenewyork.com",
+  "katzsdelicatessen.com",
+  // USA — Las Vegas
+  "mgmgrand.com",
+  "gordonramsayrestaurants.com",
+  "wolfgangpuck.com",
+  // USA — Miami
+  "cotemiami.com",
+  "kyurestaurants.com",
+  "joesstonecrab.com",
+  // USA — Chicago
+  "alinearestaurant.com",
+  "girlandthegoat.com",
+  "thepublicanrestaurant.com",
+  // USA — San Francisco
+  "saisonsf.com",
+  "zunicafe.com",
+  // USA — Denver
+  "riojadenver.com",
+  "beastandbottle.com",
 ];
 
 function isAllowedUrl(value: string): boolean {
