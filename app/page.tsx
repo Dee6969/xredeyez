@@ -1,18 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import BookingHotelStrip from "./components/BookingHotelStrip";
 import PlatformNav from "./components/PlatformNav";
 import CityLightRail from "./components/CityLightRail";
 import MembershipTeaser from "./components/MembershipTeaser";
 import SiteFooter from "./components/SiteFooter";
-import HomepageMapClient from "./components/HomepageMapClient";
 import Reveal from "./components/Reveal";
-import { cities, vibes, venues } from "./data/platform";
 
 export default function Home() {
-  const displayVibes = vibes.slice(0, 8);
-  const flagshipCity = cities.find((city) => city.slug === "amsterdam") || cities[0];
-
   return (
     <>
       <PlatformNav />
@@ -32,12 +26,12 @@ export default function Home() {
         <div className="home-hero-overlay" aria-hidden="true" />
 
         <div className="home-hero-content">
-          <p className="home-hero-city-label anim-fade-up">Amsterdam · Netherlands</p>
+          <p className="home-hero-city-label anim-fade-up">Cannabis Culture · City Guides</p>
           <h1 className="home-hero-headline anim-fade-up delay-2">
             Know where<br />to go.
           </h1>
-          <Link href="/explore" className="home-hero-cta anim-fade-up delay-4">
-            Start exploring
+          <Link href="/cities" className="home-hero-cta anim-fade-up delay-4">
+            Explore cities
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -47,7 +41,7 @@ export default function Home() {
         <p className="home-hero-scroll" aria-hidden="true">Scroll</p>
       </section>
 
-      {/* Scene interlude */}
+      {/* Brand statement */}
       <Reveal>
         <div className="scene-interlude" aria-hidden="true">
           <p className="scene-statement">
@@ -78,7 +72,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Scene interlude */}
+      {/* Second brand statement */}
       <Reveal>
         <div className="scene-interlude" aria-hidden="true">
           <p className="scene-statement">
@@ -87,55 +81,6 @@ export default function Home() {
           </p>
           <span className="scene-divider" />
         </div>
-      </Reveal>
-
-      <Reveal>
-        <div className="home-section" style={{ paddingTop: "40px", paddingBottom: "40px" }}>
-          <BookingHotelStrip city={flagshipCity} />
-        </div>
-      </Reveal>
-
-      {/* Vibe filters */}
-      <Reveal>
-        <section className="home-section" aria-label="Browse by vibe">
-          <div className="home-section-header">
-            <div>
-              <p className="eyebrow">Browse by mood</p>
-              <h2 className="home-section-title" style={{ marginTop: "8px" }}>
-                How do you want to feel?
-              </h2>
-            </div>
-            <Link href="/vibes" className="platform-inline-link">All vibes →</Link>
-          </div>
-          <div className="home-vibes-row">
-            {displayVibes.map((vibe) => (
-              <Link key={vibe.id} href={`/vibes?vibe=${vibe.id}`} className="vibe-chip">
-                {vibe.name}
-              </Link>
-            ))}
-          </div>
-        </section>
-      </Reveal>
-
-      {/* Map teaser */}
-      <Reveal>
-        <section className="home-map-teaser" aria-label="Explore the live map">
-          <div className="home-map-teaser-head">
-            <p className="eyebrow" style={{ color: "rgba(245,240,230,0.44)" }}>Live city maps</p>
-            <h2 className="home-map-teaser-title">Every venue. One map.</h2>
-            <p className="home-map-teaser-lede">
-              Zoom out for the full network, tap a pin, then open the city or venue guide.
-            </p>
-          </div>
-          <div className="home-real-map-section">
-            <HomepageMapClient venues={venues} cities={cities} />
-          </div>
-          <div className="home-map-teaser-foot">
-            <Link href="/cities/amsterdam/map" className="btn-ghost">
-              Open full map →
-            </Link>
-          </div>
-        </section>
       </Reveal>
 
       {/* Membership */}
