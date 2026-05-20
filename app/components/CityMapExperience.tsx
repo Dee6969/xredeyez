@@ -101,6 +101,21 @@ export default function CityMapExperience({
           <div className="platform-map-label">
             Live street map / {geoVenues.length} places
           </div>
+
+          <div className="platform-map-legend" aria-label="Map pin key">
+            <div className="platform-map-legend-item">
+              <span className="platform-map-legend-dot is-venue" />
+              Venues
+            </div>
+            <div className="platform-map-legend-item">
+              <span className="platform-map-legend-dot is-hotel" />
+              Hotels
+            </div>
+            <div className="platform-map-legend-item">
+              <span className="platform-map-legend-dot is-restaurant" />
+              Restaurants
+            </div>
+          </div>
         </div>
 
         <aside className="platform-map-panel">

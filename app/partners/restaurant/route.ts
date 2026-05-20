@@ -12,6 +12,7 @@ const ALLOWED_HOSTS = [
   "resy.com",
   "tock.com",
   "yelp.com",
+  // Amsterdam
   "restaurantdekas.nl",
   "rijsel.com",
   "gutsandglory.nl",
@@ -26,6 +27,31 @@ const ALLOWED_HOSTS = [
   "foodhallen.nl",
   "blueaminsterdam.nl",
   "wildmouse.nl",
+  // Barcelona
+  "bardelpla.cat",
+  "bodegasepulveda.com",
+  "parkingpizza.com",
+  // Marbella
+  "danigarcia.rest",
+  "lacabane.es",
+  "restaurantellago.com",
+  // Bangkok
+  "eatatgaggan.com",
+  "comohotels.com",
+  "bolan.co.th",
+  // Berlin
+  "nobelhartundschmutzig.com",
+  "rutz-restaurant.de",
+  "coda-berlin.com",
+  // Prague
+  "ladegustation.cz",
+  "eska.ambi.cz",
+  "lokal-dlouha.ambi.cz",
+  "ambi.cz",
+  // Cape Town
+  "thetestkitchen.co.za",
+  "lacolombe.co.za",
+  "thepotluckclub.co.za",
 ];
 
 function isAllowedUrl(value: string): boolean {

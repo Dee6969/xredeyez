@@ -2143,6 +2143,41 @@ body {
   text-transform: uppercase;
 }
 
+.platform-map-legend {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 10;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(24,22,15,0.82);
+  backdrop-filter: blur(10px);
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.platform-map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245,240,230,0.65);
+  font-family: var(--font-mono, monospace);
+}
+.platform-map-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.platform-map-legend-dot.is-venue  { background: #4A8A18; box-shadow: 0 0 6px rgba(132,197,31,0.5); }
+.platform-map-legend-dot.is-hotel  { background: #D4A847; box-shadow: 0 0 6px rgba(212,168,71,0.5); }
+.platform-map-legend-dot.is-restaurant { background: #D44A1E; box-shadow: 0 0 6px rgba(212,74,30,0.5); }
+
 .platform-map-panel { display: grid; max-height: none; gap: 12px; }
 
 .platform-map-tabs {
