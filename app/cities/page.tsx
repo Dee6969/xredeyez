@@ -7,8 +7,8 @@ import Reveal from "../components/Reveal";
 import { cities, getSortedVenuesByCity } from "../data/platform";
 
 export const metadata = {
-  title: "Cities | XRED EYEZ",
-  description: "Browse X Red Eyez cannabis culture city guides and market guides.",
+  title: "Destinations | XRED EYEZ",
+  description: "Browse X Red Eyez cannabis culture country and city guides.",
 };
 
 export default function CitiesPage() {
@@ -21,10 +21,10 @@ export default function CitiesPage() {
     <PlatformShell>
       <Reveal>
         <section className="platform-hero">
-          <div className="eyebrow">CITIES</div>
-          <h1 className="platform-title">City guides that move with you.</h1>
+          <div className="eyebrow">DESTINATIONS</div>
+          <h1 className="platform-title">Countries & cities, mapped.</h1>
           <p className="platform-lede">
-            Start with Amsterdam, then follow the platform as Barcelona, Tenerife, Marbella, Thailand, Germany, Czech Republic, and South Africa open up.
+            Amsterdam is live. Barcelona, Tenerife, Marbella, Thailand, Germany, Czech Republic, South Africa, and Canada are opening up — one country at a time.
           </p>
         </section>
       </Reveal>
@@ -38,8 +38,8 @@ export default function CitiesPage() {
               <div className="eyebrow">MARKET LAYERS</div>
               <h2 className="platform-section-title">Each country, cleanly mapped.</h2>
             </div>
-            <Link href="/cities/amsterdam/map" className="platform-inline-link">
-              Open network map
+            <Link href="/map" className="platform-inline-link">
+              Open map
             </Link>
           </div>
 
@@ -107,8 +107,8 @@ export default function CitiesPage() {
         <section className="platform-section">
           <div className="platform-section-head">
             <div>
-              <div className="eyebrow">ALL GUIDES</div>
-              <h2 className="platform-section-title">Browse the full board.</h2>
+              <div className="eyebrow">ALL DESTINATIONS</div>
+              <h2 className="platform-section-title">Every country & city.</h2>
             </div>
           </div>
           <div className="platform-card-grid">

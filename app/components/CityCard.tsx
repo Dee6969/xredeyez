@@ -15,7 +15,7 @@ export default function CityCard({ city }: { city: City }) {
         >
           <Image
             src={city.heroImage}
-            alt={`${city.name} city guide`}
+            alt={`${city.name} guide`}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
             style={{ objectFit: "cover", objectPosition: "center" }}
@@ -49,7 +49,7 @@ export default function CityCard({ city }: { city: City }) {
           href={isLive ? `/cities/${city.slug}` : "/cities"}
           className="experience-link"
         >
-          {isLive ? "Open Guide" : "Preview City"}
+          {isLive ? "Open Guide" : "Preview"}
         </Link>
       </div>
     </article>

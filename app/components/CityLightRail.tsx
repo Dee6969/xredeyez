@@ -15,12 +15,12 @@ const cities = [
 
 export default function CityLightRail() {
   return (
-    <section className="city-light-rail" aria-label="City discovery">
+    <section className="city-light-rail" aria-label="Destination discovery">
       {cities.map((city) => (
         <Link key={city.title} href={city.href} className="city-light-card">
           <Image
             src={city.image}
-            alt={`${city.title} city guide`}
+            alt={`${city.title} guide`}
             fill
             sizes="(max-width: 768px) 80vw, 25vw"
             style={{ objectFit: "cover", objectPosition: "center" }}

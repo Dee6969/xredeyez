@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Explore", href: "/explore" },
-  { label: "Cities", href: "/cities" },
+  { label: "Places", href: "/cities" },
   { label: "Map", href: "/map" },
   { label: "Saved", href: "/saved" },
   { label: "Signal", href: "/signal" },
@@ -13,7 +13,7 @@ const navItems = [
 
 const desktopItems = [
   { label: "Explore", href: "/explore" },
-  { label: "Cities", href: "/cities" },
+  { label: "Places", href: "/cities" },
   { label: "Map", href: "/map" },
   { label: "Signal", href: "/signal" },
   { label: "Profile", href: "/profile" },
@@ -32,7 +32,7 @@ const icons: Record<string, React.ReactNode> = {
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
   ),
-  Cities: (
+  Places: (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 21h18M9 21V7l6-4v18M9 7H5a2 2 0 0 0-2 2v12M15 21V11h4v10"/>
     </svg>
