@@ -36,6 +36,22 @@ const activeHotelMarkerIcon = L.divIcon({
   popupAnchor: [0, -24],
 });
 
+const restaurantMarkerIcon = L.divIcon({
+  className: "xred-leaflet-marker is-restaurant",
+  html: '<span></span>',
+  iconSize: [38, 38],
+  iconAnchor: [19, 19],
+  popupAnchor: [0, -22],
+});
+
+const activeRestaurantMarkerIcon = L.divIcon({
+  className: "xred-leaflet-marker is-restaurant is-active",
+  html: '<span></span>',
+  iconSize: [44, 44],
+  iconAnchor: [22, 22],
+  popupAnchor: [0, -24],
+});
+
 function buildBookingLink(venue: Venue): string {
   const params = new URLSearchParams({
     destination: `${venue.name}, ${venue.city}`,
@@ -47,6 +63,19 @@ function buildBookingLink(venue: Venue): string {
     params.set("url", venue.bookingUrl);
   }
   return `/partners/booking?${params.toString()}`;
+}
+
+function buildRestaurantLink(venue: Venue): string {
+  const params = new URLSearchParams({
+    name: venue.name,
+    city: venue.city.toLowerCase(),
+    venue: venue.id,
+    source: "map-pin",
+  });
+  if (venue.bookingUrl) {
+    params.set("url", venue.bookingUrl);
+  }
+  return `/partners/restaurant?${params.toString()}`;
 }
 
 const cityMarkerIcon = L.divIcon({
@@ -100,25 +129,35 @@ export default function LeafletCityMap({
       />
       {venues.map((venue) => {
         const isHotel = venue.layer === "stay";
+        const isRestaurant = venue.layer === "eat";
         const isSelected = selectedId === venue.id;
-        const icon = isHotel
-          ? (isSelected ? activeHotelMarkerIcon : hotelMarkerIcon)
-          : (isSelected ? activeMarkerIcon : markerIcon);
+
+        let icon;
+        if (isHotel) icon = isSelected ? activeHotelMarkerIcon : hotelMarkerIcon;
+        else if (isRestaurant) icon = isSelected ? activeRestaurantMarkerIcon : restaurantMarkerIcon;
+        else icon = isSelected ? activeMarkerIcon : markerIcon;
+
+        const popupClass = `xred-leaflet-popup${isHotel ? " is-hotel-popup" : ""}${isRestaurant ? " is-restaurant-popup" : ""}`;
 
         return (
           <Marker
             key={venue.id}
             position={[venue.coordinates.lat!, venue.coordinates.lng!]}
             icon={icon}
-            zIndexOffset={isHotel ? 50 : 0}
+            zIndexOffset={isHotel || isRestaurant ? 50 : 0}
             eventHandlers={{ click: () => onSelect(venue.id) }}
           >
-            <Popup closeButton={false} className={`xred-leaflet-popup${isHotel ? " is-hotel-popup" : ""}`}>
+            <Popup closeButton={false} className={popupClass}>
               <strong>{venue.name}</strong>
               <span>{venue.type} / {venue.neighborhood}</span>
               {isHotel && (
                 <a href={buildBookingLink(venue)} target="_blank" rel="noreferrer">
                   Book on Booking.com →
+                </a>
+              )}
+              {isRestaurant && (
+                <a href={buildRestaurantLink(venue)} target="_blank" rel="noreferrer">
+                  Reserve table →
                 </a>
               )}
             </Popup>

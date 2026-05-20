@@ -19,6 +19,19 @@ function buildBookingLink(venue: Venue): string {
   return `/partners/booking?${params.toString()}`;
 }
 
+function buildRestaurantLink(venue: Venue): string {
+  const params = new URLSearchParams({
+    name: venue.name,
+    city: venue.city.toLowerCase(),
+    venue: venue.id,
+    source: "map-panel",
+  });
+  if (venue.bookingUrl) {
+    params.set("url", venue.bookingUrl);
+  }
+  return `/partners/restaurant?${params.toString()}`;
+}
+
 const LeafletCityMap = dynamic(() => import("./LeafletCityMap"), {
   ssr: false,
   loading: () => <div className="platform-map-loading">Loading street map...</div>,
@@ -102,7 +115,10 @@ export default function CityMapExperience({
           </div>
 
           {selected && (
-            <article key={selected.id} className={`map-selected-card${selected.layer === "stay" ? " is-hotel" : ""}`}>
+            <article
+              key={selected.id}
+              className={`map-selected-card${selected.layer === "stay" ? " is-hotel" : ""}${selected.layer === "eat" ? " is-restaurant" : ""}`}
+            >
               <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/45">
                 {selected.type} / {selected.neighborhood}
               </div>
@@ -115,13 +131,15 @@ export default function CityMapExperience({
               <p>{selected.description}</p>
               {selected.layer === "stay" ? (
                 <div className="platform-action-row">
-                  <Link
-                    href={buildBookingLink(selected)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="map-booking-btn"
-                  >
+                  <Link href={buildBookingLink(selected)} target="_blank" rel="noreferrer" className="map-booking-btn">
                     Book on Booking.com
+                  </Link>
+                  <SaveButton itemType="venue" itemId={selected.id} />
+                </div>
+              ) : selected.layer === "eat" ? (
+                <div className="platform-action-row">
+                  <Link href={buildRestaurantLink(selected)} target="_blank" rel="noreferrer" className="map-restaurant-btn">
+                    Reserve table
                   </Link>
                   <SaveButton itemType="venue" itemId={selected.id} />
                 </div>
@@ -184,10 +202,10 @@ export default function CityMapExperience({
               <button
                 key={venue.id}
                 type="button"
-                className={`map-list-item ${selected?.id === venue.id ? "is-active" : ""}${venue.layer === "stay" ? " is-hotel" : ""}`}
+                className={`map-list-item ${selected?.id === venue.id ? "is-active" : ""}${venue.layer === "stay" ? " is-hotel" : ""}${venue.layer === "eat" ? " is-restaurant" : ""}`}
                 onClick={() => handleSelect(venue.id)}
               >
-                <span>{venue.layer === "stay" ? "🏨 " : ""}{venue.type} / {venue.neighborhood}</span>
+                <span>{venue.layer === "stay" ? "🏨 " : venue.layer === "eat" ? "🍽 " : ""}{venue.type} / {venue.neighborhood}</span>
                 <strong>{venue.name}</strong>
                 {venue.address && (
                   <em>{venue.address}{venue.postcode ? ` / ${venue.postcode}` : ""}</em>

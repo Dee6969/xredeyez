@@ -1776,6 +1776,41 @@ body {
   text-transform: uppercase;
 }
 
+/* Restaurant / Eat layer pins */
+.xred-leaflet-marker.is-restaurant {
+  background: #7A2E12;
+  border-color: rgba(255,255,255,0.68);
+  box-shadow: 0 0 0 4px rgba(210,100,48,0.20), 0 8px 22px rgba(0,0,0,0.38);
+}
+.xred-leaflet-marker.is-restaurant span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.88);
+  box-shadow: none;
+}
+.xred-leaflet-marker.is-restaurant.is-active {
+  background: #D44A1E;
+  box-shadow: 0 0 0 10px rgba(210,100,48,0.22), 0 18px 34px rgba(0,0,0,0.44);
+}
+.xred-leaflet-marker.is-restaurant.is-active span {
+  background: #fff;
+  box-shadow: 0 0 10px rgba(255,200,150,0.6);
+}
+
+/* Restaurant popup */
+.xred-leaflet-popup.is-restaurant-popup .leaflet-popup-content-wrapper {
+  border-color: rgba(210,100,48,0.32);
+  box-shadow: 0 18px 38px rgba(0,0,0,0.38), 0 0 24px rgba(210,100,48,0.16);
+}
+.xred-leaflet-popup.is-restaurant-popup a {
+  color: #E07040;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .xred-leaflet-city-marker {
   position: relative;
   display: grid !important;
@@ -2172,6 +2207,13 @@ body {
     linear-gradient(145deg, rgba(21,18,12,0.98), rgba(21,18,14,0.95));
 }
 
+.map-selected-card.is-restaurant {
+  border-color: rgba(210,100,48,0.22);
+  background:
+    radial-gradient(circle at 18% 14%, rgba(210,100,48,0.10), transparent 38%),
+    linear-gradient(145deg, rgba(20,14,10,0.98), rgba(21,18,14,0.95));
+}
+
 .map-selected-card h2 {
   margin-top: 8px;
   color: var(--text-inverse);
@@ -2207,6 +2249,28 @@ body {
 }
 .map-booking-btn:hover {
   background: #004BAF;
+  transform: translateY(-1px);
+}
+
+.map-restaurant-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: #7A2E12;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: background 200ms ease, transform 150ms ease;
+  white-space: nowrap;
+}
+.map-restaurant-btn:hover {
+  background: #C03A18;
   transform: translateY(-1px);
 }
 
@@ -2252,6 +2316,14 @@ body {
 .map-list-item.is-hotel.is-active {
   border-color: rgba(212,168,71,0.52);
   background: rgba(212,168,71,0.07);
+}
+
+.map-list-item.is-restaurant {
+  border-color: rgba(210,100,48,0.20);
+}
+.map-list-item.is-restaurant.is-active {
+  border-color: rgba(210,100,48,0.52);
+  background: rgba(210,100,48,0.07);
 }
 
 .map-list-item span {
