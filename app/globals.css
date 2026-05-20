@@ -2178,6 +2178,41 @@ body {
 .platform-map-legend-dot.is-hotel  { background: #D4A847; box-shadow: 0 0 6px rgba(212,168,71,0.5); }
 .platform-map-legend-dot.is-restaurant { background: #D44A1E; box-shadow: 0 0 6px rgba(212,74,30,0.5); }
 
+/* ── Map region jump buttons ─────────────────────────── */
+.platform-map-regions {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  pointer-events: all;
+}
+.platform-map-region-btn {
+  background: rgba(24,22,15,0.88);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(245,240,230,0.8);
+  font-family: var(--font-mono, monospace);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: background 160ms, border-color 160ms, color 160ms;
+  white-space: nowrap;
+}
+.platform-map-region-btn:hover {
+  background: rgba(132,197,31,0.18);
+  border-color: rgba(132,197,31,0.5);
+  color: #84C51F;
+}
+
 /* ── Map city picker ─────────────────────────────────── */
 .map-city-picker-grid {
   display: grid;

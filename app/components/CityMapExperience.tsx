@@ -42,11 +42,30 @@ const CITY_CENTERS: Record<string, { lat: number; lng: number; zoom: number }> =
   barcelona: { lat: 41.3851, lng: 2.1734, zoom: 12 },
   tenerife: { lat: 28.2916, lng: -16.6291, zoom: 10 },
   marbella: { lat: 36.5101, lng: -4.8824, zoom: 11 },
-  thailand: { lat: 13.7563, lng: 100.5018, zoom: 11 },
+  thailand: { lat: 13.7563, lng: 100.5018, zoom: 12 },
   germany: { lat: 52.5200, lng: 13.4050, zoom: 11 },
-  usa: { lat: 39.8283, lng: -98.5795, zoom: 4 },
+  usa: { lat: 34.0195, lng: -118.4912, zoom: 12 },
   "czech-republic": { lat: 50.0755, lng: 14.4378, zoom: 12 },
   "south-africa": { lat: -33.9249, lng: 18.4241, zoom: 11 },
+};
+
+const REGION_BUTTONS: Record<string, { label: string; lat: number; lng: number; zoom: number }[]> = {
+  thailand: [
+    { label: "Bangkok", lat: 13.7563, lng: 100.5018, zoom: 12 },
+    { label: "Phuket", lat: 7.8804, lng: 98.3923, zoom: 12 },
+    { label: "Koh Samui", lat: 9.5317, lng: 100.0610, zoom: 12 },
+    { label: "Koh Phangan", lat: 9.7047, lng: 100.0296, zoom: 12 },
+    { label: "Chiang Mai", lat: 18.7883, lng: 98.9853, zoom: 12 },
+  ],
+  usa: [
+    { label: "Los Angeles", lat: 34.0195, lng: -118.4912, zoom: 12 },
+    { label: "New York", lat: 40.7484, lng: -73.9967, zoom: 12 },
+    { label: "Las Vegas", lat: 36.1147, lng: -115.1728, zoom: 12 },
+    { label: "Miami", lat: 25.7617, lng: -80.1918, zoom: 12 },
+    { label: "Chicago", lat: 41.8827, lng: -87.6233, zoom: 12 },
+    { label: "San Francisco", lat: 37.7749, lng: -122.4194, zoom: 12 },
+    { label: "Denver", lat: 39.7392, lng: -104.9903, zoom: 12 },
+  ],
 };
 
 export default function CityMapExperience({
@@ -64,6 +83,9 @@ export default function CityMapExperience({
   const [activeLayer, setActiveLayer] = useState<DiscoveryLayer | "all">("all");
   const [view, setView] = useState<"map" | "list">("map");
   const [selectedId, setSelectedId] = useState<string>(venues[0]?.id || "");
+  const defaultCenter = CITY_CENTERS[city.slug] || CITY_CENTERS.amsterdam;
+  const [mapCenter, setMapCenter] = useState(defaultCenter);
+  const regionButtons = REGION_BUTTONS[city.slug] || [];
 
   const filteredVenues = useMemo(() => {
     return venues.filter((venue) => {
@@ -80,7 +102,6 @@ export default function CityMapExperience({
     setView("map");
   }, []);
 
-  const center = CITY_CENTERS[city.slug] || CITY_CENTERS.amsterdam;
   const geoVenues = filteredVenues.filter((venue) => venue.coordinates.lat && venue.coordinates.lng);
 
   return (
@@ -88,7 +109,7 @@ export default function CityMapExperience({
       <div className={`platform-map-shell ${view === "list" ? "is-list-view" : ""}`}>
         <div className="platform-map-canvas" aria-label={`${city.name} map`}>
           <LeafletCityMap
-            center={center}
+            center={mapCenter}
             venues={geoVenues}
             cities={networkCities}
             cityCenters={CITY_CENTERS}
@@ -101,6 +122,21 @@ export default function CityMapExperience({
           <div className="platform-map-label">
             Live street map / {geoVenues.length} places
           </div>
+
+          {regionButtons.length > 0 && (
+            <div className="platform-map-regions" aria-label="Jump to region">
+              {regionButtons.map((r) => (
+                <button
+                  key={r.label}
+                  type="button"
+                  className="platform-map-region-btn"
+                  onClick={() => setMapCenter({ lat: r.lat, lng: r.lng, zoom: r.zoom })}
+                >
+                  {r.label}
+                </button>
+              ))}
+            </div>
+          )}
 
           <div className="platform-map-legend" aria-label="Map pin key">
             <div className="platform-map-legend-item">
