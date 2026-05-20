@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import PlatformNav from "./components/PlatformNav";
 import CityLightRail from "./components/CityLightRail";
+import HeroSlideshow from "./components/HeroSlideshow";
 import MembershipTeaser from "./components/MembershipTeaser";
 import SiteFooter from "./components/SiteFooter";
 import Reveal from "./components/Reveal";
@@ -11,22 +11,11 @@ export default function Home() {
     <>
       <PlatformNav />
 
-      {/* Hero — full viewport, cinematic */}
+      {/* Hero — full viewport, cinematic slideshow */}
       <section className="home-hero" aria-label="Welcome to XRED EYEZ">
-        <div className="home-hero-image">
-          <Image
-            src="/cities/amsterdam-canal-day.png"
-            alt="Amsterdam — XRED EYEZ city guide"
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: "cover", objectPosition: "center 38%" }}
-          />
-        </div>
-        <div className="home-hero-overlay" aria-hidden="true" />
+        <HeroSlideshow />
 
         <div className="home-hero-content">
-          <p className="home-hero-city-label anim-fade-up">Cannabis Culture · City Guides</p>
           <h1 className="home-hero-headline anim-fade-up delay-2">
             Know where<br />to go.
           </h1>
