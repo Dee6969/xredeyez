@@ -98,16 +98,24 @@ export default function Home() {
             })}
 
             {/* Who is next? */}
-            <div className="home-dest-card home-dest-next" aria-hidden="true">
-              <div className="home-dest-next-inner">
-                <span>WHO IS NEXT?</span>
+            {[0, 1].map((i) => (
+              <div key={i} className="home-dest-card home-dest-next" aria-label="Who is next?">
+                <div className="home-dest-next-inner">
+                  <Image
+                    src="/redeyez-logo-clear.png"
+                    alt="XRED EYEZ"
+                    width={72}
+                    height={72}
+                    className="home-dest-next-logo"
+                    style={{ objectFit: "contain" }}
+                  />
+                  <div className="home-dest-next-brand">
+                    <strong>XRED EYEZ</strong>
+                    <span>Who is next?</span>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="home-dest-card home-dest-next" aria-hidden="true">
-              <div className="home-dest-next-inner">
-                <span>WHO IS NEXT?</span>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
       </Reveal>
