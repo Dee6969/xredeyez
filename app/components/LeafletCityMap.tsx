@@ -2,6 +2,7 @@
 
 import L from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 import type { City, Venue } from "../data/platform";
 
 const markerIcon = L.divIcon({
@@ -127,48 +128,50 @@ export default function LeafletCityMap({
         attribution="&copy; OpenStreetMap contributors"
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {venues.map((venue) => {
-        const isHotel = venue.layer === "stay";
-        const isRestaurant = venue.layer === "eat";
-        const isSelected = selectedId === venue.id;
+      <MarkerClusterGroup chunkedLoading>
+        {venues.map((venue) => {
+          const isHotel = venue.layer === "stay";
+          const isRestaurant = venue.layer === "eat";
+          const isSelected = selectedId === venue.id;
 
-        let icon;
-        if (isHotel) icon = isSelected ? activeHotelMarkerIcon : hotelMarkerIcon;
-        else if (isRestaurant) icon = isSelected ? activeRestaurantMarkerIcon : restaurantMarkerIcon;
-        else icon = isSelected ? activeMarkerIcon : markerIcon;
+          let icon;
+          if (isHotel) icon = isSelected ? activeHotelMarkerIcon : hotelMarkerIcon;
+          else if (isRestaurant) icon = isSelected ? activeRestaurantMarkerIcon : restaurantMarkerIcon;
+          else icon = isSelected ? activeMarkerIcon : markerIcon;
 
-        const popupClass = `xred-leaflet-popup${isHotel ? " is-hotel-popup" : ""}${isRestaurant ? " is-restaurant-popup" : ""}`;
+          const popupClass = `xred-leaflet-popup${isHotel ? " is-hotel-popup" : ""}${isRestaurant ? " is-restaurant-popup" : ""}`;
 
-        return (
-          <Marker
-            key={venue.id}
-            position={[venue.coordinates.lat!, venue.coordinates.lng!]}
-            icon={icon}
-            zIndexOffset={isHotel || isRestaurant ? 50 : 0}
-            eventHandlers={{ click: () => onSelect(venue.id) }}
-          >
-            <Popup closeButton={false} className={popupClass}>
-              <strong>{venue.name}</strong>
-              <span>{venue.type} / {venue.neighborhood}</span>
-              {isHotel && (
-                <a href={buildBookingLink(venue)} target="_blank" rel="noreferrer">
-                  Book on Booking.com →
-                </a>
-              )}
-              {isRestaurant && (
-                <a href={buildRestaurantLink(venue)} target="_blank" rel="noreferrer">
-                  Reserve table →
-                </a>
-              )}
-              {!isHotel && !isRestaurant && (
-                <a href={`/venues/${venue.slug}`}>
-                  View profile →
-                </a>
-              )}
-            </Popup>
-          </Marker>
-        );
-      })}
+          return (
+            <Marker
+              key={venue.id}
+              position={[venue.coordinates.lat!, venue.coordinates.lng!]}
+              icon={icon}
+              zIndexOffset={isHotel || isRestaurant ? 50 : 0}
+              eventHandlers={{ click: () => onSelect(venue.id) }}
+            >
+              <Popup closeButton={false} className={popupClass}>
+                <strong>{venue.name}</strong>
+                <span>{venue.type} / {venue.neighborhood}</span>
+                {isHotel && (
+                  <a href={buildBookingLink(venue)} target="_blank" rel="noreferrer">
+                    Book on Booking.com →
+                  </a>
+                )}
+                {isRestaurant && (
+                  <a href={buildRestaurantLink(venue)} target="_blank" rel="noreferrer">
+                    Reserve table →
+                  </a>
+                )}
+                {!isHotel && !isRestaurant && (
+                  <a href={`/venues/${venue.slug}`}>
+                    View profile →
+                  </a>
+                )}
+              </Popup>
+            </Marker>
+          );
+        })}
+      </MarkerClusterGroup>
       {cities.map((city) => {
         const cityCenter = cityCenters[city.slug];
         if (!cityCenter || city.id === activeCityId) return null;
