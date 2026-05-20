@@ -160,6 +160,11 @@ export default function LeafletCityMap({
                   Reserve table →
                 </a>
               )}
+              {!isHotel && !isRestaurant && (
+                <a href={`/venues/${venue.slug}`}>
+                  View profile →
+                </a>
+              )}
             </Popup>
           </Marker>
         );
