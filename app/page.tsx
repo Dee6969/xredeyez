@@ -102,7 +102,7 @@ export default function Home() {
               <div key={i} className="home-dest-card home-dest-next" aria-label="Who is next?">
                 <div className="home-dest-next-inner">
                   <Image
-                    src="/redeyez-logo-clear.png"
+                    src="/redeyez-logo.jpeg"
                     alt="XRED EYEZ"
                     width={72}
                     height={72}
@@ -110,7 +110,6 @@ export default function Home() {
                     style={{ objectFit: "contain" }}
                   />
                   <div className="home-dest-next-brand">
-                    <strong>XRED EYEZ</strong>
                     <span>Who is next?</span>
                   </div>
                 </div>

@@ -2332,7 +2332,7 @@ body {
 .home-dest-status.is-live { color: var(--xgreen); }
 
 .home-dest-next {
-  background: #FFFFFF;
+  background: #0F0D09;
   border: none;
   cursor: default;
 }
@@ -2370,7 +2370,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(26,24,20,0.4);
+  color: rgba(245,240,230,0.35);
   font-family: var(--font-mono, monospace);
 }
 
