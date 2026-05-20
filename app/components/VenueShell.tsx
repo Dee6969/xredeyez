@@ -7,7 +7,7 @@ export default function VenueShell({
   return (
     <>
       <PlatformNav />
-      <main style={{ paddingTop: 0, overflowX: "hidden" }}>{children}</main>
+      <main className="venue-page" style={{ paddingTop: 0, overflowX: "clip" }}>{children}</main>
       <SiteFooter />
     </>
   );

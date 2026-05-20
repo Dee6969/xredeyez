@@ -58,112 +58,121 @@ export default function CityMapExperience({
   const geoVenues = filteredVenues.filter((venue) => venue.coordinates.lat && venue.coordinates.lng);
 
   return (
-    <div className={`platform-map-shell ${view === "list" ? "is-list-view" : ""}`}>
-      <div className="platform-map-canvas" aria-label={`${city.name} map`}>
-        <LeafletCityMap
-          center={center}
-          venues={geoVenues}
-          cities={networkCities}
-          cityCenters={CITY_CENTERS}
-          activeCityId={city.id}
-          selectedId={selected?.id || ""}
-          onSelect={handleSelect}
-        />
-        <div className="platform-map-sheen" />
+    <div>
+      <div className={`platform-map-shell ${view === "list" ? "is-list-view" : ""}`}>
+        <div className="platform-map-canvas" aria-label={`${city.name} map`}>
+          <LeafletCityMap
+            center={center}
+            venues={geoVenues}
+            cities={networkCities}
+            cityCenters={CITY_CENTERS}
+            activeCityId={city.id}
+            selectedId={selected?.id || ""}
+            onSelect={handleSelect}
+          />
+          <div className="platform-map-sheen" />
 
-        <div className="platform-map-label">
-          Live street map / {geoVenues.length} places
+          <div className="platform-map-label">
+            Live street map / {geoVenues.length} places
+          </div>
         </div>
+
+        <aside className="platform-map-panel">
+          <div className="platform-map-tabs" role="tablist" aria-label="Map view">
+            <button type="button" className={view === "map" ? "is-active" : ""} onClick={() => setView("map")}>
+              Map
+            </button>
+            <button type="button" className={view === "list" ? "is-active" : ""} onClick={() => setView("list")}>
+              List
+            </button>
+            <Link href="/saved">Saved</Link>
+          </div>
+
+          {selected && (
+            <article key={selected.id} className="map-selected-card">
+              <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/45">
+                {selected.type} / {selected.neighborhood}
+              </div>
+              <h2>{selected.name}</h2>
+              {selected.address && (
+                <p className="map-selected-address">
+                  {selected.address}{selected.postcode ? ` / ${selected.postcode}` : ""}
+                </p>
+              )}
+              <p>{selected.description}</p>
+              <div className="platform-action-row">
+                <Link href={`/venues/${selected.slug}`} className="platform-primary-action">
+                  Open brand room
+                </Link>
+                <SaveButton itemType="venue" itemId={selected.id} />
+              </div>
+            </article>
+          )}
+
+          <div className="map-filter-strip">
+            <button
+              type="button"
+              className={`vibe-chip ${activeLayer === "all" && activeVibe === "all" ? "is-active" : ""}`}
+              onClick={() => {
+                setActiveLayer("all");
+                setActiveVibe("all");
+                setSelectedId("");
+              }}
+            >
+              All
+            </button>
+            {discoveryLayers.map((layer) => (
+              <button
+                key={layer.id}
+                type="button"
+                className={`vibe-chip ${activeLayer === layer.id ? "is-active" : ""}`}
+                onClick={() => {
+                  setActiveLayer(layer.id);
+                  setSelectedId("");
+                }}
+              >
+                {layer.label}
+              </button>
+            ))}
+          </div>
+          <div className="map-filter-strip">
+            {vibes.slice(0, 8).map((vibe) => (
+              <button
+                key={vibe.id}
+                type="button"
+                className={`vibe-chip ${activeVibe === vibe.id ? "is-active" : ""}`}
+                style={{ borderColor: `${vibe.accent}66` }}
+                onClick={() => {
+                  setActiveVibe(vibe.id);
+                  setSelectedId("");
+                }}
+              >
+                {vibe.name}
+              </button>
+            ))}
+          </div>
+
+          <div className="map-list-stack">
+            {filteredVenues.map((venue) => (
+              <button
+                key={venue.id}
+                type="button"
+                className={`map-list-item ${selected?.id === venue.id ? "is-active" : ""}`}
+                onClick={() => handleSelect(venue.id)}
+              >
+                <span>{venue.type} / {venue.neighborhood}</span>
+                <strong>{venue.name}</strong>
+                {venue.address && (
+                  <em>{venue.address}{venue.postcode ? ` / ${venue.postcode}` : ""}</em>
+                )}
+                <small>{venue.description}</small>
+              </button>
+            ))}
+          </div>
+        </aside>
       </div>
 
-      <aside className="platform-map-panel">
-        <div className="platform-map-tabs" role="tablist" aria-label="Map view">
-          <button type="button" className={view === "map" ? "is-active" : ""} onClick={() => setView("map")}>
-            Map
-          </button>
-          <button type="button" className={view === "list" ? "is-active" : ""} onClick={() => setView("list")}>
-            List
-          </button>
-          <Link href="/saved">Saved</Link>
-        </div>
-
-        {selected && (
-          <article className="map-selected-card">
-            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/45">
-              {selected.type} / {selected.neighborhood}
-            </div>
-            <h2>{selected.name}</h2>
-            {selected.address && (
-              <p className="map-selected-address">
-                {selected.address}{selected.postcode ? ` / ${selected.postcode}` : ""}
-              </p>
-            )}
-            <p>{selected.description}</p>
-            <div className="platform-action-row">
-              <Link href={`/venues/${selected.slug}`} className="platform-primary-action">
-                Open brand room
-              </Link>
-              <SaveButton itemType="venue" itemId={selected.id} />
-            </div>
-          </article>
-        )}
-
-        <div className="map-filter-strip">
-          <button
-            type="button"
-            className={`vibe-chip ${activeLayer === "all" && activeVibe === "all" ? "is-active" : ""}`}
-            onClick={() => {
-              setActiveLayer("all");
-              setActiveVibe("all");
-            }}
-          >
-            All
-          </button>
-          {discoveryLayers.map((layer) => (
-            <button
-              key={layer.id}
-              type="button"
-              className={`vibe-chip ${activeLayer === layer.id ? "is-active" : ""}`}
-              onClick={() => setActiveLayer(layer.id)}
-            >
-              {layer.label}
-            </button>
-          ))}
-        </div>
-        <div className="map-filter-strip">
-          {vibes.slice(0, 8).map((vibe) => (
-            <button
-              key={vibe.id}
-              type="button"
-              className={`vibe-chip ${activeVibe === vibe.id ? "is-active" : ""}`}
-              style={{ borderColor: `${vibe.accent}66` }}
-              onClick={() => setActiveVibe(vibe.id)}
-            >
-              {vibe.name}
-            </button>
-          ))}
-        </div>
-
-        <div className="map-list-stack">
-          {filteredVenues.map((venue) => (
-            <button
-              key={venue.id}
-              type="button"
-              className={`map-list-item ${selected?.id === venue.id ? "is-active" : ""}`}
-              onClick={() => handleSelect(venue.id)}
-            >
-              <span>{venue.type} / {venue.neighborhood}</span>
-              <strong>{venue.name}</strong>
-              {venue.address && (
-                <em>{venue.address}{venue.postcode ? ` / ${venue.postcode}` : ""}</em>
-              )}
-              <small>{venue.description}</small>
-            </button>
-          ))}
-        </div>
-      </aside>
-
-      <section className="platform-section px-0 md:col-span-2">
+      <section className="platform-section px-0">
         <div className="platform-section-head">
           <div>
             <div className="eyebrow">Full cards</div>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import CityCard from "../components/CityCard";
 import CityLightRail from "../components/CityLightRail";
 import PlatformShell from "../components/PlatformShell";
+import Reveal from "../components/Reveal";
 import { cities, getSortedVenuesByCity } from "../data/platform";
 
 export const metadata = {
@@ -18,26 +19,29 @@ export default function CitiesPage() {
 
   return (
     <PlatformShell>
-      <section className="platform-hero">
-        <div className="eyebrow">CITIES</div>
-        <h1 className="platform-title">City guides that move with you.</h1>
-        <p className="platform-lede">
-          Start with Amsterdam, then follow the platform as Barcelona, Tenerife, Marbella, Thailand, Germany, Czech Republic, and South Africa open up.
-        </p>
-      </section>
+      <Reveal>
+        <section className="platform-hero">
+          <div className="eyebrow">CITIES</div>
+          <h1 className="platform-title">City guides that move with you.</h1>
+          <p className="platform-lede">
+            Start with Amsterdam, then follow the platform as Barcelona, Tenerife, Marbella, Thailand, Germany, Czech Republic, and South Africa open up.
+          </p>
+        </section>
+      </Reveal>
 
       <CityLightRail />
 
-      <section className="platform-section">
-        <div className="platform-section-head">
-          <div>
-            <div className="eyebrow">MARKET LAYERS</div>
-            <h2 className="platform-section-title">Each country, cleanly mapped.</h2>
+      <Reveal>
+        <section className="platform-section">
+          <div className="platform-section-head">
+            <div>
+              <div className="eyebrow">MARKET LAYERS</div>
+              <h2 className="platform-section-title">Each country, cleanly mapped.</h2>
+            </div>
+            <Link href="/cities/amsterdam/map" className="platform-inline-link">
+              Open network map
+            </Link>
           </div>
-          <Link href="/cities/amsterdam/map" className="platform-inline-link">
-            Open network map
-          </Link>
-        </div>
 
         <div className="country-market-stack">
           {countrySections.map(({ city, venues }) => {
@@ -96,21 +100,24 @@ export default function CitiesPage() {
             );
           })}
         </div>
-      </section>
+        </section>
+      </Reveal>
 
-      <section className="platform-section">
-        <div className="platform-section-head">
-          <div>
-            <div className="eyebrow">ALL GUIDES</div>
-            <h2 className="platform-section-title">Browse the full board.</h2>
+      <Reveal>
+        <section className="platform-section">
+          <div className="platform-section-head">
+            <div>
+              <div className="eyebrow">ALL GUIDES</div>
+              <h2 className="platform-section-title">Browse the full board.</h2>
+            </div>
           </div>
-        </div>
-        <div className="platform-card-grid">
-          {cities.map((city) => (
-            <CityCard key={city.id} city={city} />
-          ))}
-        </div>
-      </section>
+          <div className="platform-card-grid">
+            {cities.map((city) => (
+              <CityCard key={city.id} city={city} />
+            ))}
+          </div>
+        </section>
+      </Reveal>
     </PlatformShell>
   );
 }

@@ -6,6 +6,7 @@ import CityLightRail from "./components/CityLightRail";
 import MembershipTeaser from "./components/MembershipTeaser";
 import SiteFooter from "./components/SiteFooter";
 import HomepageMapClient from "./components/HomepageMapClient";
+import Reveal from "./components/Reveal";
 import { cities, vibes, venues } from "./data/platform";
 
 export default function Home() {
@@ -46,89 +47,103 @@ export default function Home() {
         <p className="home-hero-scroll" aria-hidden="true">Scroll</p>
       </section>
 
-      {/* Scene interlude — world-setting */}
-      <div className="scene-interlude" aria-hidden="true">
-        <p className="scene-statement">
-          Cannabis culture deserves a platform built around{" "}
-          <strong>place, ritual, and atmosphere</strong> — not just a list of shops.
-        </p>
-        <span className="scene-divider" />
-      </div>
+      {/* Scene interlude */}
+      <Reveal>
+        <div className="scene-interlude" aria-hidden="true">
+          <p className="scene-statement">
+            Cannabis culture deserves a platform built around{" "}
+            <strong>place, ritual, and atmosphere</strong> — not just a list of shops.
+          </p>
+          <span className="scene-divider" />
+        </div>
+      </Reveal>
 
       {/* City discovery rail */}
       <section aria-label="Featured cities">
-        <div className="home-section" style={{ paddingBottom: "24px" }}>
-          <div className="home-section-header">
-            <div>
-              <p className="eyebrow">City guides</p>
-              <h2 className="home-section-title" style={{ marginTop: "8px" }}>
-                Choose your city.
-              </h2>
+        <Reveal>
+          <div className="home-section" style={{ paddingBottom: "24px" }}>
+            <div className="home-section-header">
+              <div>
+                <p className="eyebrow">City guides</p>
+                <h2 className="home-section-title" style={{ marginTop: "8px" }}>
+                  Choose your city.
+                </h2>
+              </div>
+              <Link href="/cities" className="platform-inline-link">All cities →</Link>
             </div>
-            <Link href="/cities" className="platform-inline-link">All cities →</Link>
           </div>
-        </div>
+        </Reveal>
         <div style={{ paddingLeft: "clamp(16px, 4vw, 48px)", paddingRight: "clamp(16px, 4vw, 48px)" }}>
           <CityLightRail />
         </div>
       </section>
 
-      {/* Scene interlude — vibe transition */}
-      <div className="scene-interlude" aria-hidden="true">
-        <p className="scene-statement">
-          Every place has a feeling. Every culture has a room.{" "}
-          <strong>Find yours.</strong>
-        </p>
-        <span className="scene-divider" />
-      </div>
+      {/* Scene interlude */}
+      <Reveal>
+        <div className="scene-interlude" aria-hidden="true">
+          <p className="scene-statement">
+            Every place has a feeling. Every culture has a room.{" "}
+            <strong>Find yours.</strong>
+          </p>
+          <span className="scene-divider" />
+        </div>
+      </Reveal>
 
-      <div className="home-section" style={{ paddingTop: "40px", paddingBottom: "40px" }}>
-        <BookingHotelStrip city={flagshipCity} />
-      </div>
+      <Reveal>
+        <div className="home-section" style={{ paddingTop: "40px", paddingBottom: "40px" }}>
+          <BookingHotelStrip city={flagshipCity} />
+        </div>
+      </Reveal>
 
       {/* Vibe filters */}
-      <section className="home-section" aria-label="Browse by vibe">
-        <div className="home-section-header">
-          <div>
-            <p className="eyebrow">Browse by mood</p>
-            <h2 className="home-section-title" style={{ marginTop: "8px" }}>
-              How do you want to feel?
-            </h2>
+      <Reveal>
+        <section className="home-section" aria-label="Browse by vibe">
+          <div className="home-section-header">
+            <div>
+              <p className="eyebrow">Browse by mood</p>
+              <h2 className="home-section-title" style={{ marginTop: "8px" }}>
+                How do you want to feel?
+              </h2>
+            </div>
+            <Link href="/vibes" className="platform-inline-link">All vibes →</Link>
           </div>
-          <Link href="/vibes" className="platform-inline-link">All vibes →</Link>
-        </div>
-        <div className="home-vibes-row">
-          {displayVibes.map((vibe) => (
-            <Link key={vibe.id} href={`/vibes?vibe=${vibe.id}`} className="vibe-chip">
-              {vibe.name}
+          <div className="home-vibes-row">
+            {displayVibes.map((vibe) => (
+              <Link key={vibe.id} href={`/vibes?vibe=${vibe.id}`} className="vibe-chip">
+                {vibe.name}
+              </Link>
+            ))}
+          </div>
+        </section>
+      </Reveal>
+
+      {/* Map teaser */}
+      <Reveal>
+        <section className="home-map-teaser" aria-label="Explore the live map">
+          <div className="home-map-teaser-head">
+            <p className="eyebrow" style={{ color: "rgba(245,240,230,0.44)" }}>Live city maps</p>
+            <h2 className="home-map-teaser-title">Every venue. One map.</h2>
+            <p className="home-map-teaser-lede">
+              Zoom out for the full network, tap a pin, then open the city or venue guide.
+            </p>
+          </div>
+          <div className="home-real-map-section">
+            <HomepageMapClient venues={venues} cities={cities} />
+          </div>
+          <div className="home-map-teaser-foot">
+            <Link href="/cities/amsterdam/map" className="btn-ghost">
+              Open full map →
             </Link>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
+      </Reveal>
 
-      {/* Map teaser — real live map */}
-      <section className="home-map-teaser" aria-label="Explore the live map">
-        <div className="home-map-teaser-head">
-          <p className="eyebrow" style={{ color: "rgba(245,240,230,0.44)" }}>Live city maps</p>
-          <h2 className="home-map-teaser-title">Every venue. One map.</h2>
-          <p className="home-map-teaser-lede">
-            Zoom out for the full network, tap a pin, then open the city or venue guide.
-          </p>
+      {/* Membership */}
+      <Reveal>
+        <div className="home-section">
+          <MembershipTeaser />
         </div>
-        <div className="home-real-map-section">
-          <HomepageMapClient venues={venues} cities={cities} />
-        </div>
-        <div className="home-map-teaser-foot">
-          <Link href="/cities/amsterdam/map" className="btn-ghost">
-            Open full map →
-          </Link>
-        </div>
-      </section>
-
-      {/* Membership moment */}
-      <div className="home-section">
-        <MembershipTeaser />
-      </div>
+      </Reveal>
 
       <SiteFooter />
     </>

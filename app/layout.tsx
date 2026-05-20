@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "leaflet/dist/leaflet.css";
+import ReadingProgress from "./components/ReadingProgress";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -39,7 +40,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`h-full ${playfair.variable} ${inter.variable}`}>
-      <body className="h-full antialiased">{children}</body>
+      <body className="h-full antialiased">
+        <ReadingProgress />
+        {children}
+      </body>
     </html>
   );
 }
