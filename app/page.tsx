@@ -8,14 +8,15 @@ import Reveal from "./components/Reveal";
 import { cities } from "./data/platform";
 
 const cityImages: Record<string, string> = {
-  amsterdam:      "/cities/amsterdam-canal-day.png",
-  barcelona:      "/cities/barcelona-terrace.png",
-  tenerife:       "/cities/tenerife-sunrise.png",
-  marbella:       "/cities/marbella-marina.png",
-  thailand:       "/cities/thailand-bangkok.png",
-  germany:        "/cities/germany-berlin.png",
+  amsterdam:        "/cities/amsterdam-canal-day.png",
+  barcelona:        "/cities/barcelona-terrace.png",
+  tenerife:         "/cities/tenerife-sunrise.png",
+  marbella:         "/cities/marbella-marina.png",
+  thailand:         "/cities/thailand-bangkok.png",
+  germany:          "/cities/germany-berlin.png",
   "czech-republic": "/cities/czech-prague.png",
-  "south-africa": "/cities/south-africa-cape-town.png",
+  "south-africa":   "/cities/south-africa-cape-town.png",
+  canada:           "/banners/between-sessions.png",
 };
 
 export default function Home() {
@@ -95,6 +96,18 @@ export default function Home() {
                 </Link>
               );
             })}
+
+            {/* Who is next? */}
+            <div className="home-dest-card home-dest-next" aria-hidden="true">
+              <div className="home-dest-next-inner">
+                <span>WHO IS NEXT?</span>
+              </div>
+            </div>
+            <div className="home-dest-card home-dest-next" aria-hidden="true">
+              <div className="home-dest-next-inner">
+                <span>WHO IS NEXT?</span>
+              </div>
+            </div>
           </div>
         </section>
       </Reveal>

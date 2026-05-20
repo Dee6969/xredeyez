@@ -10,6 +10,7 @@ const cities = [
   { title: "Berlin",     location: "Germany",        status: "Coming soon", href: "/cities/germany",    image: "/cities/germany-berlin.png" },
   { title: "Prague",     location: "Czech Republic", status: "Coming soon", href: "/cities/czech-republic", image: "/cities/czech-prague.png" },
   { title: "Cape Town",  location: "South Africa",   status: "Coming soon", href: "/cities/south-africa",   image: "/cities/south-africa-cape-town.png" },
+  { title: "Canada",     location: "Market Guide",   status: "Coming soon", href: "/cities/canada",          image: "/banners/between-sessions.png" },
 ];
 
 export default function CityLightRail() {

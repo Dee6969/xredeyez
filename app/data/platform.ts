@@ -366,6 +366,21 @@ export const cities: City[] = [
     neighborhoods: [],
     routes: [],
   },
+  {
+    id: "canada",
+    slug: "canada",
+    name: "Canada",
+    country: "Market Guide",
+    status: "coming",
+    summary: "The world's most mature legal cannabis market — Vancouver, Toronto, and Montreal each carry a distinct culture. Craft producers, legacy operators, licensed retail, and a cold-weather city rhythm unlike anywhere else.",
+    legalContext: "Cannabis is federally legal across Canada. Purchase from licensed retailers (SQDC in Québec, OCS in Ontario, BCLDB in BC). Public consumption rules vary by province.",
+    heroImage: "/banners/between-sessions.png",
+    vibeIds: ["origin", "creative", "recovery"],
+    sponsorshipSlots: ["canada-market-sponsor"],
+    featuredCollectionIds: [],
+    neighborhoods: [],
+    routes: [],
+  },
 ];
 
 export const venues: Venue[] = [
