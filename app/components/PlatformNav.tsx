@@ -79,14 +79,25 @@ export default function PlatformNav() {
       {/* Desktop top bar */}
       <nav className={`platform-top-nav${isHome && heroNav ? " is-hero" : ""}`} aria-label="Primary navigation">
         <Link href="/" className="platform-brand" aria-label="XRED EYEZ — home">
-          <Image
-            src="/redeyez-logo-clear.png"
-            alt="XRED EYEZ"
-            width={96}
-            height={36}
-            style={{ objectFit: "contain", height: "36px", width: "auto" }}
-            priority
-          />
+          {isHome && heroNav ? (
+            <Image
+              src="/redeyez-logo.jpeg"
+              alt="XRED EYEZ"
+              width={120}
+              height={44}
+              style={{ objectFit: "contain", height: "44px", width: "auto", borderRadius: "4px" }}
+              priority
+            />
+          ) : (
+            <Image
+              src="/redeyez-logo-clear.png"
+              alt="XRED EYEZ"
+              width={120}
+              height={44}
+              style={{ objectFit: "contain", height: "44px", width: "auto", mixBlendMode: "multiply" }}
+              priority
+            />
+          )}
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
