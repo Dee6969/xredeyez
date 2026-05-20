@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const navItems = [
   { label: "Explore", href: "/explore" },
   { label: "Cities", href: "/cities" },
-  { label: "Map", href: "/cities/amsterdam/map" },
+  { label: "Map", href: "/map" },
   { label: "Saved", href: "/saved" },
   { label: "Signal", href: "/signal" },
 ];
@@ -14,7 +14,7 @@ const navItems = [
 const desktopItems = [
   { label: "Explore", href: "/explore" },
   { label: "Cities", href: "/cities" },
-  { label: "Map", href: "/cities/amsterdam/map" },
+  { label: "Map", href: "/map" },
   { label: "Signal", href: "/signal" },
   { label: "Profile", href: "/profile" },
 ];
@@ -22,6 +22,7 @@ const desktopItems = [
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   if (href === "/explore") return pathname === "/explore";
+  if (href === "/map") return pathname === "/map" || pathname.endsWith("/map");
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
