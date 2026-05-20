@@ -39,6 +39,18 @@ const ALLOWED_HOSTS = [
   "eatatgaggan.com",
   "comohotels.com",
   "bolan.co.th",
+  // Thailand — Phuket
+  "trisara.com",
+  "sixsenses.com",
+  "suayrestaurant.com",
+  "acquaphuket.com",
+  // Thailand — Koh Samui
+  "thelardersamui.com",
+  // Thailand — Koh Phangan
+  "threesixtybarkohphangan.com",
+  // Thailand — Chiang Mai
+  "blackitchchiangmai.com",
+  "khaochiangmai.com",
   // Berlin
   "nobelhartundschmutzig.com",
   "rutz-restaurant.de",
