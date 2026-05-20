@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -78,8 +79,14 @@ export default function PlatformNav() {
       {/* Desktop top bar */}
       <nav className={`platform-top-nav${isHome && heroNav ? " is-hero" : ""}`} aria-label="Primary navigation">
         <Link href="/" className="platform-brand" aria-label="XRED EYEZ — home">
-          <span className="platform-brand-xred">XRED </span>
-          <span className="platform-brand-eyez">EYEZ</span>
+          <Image
+            src="/redeyez-logo-clear.png"
+            alt="XRED EYEZ"
+            width={96}
+            height={36}
+            style={{ objectFit: "contain", height: "36px", width: "auto" }}
+            priority
+          />
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
