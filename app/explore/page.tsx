@@ -13,7 +13,7 @@ export const metadata = {
 };
 
 export default function ExplorePage() {
-  const featuredCities = cities.slice(0, 4);
+  const featuredCities = cities;
   const flagshipCity = cities.find((city) => city.slug === "amsterdam") || cities[0];
   const featuredVenues = getSortedVenuesByCity("amsterdam").slice(0, 3);
   const placements = getFeaturedPlacements("amsterdam").slice(0, 2);
@@ -27,11 +27,11 @@ export default function ExplorePage() {
           Start with Amsterdam, browse by Cannabis, Stay, Eat, Do, or vibe, save places, and build better city routes with cannabis culture built in.
         </p>
         <div className="platform-action-row">
-          <Link href="/cities/amsterdam/map" className="platform-primary-action">
-            Open Amsterdam Map
+          <Link href="/map" className="platform-primary-action">
+            Open Map
           </Link>
           <Link href="/cities" className="platform-secondary-action">
-            Browse Cities
+            All Destinations
           </Link>
           <Link href="/partners/claim" className="platform-secondary-action">
             Claim a Listing
@@ -53,7 +53,7 @@ export default function ExplorePage() {
           </div>
           <div>
             <span>Best first step</span>
-            <strong>Amsterdam Map</strong>
+            <strong>Pick a destination</strong>
           </div>
         </div>
       </section>
@@ -128,8 +128,8 @@ export default function ExplorePage() {
       <section className="platform-section">
         <div className="platform-section-head">
           <div>
-            <div className="eyebrow">Cities</div>
-            <h2 className="platform-section-title">Featured guides.</h2>
+            <div className="eyebrow">All Destinations</div>
+            <h2 className="platform-section-title">Every country & city.</h2>
           </div>
           <Link href="/cities" className="platform-inline-link">
             View all →

@@ -45,12 +45,22 @@ export default function CityCard({ city }: { city: City }) {
           {city.summary}
         </p>
 
-        <Link
-          href={isLive ? `/cities/${city.slug}` : "/cities"}
-          className="experience-link"
-        >
-          {isLive ? "Open Guide" : "Preview"}
-        </Link>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <Link
+            href={isLive ? `/cities/${city.slug}` : "/cities"}
+            className="experience-link"
+            style={{ flex: 1 }}
+          >
+            {isLive ? "Open Guide" : "Preview"}
+          </Link>
+          <Link
+            href={`/cities/${city.slug}/map`}
+            className="platform-secondary-action"
+            style={{ flex: 1, textAlign: "center", fontSize: "13px", padding: "9px 12px" }}
+          >
+            Open Map
+          </Link>
+        </div>
       </div>
     </article>
   );
