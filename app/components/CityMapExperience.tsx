@@ -47,9 +47,15 @@ const CITY_CENTERS: Record<string, { lat: number; lng: number; zoom: number }> =
   usa: { lat: 34.0195, lng: -118.4912, zoom: 12 },
   "czech-republic": { lat: 50.0755, lng: 14.4378, zoom: 12 },
   "south-africa": { lat: -33.9249, lng: 18.4241, zoom: 11 },
+  canada: { lat: 43.6532, lng: -79.3832, zoom: 12 },
 };
 
 const REGION_BUTTONS: Record<string, { label: string; lat: number; lng: number; zoom: number }[]> = {
+  canada: [
+    { label: "Toronto", lat: 43.6532, lng: -79.3832, zoom: 12 },
+    { label: "Vancouver", lat: 49.2827, lng: -123.1207, zoom: 12 },
+    { label: "Montreal", lat: 45.5017, lng: -73.5673, zoom: 12 },
+  ],
   thailand: [
     { label: "Bangkok", lat: 13.7563, lng: 100.5018, zoom: 12 },
     { label: "Phuket", lat: 7.8804, lng: 98.3923, zoom: 12 },
