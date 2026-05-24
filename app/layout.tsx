@@ -4,6 +4,8 @@ import "./globals.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "leaflet/dist/leaflet.css";
 import ReadingProgress from "./components/ReadingProgress";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -43,6 +45,8 @@ export default function RootLayout({
       <body className="h-full antialiased">
         <ReadingProgress />
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
