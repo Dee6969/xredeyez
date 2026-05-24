@@ -1,4 +1,5 @@
 import PlatformNav from "./PlatformNav";
+import SiteFooter from "./SiteFooter";
 
 export default function PlatformShell({
   children,
@@ -9,6 +10,7 @@ export default function PlatformShell({
     <>
       <PlatformNav />
       <main className="platform-page">{children}</main>
+      <SiteFooter />
     </>
   );
 }

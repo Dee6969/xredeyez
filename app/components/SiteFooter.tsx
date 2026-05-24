@@ -11,7 +11,7 @@ const legalLinks = [
 const discoverLinks = [
   ["Explore", "/explore"],
   ["Cities", "/cities"],
-  ["Map", "/cities/amsterdam/map"],
+  ["Map", "/map"],
   ["Vibes", "/vibes"],
 ];
 

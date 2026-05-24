@@ -58,8 +58,8 @@ export default async function SignalPage({ params }: SignalPageProps) {
             <Link href="/news" data-hover className="nav-button">
               NEWS ROOM
             </Link>
-            <Link href="/?inside=1#news" data-hover className="nav-button">
-              BACK TO WORLD
+            <Link href="/" data-hover className="nav-button">
+              HOME
             </Link>
           </div>
           <Link href="/vault" data-hover className="nav-button nav-button-hot">

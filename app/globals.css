@@ -44,6 +44,9 @@
   --bone:        #F5F0E6;
   --brass:       #9E8B6A;
   --smoke:       rgba(255,255,255,0.04);
+  /* Aliases used in map/card components */
+  --accent-green: #84C51F;
+  --xred-green:   #84C51F;
 }
 
 /* =====================================================
@@ -292,6 +295,7 @@ body {
 
 .platform-section-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
   gap: 18px;
@@ -1544,6 +1548,17 @@ body {
     linear-gradient(90deg, rgba(24,22,15,0.72), rgba(24,22,15,0.16)),
     linear-gradient(0deg, rgba(24,22,15,0.84), transparent 52%);
   border-radius: 20px;
+}
+
+/* City hero text must be light — sits on dark image overlay */
+.platform-city-hero .eyebrow {
+  color: rgba(245,240,230,0.56);
+}
+.platform-city-hero .platform-title {
+  color: var(--text-inverse);
+}
+.platform-city-hero .platform-lede {
+  color: rgba(245,240,230,0.72);
 }
 
 /* =====================================================
@@ -3000,6 +3015,7 @@ body {
 
 .home-section-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
@@ -3940,7 +3956,7 @@ body {
   .platform-flow-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .platform-bottom-nav { display: none; }
 }
 

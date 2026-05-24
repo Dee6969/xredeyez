@@ -48,10 +48,10 @@ export default function VibesPage({
           <div className="eyebrow" style={{ color: activeVibe.accent }}>
             ACTIVE VIBE
           </div>
-          <h2 className="mt-4 font-display text-[42px] leading-none text-[var(--bone)] md:text-[72px]">
+          <h2 className="mt-4 font-display text-[42px] leading-none text-[var(--text-primary)] md:text-[72px]">
             {activeVibe.name}
           </h2>
-          <p className="mt-5 max-w-2xl text-[16px] leading-7 text-white/62">{activeVibe.description}</p>
+          <p className="mt-5 max-w-2xl text-[16px] leading-7 text-[var(--text-secondary)]">{activeVibe.description}</p>
         </div>
       </section>
 

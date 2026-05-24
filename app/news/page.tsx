@@ -26,11 +26,11 @@ export default async function NewsPage() {
         <div className="red-ambient" />
         <nav className="fixed left-6 right-6 top-6 z-40 flex flex-wrap items-center justify-between gap-4 md:left-10 md:right-10">
           <div className="flex flex-wrap items-center gap-2">
-            <Link href="/?inside=1#news" data-hover className="nav-button">
-              BACK TO WORLD
+            <Link href="/" data-hover className="nav-button">
+              HOME
             </Link>
-            <Link href="/?inside=1#gallery" data-hover className="nav-button">
-              GALLERY
+            <Link href="/explore" data-hover className="nav-button">
+              EXPLORE
             </Link>
           </div>
           <Link href="/vault" data-hover className="nav-button nav-button-hot">

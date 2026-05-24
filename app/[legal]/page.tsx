@@ -50,8 +50,8 @@ export default async function LegalPage({ params }: LegalRouteProps) {
         <div className="red-ambient" />
         <nav className="fixed left-6 right-6 top-6 z-40 flex flex-wrap items-center justify-between gap-4 md:left-10 md:right-10">
           <div className="flex flex-wrap items-center gap-2">
-            <Link href="/?inside=1#lobby" data-hover className="nav-button">
-              BACK TO WORLD
+            <Link href="/" data-hover className="nav-button">
+              HOME
             </Link>
             <Link href="/news" data-hover className="nav-button">
               NEWS ROOM

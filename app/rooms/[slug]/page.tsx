@@ -56,18 +56,18 @@ export default async function RoomIntroPage({
         <nav className="fixed left-6 right-6 top-6 z-40 flex items-center justify-between gap-4 md:left-10 md:right-10">
           <div className="flex flex-wrap items-center gap-2">
           <Link
-            href="/?inside=1#lobby"
+            href="/"
             data-hover
             className="nav-button"
           >
-            BACK TO ROOMS
+            HOME
           </Link>
           <Link
-            href={`/?inside=1#${room.id}`}
+            href="/explore"
             data-hover
             className="nav-button nav-button-hot"
           >
-            SKIP INTRO
+            EXPLORE
           </Link>
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -133,7 +133,7 @@ export default async function RoomIntroPage({
                 <h2 className="mt-5 font-display" style={{ color: "var(--bone)", fontSize: "clamp(30px, 4vw, 56px)", lineHeight: 0.94 }}>
                   Before you enter.
                 </h2>
-                <Link href={`/?inside=1#${room.id}`} data-hover className="signal-link mt-8">
+                <Link href="/explore" data-hover className="signal-link mt-8">
                   {room.cta}
                 </Link>
               </div>
