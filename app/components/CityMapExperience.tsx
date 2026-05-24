@@ -2,7 +2,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useMemo, useState, useCallback } from "react";
-import { discoveryLayers, getVenueLayer, type City, type DiscoveryLayer, type Venue, type Vibe } from "../data/platform";
+import { discoveryLayers, getVenueLayer, type City, type DiscoveryLayer, type Venue } from "../data/platform";
 import SaveButton from "./SaveButton";
 import VenueCard from "./VenueCard";
 
@@ -72,14 +72,11 @@ export default function CityMapExperience({
   city,
   venues,
   networkCities,
-  vibes,
 }: {
   city: City;
   venues: Venue[];
   networkCities: City[];
-  vibes: Vibe[];
 }) {
-  const [activeVibe, setActiveVibe] = useState<string>("all");
   const [activeLayer, setActiveLayer] = useState<DiscoveryLayer | "all">("all");
   const [view, setView] = useState<"map" | "list">("map");
   const [selectedId, setSelectedId] = useState<string>(venues[0]?.id || "");
@@ -89,11 +86,9 @@ export default function CityMapExperience({
 
   const filteredVenues = useMemo(() => {
     return venues.filter((venue) => {
-      const layerMatch = activeLayer === "all" || getVenueLayer(venue) === activeLayer;
-      const vibeMatch = activeVibe === "all" || venue.vibeIds.includes(activeVibe);
-      return layerMatch && vibeMatch;
+      return activeLayer === "all" || getVenueLayer(venue) === activeLayer;
     });
-  }, [activeLayer, activeVibe, venues]);
+  }, [activeLayer, venues]);
 
   const selected = filteredVenues.find((venue) => venue.id === selectedId) || filteredVenues[0];
 
@@ -208,10 +203,9 @@ export default function CityMapExperience({
           <div className="map-filter-strip">
             <button
               type="button"
-              className={`vibe-chip ${activeLayer === "all" && activeVibe === "all" ? "is-active" : ""}`}
+              className={`vibe-chip ${activeLayer === "all" ? "is-active" : ""}`}
               onClick={() => {
                 setActiveLayer("all");
-                setActiveVibe("all");
                 setSelectedId("");
               }}
             >
@@ -231,23 +225,6 @@ export default function CityMapExperience({
               </button>
             ))}
           </div>
-          <div className="map-filter-strip">
-            {vibes.slice(0, 8).map((vibe) => (
-              <button
-                key={vibe.id}
-                type="button"
-                className={`vibe-chip ${activeVibe === vibe.id ? "is-active" : ""}`}
-                style={{ borderColor: `${vibe.accent}66` }}
-                onClick={() => {
-                  setActiveVibe(vibe.id);
-                  setSelectedId("");
-                }}
-              >
-                {vibe.name}
-              </button>
-            ))}
-          </div>
-
           <div className="map-list-stack">
             {filteredVenues.map((venue) => (
               <button

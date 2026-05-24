@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import CityMapExperience from "../../../components/CityMapExperience";
 import PlatformShell from "../../../components/PlatformShell";
 import SaveButton from "../../../components/SaveButton";
-import { cities, getCity, getFeaturedPlacements, getSortedVenuesByCity, vibes } from "../../../data/platform";
+import { cities, getCity, getFeaturedPlacements, getSortedVenuesByCity } from "../../../data/platform";
 
 interface MapPageProps {
   params: Promise<{ slug: string }>;
@@ -52,7 +52,7 @@ export default async function CityMapPage({ params }: MapPageProps) {
           </div>
         </header>
 
-        <CityMapExperience city={city} venues={cityVenues} networkCities={cities} vibes={vibes} />
+        <CityMapExperience city={city} venues={cityVenues} networkCities={cities} />
 
         <section className="platform-section px-0">
           <div className="platform-info-strip">
