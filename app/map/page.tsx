@@ -11,12 +11,19 @@ export const metadata = {
 export default function MapIndexPage() {
   return (
     <PlatformShell>
-      <section className="platform-hero" style={{ paddingBottom: "32px" }}>
-        <div className="eyebrow">MAP</div>
+      <section className="platform-hero map-page-hero" style={{ paddingBottom: "32px" }}>
+        <div className="eyebrow map-eyebrow">MAP</div>
         <h1 className="platform-title">Choose a city.</h1>
         <p className="platform-lede">
           Select a city to open its live map — venues, hotels, restaurants, and cannabis culture all pinned.
         </p>
+        <div className="map-page-stat-row">
+          <span><strong>{cities.filter(c => c.status === "flagship" || c.status === "live").length}</strong> live cities</span>
+          <span className="map-page-stat-dot" />
+          <span>Venues · Hotels · Cannabis</span>
+          <span className="map-page-stat-dot" />
+          <span>Pins updated live</span>
+        </div>
       </section>
 
       <section className="platform-section" style={{ paddingTop: 0 }}>

@@ -98,20 +98,16 @@ export default function Home() {
               );
             })}
 
-            {/* Who is next? */}
+            {/* Who is next? — locked future-drop teaser */}
             {[0, 1].map((i) => (
-              <div key={i} className="home-dest-card home-dest-next" aria-label="Who is next?">
+              <div key={i} className="home-dest-card home-dest-next" aria-label="Next destination — coming soon">
                 <div className="home-dest-next-inner">
-                  <Image
-                    src="/redeyez-logo.jpeg"
-                    alt="XRED EYEZ"
-                    width={72}
-                    height={72}
-                    className="home-dest-next-logo"
-                    style={{ objectFit: "contain" }}
-                  />
+                  <div className="home-dest-next-ring">
+                    <span className="home-dest-next-ring-dot" />
+                  </div>
                   <div className="home-dest-next-brand">
-                    <span>Who is next?</span>
+                    <strong>Who is next?</strong>
+                    <span>Drop incoming</span>
                   </div>
                 </div>
               </div>

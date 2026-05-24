@@ -44,16 +44,16 @@ export default function ExplorePage() {
       <section className="platform-section">
         <div className="platform-info-strip">
           <div>
-            <span>Where am I?</span>
-            <strong>Explore hub</strong>
+            <span>Platform</span>
+            <strong>Cannabis culture guide</strong>
           </div>
           <div>
-            <span>What can I do?</span>
-            <strong>Map, filter, save</strong>
+            <span>Browse by</span>
+            <strong>City · Vibe · Venue type</strong>
           </div>
           <div>
             <span>Best first step</span>
-            <strong>Pick a destination</strong>
+            <strong>Open Amsterdam →</strong>
           </div>
         </div>
       </section>
