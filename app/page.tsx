@@ -16,7 +16,8 @@ const cityImages: Record<string, string> = {
   germany:          "/cities/germany-berlin.png",
   "czech-republic": "/cities/czech-prague.png",
   "south-africa":   "/cities/south-africa-cape-town.png",
-  canada:           "/banners/between-sessions.png",
+  usa:              "/cities/usa-market-hero.png",
+  canada:           "/cities/canada-market-hero.png",
 };
 
 export default function Home() {
