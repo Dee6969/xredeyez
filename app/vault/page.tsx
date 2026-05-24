@@ -38,7 +38,7 @@ export default function VaultPage() {
           <div className="eyebrow">VAULT</div>
           <h1 className="platform-title">Membership without the noise.</h1>
           <p className="platform-lede">
-            The Vault turns saved places into boards, boards into routes, and routes into early-access city intelligence. No algorithm. No feed. Just the information serious cannabis travellers actually need.
+            The Vault turns saved places into boards, boards into routes, and routes into early-access city intelligence. Curated routes, private drops, and the information serious cannabis travellers actually need.
           </p>
           <div className="platform-action-row">
             <Link href="/saved" className="platform-primary-action">
@@ -77,7 +77,7 @@ export default function VaultPage() {
         <section className="platform-section">
           <div className="platform-legal-panel">
             <p>
-              Vault membership is currently in early access. Join the waitlist and you'll be first in when premium routes, city drops, and cross-device boards launch. No spam, no algorithm — just the intel.
+              Vault membership is currently in early access. Join the waitlist and you&apos;ll be first in when premium routes, city drops, and cross-device boards launch. No spam, just sharp city intel.
             </p>
           </div>
         </section>

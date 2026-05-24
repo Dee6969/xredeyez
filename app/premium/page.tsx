@@ -111,7 +111,7 @@ export default function PremiumPage() {
           </div>
           <div className="platform-legal-panel">
             <p>
-              Cannabis travelers search for information that Google Maps won't surface and TripAdvisor doesn't understand. XRED EYEZ is the platform they find first — and a listing here is the signal that your venue is ready for that audience. Featured and Premium partners get direct referral traffic, editorial coverage, and city guide placement that builds sustained visibility.
+              Cannabis travelers search for information that Google Maps won&apos;t surface and TripAdvisor doesn&apos;t understand. XRED EYEZ is the platform they find first — and a listing here is the signal that your venue is ready for that audience. Featured and Premium partners get direct referral traffic, editorial coverage, and city guide placement that builds sustained visibility.
             </p>
           </div>
         </section>
