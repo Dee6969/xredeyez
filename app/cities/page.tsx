@@ -24,7 +24,7 @@ export default function CitiesPage() {
           <div className="eyebrow">DESTINATIONS</div>
           <h1 className="platform-title">Countries & cities, mapped.</h1>
           <p className="platform-lede">
-            Amsterdam is live. Barcelona, Tenerife, Marbella, Thailand, Germany, Czech Republic, South Africa, and Canada are opening up — one country at a time.
+            Amsterdam, Barcelona, USA, and Canada are flagship and live. Tenerife, Marbella, Thailand, Germany, Czech Republic, and South Africa guides are open — maps, venues, and culture layers across every destination.
           </p>
         </section>
       </Reveal>
