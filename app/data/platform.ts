@@ -2532,6 +2532,38 @@ export const venues: Venue[] = [
     brand: { primaryColor: "#100E0A", accentColor: "#A8C870", aesthetic: "warm-dark", tagline: "Boutique. Wellness-first. Premium California flower.", logoText: "SWEET FLOWER" },
   },
 
+  {
+    id: "jungle-boys-dtla",
+    slug: "jungle-boys-downtown-la",
+    name: "Jungle Boys Downtown LA",
+    cityId: "usa",
+    city: "USA",
+    country: "USA",
+    neighborhood: "Downtown Los Angeles",
+    type: "Dispensary",
+    layer: "cannabis",
+    image: "/banners/seen-differently.png",
+    description: "Jungle Boys' Downtown Los Angeles flagship — the world-renowned LA-born cultivator now in full retail form. House-grown genetics, single-origin flower, and decades of underground credibility made fully legal. The most important cannabis brand to come out of California, in its home city.",
+    highlights: ["Jungle Boys house genetics", "Single-origin flower", "Downtown LA flagship", "Legacy LA cultivator"],
+    bestFor: ["Serious cannabis culture", "LA origin story", "Connoisseur flower"],
+    vibeIds: ["creative", "origin", "energy"],
+    coordinates: { x: 27, y: 53, lat: 34.0413, lng: -118.2468 },
+    guideNote: "Jungle Boys built the blueprint for LA cannabis. This is where the genetics started — buy direct from the source.",
+    openingHours: "Daily 08:00–22:00",
+    listingTier: "premium",
+    isFeatured: true,
+    featuredWeight: 97,
+    partnerUrl: "https://jungleboys.com/",
+    bookingUrl: "https://jungleboys.com/",
+    referralCode: "xred-jungle-boys-dtla",
+    claimStatus: "unclaimed",
+    galleryImages: [
+      "https://cdn.prod.website-files.com/6981ad8672f6252d7d7bb320/698ad6446547cd2f2f643482_Downtown%20Los%20Angeles.png",
+      "https://cdn.prod.website-files.com/6981ad8672f6252d7d7bb320/69b35b1f97fd1dfac5160a68_Locations%20Header.png",
+    ],
+    brand: { primaryColor: "#080C08", accentColor: "#84C51F", aesthetic: "dark", tagline: "LA genetics. Single-origin. Downtown flagship.", logoText: "JUNGLE BOYS", bannerUrl: "https://cdn.prod.website-files.com/6981ad8672f6252d7d7bb320/698ad6446547cd2f2f643482_Downtown%20Los%20Angeles.png" },
+  },
+
   // ─── LA HOTELS ────────────────────────────────────────────────────────────
   {
     id: "chateau-marmont-la",
@@ -2557,7 +2589,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/chateau-marmont.html",
     referralCode: "xred-chateau-marmont",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0C0A06", accentColor: "#C8A870", aesthetic: "dark", tagline: "Sunset Strip castle. Bungalows. Absolute discretion.", logoText: "CHATEAU MARMONT" },
+    brand: { primaryColor: "#0C0A06", accentColor: "#C8A870", aesthetic: "dark", tagline: "Sunset Strip castle. Bungalows. Absolute discretion.", logoText: "CHATEAU MARMONT", bannerUrl: "https://chateaumarmont.com/imgs/cm-outline-pan-2.png" },
   },
   {
     id: "beverly-hills-hotel-la",
@@ -2609,7 +2641,12 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/1-hotel-west-hollywood.html",
     referralCode: "xred-1-hotel-wh",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0C1008", accentColor: "#98B870", aesthetic: "minimal", tagline: "Rooftop pool. Sustainability. Sunset Strip.", logoText: "1 HOTEL WEST HOLLYWOOD" },
+    galleryImages: [
+      "https://1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/h5bmr95q7cncrg9r8nvnv8v/1HOTEL-EDITORIAL-SHOT-01-0860-Ah1320.jpg",
+      "https://1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/Pool_182w1620.jpg",
+      "https://1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/kt3f4nkj34gtfcsn4pn5p5h/4R3A6098w1920.jpg",
+    ],
+    brand: { primaryColor: "#0C1008", accentColor: "#98B870", aesthetic: "minimal", tagline: "Rooftop pool. Sustainability. Sunset Strip.", logoText: "1 HOTEL WEST HOLLYWOOD", bannerUrl: "https://1hotels.com/sites/1hotels.com/files/styles/card_wide/public/brandfolder/c92r974nbgbw474h3wnzrf46/1_Hotel_WH_2019_46h2880.jpg" },
   },
 
   // ─── LA RESTAURANTS ───────────────────────────────────────────────────────
@@ -2638,7 +2675,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.noburestaurants.com/malibu/",
     referralCode: "xred-nobu-malibu",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0C10", accentColor: "#C0A870", aesthetic: "dark", tagline: "Pacific cliffside. Black cod miso. LA power dining.", logoText: "NOBU MALIBU" },
+    brand: { primaryColor: "#0A0C10", accentColor: "#C0A870", aesthetic: "dark", tagline: "Pacific cliffside. Black cod miso. LA power dining.", logoText: "NOBU MALIBU", bannerUrl: "https://www.noburestaurants.com/assets/Uploads/Artboard-812x_Resampled.jpg" },
   },
   {
     id: "n-naka-la",
@@ -2807,7 +2844,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/the-mark.html",
     referralCode: "xred-the-mark-nyc",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0C10", accentColor: "#C0A878", aesthetic: "minimal", tagline: "Upper East Side. Jean-Georges. Quiet luxury.", logoText: "THE MARK" },
+    galleryImages: [
+      "https://markhotel-production.s3.amazonaws.com/app/uploads/2015/03/home_1-2000x1002.jpg",
+      "https://markhotel-production.s3.amazonaws.com/app/uploads/2020/12/bar-crop-2-1024x635.jpg",
+    ],
+    brand: { primaryColor: "#0A0C10", accentColor: "#C0A878", aesthetic: "minimal", tagline: "Upper East Side. Jean-Georges. Quiet luxury.", logoText: "THE MARK", bannerUrl: "https://markhotel-production.s3.amazonaws.com/app/uploads/2015/03/home_1-2000x1002.jpg" },
   },
   {
     id: "1-hotel-central-park-nyc",
@@ -2833,7 +2874,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/1-hotel-central-park.html",
     referralCode: "xred-1-hotel-cp",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0C100A", accentColor: "#98B870", aesthetic: "minimal", tagline: "Central Park. Sustainability. Living walls.", logoText: "1 HOTEL CENTRAL PARK" },
+    galleryImages: [
+      "https://www.1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/w7v59bpc6ts7q4qrqm7q4r9/Exterior_Central_Park_01_0187w720.jpg",
+      "https://www.1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/39p3hfhb898hcc2ks7rwmv6f/Park_Terrace_Kingh1320.jpg",
+    ],
+    brand: { primaryColor: "#0C100A", accentColor: "#98B870", aesthetic: "minimal", tagline: "Central Park. Sustainability. Living walls.", logoText: "1 HOTEL CENTRAL PARK", bannerUrl: "https://www.1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/4b8np46qpcr6rpqw9fqvnj/Facade_1_Hotel_Central_Park_Photo_Credit_Eric_Laignel-1200x900-e339a72h1440.jpg" },
   },
   {
     id: "soho-grand-nyc",
@@ -2859,7 +2904,12 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/soho-grand.html",
     referralCode: "xred-soho-grand",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0A0C", accentColor: "#C0A080", aesthetic: "dark", tagline: "SoHo original. Grand Bar. Downtown energy.", logoText: "SOHO GRAND" },
+    galleryImages: [
+      "https://djmzubtjl6upi.cloudfront.net/wp-content/uploads/sites/2/2020/11/nyc-skyline.jpeg",
+      "https://djmzubtjl6upi.cloudfront.net/wp-content/uploads/sites/2/2021/04/Soho-terrace-suite.jpg",
+      "https://djmzubtjl6upi.cloudfront.net/wp-content/uploads/sites/2/2021/04/soho-diner-drinks.jpeg",
+    ],
+    brand: { primaryColor: "#0A0A0C", accentColor: "#C0A080", aesthetic: "dark", tagline: "SoHo original. Grand Bar. Downtown energy.", logoText: "SOHO GRAND", bannerUrl: "https://djmzubtjl6upi.cloudfront.net/wp-content/uploads/sites/2/2021/04/Soho-terrace-suite.jpg" },
   },
 
   // ─── NYC RESTAURANTS ──────────────────────────────────────────────────────
@@ -2915,7 +2965,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://carbonenewyork.com/",
     referralCode: "xred-carbone-nyc",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#140808", accentColor: "#C04030", aesthetic: "dark", tagline: "NYC's most wanted table. Italian-American. The scene.", logoText: "CARBONE" },
+    galleryImages: [
+      "https://cdn.sanity.io/images/gb1p0gbj/production/e1dc13afd3787e46214ce6375980bfb012ca93b1-3500x2335.jpg",
+      "https://cdn.sanity.io/images/gb1p0gbj/production/7465bad9054f42c684c220220d77eeff58ec40fb-5568x3712.jpg",
+    ],
+    brand: { primaryColor: "#140808", accentColor: "#C04030", aesthetic: "dark", tagline: "NYC's most wanted table. Italian-American. The scene.", logoText: "CARBONE", bannerUrl: "https://cdn.sanity.io/images/gb1p0gbj/production/783c85fd5a4b8f6c2d60f3fd0793cb6cec37c6a0-1440x695.png" },
   },
   {
     id: "katzs-deli-nyc",
@@ -3057,7 +3111,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/wynn-las-vegas.html",
     referralCode: "xred-wynn-lv",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0808", accentColor: "#C8A860", aesthetic: "dark", tagline: "Vegas luxury benchmark. Golf. Five-star dining.", logoText: "WYNN LAS VEGAS" },
+    galleryImages: [
+      "https://cdn.wynnresorts.com/image/upload/v1587100192/Wynn%20Las%20Vegas/Generic%20Teaser%20Cards/721_Wynn_Resort_Pool_Barbara_kraft",
+      "https://cdn.wynnresorts.com/image/upload/v1625771450/Wynn%20Las%20Vegas/Experiences/Golf/Golf-18th%20Green%20WIDE-Barbara%20Kraft_10-24-828x466",
+    ],
+    brand: { primaryColor: "#0A0808", accentColor: "#C8A860", aesthetic: "dark", tagline: "Vegas luxury benchmark. Golf. Five-star dining.", logoText: "WYNN LAS VEGAS", bannerUrl: "https://cdn.wynnresorts.com/image/upload/w_auto,f_auto,q_auto/v1681489645/Wynn%20Las%20Vegas/Home%20Page/Heros/wynn-home-poster-image-desktop" },
   },
   {
     id: "bellagio-las-vegas",
@@ -3109,7 +3167,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/the-venetian-las-vegas.html",
     referralCode: "xred-venetian-lv",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0A0C", accentColor: "#C0B0A0", aesthetic: "minimal", tagline: "All-suite. Canyon Ranch Spa. Italian palazzo scale.", logoText: "THE VENETIAN" },
+    galleryImages: [
+      "https://adobe.dynamicmedia.com/deliver/dm-aid--8f2a55b6-7a31-4128-ae60-b212921ab778/summer-offer-1-2000x1000.jpg",
+      "https://adobe.dynamicmedia.com/deliver/dm-aid--329eebaf-7512-4f2c-883d-d008fdfca7d4/outdoor-gondola-9-1200x800.jpg",
+    ],
+    brand: { primaryColor: "#0A0A0C", accentColor: "#C0B0A0", aesthetic: "minimal", tagline: "All-suite. Canyon Ranch Spa. Italian palazzo scale.", logoText: "THE VENETIAN", bannerUrl: "https://adobe.dynamicmedia.com/deliver/dm-aid--d95a08cc-985e-4490-a3cb-8da335b544a9/exterior-3-1500x1500.jpg" },
   },
 
   // ─── LAS VEGAS RESTAURANTS ────────────────────────────────────────────────
@@ -3307,7 +3369,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/faena-miami-beach.html",
     referralCode: "xred-faena-miami",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#14080A", accentColor: "#D04858", aesthetic: "dark", tagline: "Damien Hirst. Theatrical luxury. Miami's most dramatic hotel.", logoText: "FAENA MIAMI BEACH" },
+    galleryImages: [
+      "https://www.faena.com/sites/default/files/styles/big_callout_d/public/2026-01/20251201-DSC01013_0.jpg?h=b95b27cf&itok=kLw7gUAt",
+      "https://www.faena.com/sites/default/files/styles/three_column_image_callout_m/public/2026-03/20251201-DJI_0319.jpg?h=9c86ceb9&itok=7Md1p93C",
+    ],
+    brand: { primaryColor: "#14080A", accentColor: "#D04858", aesthetic: "dark", tagline: "Damien Hirst. Theatrical luxury. Miami's most dramatic hotel.", logoText: "FAENA MIAMI BEACH", bannerUrl: "https://www.faena.com/sites/default/files/styles/big_callout_d/public/2025-06/Faena%20Suite_Bedroom_Photo%20by%20Nik%20Koenig.jpg?h=3e8da8cb&itok=qfOsXf44" },
   },
   {
     id: "1-hotel-south-beach-miami",
@@ -3333,7 +3399,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/1-hotel-south-beach.html",
     referralCode: "xred-1-hotel-sb",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A100C", accentColor: "#80B870", aesthetic: "minimal", tagline: "Beachfront. Bamford Spa. Sustainability-forward.", logoText: "1 HOTEL SOUTH BEACH" },
+    galleryImages: [
+      "https://www.1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/7b9bx9cbk65j9ngxk35fq7bv/Main_Pool_4w1440.jpg",
+      "https://www.1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/Audix1HotelSouthBeachFinal-11h2879.jpg",
+    ],
+    brand: { primaryColor: "#0A100C", accentColor: "#80B870", aesthetic: "minimal", tagline: "Beachfront. Bamford Spa. Sustainability-forward.", logoText: "1 HOTEL SOUTH BEACH", bannerUrl: "https://www.1hotels.com/sites/1hotels.com/files/styles/card_wide/public/brandfolder/hxsf5wt7smjb347sqh9kvx/1_Hotels_MIA_Walkabout_02_0187-1920w1620.jpg" },
   },
   {
     id: "edition-miami-beach",
@@ -3359,7 +3429,12 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/the-miami-beach-edition.html",
     referralCode: "xred-edition-miami",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0C10", accentColor: "#A0C0E0", aesthetic: "dark", tagline: "Ian Schrager. Jean-Georges. Bowling and pool in one hotel.", logoText: "MIAMI BEACH EDITION" },
+    galleryImages: [
+      "https://www.editionhotels.com/wp-content/uploads/2016/01/Matador-Bar-Dining-Room-2000x1000.jpg",
+      "https://www.editionhotels.com/wp-content/uploads/2016/01/Beach-Club-2000x1000.jpg",
+      "https://www.editionhotels.com/wp-content/uploads/2016/01/The-Spa-at-The-Miami-Beach-EDITION-Relaxation-Room-2000x1000.jpg",
+    ],
+    brand: { primaryColor: "#0A0C10", accentColor: "#A0C0E0", aesthetic: "dark", tagline: "Ian Schrager. Jean-Georges. Bowling and pool in one hotel.", logoText: "MIAMI BEACH EDITION", bannerUrl: "https://www.editionhotels.com/wp-content/uploads/2016/01/Oceanfront-Balcony-King-2000x1000.jpg" },
   },
 
   // ─── MIAMI RESTAURANTS ────────────────────────────────────────────────────
@@ -3475,7 +3550,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://dispensary33.com/",
     referralCode: "xred-dispensary-33",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0C10", accentColor: "#4878D8", aesthetic: "dark", tagline: "Andersonville independent. Craft Illinois. Education-first.", logoText: "DISPENSARY 33" },
+    galleryImages: [
+      "https://media.dispensary33.com/display-cases.jpg",
+      "https://media.dispensary33.com/d33wbez-2.jpg",
+    ],
+    brand: { primaryColor: "#0A0C10", accentColor: "#4878D8", aesthetic: "dark", tagline: "Andersonville independent. Craft Illinois. Education-first.", logoText: "DISPENSARY 33", bannerUrl: "https://media.dispensary33.com/display-case-reach.jpg" },
   },
   {
     id: "sunnyside-chicago-wicker",
@@ -3609,7 +3688,12 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/langham-chicago.html",
     referralCode: "xred-langham-chicago",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0A0E", accentColor: "#9090C0", aesthetic: "minimal", tagline: "Mies van der Rohe building. Chuan Spa. River views.", logoText: "THE LANGHAM CHICAGO" },
+    galleryImages: [
+      "https://assets.langhamhotels.com/is/image/langhamhotelsstage/tlchi-infinity-suite-parlor",
+      "https://assets.langhamhotels.com/is/image/langhamhotelsstage/tlchi-chuan-spa-moon-gate",
+      "https://assets.langhamhotels.com/is/image/langhamhotelsstage/tlchi-dine-travelle-main-dining-room",
+    ],
+    brand: { primaryColor: "#0A0A0E", accentColor: "#9090C0", aesthetic: "minimal", tagline: "Mies van der Rohe building. Chuan Spa. River views.", logoText: "THE LANGHAM CHICAGO", bannerUrl: "https://assets.langhamhotels.com/is/image/langhamhotelsstage/tlchi-linger-longer" },
   },
 
   // ─── CHICAGO RESTAURANTS ──────────────────────────────────────────────────
@@ -3638,7 +3722,12 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.alinearestaurant.com/",
     referralCode: "xred-alinea",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#080808", accentColor: "#E8E0D0", aesthetic: "minimal", tagline: "Three Michelin stars. Helium balloons. World's 50 Best.", logoText: "ALINEA" },
+    galleryImages: [
+      "https://images.squarespace-cdn.com/content/v1/6091adceeec0df416e2b512e/1620245165385-J2OGSR4LSAV0FUICLPBS/20160518_gilsonAlinea_0011.jpg",
+      "https://images.squarespace-cdn.com/content/v1/6091adceeec0df416e2b512e/1620245506638-QYQC5XJMNTCP2GI41SLQ/20160429_gilsonAlinea_0005.jpg",
+      "https://images.squarespace-cdn.com/content/v1/6091adceeec0df416e2b512e/1620245788581-XACF8LIM8DF28GZAB4HP/20171102_alinea_0039.jpg",
+    ],
+    brand: { primaryColor: "#080808", accentColor: "#E8E0D0", aesthetic: "minimal", tagline: "Three Michelin stars. Helium balloons. World's 50 Best.", logoText: "ALINEA", bannerUrl: "https://images.squarespace-cdn.com/content/v1/6091adceeec0df416e2b512e/1620244610795-GANI6Y4MZVZK7FGYILVG/20171102_alinea_0280.jpg" },
   },
   {
     id: "girl-and-the-goat-chicago",
@@ -3755,6 +3844,34 @@ export const venues: Venue[] = [
     brand: { primaryColor: "#0C0A10", accentColor: "#9870D8", aesthetic: "minimal", tagline: "Award-winning. LGBTQ+ aligned. Castro pharmacy design.", logoText: "THE APOTHECARIUM" },
   },
 
+  {
+    id: "harborside-sf",
+    slug: "harborside-sf",
+    name: "Harborside",
+    cityId: "usa",
+    city: "USA",
+    country: "USA",
+    neighborhood: "Mission District / SoMa",
+    type: "Dispensary",
+    layer: "cannabis",
+    image: "/banners/seen-differently.png",
+    description: "One of the most historically significant cannabis retailers in America — operating since 2006, Harborside won the legal battles that proved cannabis businesses could survive federal pressure and shaped California's path to adult-use legalization. Still among the best-stocked dispensaries in the Bay Area.",
+    highlights: ["Open since 2006", "Shaped California legalization", "Landmark federal court battles", "Full medical and adult-use"],
+    bestFor: ["Cannabis history", "Medical patients", "Bay Area culture"],
+    vibeIds: ["origin", "local", "social"],
+    coordinates: { x: 20, y: 43, lat: 37.7719, lng: -122.4099 },
+    guideNote: "Harborside's history IS California cannabis history. The federal asset forfeiture fight in 2012 changed the legal landscape permanently.",
+    openingHours: "Daily 08:00–21:00",
+    listingTier: "featured",
+    isFeatured: true,
+    featuredWeight: 88,
+    partnerUrl: "https://harborside.com/",
+    bookingUrl: "https://harborside.com/",
+    referralCode: "xred-harborside-sf",
+    claimStatus: "unclaimed",
+    brand: { primaryColor: "#080C08", accentColor: "#40A870", aesthetic: "warm-dark", tagline: "Since 2006. Shaped California legalization. SF landmark.", logoText: "HARBORSIDE" },
+  },
+
   // ─── SF HOTELS ────────────────────────────────────────────────────────────
   {
     id: "proper-hotel-sf",
@@ -3835,7 +3952,12 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.saisonsf.com/",
     referralCode: "xred-saison-sf",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0808", accentColor: "#D08840", aesthetic: "dark", tagline: "Three Michelin stars. Live-fire hearth. Own farm and boat.", logoText: "SAISON" },
+    galleryImages: [
+      "https://saisonsf.com/wp-content/uploads/2025/06/grill.jpg",
+      "https://saisonsf.com/wp-content/uploads/2025/08/Antelope-Show-LEE_6180sm.jpg",
+      "https://saisonsf.com/wp-content/uploads/2025/09/AdahliaColexSaisonshootJuly2023-5-1.jpg",
+    ],
+    brand: { primaryColor: "#0A0808", accentColor: "#D08840", aesthetic: "dark", tagline: "Three Michelin stars. Live-fire hearth. Own farm and boat.", logoText: "SAISON", bannerUrl: "https://saisonsf.com/wp-content/uploads/2025/06/grill.jpg" },
   },
   {
     id: "zuni-cafe-sf",
@@ -3862,7 +3984,12 @@ export const venues: Venue[] = [
     bookingUrl: "https://zunicafe.com/",
     referralCode: "xred-zuni-cafe",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#100C06", accentColor: "#C89030", aesthetic: "warm-dark", tagline: "Iconic roast chicken. 1979 institution. SF culture canon.", logoText: "ZUNI CAFÉ" },
+    galleryImages: [
+      "https://zunicafe.com/wp-content/uploads/zuni-1-2-1400x934.jpg",
+      "https://zunicafe.com/wp-content/uploads/Zuni-Favorites-6-1400x934.jpg",
+      "https://zunicafe.com/wp-content/uploads/zuni-12-1400x934.jpg",
+    ],
+    brand: { primaryColor: "#100C06", accentColor: "#C89030", aesthetic: "warm-dark", tagline: "Iconic roast chicken. 1979 institution. SF culture canon.", logoText: "ZUNI CAFÉ", bannerUrl: "https://zunicafe.com/wp-content/uploads/zuni-8-1400x934.jpg" },
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -3925,6 +4052,34 @@ export const venues: Venue[] = [
     brand: { primaryColor: "#0A0C08", accentColor: "#58C840", aesthetic: "minimal", tagline: "Colorado's largest. Consistent quality. Colfax Ave.", logoText: "LIVWELL" },
   },
 
+  {
+    id: "the-green-solution-denver",
+    slug: "the-green-solution-denver",
+    name: "The Green Solution",
+    cityId: "usa",
+    city: "USA",
+    country: "USA",
+    neighborhood: "LoDo / RiNo",
+    type: "Dispensary",
+    layer: "cannabis",
+    image: "/banners/before-the-drop.png",
+    description: "Colorado's most decorated multi-location dispensary group — winner of more High Times Cannabis Cup awards than any other Colorado retailer. Flagship locations in LoDo and RiNo serve the full spectrum of Colorado's best cultivators alongside house-grown genetics that have won competitions across the state.",
+    highlights: ["Most Cannabis Cup wins in Colorado", "LoDo and RiNo locations", "Award-winning house genetics", "Full Colorado product range"],
+    bestFor: ["Award-winning Colorado cannabis", "Downtown Denver", "Serious product buyers"],
+    vibeIds: ["origin", "creative", "local"],
+    coordinates: { x: 42, y: 42, lat: 39.7528, lng: -104.9941 },
+    guideNote: "The Green Solution has won more Colorado Cannabis Cups than any rival. Their house strains are the reason to visit.",
+    openingHours: "Daily 08:00–21:45",
+    listingTier: "featured",
+    isFeatured: true,
+    featuredWeight: 86,
+    partnerUrl: "https://thegreensolution.com/",
+    bookingUrl: "https://thegreensolution.com/",
+    referralCode: "xred-green-solution-denver",
+    claimStatus: "unclaimed",
+    brand: { primaryColor: "#080E06", accentColor: "#60C020", aesthetic: "dark", tagline: "Most Cannabis Cups in Colorado. LoDo and RiNo.", logoText: "THE GREEN SOLUTION" },
+  },
+
   // ─── DENVER HOTELS ────────────────────────────────────────────────────────
   {
     id: "four-seasons-denver",
@@ -3976,7 +4131,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.booking.com/hotel/us/the-brown-palace-hotel-and-spa.html",
     referralCode: "xred-brown-palace",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0C0A06", accentColor: "#C8A858", aesthetic: "warm-dark", tagline: "Since 1892. Presidential atrium. Denver grand dame.", logoText: "BROWN PALACE" },
+    galleryImages: [
+      "https://marriott.cdn.tambourine.com/the-brown-palace-hotel-and-spa/media/thebrownpalacehotelandspaautographcollection-homepage-historicallyrefinedstays-68efb6216c4b9.jpg",
+      "https://marriott.cdn.tambourine.com/the-brown-palace-hotel-and-spa/media/thebrownpalacehotelandspa-dining-churchillbar-gallery-newimage-01-694318d85152e.jpg",
+    ],
+    brand: { primaryColor: "#0C0A06", accentColor: "#C8A858", aesthetic: "warm-dark", tagline: "Since 1892. Presidential atrium. Denver grand dame.", logoText: "BROWN PALACE", bannerUrl: "https://marriott.cdn.tambourine.com/the-brown-palace-hotel-and-spa/media/thebrownpalacehotelandspa-homepage-historicallyrefinedstays-6924cc074b5a8.jpg" },
   },
 
   // ─── DENVER RESTAURANTS ───────────────────────────────────────────────────
@@ -4005,7 +4164,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.riojadenver.com/",
     referralCode: "xred-rioja-denver",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0C0A06", accentColor: "#C87840", aesthetic: "warm-dark", tagline: "James Beard winner. Handmade pasta. Larimer Square.", logoText: "RIOJA" },
+    galleryImages: [
+      "https://www.riojadenver.com/wp-content/uploads/2020/08/rioja-2653-copy-1.jpg",
+      "https://www.riojadenver.com/wp-content/uploads/2020/08/beth-and-jen-Bryan-Grant.jpg",
+    ],
+    brand: { primaryColor: "#0C0A06", accentColor: "#C87840", aesthetic: "warm-dark", tagline: "James Beard winner. Handmade pasta. Larimer Square.", logoText: "RIOJA", bannerUrl: "https://www.riojadenver.com/wp-content/uploads/2020/08/rioja-2482.jpg" },
   },
   {
     id: "beast-and-bottle-denver",
@@ -4032,7 +4195,11 @@ export const venues: Venue[] = [
     bookingUrl: "https://beastandbottle.com/",
     referralCode: "xred-beast-bottle",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#100A04", accentColor: "#C07828", aesthetic: "warm-dark", tagline: "Whole-animal butchery. Colorado farms. Uptown Denver.", logoText: "BEAST + BOTTLE" },
+    galleryImages: [
+      "https://beastandbottle.com/wp-content/uploads/2016/08/square_plate_dinner-1-e1476842022785.jpg",
+      "https://beastandbottle.com/wp-content/uploads/2016/08/two_cocktails_redbrown-e1476841788746.jpg",
+    ],
+    brand: { primaryColor: "#100A04", accentColor: "#C07828", aesthetic: "warm-dark", tagline: "Whole-animal butchery. Colorado farms. Uptown Denver.", logoText: "BEAST + BOTTLE", bannerUrl: "https://beastandbottle.com/wp-content/uploads/2016/08/circle_plate_fruitetc-e1476842125642.jpg" },
   },
 
   {
