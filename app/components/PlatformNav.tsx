@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useCart } from "./CartContext";
 
 const navItems = [
   { label: "Explore", href: "/explore" },
@@ -9,6 +10,7 @@ const navItems = [
   { label: "Map", href: "/map" },
   { label: "Saved", href: "/saved" },
   { label: "Signal", href: "/signal" },
+  { label: "Merch", href: "/shop" },
 ];
 
 const desktopItems = [
@@ -16,6 +18,7 @@ const desktopItems = [
   { label: "Places", href: "/cities" },
   { label: "Map", href: "/map" },
   { label: "Signal", href: "/signal" },
+  { label: "Merch", href: "/shop" },
   { label: "Profile", href: "/profile" },
 ];
 
@@ -54,12 +57,20 @@ const icons: Record<string, React.ReactNode> = {
       <polygon points="22 2 15 22 11 13 2 9 22 2"/>
     </svg>
   ),
+  Merch: (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 0 1-8 0"/>
+    </svg>
+  ),
 };
 
 export default function PlatformNav() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [heroNav, setHeroNav] = useState(true);
+  const { itemCount, dispatch: cartDispatch } = useCart();
 
   useEffect(() => {
     if (!isHome) return;
@@ -95,6 +106,46 @@ export default function PlatformNav() {
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
+          <button
+            onClick={() => cartDispatch({ type: "OPEN" })}
+            aria-label={`Cart${itemCount > 0 ? ` (${itemCount} items)` : ""}`}
+            style={{
+              position: "relative",
+              background: "none",
+              border: "1.5px solid var(--border-medium)",
+              borderRadius: "8px",
+              padding: "8px 12px",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              color: "var(--text-primary)",
+              fontSize: "13px",
+              fontWeight: 600,
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            {itemCount > 0 && (
+              <span
+                style={{
+                  background: "var(--xgreen)",
+                  color: "#fff",
+                  borderRadius: "99px",
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  padding: "1px 6px",
+                  minWidth: "18px",
+                  textAlign: "center",
+                }}
+              >
+                {itemCount}
+              </span>
+            )}
+          </button>
           <Link href="/premium" className="platform-secondary-action" style={{ minHeight: "38px", padding: "9px 20px", fontSize: "13px" }}>
             Premium
           </Link>
@@ -105,14 +156,38 @@ export default function PlatformNav() {
       <nav className="platform-bottom-nav" aria-label="Mobile navigation">
         {navItems.map((item) => {
           const active = isActive(pathname, item.href);
+          const isMerch = item.label === "Merch";
           return (
             <Link
               key={item.label}
               href={item.href}
               className={`platform-bottom-item${active ? " is-active" : ""}`}
             >
-              <span style={{ color: active ? "var(--accent-red)" : "var(--text-muted)", transition: "color 200ms ease" }}>
+              <span style={{ position: "relative", color: active ? "var(--accent-red)" : "var(--text-muted)", transition: "color 200ms ease" }}>
                 {icons[item.label]}
+                {isMerch && itemCount > 0 && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: -4,
+                      right: -6,
+                      background: "var(--xgreen)",
+                      color: "#fff",
+                      borderRadius: "99px",
+                      fontSize: "9px",
+                      fontWeight: 700,
+                      minWidth: "16px",
+                      height: "16px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: "0 4px",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {itemCount}
+                  </span>
+                )}
               </span>
               {item.label}
               <span className="platform-bottom-dot" />

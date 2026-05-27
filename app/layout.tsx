@@ -4,6 +4,7 @@ import "./globals.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "leaflet/dist/leaflet.css";
 import ReadingProgress from "./components/ReadingProgress";
+import ShopProviders from "./components/ShopProviders";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -44,7 +45,9 @@ export default function RootLayout({
     <html lang="en" className={`h-full ${playfair.variable} ${inter.variable}`}>
       <body className="h-full antialiased">
         <ReadingProgress />
-        {children}
+        <ShopProviders>
+          {children}
+        </ShopProviders>
         <Analytics />
         <SpeedInsights />
       </body>
