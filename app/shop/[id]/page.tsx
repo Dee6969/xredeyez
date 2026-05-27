@@ -2,17 +2,13 @@ import { notFound } from "next/navigation";
 import PlatformNav from "../../components/PlatformNav";
 import SiteFooter from "../../components/SiteFooter";
 import ProductClient from "./ProductClient";
-import { PrintfulSyncProductDetail } from "../../lib/printful";
+import { getSyncProduct, PrintfulSyncProductDetail } from "../../lib/printful";
+
+export const revalidate = 300;
 
 async function getProduct(id: string): Promise<PrintfulSyncProductDetail | null> {
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
   try {
-    const res = await fetch(`${base}/api/shop/products/${id}`, {
-      next: { revalidate: 300 },
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    return data.product ?? null;
+    return await getSyncProduct(id);
   } catch {
     return null;
   }

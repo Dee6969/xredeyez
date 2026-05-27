@@ -2,18 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import PlatformNav from "../components/PlatformNav";
 import SiteFooter from "../components/SiteFooter";
-import { PrintfulSyncProduct } from "../lib/printful";
+import { listSyncProducts, PrintfulSyncProduct } from "../lib/printful";
 
 async function getProducts(): Promise<PrintfulSyncProduct[]> {
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
   try {
-    const res = await fetch(`${base}/api/shop/products`, { next: { revalidate: 300 } });
-    const data = await res.json();
-    return data.products ?? [];
+    return await listSyncProducts();
   } catch {
     return [];
   }
 }
+
+export const revalidate = 300;
 
 export const metadata = {
   title: "Merch — XRED EYEZ",
@@ -155,24 +154,7 @@ export default async function ShopPage() {
                     href={`/shop/${product.id}`}
                     style={{ textDecoration: "none", display: "block" }}
                   >
-                    <article
-                      style={{
-                        background: "var(--bg-card)",
-                        borderRadius: "16px",
-                        overflow: "hidden",
-                        boxShadow: "var(--shadow-card)",
-                        transition: "transform 280ms ease, box-shadow 280ms ease",
-                        cursor: "pointer",
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
-                        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-raised)";
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-card)";
-                      }}
-                    >
+                    <article className="shop-product-card">
                       {/* Product image */}
                       <div
                         style={{
@@ -188,13 +170,8 @@ export default async function ShopPage() {
                             alt={product.name}
                             fill
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            style={{ objectFit: "cover", transition: "transform 400ms ease" }}
-                            onMouseEnter={(e) => {
-                              (e.currentTarget as HTMLElement).style.transform = "scale(1.04)";
-                            }}
-                            onMouseLeave={(e) => {
-                              (e.currentTarget as HTMLElement).style.transform = "scale(1)";
-                            }}
+                            className="shop-product-img"
+                            style={{ objectFit: "cover" }}
                           />
                         ) : (
                           <div

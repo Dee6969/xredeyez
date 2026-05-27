@@ -206,6 +206,28 @@ body {
 }
 
 /* =====================================================
+   SHOP
+   ===================================================== */
+.shop-product-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 280ms ease, box-shadow 280ms ease;
+  cursor: pointer;
+}
+.shop-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-raised);
+}
+.shop-product-img {
+  transition: transform 400ms ease;
+}
+.shop-product-card:hover .shop-product-img {
+  transform: scale(1.04);
+}
+
+/* =====================================================
    NAVIGATION — MOBILE BOTTOM
    ===================================================== */
 .platform-bottom-nav {
