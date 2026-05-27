@@ -439,6 +439,48 @@ export default function ProductClient({ product }: { product: PrintfulSyncProduc
               <span style={{ fontSize: "13px", color: "var(--text-muted)" }}>Free delivery over £100</span>
             </div>
 
+            {/* ── Color swatches (visual — updates gallery image) ── */}
+            {hasColors && colors.length > 0 && (
+              <div style={{ marginBottom: "28px" }}>
+                <p style={{ fontSize: "12px", fontWeight: 700, color: "var(--text-secondary)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "12px" }}>
+                  Colour — <span style={{ color: "var(--text-primary)", fontWeight: 600, textTransform: "none", letterSpacing: 0 }}>{selectedColor}</span>
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                  {colors.map((color) => {
+                    const hex = colorHex(color);
+                    const light = isLight(hex);
+                    const isSel = selectedColor === color;
+                    return (
+                      <button
+                        key={color}
+                        onClick={() => pickColor(color)}
+                        title={color}
+                        aria-label={`Select colour ${color}`}
+                        style={{
+                          width: 36,
+                          height: 36,
+                          borderRadius: "50%",
+                          background: hex,
+                          border: isSel
+                            ? "3px solid var(--xgreen)"
+                            : light
+                              ? "2px solid var(--border-medium)"
+                              : "2px solid transparent",
+                          cursor: "pointer",
+                          padding: 0,
+                          boxShadow: isSel
+                            ? "0 0 0 2px var(--bg-primary), 0 0 0 4px var(--xgreen)"
+                            : "0 2px 6px rgba(0,0,0,0.15)",
+                          transition: "box-shadow 150ms, transform 150ms",
+                          transform: isSel ? "scale(1.12)" : "scale(1)",
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* ── Size selector ── */}
             {hasSizes && sizes.length > 0 && (
               <div style={{ marginBottom: "28px" }}>
@@ -517,13 +559,13 @@ export default function ProductClient({ product }: { product: PrintfulSyncProduc
               </div>
             </div>
 
-            {/* ── Color swatches ── */}
+            {/* ── Named colour boxes (confirm selection before adding to cart) ── */}
             {hasColors && colors.length > 0 && (
               <div style={{ marginBottom: "20px" }}>
                 <p style={{ fontSize: "12px", fontWeight: 700, color: "var(--text-secondary)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "12px" }}>
-                  Colour — <span style={{ color: "var(--text-primary)", fontWeight: 600, textTransform: "none", letterSpacing: 0 }}>{selectedColor}</span>
+                  Selected Colour
                 </p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                   {colors.map((color) => {
                     const hex = colorHex(color);
                     const light = isLight(hex);
@@ -532,27 +574,43 @@ export default function ProductClient({ product }: { product: PrintfulSyncProduc
                       <button
                         key={color}
                         onClick={() => pickColor(color)}
-                        title={color}
                         aria-label={`Select colour ${color}`}
                         style={{
-                          width: 36,
-                          height: 36,
-                          borderRadius: "50%",
-                          background: hex,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          padding: "9px 14px",
+                          borderRadius: "10px",
                           border: isSel
-                            ? "3px solid var(--xgreen)"
-                            : light
-                              ? "2px solid var(--border-medium)"
-                              : "2px solid transparent",
+                            ? "2px solid var(--text-primary)"
+                            : "1.5px solid var(--border-medium)",
+                          background: isSel ? "var(--text-primary)" : "var(--bg-card)",
                           cursor: "pointer",
-                          padding: 0,
-                          boxShadow: isSel
-                            ? "0 0 0 2px var(--bg-primary), 0 0 0 4px var(--xgreen)"
-                            : "0 2px 6px rgba(0,0,0,0.15)",
-                          transition: "box-shadow 150ms, transform 150ms",
-                          transform: isSel ? "scale(1.12)" : "scale(1)",
+                          transition: "all 150ms",
                         }}
-                      />
+                      >
+                        <span
+                          style={{
+                            width: 14,
+                            height: 14,
+                            borderRadius: "50%",
+                            background: hex,
+                            border: light ? "1px solid var(--border-medium)" : "none",
+                            flexShrink: 0,
+                            boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+                          }}
+                        />
+                        <span
+                          style={{
+                            fontSize: "13px",
+                            fontWeight: 600,
+                            color: isSel ? "#fff" : "var(--text-primary)",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {color}
+                        </span>
+                      </button>
                     );
                   })}
                 </div>
