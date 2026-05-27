@@ -208,6 +208,60 @@ body {
 /* =====================================================
    SHOP
    ===================================================== */
+
+/* Checkout: order summary shows first on mobile, after form on desktop */
+.shop-checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: start;
+}
+@media (min-width: 720px) {
+  .shop-checkout-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+}
+
+.shop-checkout-summary {
+  order: -1; /* summary above form on mobile */
+}
+@media (min-width: 720px) {
+  .shop-checkout-summary {
+    order: 0;
+    position: sticky;
+    top: 100px;
+  }
+}
+
+/* Stacked 2-col form rows on narrow screens */
+.shop-form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 480px) {
+  .shop-form-row { grid-template-columns: 1fr 1fr; }
+}
+
+/* Bottom safe area for pages without footer on mobile */
+.shop-page-main {
+  padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+}
+@media (min-width: 768px) {
+  .shop-page-main { padding-bottom: 100px; }
+}
+/* Product detail: single col on mobile, 2-col on desktop */
+.shop-product-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .shop-product-layout { grid-template-columns: 1fr 1fr; gap: 64px; }
+}
+
 .shop-product-card {
   background: var(--bg-card);
   border-radius: 16px;

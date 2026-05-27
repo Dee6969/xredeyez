@@ -70,7 +70,7 @@ export default function ProductClient({ product }: { product: PrintfulSyncProduc
   }
 
   return (
-    <main style={{ background: "var(--bg-primary)", paddingTop: "80px" }}>
+    <main className="shop-page-main" style={{ background: "var(--bg-primary)", paddingTop: "80px" }}>
       {/* Breadcrumb */}
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "32px 24px 0" }}>
         <nav style={{ display: "flex", gap: "8px", alignItems: "center" }}>
@@ -86,15 +86,8 @@ export default function ProductClient({ product }: { product: PrintfulSyncProduc
 
       {/* Product layout */}
       <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "40px 24px 100px",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
-          gap: "64px",
-          alignItems: "start",
-        }}
+        className="shop-product-layout"
+        style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px 24px 0" }}
       >
         {/* Image */}
         <div>

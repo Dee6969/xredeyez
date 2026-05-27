@@ -242,15 +242,8 @@ export default function CheckoutClient() {
       }}
     >
       <div
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "48px 24px 100px",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 420px), 1fr))",
-          gap: "48px",
-          alignItems: "start",
-        }}
+        className="shop-checkout-layout shop-page-main"
+        style={{ maxWidth: "1100px", margin: "0 auto", padding: "48px 24px 0" }}
       >
         {/* Left: form */}
         <div>
@@ -298,7 +291,7 @@ export default function CheckoutClient() {
                 Shipping Details
               </h2>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+              <div className="shop-form-row">
                 <div>
                   <label style={labelStyle}>Full Name *</label>
                   <input
@@ -343,7 +336,7 @@ export default function CheckoutClient() {
                 />
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+              <div className="shop-form-row">
                 <div>
                   <label style={labelStyle}>City *</label>
                   <input
@@ -366,7 +359,7 @@ export default function CheckoutClient() {
                 </div>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+              <div className="shop-form-row">
                 <div>
                   <label style={labelStyle}>State / Region</label>
                   <input
@@ -467,15 +460,14 @@ export default function CheckoutClient() {
           )}
         </div>
 
-        {/* Right: order summary */}
+        {/* Order summary — shows first on mobile via CSS order:-1 */}
         <div
+          className="shop-checkout-summary"
           style={{
             background: "var(--bg-card)",
             borderRadius: "16px",
             padding: "28px",
             boxShadow: "var(--shadow-card)",
-            position: "sticky",
-            top: "100px",
           }}
         >
           <h3 style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "20px", color: "var(--text-secondary)" }}>
