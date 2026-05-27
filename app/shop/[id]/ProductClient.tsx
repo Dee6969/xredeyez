@@ -51,6 +51,35 @@ function getVariantImage(v: PrintfulSyncVariant): string {
   );
 }
 
+// ─── Parse color / size from variant name ("Product / Color / Size") ─────────
+const KNOWN_SIZES = new Set(['xs','s','m','l','xl','2xl','3xl','4xl','xxl','xxxl','one size','os']);
+
+function parseVariantName(name: string): { color: string; size: string } {
+  const parts = name.split(' / ');
+  if (parts.length >= 3) {
+    return { color: parts[parts.length - 2].trim(), size: parts[parts.length - 1].trim() };
+  }
+  if (parts.length === 2) {
+    const last = parts[1].trim();
+    return KNOWN_SIZES.has(last.toLowerCase())
+      ? { color: '', size: last }
+      : { color: last, size: '' };
+  }
+  return { color: '', size: '' };
+}
+
+function getVariantColor(v: PrintfulSyncVariant): string {
+  const opt = v.options?.find((o) => o.id === "color");
+  if (opt && typeof opt.value === 'string' && opt.value) return opt.value;
+  return parseVariantName(v.name).color;
+}
+
+function getVariantSize(v: PrintfulSyncVariant): string {
+  const opt = v.options?.find((o) => o.id === "size");
+  if (opt && typeof opt.value === 'string' && opt.value) return opt.value;
+  return parseVariantName(v.name).size;
+}
+
 // ─── Unique gallery images across all variants ────────────────────────────────
 function buildGallery(variants: PrintfulSyncVariant[]): Array<{ url: string; label: string }> {
   const seen = new Set<string>();
@@ -59,21 +88,19 @@ function buildGallery(variants: PrintfulSyncVariant[]): Array<{ url: string; lab
     const url = getVariantImage(v);
     if (url && !seen.has(url)) {
       seen.add(url);
-      const colorOpt = v.options?.find((o) => o.id === "color");
-      gallery.push({ url, label: colorOpt?.value ?? v.name });
+      gallery.push({ url, label: getVariantColor(v) || v.name });
     }
   });
   return gallery;
 }
 
-// ─── Group variants by option ─────────────────────────────────────────────────
-function groupByOption(variants: PrintfulSyncVariant[], id: string): string[] {
-  const seen = new Set<string>();
-  variants.forEach((v) => {
-    const opt = v.options?.find((o) => o.id === id);
-    if (opt) seen.add(opt.value);
-  });
-  return Array.from(seen);
+// ─── Unique values for color / size across all variants ───────────────────────
+function getColors(variants: PrintfulSyncVariant[]): string[] {
+  return Array.from(new Set(variants.map(getVariantColor).filter(Boolean)));
+}
+
+function getSizes(variants: PrintfulSyncVariant[]): string[] {
+  return Array.from(new Set(variants.map(getVariantSize).filter(Boolean)));
 }
 
 // ─── Size chart data ──────────────────────────────────────────────────────────
@@ -267,10 +294,10 @@ export default function ProductClient({ product }: { product: PrintfulSyncProduc
   const validVariants = sync_variants.filter((v) => v.synced);
   const gallery = useMemo(() => buildGallery(validVariants), [validVariants]);
 
-  const hasColors = validVariants.some((v) => v.options?.some((o) => o.id === "color"));
-  const hasSizes  = validVariants.some((v) => v.options?.some((o) => o.id === "size"));
-  const colors    = groupByOption(validVariants, "color");
-  const sizes     = groupByOption(validVariants, "size");
+  const colors    = getColors(validVariants);
+  const sizes     = getSizes(validVariants);
+  const hasColors = colors.length > 0;
+  const hasSizes  = sizes.length > 0;
 
   const [selectedColor, setSelectedColor] = useState<string>(colors[0] ?? "");
   const [selectedSize,  setSelectedSize]  = useState<string>(sizes[0] ?? "");
@@ -281,8 +308,8 @@ export default function ProductClient({ product }: { product: PrintfulSyncProduc
 
   const selectedVariant = useMemo(() =>
     validVariants.find((v) => {
-      const colorOk = !hasColors || v.options?.some((o) => o.id === "color" && o.value === selectedColor);
-      const sizeOk  = !hasSizes  || v.options?.some((o) => o.id === "size"  && o.value === selectedSize);
+      const colorOk = !hasColors || getVariantColor(v) === selectedColor;
+      const sizeOk  = !hasSizes  || getVariantSize(v)  === selectedSize;
       return colorOk && sizeOk;
     }) ?? validVariants[0],
     [validVariants, hasColors, hasSizes, selectedColor, selectedSize]
@@ -295,10 +322,7 @@ export default function ProductClient({ product }: { product: PrintfulSyncProduc
 
   function pickColor(color: string) {
     setSelectedColor(color);
-    // Snap gallery to first image for this color
-    const match = validVariants.find((v) =>
-      v.options?.some((o) => o.id === "color" && o.value === color)
-    );
+    const match = validVariants.find((v) => getVariantColor(v) === color);
     if (match) {
       const img = getVariantImage(match);
       if (img) setActiveImage(img);
@@ -499,8 +523,8 @@ export default function ProductClient({ product }: { product: PrintfulSyncProduc
                   {sizes.map((size) => {
                     const available = validVariants.some(
                       (v) =>
-                        v.options?.some((o) => o.id === "size" && o.value === size) &&
-                        (!hasColors || v.options?.some((o) => o.id === "color" && o.value === selectedColor))
+                        getVariantSize(v) === size &&
+                        (!hasColors || getVariantColor(v) === selectedColor)
                     );
                     const isSel = selectedSize === size;
                     return (
