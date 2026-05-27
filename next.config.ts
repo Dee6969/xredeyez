@@ -6,6 +6,14 @@ const nextConfig: NextConfig = {
     root: path.resolve(__dirname),
   },
   transpilePackages: ["react-map-gl", "mapbox-gl"],
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "cdn.shopify.com" },
+      { protocol: "https", hostname: "files.cdn.printful.com" },
+      { protocol: "https", hostname: "*.printful.com" },
+      { protocol: "https", hostname: "ucarecdn.com" },
+    ],
+  },
 };
 
 export default nextConfig;
