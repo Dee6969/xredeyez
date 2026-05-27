@@ -7,23 +7,39 @@ import { PrintfulSyncProductDetail, PrintfulSyncVariant } from "../../lib/printf
 
 // ─── Color name → hex ────────────────────────────────────────────────────────
 const COLOR_MAP: Record<string, string> = {
+  // blacks
   black: "#1a1a1a", "vintage black": "#1e1c1c", "faded black": "#2a2828",
-  "washed black": "#222020", "jet black": "#0d0d0d",
+  "washed black": "#222020", "jet black": "#0d0d0d", asphalt: "#36393d",
+  "carbon grey": "#5a5a5a", "charcoal heather": "#636363",
+  // whites / creams / naturals
   white: "#f5f5f5", "off white": "#faf6ef", cream: "#fffdd0",
+  oyster: "#d1c4ad", natural: "#f0ead6", beige: "#f5f0e0",
+  // greys
   grey: "#808080", gray: "#808080", "dark grey": "#4a4a4a",
   "heather grey": "#c0bdb8", "light grey": "#d1d1d1", charcoal: "#374151",
+  // navies + blues
   navy: "#1b2a4a", "navy blue": "#1b2a4a", "dark navy": "#0f1d36",
   blue: "#1d3557", "royal blue": "#2147a8", "light blue": "#93c5fd",
   "sky blue": "#38bdf8", "steel blue": "#4682b4",
+  // reds
   red: "#cc2200", "dark red": "#8b1a1a", maroon: "#7f1d1d",
-  green: "#2d6a4f", "forest green": "#2d5016", "military green": "#4a5240",
-  olive: "#556b2f", "dark green": "#1a3a2a",
+  "brick red": "#9c3434",
+  // greens
+  green: "#2d6a4f", "forest green": "#2d5016", forest: "#2d5016",
+  "military green": "#4a5240", olive: "#556b2f", "dark green": "#1a3a2a",
+  agave: "#7a9e78", "faded eucalyptus": "#7aaa94",
+  // pinks / purples
   pink: "#f4a0b5", "light pink": "#ffccd5", "hot pink": "#e91e8c",
   purple: "#6b21a8", "dark purple": "#3b0764", violet: "#7c3aed",
+  // yellows / golds / oranges
   yellow: "#fbbf24", "bright yellow": "#facc15",
   orange: "#ea580c", "burnt orange": "#c2410c",
-  brown: "#78350f", tan: "#d4a853", sand: "#c2b280", caramel: "#b5651d",
-  beige: "#f5f0e0", natural: "#f0ead6",
+  gold: "#d4a017", "vintage gold": "#c9a441",
+  // browns / tans / khakis
+  brown: "#78350f", "vintage brown": "#7a5c4a",
+  tan: "#d4a853", sand: "#c2b280", caramel: "#b5651d",
+  khaki: "#b5a88a", "faded khaki": "#b5a88a",
+  // misc
   mint: "#98e0c8", teal: "#0d9488", turquoise: "#0891b2",
   burgundy: "#800020", wine: "#722f37", rose: "#f43f5e",
 };
