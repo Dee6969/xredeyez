@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "cdn.shopify.com" },
       { protocol: "https", hostname: "files.cdn.printful.com" },
       { protocol: "https", hostname: "*.printful.com" },
+      { protocol: "https", hostname: "files.cdn.printful.com" },
       { protocol: "https", hostname: "ucarecdn.com" },
     ],
   },

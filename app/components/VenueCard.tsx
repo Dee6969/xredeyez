@@ -9,6 +9,7 @@ export default function VenueCard({ venue }: { venue: Venue }) {
   const tileImage = brand?.bannerUrl || venue.galleryImages?.[0] || venue.image;
   const brandName = brand?.logoText || venue.name;
   const signature = getSignatureBanner(venue.id);
+  const hasOfficialVisual = Boolean(brand?.bannerUrl || venue.galleryImages?.[0] || venue.image || brand?.logoUrl);
   const cardStyle = {
     "--venue-primary": brand?.primaryColor || "#18160F",
     "--venue-accent": brand?.accentColor || "var(--accent-gold)",
@@ -38,6 +39,19 @@ export default function VenueCard({ venue }: { venue: Venue }) {
               </div>
               <div className="venue-signature-meta">{signature.meta}</div>
             </div>
+          ) : !hasOfficialVisual ? (
+            <div className={`venue-generated-banner is-${brand?.aesthetic || "dark"}`} aria-hidden="true">
+              <div className="venue-generated-glow" />
+              <div className="venue-generated-grid" />
+              <div className="venue-generated-mark">
+                {initials(brandName)}
+              </div>
+              <div className="venue-generated-copy">
+                <span>{venue.city} / {venue.neighborhood}</span>
+                <strong>{brandName}</strong>
+                <em>{brand?.tagline || `${venue.type} / ${venue.city}`}</em>
+              </div>
+            </div>
           ) : (
             <>
               <img src={venue.image} alt="" className="venue-tile-backdrop" aria-hidden="true" />
@@ -50,7 +64,7 @@ export default function VenueCard({ venue }: { venue: Venue }) {
           <div className="venue-tile-type">{venue.type}</div>
           {tierLabel && <div className="listing-badge venue-tile-badge">{tierLabel}</div>}
 
-          {!signature && (
+          {!signature && hasOfficialVisual && (
             <div className="venue-tile-brand-panel">
               <span className="venue-tile-kicker">Official brand room</span>
               {brand?.logoUrl ? (
@@ -120,6 +134,13 @@ export default function VenueCard({ venue }: { venue: Venue }) {
       </div>
     </article>
   );
+}
+
+function initials(name: string) {
+  const clean = name.replace(/[^a-z0-9\s&]/gi, " ").trim();
+  const parts = clean.split(/\s+/).filter(Boolean);
+  if (parts.length === 1) return parts[0].slice(0, 3).toUpperCase();
+  return parts.slice(0, 3).map((part) => part[0]).join("").toUpperCase();
 }
 
 function getSignatureBanner(venueId: string) {

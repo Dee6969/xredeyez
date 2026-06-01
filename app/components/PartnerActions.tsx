@@ -24,8 +24,11 @@ function referralHref(url: string, venue: Venue, sourcePage: string) {
 }
 
 function bookingAffiliateHref(venue: Venue, sourcePage: string) {
+  const destination = [venue.name, venue.neighborhood, venue.country || venue.city]
+    .filter(Boolean)
+    .join(", ");
   const params = new URLSearchParams({
-    destination: `${venue.name}, ${venue.city}`,
+    destination,
     city: venue.cityId,
     venue: venue.slug,
     source: sourcePage,

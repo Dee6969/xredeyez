@@ -18,11 +18,20 @@ function isBookingUrl(value: string) {
   }
 }
 
+function isBookingSearchUrl(value: string) {
+  try {
+    const url = new URL(value);
+    return isBookingUrl(value) && url.pathname.includes("searchresults");
+  } catch {
+    return false;
+  }
+}
+
 function buildDestination(request: NextRequest) {
   const destination = request.nextUrl.searchParams.get("destination") || "";
   const rawUrl = request.nextUrl.searchParams.get("url") || "";
 
-  if (rawUrl && isBookingUrl(rawUrl)) {
+  if (rawUrl && isBookingSearchUrl(rawUrl)) {
     return rawUrl;
   }
 

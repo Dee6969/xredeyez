@@ -32,6 +32,13 @@ function hexToRgb(hex: string): string {
   return `${r},${g},${b}`;
 }
 
+function initials(name: string) {
+  const clean = name.replace(/[^a-z0-9\s&]/gi, " ").trim();
+  const parts = clean.split(/\s+/).filter(Boolean);
+  if (parts.length === 1) return parts[0].slice(0, 3).toUpperCase();
+  return parts.slice(0, 3).map((part) => part[0]).join("").toUpperCase();
+}
+
 export default async function VenuePage({ params }: VenuePageProps) {
   const { slug } = await params;
   const venue = getVenue(slug);
@@ -45,7 +52,8 @@ export default async function VenuePage({ params }: VenuePageProps) {
   const primaryRgb = brand ? hexToRgb(brand.primaryColor) : "24,22,15";
   const accentRgb = brand ? hexToRgb(brand.accentColor) : "181,36,38";
   const accent = brand?.accentColor || "#B52426";
-  const hasBanner = !!brand?.bannerUrl;
+  const heroBanner = brand?.bannerUrl || venue.image;
+  const hasBanner = !!heroBanner;
   const gallery = venue.galleryImages || [];
   const isPartner = venue.claimStatus === "partner";
   const isPremium = venue.listingTier === "premium";
@@ -72,8 +80,21 @@ export default async function VenuePage({ params }: VenuePageProps) {
           {hasBanner && (
             <div
               className="vlp-hero-img"
-              style={{ backgroundImage: `url(${brand!.bannerUrl})` }}
+              style={{ backgroundImage: `url(${heroBanner})` }}
             />
+          )}
+          {!hasBanner && (
+            <div className={`vlp-generated-hero is-${brand?.aesthetic || "dark"}`} aria-hidden="true">
+              <div className="vlp-generated-hero-grid" />
+              <div className="vlp-generated-hero-mark" style={{ borderColor: accent, color: accent }}>
+                {initials(brand?.logoText || venue.name)}
+              </div>
+              <div className="vlp-generated-hero-lines">
+                <span style={{ background: accent }} />
+                <span style={{ background: accent }} />
+                <span style={{ background: accent }} />
+              </div>
+            </div>
           )}
           <div
             className="vlp-hero-overlay"
@@ -194,17 +215,23 @@ export default async function VenuePage({ params }: VenuePageProps) {
         <VenueReveal>
           <section className="vlp-story">
             <div className="vlp-story-media">
-              {gallery[0] ? (
+              {gallery[0] || venue.image ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={gallery[0]} alt={venue.name} />
+                <img src={gallery[0] || venue.image} alt={venue.name} />
               ) : (
                 <div
-                  className="vlp-story-media-placeholder"
-                  style={{ background: `rgba(${primaryRgb},0.12)` }}
+                  className={`vlp-story-media-placeholder is-${brand?.aesthetic || "dark"}`}
+                  style={{
+                    background:
+                      `radial-gradient(circle at 20% 20%, rgba(${accentRgb},0.28), transparent 32%), ` +
+                      `linear-gradient(135deg, rgba(${primaryRgb},0.96), #050505)`,
+                  }}
                 >
-                  <span style={{ color: accent }}>
-                    {(brand?.logoText || venue.name).charAt(0)}
-                  </span>
+                  <b style={{ borderColor: accent, color: accent }}>
+                    {initials(brand?.logoText || venue.name)}
+                  </b>
+                  <strong>{brand?.logoText || venue.name}</strong>
+                  <em>{brand?.tagline || `${venue.neighborhood} / ${venue.type}`}</em>
                 </div>
               )}
             </div>

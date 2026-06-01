@@ -1030,6 +1030,122 @@ body {
   background: #111;
 }
 
+.venue-generated-banner {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  display: grid;
+  align-content: end;
+  padding: 58px 20px 24px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--venue-accent), transparent 52%), transparent 30%),
+    radial-gradient(circle at 82% 74%, color-mix(in srgb, var(--venue-accent), transparent 70%), transparent 36%),
+    linear-gradient(135deg, color-mix(in srgb, var(--venue-primary), #000 10%), #050505 78%);
+}
+
+.venue-generated-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--venue-accent), transparent 18%) 0 4px, transparent 4px),
+    linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.72));
+}
+
+.venue-generated-glow {
+  position: absolute;
+  right: -70px;
+  top: -70px;
+  width: 230px;
+  height: 230px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--venue-accent), transparent 52%);
+  box-shadow:
+    0 0 80px color-mix(in srgb, var(--venue-accent), transparent 70%),
+    inset 0 0 54px rgba(255,255,255,0.06);
+}
+
+.venue-generated-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,0.10) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(180deg, transparent, black 30%, black);
+}
+
+.venue-generated-mark {
+  position: absolute;
+  right: 20px;
+  top: 48px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  border: 1px solid color-mix(in srgb, var(--venue-accent), transparent 34%);
+  border-radius: 999px;
+  background: rgba(0,0,0,0.24);
+  color: color-mix(in srgb, var(--venue-accent), #fff 20%);
+  font-family: "Courier New", monospace;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.38);
+}
+
+.venue-generated-copy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 7px;
+}
+
+.venue-generated-copy span {
+  color: rgba(255,255,255,0.62);
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.venue-generated-copy strong {
+  max-width: 11ch;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 7vw, 54px);
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-shadow: 0 14px 34px rgba(0,0,0,0.70), 0 0 30px color-mix(in srgb, var(--venue-accent), transparent 54%);
+}
+
+.venue-generated-copy em {
+  max-width: 25rem;
+  color: rgba(255,255,255,0.84);
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.venue-generated-banner.is-light {
+  background:
+    radial-gradient(circle at 20% 12%, color-mix(in srgb, var(--venue-accent), white 28%), transparent 26%),
+    linear-gradient(135deg, #f5efe3, color-mix(in srgb, var(--venue-primary), #fff 58%) 62%, #14110d);
+}
+
+.venue-generated-banner.is-light .venue-generated-copy strong,
+.venue-generated-banner.is-light .venue-generated-copy span,
+.venue-generated-banner.is-light .venue-generated-copy em {
+  color: #fff;
+}
+
 .venue-signature-banner {
   position: absolute;
   inset: 0;
@@ -4258,6 +4374,64 @@ body {
 }
 .vlp-hero:hover .vlp-hero-img { transform: scale(1); }
 
+.vlp-generated-hero {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,255,255,0.10), transparent 24%),
+    radial-gradient(circle at 78% 24%, rgba(255,255,255,0.06), transparent 22%);
+}
+
+.vlp-generated-hero-grid {
+  position: absolute;
+  inset: -20%;
+  opacity: 0.20;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,0.10) 1px, transparent 1px);
+  background-size: 76px 76px;
+  transform: rotate(-8deg);
+  mask-image: radial-gradient(circle at 45% 55%, black, transparent 72%);
+}
+
+.vlp-generated-hero-mark {
+  position: absolute;
+  right: clamp(24px, 7vw, 120px);
+  top: clamp(94px, 16vw, 180px);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(138px, 20vw, 260px);
+  height: clamp(138px, 20vw, 260px);
+  border: 1px solid;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.20);
+  font-family: "Courier New", monospace;
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  opacity: 0.54;
+  box-shadow: 0 0 80px currentColor;
+}
+
+.vlp-generated-hero-lines {
+  position: absolute;
+  left: clamp(20px, 5vw, 64px);
+  top: clamp(96px, 14vw, 170px);
+  z-index: 1;
+  display: grid;
+  gap: 16px;
+  opacity: 0.52;
+}
+
+.vlp-generated-hero-lines span {
+  display: block;
+  width: clamp(120px, 22vw, 280px);
+  height: 2px;
+  box-shadow: 0 0 24px currentColor;
+}
+
 .vlp-hero-overlay {
   position: absolute;
   inset: 0;
@@ -4898,16 +5072,56 @@ body {
 .vlp-story-media-placeholder {
   position: absolute;
   inset: 0;
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: center;
+  align-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 32px;
+  color: #fff;
+  text-align: center;
 }
-.vlp-story-media-placeholder span {
-  font-family: var(--font-playfair, Georgia, serif);
-  font-size: clamp(40px, 8vw, 96px);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  opacity: 0.12;
+.vlp-story-media-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,0.10) 1px, transparent 1px);
+  background-size: 58px 58px;
+}
+.vlp-story-media-placeholder b {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(76px, 12vw, 136px);
+  height: clamp(76px, 12vw, 136px);
+  border: 1px solid;
+  border-radius: 999px;
+  font-family: "Courier New", monospace;
+  font-size: clamp(18px, 3vw, 34px);
+  letter-spacing: 0.04em;
+}
+.vlp-story-media-placeholder strong {
+  position: relative;
+  z-index: 1;
+  max-width: 11ch;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 7vw, 82px);
+  font-weight: 900;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+.vlp-story-media-placeholder em {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  color: rgba(255,255,255,0.74);
+  font-style: normal;
+  line-height: 1.5;
 }
 
 .vlp-story-body {

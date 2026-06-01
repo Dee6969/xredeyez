@@ -7,13 +7,16 @@ import SaveButton from "./SaveButton";
 import VenueCard from "./VenueCard";
 
 function buildBookingLink(venue: Venue): string {
+  const destination = [venue.name, venue.neighborhood, venue.country || venue.city]
+    .filter(Boolean)
+    .join(", ");
   const params = new URLSearchParams({
-    destination: `${venue.name}, ${venue.city}`,
-    city: venue.city.toLowerCase(),
+    destination,
+    city: venue.cityId,
     venue: venue.id,
     source: "map-panel",
   });
-  if (venue.bookingUrl && venue.bookingUrl.includes("booking.com")) {
+  if (venue.bookingUrl && venue.bookingUrl.includes("booking.com/searchresults")) {
     params.set("url", venue.bookingUrl);
   }
   return `/partners/booking?${params.toString()}`;
