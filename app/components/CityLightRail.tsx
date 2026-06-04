@@ -3,6 +3,8 @@ import Link from "next/link";
 
 const cities = [
   { title: "Amsterdam",  location: "Netherlands",    status: "Live now", href: "/cities/amsterdam",     image: "/cities/amsterdam-canal-day.png" },
+  { title: "Den Haag",   location: "Netherlands",    status: "Live now", href: "/cities/den-haag",      image: "/cities/den-haag-market.png" },
+  { title: "Rotterdam",  location: "Netherlands",    status: "Live now", href: "/cities/rotterdam",     image: "/cities/rotterdam-market.png" },
   { title: "Barcelona",  location: "Spain",          status: "Live now", href: "/cities/barcelona",     image: "/cities/barcelona-terrace.png" },
   { title: "Tenerife",   location: "Spain",          status: "Live now", href: "/cities/tenerife",      image: "/cities/tenerife-sunrise.png" },
   { title: "Marbella",   location: "Spain",          status: "Live now", href: "/cities/marbella",      image: "/cities/marbella-marina.png" },

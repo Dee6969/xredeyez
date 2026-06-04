@@ -42,6 +42,8 @@ const LeafletCityMap = dynamic(() => import("./LeafletCityMap"), {
 
 const CITY_CENTERS: Record<string, { lat: number; lng: number; zoom: number }> = {
   amsterdam: { lat: 52.3707, lng: 4.8977, zoom: 13 },
+  "den-haag": { lat: 52.0800, lng: 4.3007, zoom: 13 },
+  rotterdam: { lat: 51.9244, lng: 4.4777, zoom: 13 },
   barcelona: { lat: 41.3851, lng: 2.1734, zoom: 12 },
   tenerife: { lat: 28.2916, lng: -16.6291, zoom: 10 },
   marbella: { lat: 36.5101, lng: -4.8824, zoom: 11 },
@@ -54,6 +56,11 @@ const CITY_CENTERS: Record<string, { lat: number; lng: number; zoom: number }> =
 };
 
 const REGION_BUTTONS: Record<string, { label: string; lat: number; lng: number; zoom: number }[]> = {
+  amsterdam: [
+    { label: "Amsterdam", lat: 52.3707, lng: 4.8977, zoom: 13 },
+    { label: "Den Haag", lat: 52.0800, lng: 4.3007, zoom: 13 },
+    { label: "Rotterdam", lat: 51.9244, lng: 4.4777, zoom: 13 },
+  ],
   canada: [
     { label: "Toronto", lat: 43.6532, lng: -79.3832, zoom: 12 },
     { label: "Vancouver", lat: 49.2827, lng: -123.1207, zoom: 12 },

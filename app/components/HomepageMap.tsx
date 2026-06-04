@@ -35,6 +35,8 @@ const LONDON_CENTER = { lat: 51.5074, lng: -0.1278 };
 
 const CITY_CENTERS: Record<string, { lat: number; lng: number }> = {
   amsterdam: { lat: 52.3707, lng: 4.8977 },
+  "den-haag": { lat: 52.0800, lng: 4.3007 },
+  rotterdam: { lat: 51.9244, lng: 4.4777 },
   barcelona: { lat: 41.3851, lng: 2.1734 },
   tenerife: { lat: 28.2916, lng: -16.6291 },
   marbella: { lat: 36.5101, lng: -4.8824 },
