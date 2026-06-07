@@ -2,6 +2,11 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const nextConfig: NextConfig = {
+  async rewrites() {
+    return [
+      { source: "/sitemap.xml", destination: "/api/sitemap" },
+    ];
+  },
   turbopack: {
     root: path.resolve(__dirname),
   },
