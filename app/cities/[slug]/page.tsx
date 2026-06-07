@@ -9,6 +9,7 @@ import SaveButton from "../../components/SaveButton";
 import VenueCard from "../../components/VenueCard";
 import { cities, discoveryLayers, getCity, getFeaturedPlacements, getSortedVenuesByCity, getVenueLayer, vibes } from "../../data/platform";
 import { breadcrumbSchema, faqSchema, touristDestinationSchema, toJsonLd } from "../../lib/schema";
+import { hoodSlug } from "../../lib/utils";
 
 interface CityPageProps {
   params: Promise<{ slug: string }>;
@@ -251,11 +252,16 @@ export default async function CityPage({ params }: CityPageProps) {
             </div>
             <div className="city-neighborhoods-grid">
               {city.neighborhoods.map((hood) => (
-                <div key={hood.name} className="city-hood-item">
+                <Link
+                  key={hood.name}
+                  href={`/cities/${city.slug}/neighbourhoods/${hoodSlug(hood.name)}`}
+                  className="city-hood-item city-hood-item-link"
+                >
                   <span className="city-hood-name">{hood.name}</span>
                   <span className="city-hood-mood">{hood.mood}</span>
                   <p className="city-hood-note">{hood.note}</p>
-                </div>
+                  <span className="city-hood-arrow" aria-hidden="true">→</span>
+                </Link>
               ))}
             </div>
           </div>

@@ -201,6 +201,30 @@ export function organizationSchema() {
   };
 }
 
+// ── Neighbourhood (Place) ───────────────────────────────────────────────────
+export function neighbourhoodSchema(
+  hood: { name: string; mood: string; note: string },
+  city: City,
+  hoodSlugStr: string,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    name: `${hood.name}`,
+    description: `${hood.mood} in ${city.name}. ${hood.note}`,
+    url: `${SITE_URL}/cities/${city.slug}/neighbourhoods/${hoodSlugStr}`,
+    "@id": `${SITE_URL}/cities/${city.slug}/neighbourhoods/${hoodSlugStr}#place`,
+    containedInPlace: {
+      "@type": "City",
+      name: city.name,
+      containedInPlace: {
+        "@type": "Country",
+        name: city.country,
+      },
+    },
+  };
+}
+
 // ── Helper: serialize to JSON-LD string ────────────────────────────────────
 export function toJsonLd(schema: Record<string, unknown>): string {
   return JSON.stringify(schema);

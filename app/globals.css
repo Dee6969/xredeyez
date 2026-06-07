@@ -8380,3 +8380,273 @@ body {
   transition: color 140ms;
 }
 .prem-b2b-strip a:hover { color: var(--xgreen); }
+
+/* ══════════════════════════════════════════════════
+   NEIGHBOURHOOD PAGES (.hood-*)
+   ══════════════════════════════════════════════════ */
+
+/* ── Hero ───────────────────────────────────────── */
+.hood-hero {
+  position: relative;
+  min-height: 52vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+.hood-hero-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hood-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10,10,10,0.18) 0%, rgba(10,10,10,0.74) 100%);
+  z-index: 1;
+}
+.hood-hero-body {
+  position: relative;
+  z-index: 2;
+  padding: 40px 24px 36px;
+  max-width: 760px;
+}
+@media (min-width: 768px) {
+  .hood-hero { min-height: 62vh; }
+  .hood-hero-body { padding: 56px 48px 48px; }
+}
+.hood-hero-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.hood-back {
+  font-size: 13px;
+  font-family: var(--font-mono, monospace);
+  color: rgba(245,240,230,0.6);
+  text-decoration: none;
+  transition: color 140ms;
+}
+.hood-back:hover { color: var(--xgreen); }
+.hood-hero-country {
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  color: rgba(245,240,230,0.36);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hood-hero-label {
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  color: var(--xgreen);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.hood-hero-name {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 800;
+  color: #f5f0e6;
+  margin: 0 0 10px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.hood-hero-mood {
+  font-size: 1rem;
+  color: rgba(245,240,230,0.62);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ── Local Intel ────────────────────────────────── */
+.hood-intel-section { padding-top: 40px; }
+.hood-intel-grid {
+  display: grid;
+  gap: 32px;
+}
+@media (min-width: 768px) {
+  .hood-intel-grid { grid-template-columns: 1fr 300px; gap: 48px; }
+}
+.hood-intel-title {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: #f5f0e6;
+  margin: 8px 0 16px;
+  letter-spacing: -0.02em;
+}
+.hood-intel-note {
+  font-size: 1rem;
+  color: rgba(245,240,230,0.72);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.hood-intel-context {
+  font-size: 0.875rem;
+  color: rgba(245,240,230,0.44);
+  line-height: 1.65;
+  font-family: var(--font-mono, monospace);
+}
+.hood-intel-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hood-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+}
+.hood-stat-label {
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  color: rgba(245,240,230,0.36);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.hood-stat-val {
+  font-size: 1rem;
+  color: #f5f0e6;
+  font-weight: 600;
+}
+.hood-stat-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+/* ── Routes ─────────────────────────────────────── */
+.hood-routes-list {
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .hood-routes-list { grid-template-columns: repeat(2, 1fr); }
+}
+.hood-route-item {
+  padding: 20px 22px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+}
+.hood-route-meta {
+  margin-bottom: 8px;
+}
+.hood-route-duration {
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  color: var(--xgreen);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.hood-route-title {
+  display: block;
+  font-size: 1rem;
+  color: #f5f0e6;
+  margin-bottom: 8px;
+}
+.hood-route-desc {
+  font-size: 0.875rem;
+  color: rgba(245,240,230,0.52);
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+.hood-route-stops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.hood-route-stop {
+  font-size: 11px;
+  padding: 3px 10px;
+  background: rgba(132,197,31,0.1);
+  border: 1px solid rgba(132,197,31,0.2);
+  border-radius: 20px;
+  color: var(--xgreen);
+  font-family: var(--font-mono, monospace);
+}
+
+/* ── Sibling hoods ──────────────────────────────── */
+.hood-sibling-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.hood-sibling-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: border-color 160ms, background 160ms;
+  position: relative;
+}
+.hood-sibling-card:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(132,197,31,0.3);
+}
+.hood-sibling-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f5f0e6;
+}
+.hood-sibling-mood {
+  font-size: 12px;
+  color: var(--xgreen);
+  font-family: var(--font-mono, monospace);
+}
+.hood-sibling-note {
+  font-size: 12px;
+  color: rgba(245,240,230,0.42);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.hood-sibling-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: rgba(245,240,230,0.24);
+  transition: color 160ms, right 160ms;
+}
+.hood-sibling-card:hover .hood-sibling-arrow {
+  right: 12px;
+  color: var(--xgreen);
+}
+
+/* ── Empty state ────────────────────────────────── */
+.hood-empty {
+  padding: 32px 0;
+  color: rgba(245,240,230,0.48);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* ── City neighbourhood links (city page) ───────── */
+.city-hood-item-link {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 160ms, background 160ms;
+}
+.city-hood-item-link:hover {
+  background: rgba(132,197,31,0.06);
+  border-color: rgba(132,197,31,0.25);
+}
+.city-hood-arrow {
+  display: block;
+  font-size: 13px;
+  color: rgba(245,240,230,0.22);
+  margin-top: 8px;
+  transition: color 160ms;
+}
+.city-hood-item-link:hover .city-hood-arrow { color: var(--xgreen); }
