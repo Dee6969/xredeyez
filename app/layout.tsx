@@ -22,6 +22,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "XRED EYEZ",
   description: "Premium cannabis culture discovery. Find cities, venues, vibes, and routes.",
+  verification: {
+    google: "55339fc862df57d7",
+  },
   openGraph: {
     title: "XRED EYEZ",
     description: "Premium cannabis culture discovery. Find cities, venues, vibes, and routes.",
