@@ -61,8 +61,8 @@ const mobileNavItems = [
 const desktopItems = [
   { label: "Explore", href: "/explore" },
   { label: "Cities", href: "/cities" },
+  { label: "Guides", href: "/guides" },
   { label: "Map", href: "/map" },
-  { label: "Book Hotels", href: "/cities" },
 ];
 
 function isActive(pathname: string, href: string) {

@@ -225,6 +225,42 @@ export function neighbourhoodSchema(
   };
 }
 
+// ── Article (guide pages) ───────────────────────────────────────────────────
+export function articleSchema(guide: {
+  title: string;
+  subtitle: string;
+  intro: string;
+  heroImage: string;
+  slug: string;
+  publishedAt: string;
+  updatedAt: string;
+}) {
+  const img = guide.heroImage.startsWith("http") ? guide.heroImage : `${SITE_URL}${guide.heroImage}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.title,
+    description: guide.subtitle,
+    articleBody: guide.intro,
+    image: img,
+    url: `${SITE_URL}/guides/${guide.slug}`,
+    "@id": `${SITE_URL}/guides/${guide.slug}#article`,
+    datePublished: guide.publishedAt,
+    dateModified: guide.updatedAt,
+    author: {
+      "@type": "Organization",
+      name: "XRED EYEZ",
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "XRED EYEZ",
+      url: SITE_URL,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/redeyez-logo-clear.png` },
+    },
+  };
+}
+
 // ── WebSite + SearchAction ──────────────────────────────────────────────────
 export function websiteSchema() {
   return {
