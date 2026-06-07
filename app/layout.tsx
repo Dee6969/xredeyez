@@ -45,6 +45,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`h-full ${playfair.variable} ${inter.variable}`}>
+      <head>
+        <meta name="google-site-verification" content="zNE8Nv4Ff4leTc2HsYZSA1kD1D_y6v_bz2-Vy58P-cw" />
+      </head>
       <body className="h-full antialiased">
         <script
           type="application/ld+json"
