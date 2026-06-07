@@ -1,163 +1,26 @@
-import Link from "next/link";
-import BookingHotelStrip from "../components/BookingHotelStrip";
-import CityCard from "../components/CityCard";
-import CityLightRail from "../components/CityLightRail";
-import FeaturedPlacementSlot from "../components/FeaturedPlacementSlot";
 import PlatformShell from "../components/PlatformShell";
-import VenueCard from "../components/VenueCard";
-import { cities, discoveryLayers, getFeaturedPlacements, getSortedVenuesByCity, vibes } from "../data/platform";
+import ExploreDirectory from "../components/ExploreDirectory";
+import { cities, venues } from "../data/platform";
 
 export const metadata = {
   title: "Explore | XRED EYEZ",
-  description: "Explore cannabis culture, city guides, vibes, venues, and lifestyle spots.",
+  description: "Browse cannabis culture venues, stays, restaurants and more across every XRED EYEZ city.",
 };
 
 export default function ExplorePage() {
-  const featuredCities = cities;
-  const flagshipCity = cities.find((city) => city.slug === "amsterdam") || cities[0];
-  const featuredVenues = getSortedVenuesByCity("amsterdam").slice(0, 3);
-  const placements = getFeaturedPlacements("amsterdam").slice(0, 2);
+  const liveCities = cities.filter(c => c.status === "flagship" || c.status === "live");
 
   return (
     <PlatformShell>
-      <section className="platform-hero">
-        <div className="eyebrow">Explore</div>
-        <h1 className="platform-title">Find the room. Read the city.</h1>
-        <p className="platform-lede">
-          Start with Amsterdam, browse by Cannabis, Stay, Eat, Do, or vibe, save places, and build better city routes with cannabis culture built in.
+      <div className="xdir-page-head">
+        <div className="eyebrow">Places</div>
+        <h1 className="platform-title xdir-page-title">Every spot. Every city.</h1>
+        <p className="platform-lede xdir-page-lede">
+          {venues.length} venues across {liveCities.length} cities — filter by Cannabis, Stay, Eat, Do, search by name or neighbourhood.
         </p>
-        <div className="platform-action-row">
-          <Link href="/map" className="platform-primary-action">
-            Open Map
-          </Link>
-          <Link href="/cities" className="platform-secondary-action">
-            All Destinations
-          </Link>
-          <Link href="/partners/claim" className="platform-secondary-action">
-            Claim a Listing
-          </Link>
-        </div>
-      </section>
+      </div>
 
-      <CityLightRail />
-
-      <section className="platform-section">
-        <div className="platform-info-strip">
-          <div>
-            <span>Platform</span>
-            <strong>Cannabis culture guide</strong>
-          </div>
-          <div>
-            <span>Browse by</span>
-            <strong>City · Vibe · Venue type</strong>
-          </div>
-          <div>
-            <span>Best first step</span>
-            <strong>Open Amsterdam →</strong>
-          </div>
-        </div>
-      </section>
-
-      <section className="platform-section">
-        <BookingHotelStrip city={flagshipCity} />
-      </section>
-
-      {placements.length > 0 && (
-        <section className="platform-section">
-          <div className="platform-section-head">
-            <div>
-              <div className="eyebrow">Featured</div>
-              <h2 className="platform-section-title">Partner highlights.</h2>
-            </div>
-          </div>
-          <div className="platform-commercial-grid">
-            {placements.map((placement) => (
-              <FeaturedPlacementSlot key={placement.id} placement={placement} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section className="platform-section">
-        <div className="platform-section-head">
-          <div>
-            <div className="eyebrow">Platform layers</div>
-            <h2 className="platform-section-title">Cannabis culture, full city utility.</h2>
-          </div>
-          <Link href="/cities/amsterdam/map" className="platform-inline-link">
-            Try Amsterdam
-          </Link>
-        </div>
-        <div className="platform-layer-grid">
-          {discoveryLayers.map((layer) => (
-            <Link key={layer.id} href="/cities/amsterdam/map" className="platform-layer-card">
-              <span>{layer.label}</span>
-              <strong>{layer.id === "cannabis" ? "Core" : "Layer"}</strong>
-              <p>{layer.description}</p>
-              <em>{layer.shortAction}</em>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="platform-section">
-        <div className="platform-section-head">
-          <div>
-            <div className="eyebrow">Vibes</div>
-            <h2 className="platform-section-title">Browse by mood.</h2>
-          </div>
-          <Link href="/vibes" className="platform-inline-link">
-            All vibes →
-          </Link>
-        </div>
-        <div className="platform-chip-grid">
-          {vibes.slice(0, 12).map((vibe) => (
-            <Link
-              key={vibe.id}
-              href={`/vibes?vibe=${vibe.id}`}
-              className="platform-vibe-tile"
-              style={{ borderLeftColor: `${vibe.accent}55`, borderLeftWidth: "3px" }}
-            >
-              <span>{vibe.name}</span>
-              <small>{vibe.description}</small>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="platform-section">
-        <div className="platform-section-head">
-          <div>
-            <div className="eyebrow">All Destinations</div>
-            <h2 className="platform-section-title">Every country & city.</h2>
-          </div>
-          <Link href="/cities" className="platform-inline-link">
-            View all →
-          </Link>
-        </div>
-        <div className="platform-card-grid">
-          {featuredCities.map((city) => (
-            <CityCard key={city.id} city={city} />
-          ))}
-        </div>
-      </section>
-
-      <section className="platform-section">
-        <div className="platform-section-head">
-          <div>
-            <div className="eyebrow">Amsterdam picks</div>
-            <h2 className="platform-section-title">Start here.</h2>
-          </div>
-          <Link href="/cities/amsterdam" className="platform-inline-link">
-            Amsterdam guide →
-          </Link>
-        </div>
-        <div className="platform-card-grid">
-          {featuredVenues.map((venue) => (
-            <VenueCard key={venue.id} venue={venue} />
-          ))}
-        </div>
-      </section>
+      <ExploreDirectory venues={venues} cities={cities} />
     </PlatformShell>
   );
 }
