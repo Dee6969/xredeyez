@@ -5,6 +5,7 @@ import ReadingProgress from "./components/ReadingProgress";
 import ShopProviders from "./components/ShopProviders";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { organizationSchema, toJsonLd } from "./lib/schema";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -42,6 +43,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`h-full ${playfair.variable} ${inter.variable}`}>
       <body className="h-full antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: toJsonLd(organizationSchema()) }}
+        />
         <ReadingProgress />
         <ShopProviders>
           {children}

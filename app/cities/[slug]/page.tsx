@@ -8,6 +8,7 @@ import Reveal from "../../components/Reveal";
 import SaveButton from "../../components/SaveButton";
 import VenueCard from "../../components/VenueCard";
 import { cities, discoveryLayers, getCity, getFeaturedPlacements, getSortedVenuesByCity, getVenueLayer, vibes } from "../../data/platform";
+import { breadcrumbSchema, faqSchema, touristDestinationSchema, toJsonLd } from "../../lib/schema";
 
 interface CityPageProps {
   params: Promise<{ slug: string }>;
@@ -75,8 +76,17 @@ export default async function CityPage({ params }: CityPageProps) {
 
   const bookingUrl = `/partners/booking?destination=${encodeURIComponent(city.name)}&city=${city.slug}&source=city-page`;
 
+  const cityBreadcrumb = breadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Cities", href: "/cities" },
+    { name: city.name, href: `/cities/${city.slug}` },
+  ]);
+
   return (
     <PlatformShell>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(touristDestinationSchema(city)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(faqSchema(city)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(cityBreadcrumb) }} />
       {/* Cinematic city hero */}
       <section className="platform-city-hero">
         <Image

@@ -7,6 +7,7 @@ import VenueMobileStrip from "../../components/VenueMobileStrip";
 import VenueReveal from "../../components/VenueReveal";
 import VenueShell from "../../components/VenueShell";
 import { getSortedVenuesByCity, getVenue, venues } from "../../data/platform";
+import { breadcrumbSchema, localBusinessSchema, toJsonLd } from "../../lib/schema";
 
 interface VenuePageProps {
   params: Promise<{ slug: string }>;
@@ -19,9 +20,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: VenuePageProps) {
   const { slug } = await params;
   const venue = getVenue(slug);
+  if (!venue) return { title: "Venue | XRED EYEZ" };
   return {
-    title: venue ? `${venue.name} | XRED EYEZ` : "Venue | XRED EYEZ",
-    description: venue?.description,
+    title: `${venue.name} | ${venue.city} Cannabis Guide | XRED EYEZ`,
+    description: venue.description,
+    openGraph: {
+      title: `${venue.name} | ${venue.city}`,
+      description: venue.description,
+      ...(venue.image ? { images: [{ url: venue.image }] } : {}),
+    },
   };
 }
 
@@ -64,8 +71,17 @@ export default async function VenuePage({ params }: VenuePageProps) {
     : venue.listingTier === "featured" ? "Featured Listing"
     : "Free Listing";
 
+  const breadcrumb = breadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Cities", href: "/cities" },
+    { name: venue.city, href: `/cities/${venue.cityId}` },
+    { name: venue.name, href: `/venues/${venue.slug}` },
+  ]);
+
   return (
     <VenueShell>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(localBusinessSchema(venue)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(breadcrumb) }} />
       <div className={tierClass}>
 
         <UnclaimedBanner venue={venue} />
