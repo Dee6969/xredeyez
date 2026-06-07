@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCart } from "./CartContext";
+import GlobalSearch from "./GlobalSearch";
 
 const mobileNavItems = [
   {
@@ -110,27 +111,31 @@ export default function PlatformNav() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <Link href="/partners/list" className="platform-nav-pill platform-list-pill">
-            List Your Business
-          </Link>
-          <button
-            onClick={() => cartDispatch({ type: "OPEN" })}
-            aria-label={`Cart${itemCount > 0 ? ` (${itemCount} items)` : ""}`}
-            className="platform-cart-btn"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 0 1-8 0"/>
-            </svg>
-            {itemCount > 0 && (
-              <span className="platform-cart-count">{itemCount}</span>
-            )}
-          </button>
-          <Link href="/premium" className="platform-secondary-action" style={{ minHeight: "38px", padding: "9px 20px", fontSize: "13px" }}>
-            Premium
-          </Link>
+        {/* Right side — search always visible, rest desktop-only */}
+        <div className="platform-nav-right">
+          <GlobalSearch />
+          <div className="hidden items-center gap-2 md:flex">
+            <Link href="/partners/list" className="platform-nav-pill platform-list-pill">
+              List Your Business
+            </Link>
+            <button
+              onClick={() => cartDispatch({ type: "OPEN" })}
+              aria-label={`Cart${itemCount > 0 ? ` (${itemCount} items)` : ""}`}
+              className="platform-cart-btn"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              {itemCount > 0 && (
+                <span className="platform-cart-count">{itemCount}</span>
+              )}
+            </button>
+            <Link href="/premium" className="platform-secondary-action" style={{ minHeight: "38px", padding: "9px 20px", fontSize: "13px" }}>
+              Premium
+            </Link>
+          </div>
         </div>
       </nav>
 
