@@ -1,6 +1,7 @@
 import MembershipTeaser from "../components/MembershipTeaser";
 import PlatformShell from "../components/PlatformShell";
 import SavedList from "../components/SavedList";
+import { cities, venues, vibes } from "../data/platform";
 
 export const metadata = {
   title: "Saved | XRED EYEZ",
@@ -19,7 +20,11 @@ export default function SavedPage() {
       </section>
 
       <section className="platform-section">
-        <SavedList />
+        <SavedList
+          venues={venues.map(({ id, name, city, neighborhood, slug }) => ({ id, name, city, neighborhood, slug }))}
+          cities={cities.map(({ id, name, country, slug }) => ({ id, name, country, slug }))}
+          vibes={vibes.map(({ id, name, slug }) => ({ id, name, slug }))}
+        />
       </section>
 
       <section className="platform-section">

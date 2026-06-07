@@ -1,7 +1,16 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { cities, venues, vibes } from "../data/platform";
+
+type SlimVenue = { id: string; name: string; city: string; neighborhood: string; slug: string };
+type SlimCity = { id: string; name: string; country: string; slug: string };
+type SlimVibe = { id: string; name: string; slug: string };
+
+interface SavedListProps {
+  venues: SlimVenue[];
+  cities: SlimCity[];
+  vibes: SlimVibe[];
+}
 
 const storageKey = "xred-saved-items";
 
@@ -13,7 +22,7 @@ function readSaved() {
   }
 }
 
-export default function SavedList() {
+export default function SavedList({ venues, cities, vibes }: SavedListProps) {
   const [saved, setSaved] = useState<string[]>([]);
 
   useEffect(() => {

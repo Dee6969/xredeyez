@@ -18,7 +18,48 @@ const cityImages: Record<string, string> = {
   "south-africa":   "/cities/south-africa-cape-town.png",
   usa:              "/cities/usa-market-hero.png",
   canada:           "/cities/canada-market-hero.png",
+  "den-haag":       "/cities/den-haag-market.png",
+  rotterdam:        "/cities/rotterdam-market.png",
 };
+
+const actionBlocks = [
+  {
+    label: "Explore Cities",
+    desc: "Browse destination guides",
+    href: "/cities",
+    symbol: "◎",
+    accent: "#84C51F",
+  },
+  {
+    label: "Find Cannabis",
+    desc: "Coffeeshops & social clubs",
+    href: "/explore",
+    symbol: "◉",
+    accent: "#84C51F",
+  },
+  {
+    label: "Book Hotels",
+    desc: "Cannabis-friendly stays",
+    href: "/partners/booking?destination=Amsterdam&source=homepage",
+    symbol: "◆",
+    accent: "#B8A07A",
+    external: true,
+  },
+  {
+    label: "Open Map",
+    desc: "Browse the city map",
+    href: "/map",
+    symbol: "✦",
+    accent: "#38BDF8",
+  },
+  {
+    label: "List Your Business",
+    desc: "From €49/month",
+    href: "/partners/list",
+    symbol: "◈",
+    accent: "#9E8B6A",
+  },
+];
 
 export default function Home() {
   return (
@@ -32,15 +73,58 @@ export default function Home() {
           <h1 className="home-hero-headline anim-fade-up delay-2">
             Know where<br />to go.
           </h1>
-          <Link href="/cities" className="home-hero-cta anim-fade-up delay-4">
-            Explore destinations
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </Link>
+          <p className="home-hero-sub anim-fade-up delay-3">
+            Cannabis culture travel. City guides, venues, routes and hotels — curated for real travellers.
+          </p>
+          <div className="home-hero-actions anim-fade-up delay-4">
+            <Link href="/cities" className="home-hero-cta">
+              Explore destinations
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </Link>
+            <Link href="/map" className="home-hero-cta-secondary">
+              Open Map
+            </Link>
+          </div>
         </div>
         <p className="home-hero-scroll" aria-hidden="true">Scroll</p>
       </section>
+
+      {/* Action blocks — 5 quick access tiles */}
+      <Reveal>
+        <section className="home-action-section" aria-label="Quick actions">
+          <div className="home-action-blocks">
+            {actionBlocks.map((block) =>
+              block.external ? (
+                <a
+                  key={block.label}
+                  href={block.href}
+                  className="home-action-block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ "--block-accent": block.accent } as React.CSSProperties}
+                >
+                  <span className="home-action-symbol" aria-hidden="true">{block.symbol}</span>
+                  <strong className="home-action-label">{block.label}</strong>
+                  <span className="home-action-desc">{block.desc}</span>
+                </a>
+              ) : (
+                <Link
+                  key={block.label}
+                  href={block.href}
+                  className="home-action-block"
+                  style={{ "--block-accent": block.accent } as React.CSSProperties}
+                >
+                  <span className="home-action-symbol" aria-hidden="true">{block.symbol}</span>
+                  <strong className="home-action-label">{block.label}</strong>
+                  <span className="home-action-desc">{block.desc}</span>
+                </Link>
+              )
+            )}
+          </div>
+        </section>
+      </Reveal>
 
       {/* Brand statement */}
       <Reveal>
@@ -98,7 +182,6 @@ export default function Home() {
               );
             })}
 
-            {/* Who is next? — locked future-drop teaser */}
             {[0, 1].map((i) => (
               <div key={i} className="home-dest-card home-dest-next" aria-label="Next destination — coming soon">
                 <div className="home-dest-next-inner">

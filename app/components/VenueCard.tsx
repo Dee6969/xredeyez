@@ -1,22 +1,37 @@
-/* eslint-disable @next/next/no-img-element -- Venue tiles intentionally support remote partner brand assets without remote image config friction. */
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { getVibe, type Venue } from "../data/platform";
+import PlaceImage from "./PlaceImage";
 import SaveButton from "./SaveButton";
+
+const PI_FILL: CSSProperties = { position: "absolute", inset: 0, width: "100%", height: "100%" };
+
+function bookingHref(city: string, venueSlug?: string) {
+  const params = new URLSearchParams({
+    destination: city,
+    city: city.toLowerCase().replace(/\s+/g, "-"),
+    source: "venue-card",
+  });
+  if (venueSlug) params.set("venue", venueSlug);
+  return `/partners/booking?${params.toString()}`;
+}
 
 export default function VenueCard({ venue }: { venue: Venue }) {
   const brand = venue.brand;
-  const tileImage = brand?.bannerUrl || venue.galleryImages?.[0] || venue.image;
+  const tileImage = brand?.bannerUrl || venue.galleryImages?.[0] || (venue.image || undefined);
   const brandName = brand?.logoText || venue.name;
   const signature = getSignatureBanner(venue.id);
   const hasOfficialVisual = Boolean(brand?.bannerUrl || venue.galleryImages?.[0] || venue.image || brand?.logoUrl);
+  const isHotelLayer = venue.layer === "stay";
+  const isCannabisLayer = venue.layer === "cannabis";
+
   const cardStyle = {
     "--venue-primary": brand?.primaryColor || "#18160F",
     "--venue-accent": brand?.accentColor || "var(--accent-gold)",
   } as CSSProperties;
-  const isTopRated = Boolean(signature);
+
   const tierLabel =
-    isTopRated
+    signature
       ? "Top Rated"
       : venue.listingTier === "premium"
       ? "Premium Partner"
@@ -28,6 +43,8 @@ export default function VenueCard({ venue }: { venue: Venue }) {
     <article className={`platform-card venue-card overflow-hidden is-${venue.listingTier}`} style={cardStyle}>
       <Link href={`/venues/${venue.slug}`} style={{ textDecoration: "none", display: "block" }}>
         <div className={`venue-tile-media${signature ? ` venue-signature-media ${signature.className}` : ""}`}>
+
+          {/* ── Signature (premium hardcoded brands) ── */}
           {signature ? (
             <div className="venue-signature-banner" aria-hidden="true">
               <div className="venue-signature-orbit" />
@@ -39,49 +56,53 @@ export default function VenueCard({ venue }: { venue: Venue }) {
               </div>
               <div className="venue-signature-meta">{signature.meta}</div>
             </div>
-          ) : !hasOfficialVisual ? (
-            <div className={`venue-generated-banner is-${brand?.aesthetic || "dark"}`} aria-hidden="true">
-              <div className="venue-generated-glow" />
-              <div className="venue-generated-grid" />
-              <div className="venue-generated-mark">
-                {initials(brandName)}
-              </div>
-              <div className="venue-generated-copy">
-                <span>{venue.city} / {venue.neighborhood}</span>
-                <strong>{brandName}</strong>
-                <em>{brand?.tagline || `${venue.type} / ${venue.city}`}</em>
-              </div>
-            </div>
-          ) : (
+          ) : hasOfficialVisual ? (
+            /* ── Real image via PlaceImage (handles load/error/skeleton) ── */
             <>
-              <img src={venue.image} alt="" className="venue-tile-backdrop" aria-hidden="true" />
-              <img src={tileImage} alt={`${venue.name} brand preview`} className="venue-tile-img" />
+              <PlaceImage
+                src={tileImage}
+                alt={`${venue.name} — ${venue.type} in ${venue.city}`}
+                category={venue.type}
+                name={brandName}
+                city={`${venue.city} / ${venue.neighborhood}`}
+                style={PI_FILL}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+              />
               <div className="venue-tile-shade" />
+              <div className="venue-tile-brand-panel">
+                <span className="venue-tile-kicker">Official brand room</span>
+                {brand?.logoUrl ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img src={brand.logoUrl} alt={`${venue.name} logo`} className="venue-tile-logo" />
+                ) : (
+                  <span className="venue-tile-wordmark">{brandName}</span>
+                )}
+                <span className="venue-tile-tagline">
+                  {brand?.tagline || `${venue.neighborhood} / ${venue.type}`}
+                </span>
+              </div>
             </>
+          ) : (
+            /* ── No image — PlaceImage generates premium category fallback ── */
+            <PlaceImage
+              src={null}
+              alt={`${venue.name} — ${venue.type} in ${venue.city}`}
+              category={venue.type}
+              name={brandName}
+              city={`${venue.city} / ${venue.neighborhood}`}
+              style={PI_FILL}
+            />
           )}
-          <div className="venue-tile-accent" />
 
+          {/* Always-present overlays */}
+          <div className="venue-tile-accent" />
           <div className="venue-tile-type">{venue.type}</div>
           {tierLabel && <div className="listing-badge venue-tile-badge">{tierLabel}</div>}
-
-          {!signature && hasOfficialVisual && (
-            <div className="venue-tile-brand-panel">
-              <span className="venue-tile-kicker">Official brand room</span>
-              {brand?.logoUrl ? (
-                <img src={brand.logoUrl} alt={`${venue.name} logo`} className="venue-tile-logo" />
-              ) : (
-                <span className="venue-tile-wordmark">{brandName}</span>
-              )}
-              <span className="venue-tile-tagline">
-                {brand?.tagline || `${venue.neighborhood} / ${venue.type}`}
-              </span>
-            </div>
-          )}
         </div>
       </Link>
 
-      <div style={{ padding: "20px", display: "grid", gap: "12px" }}>
-        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
+      <div className="venue-card-body">
+        <div className="venue-card-header">
           <div>
             <div className="eyebrow">
               {venue.city} / {venue.neighborhood}
@@ -98,14 +119,21 @@ export default function VenueCard({ venue }: { venue: Venue }) {
           <SaveButton itemType="venue" itemId={venue.id} />
         </div>
 
-        <p style={{ fontSize: "14px", lineHeight: "1.6", color: "var(--text-secondary)" }}>
-          {venue.description}
-        </p>
+        <p className="venue-card-desc">{venue.description}</p>
 
         {venue.address && (
           <p className="venue-address-line">
             {venue.address}{venue.postcode ? ` · ${venue.postcode}` : ""}
           </p>
+        )}
+
+        {isCannabisLayer && (
+          <div className="venue-card-know">
+            <span className="venue-card-know-label">Know before you go</span>
+            <span className="venue-card-know-text">
+              {venue.guideNote || "Check local rules and etiquette before visiting."}
+            </span>
+          </div>
         )}
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
@@ -124,23 +152,28 @@ export default function VenueCard({ venue }: { venue: Venue }) {
         </div>
 
         <div className="venue-card-actions">
-          <Link href={`/venues/${venue.slug}`} className="platform-inline-link">
-            Open brand room
+          <Link href={`/venues/${venue.slug}`} className="vca-btn vca-view">View</Link>
+          <Link href={`/cities/${venue.cityId}/map`} className="vca-btn vca-map" aria-label={`Open ${venue.name} on map`}>
+            Map
           </Link>
-          <Link href={`/partners/claim?venue=${venue.slug}`} className="platform-inline-link">
-            Claim
-          </Link>
+          {isHotelLayer ? (
+            <a
+              href={bookingHref(venue.city, venue.slug)}
+              className="vca-btn vca-book"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book Stay
+            </a>
+          ) : (
+            <Link href={`/partners/claim?venue=${venue.slug}`} className="vca-btn vca-claim">
+              Claim
+            </Link>
+          )}
         </div>
       </div>
     </article>
   );
-}
-
-function initials(name: string) {
-  const clean = name.replace(/[^a-z0-9\s&]/gi, " ").trim();
-  const parts = clean.split(/\s+/).filter(Boolean);
-  if (parts.length === 1) return parts[0].slice(0, 3).toUpperCase();
-  return parts.slice(0, 3).map((part) => part[0]).join("").toUpperCase();
 }
 
 function getSignatureBanner(venueId: string) {

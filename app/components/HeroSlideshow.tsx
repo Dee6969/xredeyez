@@ -39,29 +39,34 @@ export default function HeroSlideshow() {
   }, [prev]);
 
   const slide = slides[current];
+  const nextIdx = (current + 1) % slides.length;
+  const visibleIdxs = new Set([current, prev ?? -1, nextIdx]);
 
   return (
     <>
       <div className="home-hero-image" aria-hidden="true">
-        {slides.map((s, i) => (
-          <div
-            key={s.src}
-            className="home-hero-slide"
-            style={{
-              opacity: i === current ? 1 : 0,
-              zIndex: i === current ? 2 : i === prev ? 1 : 0,
-            }}
-          >
-            <Image
-              src={s.src}
-              alt=""
-              fill
-              priority={i === 0}
-              sizes="100vw"
-              style={{ objectFit: "cover", objectPosition: "center 38%" }}
-            />
-          </div>
-        ))}
+        {slides.map((s, i) => {
+          if (!visibleIdxs.has(i)) return null;
+          return (
+            <div
+              key={s.src}
+              className="home-hero-slide"
+              style={{
+                opacity: i === current ? 1 : 0,
+                zIndex: i === current ? 2 : i === prev ? 1 : 0,
+              }}
+            >
+              <Image
+                src={s.src}
+                alt=""
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                style={{ objectFit: "cover", objectPosition: "center 38%" }}
+              />
+            </div>
+          );
+        })}
       </div>
 
       <div className="home-hero-overlay" />

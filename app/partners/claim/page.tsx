@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PartnerClaimForm from "../../components/PartnerClaimForm";
 import PlatformShell from "../../components/PlatformShell";
+import { getVenue, venues } from "../../data/platform";
 
 export const metadata = {
   title: "Claim Listing | XRED EYEZ",
@@ -13,6 +14,8 @@ interface ClaimListingPageProps {
 
 export default async function ClaimListingPage({ searchParams }: ClaimListingPageProps) {
   const { venue } = await searchParams;
+  const currentVenue = venue ? getVenue(venue) : undefined;
+  const slimVenues = venues.map(({ id, name, city, slug }) => ({ id, name, city, slug }));
 
   return (
     <PlatformShell>
@@ -51,7 +54,10 @@ export default async function ClaimListingPage({ searchParams }: ClaimListingPag
 
       <section className="platform-section">
         <div className="claim-layout">
-          <PartnerClaimForm venueSlug={venue} />
+          <PartnerClaimForm
+            venues={slimVenues}
+            currentVenue={currentVenue ? { id: currentVenue.id, name: currentVenue.name, city: currentVenue.city, slug: currentVenue.slug } : undefined}
+          />
 
           <aside className="platform-panel">
             <div className="eyebrow">COMMERCIAL OPTIONS</div>

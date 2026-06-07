@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-import "mapbox-gl/dist/mapbox-gl.css";
-import "leaflet/dist/leaflet.css";
 import ReadingProgress from "./components/ReadingProgress";
 import ShopProviders from "./components/ShopProviders";
 import { Analytics } from "@vercel/analytics/next";

@@ -1,10 +1,15 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { getVenue, venues } from "../data/platform";
 
-export default function PartnerClaimForm({ venueSlug }: { venueSlug?: string }) {
-  const venue = venueSlug ? getVenue(venueSlug) : undefined;
+type SlimVenue = { id: string; name: string; city: string; slug: string };
+
+interface PartnerClaimFormProps {
+  venues: SlimVenue[];
+  currentVenue?: SlimVenue;
+}
+
+export default function PartnerClaimForm({ venues, currentVenue: venue }: PartnerClaimFormProps) {
   const [sent, setSent] = useState(false);
 
   return (
