@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { useMemo, useState, useCallback } from "react";
 import { discoveryLayers, getVenueLayer, type City, type DiscoveryLayer, type Venue } from "../data/platform";
 import SaveButton from "./SaveButton";
-import VenueCard from "./VenueCard";
 
 function buildBookingLink(venue: Venue): string {
   const destination = [venue.name, venue.neighborhood, venue.country || venue.city]
@@ -29,15 +28,13 @@ function buildRestaurantLink(venue: Venue): string {
     venue: venue.id,
     source: "map-panel",
   });
-  if (venue.bookingUrl) {
-    params.set("url", venue.bookingUrl);
-  }
+  if (venue.bookingUrl) params.set("url", venue.bookingUrl);
   return `/partners/restaurant?${params.toString()}`;
 }
 
 const LeafletCityMap = dynamic(() => import("./LeafletCityMap"), {
   ssr: false,
-  loading: () => <div className="platform-map-loading">Loading street map...</div>,
+  loading: () => <div className="map-zen-loading">Loading map…</div>,
 });
 
 const CITY_CENTERS: Record<string, { lat: number; lng: number; zoom: number }> = {
@@ -84,6 +81,14 @@ const REGION_BUTTONS: Record<string, { label: string; lat: number; lng: number; 
   ],
 };
 
+type SheetMode = "hidden" | "compact" | "open";
+
+function venueCta(venue: Venue): { href: string; label: string; cls: string; external: boolean } {
+  if (venue.layer === "stay") return { href: buildBookingLink(venue), label: "Book stay →", cls: "map-zen-cta is-book", external: true };
+  if (venue.layer === "eat")  return { href: buildRestaurantLink(venue), label: "Reserve →", cls: "map-zen-cta is-eat", external: true };
+  return { href: `/venues/${venue.slug}`, label: "Open profile →", cls: "map-zen-cta", external: false };
+}
+
 export default function CityMapExperience({
   city,
   venues,
@@ -94,186 +99,243 @@ export default function CityMapExperience({
   networkCities: City[];
 }) {
   const [activeLayer, setActiveLayer] = useState<DiscoveryLayer | "all">("all");
-  const [view, setView] = useState<"map" | "list">("map");
-  const [selectedId, setSelectedId] = useState<string>(venues[0]?.id || "");
+  const [selectedId, setSelectedId] = useState<string>("");
+  const [sheetMode, setSheetMode] = useState<SheetMode>("hidden");
   const defaultCenter = CITY_CENTERS[city.slug] || CITY_CENTERS.amsterdam;
   const [mapCenter, setMapCenter] = useState(defaultCenter);
   const regionButtons = REGION_BUTTONS[city.slug] || [];
 
-  const filteredVenues = useMemo(() => {
-    return venues.filter((venue) => {
-      return activeLayer === "all" || getVenueLayer(venue) === activeLayer;
-    });
-  }, [activeLayer, venues]);
+  const filteredVenues = useMemo(
+    () => activeLayer === "all" ? venues : venues.filter(v => getVenueLayer(v) === activeLayer),
+    [activeLayer, venues]
+  );
 
-  const selected = filteredVenues.find((venue) => venue.id === selectedId) || filteredVenues[0];
+  const selected = filteredVenues.find(v => v.id === selectedId) ?? null;
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(id);
-    setView("map");
+    setSheetMode("compact");
   }, []);
 
-  const geoVenues = filteredVenues.filter((venue) => venue.coordinates.lat && venue.coordinates.lng);
+  const setLayer = useCallback((layer: DiscoveryLayer | "all") => {
+    setActiveLayer(layer);
+    setSelectedId("");
+    setSheetMode("hidden");
+  }, []);
+
+  const geoVenues = filteredVenues.filter(v => v.coordinates.lat && v.coordinates.lng);
 
   return (
-    <div>
-      <div className={`platform-map-shell ${view === "list" ? "is-list-view" : ""}`}>
-        <div className="platform-map-canvas" aria-label={`${city.name} map`}>
-          <LeafletCityMap
-            center={mapCenter}
-            venues={geoVenues}
-            cities={networkCities}
-            cityCenters={CITY_CENTERS}
-            activeCityId={city.id}
-            selectedId={selected?.id || ""}
-            onSelect={handleSelect}
-          />
-          <div className="platform-map-sheen" />
+    <div className="map-zen-root">
 
-          <div className="platform-map-label">
-            Live street map / {geoVenues.length} places
-          </div>
+      {/* ══════════════════════════════════════
+          MAP CANVAS
+          ══════════════════════════════════════ */}
+      <div className="map-zen-canvas">
+        <LeafletCityMap
+          center={mapCenter}
+          venues={geoVenues}
+          cities={networkCities}
+          cityCenters={CITY_CENTERS}
+          activeCityId={city.id}
+          selectedId={selectedId}
+          onSelect={handleSelect}
+        />
 
-          {regionButtons.length > 0 && (
-            <div className="platform-map-regions" aria-label="Jump to region">
-              {regionButtons.map((r) => (
-                <button
-                  key={r.label}
-                  type="button"
-                  className="platform-map-region-btn"
-                  onClick={() => setMapCenter({ lat: r.lat, lng: r.lng, zoom: r.zoom })}
-                >
-                  {r.label}
-                </button>
-              ))}
-            </div>
-          )}
-
-          <div className="platform-map-legend" aria-label="Map pin key">
-            <div className="platform-map-legend-item">
-              <span className="platform-map-legend-dot is-venue" />
-              Venues
-            </div>
-            <div className="platform-map-legend-item">
-              <span className="platform-map-legend-dot is-hotel" />
-              Hotels
-            </div>
-            <div className="platform-map-legend-item">
-              <span className="platform-map-legend-dot is-restaurant" />
-              Restaurants
-            </div>
-          </div>
+        {/* City tag — top left */}
+        <div className="map-zen-city-tag">
+          <Link href={`/cities/${city.slug}`} className="map-zen-back">← Guide</Link>
+          <span className="map-zen-city-name">{city.name}</span>
         </div>
 
-        <aside className="platform-map-panel">
-          <div className="platform-map-tabs" role="tablist" aria-label="Map view">
-            <button type="button" className={view === "map" ? "is-active" : ""} onClick={() => setView("map")}>
-              Map
-            </button>
-            <button type="button" className={view === "list" ? "is-active" : ""} onClick={() => setView("list")}>
-              List
-            </button>
-            <Link href="/saved">Saved</Link>
+        {/* Category filter chips — top centre */}
+        <div className="map-zen-cats" aria-label="Filter by category">
+          <button
+            type="button"
+            className={`map-zen-cat${activeLayer === "all" ? " is-active" : ""}`}
+            onClick={() => setLayer("all")}
+          >All</button>
+          {discoveryLayers.map(layer => (
+            <button
+              key={layer.id}
+              type="button"
+              className={`map-zen-cat${activeLayer === layer.id ? " is-active" : ""}`}
+              onClick={() => setLayer(layer.id)}
+            >{layer.label}</button>
+          ))}
+        </div>
+
+        {/* Region jump — multi-city coverage */}
+        {regionButtons.length > 0 && (
+          <div className="map-zen-regions" aria-label="Jump to region">
+            {regionButtons.map(r => (
+              <button
+                key={r.label}
+                type="button"
+                className="platform-map-region-btn"
+                onClick={() => setMapCenter({ lat: r.lat, lng: r.lng, zoom: r.zoom })}
+              >{r.label}</button>
+            ))}
           </div>
+        )}
 
-          {selected && (
-            <article
-              key={selected.id}
-              className={`map-selected-card${selected.layer === "stay" ? " is-hotel" : ""}${selected.layer === "eat" ? " is-restaurant" : ""}`}
+        {/* Selected card — floats on canvas (desktop) / hidden on mobile (use sheet) */}
+        {selected && (
+          <div
+            key={selected.id}
+            className={`map-zen-selected${selected.layer === "stay" ? " is-hotel" : ""}${selected.layer === "eat" ? " is-eat" : ""}`}
+          >
+            <div className="map-zen-sel-type">{selected.type} · {selected.neighborhood}</div>
+            <div className="map-zen-sel-name">{selected.name}</div>
+            {selected.address && (
+              <div className="map-zen-sel-addr">{selected.address}{selected.postcode ? `, ${selected.postcode}` : ""}</div>
+            )}
+            <div className="map-zen-sel-actions">
+              {(() => { const cta = venueCta(selected); return (
+                <Link
+                  href={cta.href}
+                  className={cta.cls}
+                  {...(cta.external ? { target: "_blank", rel: "noreferrer" } : {})}
+                >{cta.label}</Link>
+              ); })()}
+              <SaveButton itemType="venue" itemId={selected.id} />
+            </div>
+          </div>
+        )}
+
+        {/* Mobile: pill showing count + opens sheet */}
+        <button
+          type="button"
+          className="map-zen-list-trigger"
+          onClick={() => setSheetMode(m => m === "hidden" ? "open" : "hidden")}
+          aria-label="Toggle venue list"
+        >
+          {sheetMode !== "hidden" ? "✕ Close" : `${filteredVenues.length} places`}
+        </button>
+      </div>
+
+      {/* ══════════════════════════════════════
+          DESKTOP SIDEBAR
+          ══════════════════════════════════════ */}
+      <aside className="map-zen-sidebar" aria-label="Venue list">
+        <div className="map-zen-sidebar-head">
+          <span className="map-zen-sidebar-city">{city.name}</span>
+          <SaveButton itemType="city" itemId={city.id} label="Save" />
+        </div>
+
+        {/* Category chips in sidebar */}
+        <div className="map-zen-sidebar-cats">
+          <button
+            type="button"
+            className={`map-zen-cat${activeLayer === "all" ? " is-active" : ""}`}
+            onClick={() => setLayer("all")}
+          >All</button>
+          {discoveryLayers.map(layer => (
+            <button
+              key={layer.id}
+              type="button"
+              className={`map-zen-cat${activeLayer === layer.id ? " is-active" : ""}`}
+              onClick={() => setLayer(layer.id)}
+            >{layer.label}</button>
+          ))}
+        </div>
+
+        <div className="map-zen-sidebar-count">
+          {filteredVenues.length} {activeLayer === "all" ? "places" : filteredVenues.length === 1 ? "place" : "places"}
+        </div>
+
+        <div className="map-zen-sidebar-list">
+          {filteredVenues.map(venue => (
+            <button
+              key={venue.id}
+              type="button"
+              className={`map-zen-row${selectedId === venue.id ? " is-active" : ""}${venue.layer === "stay" ? " is-hotel" : ""}${venue.layer === "eat" ? " is-eat" : ""}`}
+              onClick={() => handleSelect(venue.id)}
             >
-              <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/45">
-                {selected.type} / {selected.neighborhood}
-              </div>
-              <h2>{selected.name}</h2>
-              {selected.address && (
-                <p className="map-selected-address">
-                  {selected.address}{selected.postcode ? ` / ${selected.postcode}` : ""}
-                </p>
-              )}
-              <p>{selected.description}</p>
-              {selected.layer === "stay" ? (
-                <div className="platform-action-row">
-                  <Link href={buildBookingLink(selected)} target="_blank" rel="noreferrer" className="map-booking-btn">
-                    Book on Booking.com
-                  </Link>
-                  <SaveButton itemType="venue" itemId={selected.id} />
-                </div>
-              ) : selected.layer === "eat" ? (
-                <div className="platform-action-row">
-                  <Link href={buildRestaurantLink(selected)} target="_blank" rel="noreferrer" className="map-restaurant-btn">
-                    Reserve table
-                  </Link>
-                  <SaveButton itemType="venue" itemId={selected.id} />
-                </div>
-              ) : (
-                <div className="platform-action-row">
-                  <Link href={`/venues/${selected.slug}`} className="platform-primary-action">
-                    Open brand room
-                  </Link>
-                  <SaveButton itemType="venue" itemId={selected.id} />
-                </div>
-              )}
-            </article>
-          )}
+              <span className="map-zen-row-type">{venue.type}</span>
+              <strong className="map-zen-row-name">{venue.name}</strong>
+              <span className="map-zen-row-area">{venue.neighborhood}</span>
+            </button>
+          ))}
+        </div>
+      </aside>
 
-          <div className="map-filter-strip">
+      {/* ══════════════════════════════════════
+          MOBILE BOTTOM SHEET
+          ══════════════════════════════════════ */}
+      <div
+        className={`map-zen-sheet${sheetMode === "compact" ? " is-compact" : sheetMode === "open" ? " is-open" : ""}`}
+        aria-hidden={sheetMode === "hidden"}
+      >
+        {/* Drag handle */}
+        <button
+          type="button"
+          className="map-zen-sheet-handle"
+          onClick={() => setSheetMode(m => m === "open" ? "compact" : "open")}
+          aria-label={sheetMode === "open" ? "Collapse list" : "Expand venue list"}
+        >
+          <span />
+        </button>
+
+        {/* Compact peek: selected venue */}
+        <div className="map-zen-sheet-peek">
+          {selected ? (
+            <>
+              <div className="map-zen-sheet-venue-type">{selected.type} · {selected.neighborhood}</div>
+              <div className="map-zen-sheet-venue-name">{selected.name}</div>
+              <div className="map-zen-sheet-venue-actions">
+                {(() => { const cta = venueCta(selected); return (
+                  <Link
+                    href={cta.href}
+                    className={cta.cls}
+                    style={{ height: "32px", fontSize: "12px", padding: "0 14px" }}
+                    {...(cta.external ? { target: "_blank", rel: "noreferrer" } : {})}
+                  >{cta.label}</Link>
+                ); })()}
+                <SaveButton itemType="venue" itemId={selected.id} />
+              </div>
+            </>
+          ) : (
+            <div className="map-zen-sheet-venue-name" style={{ color: "rgba(245,240,230,0.48)", fontSize: "14px" }}>
+              {filteredVenues.length} places — tap a pin to explore
+            </div>
+          )}
+        </div>
+
+        {/* Expanded: full list */}
+        <div className="map-zen-sheet-body">
+          <div className="map-zen-sheet-cats">
             <button
               type="button"
-              className={`vibe-chip ${activeLayer === "all" ? "is-active" : ""}`}
-              onClick={() => {
-                setActiveLayer("all");
-                setSelectedId("");
-              }}
-            >
-              All
-            </button>
-            {discoveryLayers.map((layer) => (
+              className={`map-zen-cat map-zen-cat--sm${activeLayer === "all" ? " is-active" : ""}`}
+              onClick={() => setLayer("all")}
+            >All</button>
+            {discoveryLayers.map(layer => (
               <button
                 key={layer.id}
                 type="button"
-                className={`vibe-chip ${activeLayer === layer.id ? "is-active" : ""}`}
-                onClick={() => {
-                  setActiveLayer(layer.id);
-                  setSelectedId("");
-                }}
-              >
-                {layer.label}
-              </button>
+                className={`map-zen-cat map-zen-cat--sm${activeLayer === layer.id ? " is-active" : ""}`}
+                onClick={() => setLayer(layer.id)}
+              >{layer.label}</button>
             ))}
           </div>
-          <div className="map-list-stack">
-            {filteredVenues.map((venue) => (
+          <div className="map-zen-sheet-list">
+            {filteredVenues.map(venue => (
               <button
                 key={venue.id}
                 type="button"
-                className={`map-list-item ${selected?.id === venue.id ? "is-active" : ""}${venue.layer === "stay" ? " is-hotel" : ""}${venue.layer === "eat" ? " is-restaurant" : ""}`}
-                onClick={() => handleSelect(venue.id)}
+                className={`map-zen-sheet-row${selectedId === venue.id ? " is-active" : ""}${venue.layer === "stay" ? " is-hotel" : ""}${venue.layer === "eat" ? " is-eat" : ""}`}
+                onClick={() => { handleSelect(venue.id); setSheetMode("compact"); }}
               >
-                <span>{venue.layer === "stay" ? "🏨 " : venue.layer === "eat" ? "🍽 " : ""}{venue.type} / {venue.neighborhood}</span>
-                <strong>{venue.name}</strong>
-                {venue.address && (
-                  <em>{venue.address}{venue.postcode ? ` / ${venue.postcode}` : ""}</em>
-                )}
-                <small>{venue.description}</small>
+                <span className="map-zen-sheet-row-type">{venue.type}</span>
+                <strong className="map-zen-sheet-row-name">{venue.name}</strong>
+                <span className="map-zen-sheet-row-area">{venue.neighborhood}</span>
               </button>
             ))}
           </div>
-        </aside>
+        </div>
       </div>
 
-      <section className="platform-section px-0">
-        <div className="platform-section-head">
-          <div>
-            <div className="eyebrow">Full cards</div>
-            <h2 className="platform-section-title">Compare places.</h2>
-          </div>
-        </div>
-        <div className="platform-card-grid">
-          {filteredVenues.map((venue) => (
-            <VenueCard key={venue.id} venue={venue} />
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
