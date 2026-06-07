@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: "XRED EYEZ",
   description: "Premium cannabis culture discovery. Find cities, venues, vibes, and routes.",
   verification: {
-    google: "55339fc862df57d7",
+    google: "zNE8Nv4Ff4leTc2HsYZSA1kD1D_y6v_bz2-Vy58P-cw",
   },
   openGraph: {
     title: "XRED EYEZ",
