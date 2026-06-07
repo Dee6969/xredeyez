@@ -7,8 +7,11 @@ import Reveal from "../components/Reveal";
 import { cities, getSortedVenuesByCity } from "../data/platform";
 
 export const metadata = {
-  title: "Destinations | XRED EYEZ",
-  description: "Browse X Red Eyez cannabis culture country and city guides.",
+  title: "Cannabis City Guides — Amsterdam, Barcelona, Prague & More | XRED EYEZ",
+  description: "Browse XRED EYEZ cannabis culture city guides. Coffeeshops, social clubs, hotels, restaurants and curated routes across Europe and beyond.",
+  alternates: {
+    canonical: "https://www.redeyez.co.uk/cities",
+  },
 };
 
 export default function CitiesPage() {

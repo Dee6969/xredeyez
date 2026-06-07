@@ -225,6 +225,26 @@ export function neighbourhoodSchema(
   };
 }
 
+// ── WebSite + SearchAction ──────────────────────────────────────────────────
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "XRED EYEZ",
+    url: SITE_URL,
+    "@id": `${SITE_URL}/#website`,
+    description: "Premium cannabis culture travel platform. City guides, venue discovery, curated routes and hotel booking.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/explore?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
 // ── Helper: serialize to JSON-LD string ────────────────────────────────────
 export function toJsonLd(schema: Record<string, unknown>): string {
   return JSON.stringify(schema);

@@ -3,8 +3,11 @@ import ExploreDirectory from "../components/ExploreDirectory";
 import { cities, venues } from "../data/platform";
 
 export const metadata = {
-  title: "Explore | XRED EYEZ",
-  description: "Browse cannabis culture venues, stays, restaurants and more across every XRED EYEZ city.",
+  title: "Find Cannabis Venues, Coffeeshops & Social Clubs | XRED EYEZ",
+  description: "Search and filter 245+ cannabis culture venues across Amsterdam, Barcelona, Prague and more. Coffeeshops, social clubs, hotels, restaurants — all in one place.",
+  alternates: {
+    canonical: "https://www.redeyez.co.uk/explore",
+  },
 };
 
 export default function ExplorePage() {

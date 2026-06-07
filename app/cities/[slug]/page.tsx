@@ -29,6 +29,9 @@ export async function generateMetadata({ params }: CityPageProps) {
     description: city
       ? `${city.summary} Discover coffeeshops, social clubs, hotels, restaurants and routes in ${city.name}.`
       : "Cannabis culture city guides on XRED EYEZ.",
+    alternates: city ? {
+      canonical: `https://www.redeyez.co.uk/cities/${city.slug}`,
+    } : undefined,
     openGraph: city ? {
       title: `${city.name} Cannabis Travel Guide | XRED EYEZ`,
       description: city.summary,

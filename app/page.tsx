@@ -1,11 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import PlatformNav from "./components/PlatformNav";
 import HeroSlideshow from "./components/HeroSlideshow";
 import MembershipTeaser from "./components/MembershipTeaser";
 import SiteFooter from "./components/SiteFooter";
 import Reveal from "./components/Reveal";
 import { cities } from "./data/platform";
+import { websiteSchema, toJsonLd } from "./lib/schema";
+
+export const metadata: Metadata = {
+  title: "Cannabis Culture Travel Guides — City Intel, Venues & Routes | XRED EYEZ",
+  description: "XRED EYEZ is the premium cannabis culture travel platform. City guides for Amsterdam, Barcelona, Prague and more — coffeeshops, social clubs, hotels, restaurants and curated routes.",
+  alternates: {
+    canonical: "https://www.redeyez.co.uk",
+  },
+  openGraph: {
+    title: "Cannabis Culture Travel Guides | XRED EYEZ",
+    description: "City guides, venue discovery and curated routes for cannabis culture travellers. Amsterdam, Barcelona, Prague and beyond.",
+    type: "website",
+    url: "https://www.redeyez.co.uk",
+    images: [{ url: "/cities/amsterdam-canal-day.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cannabis Culture Travel Guides | XRED EYEZ",
+    description: "City guides, venue discovery and curated routes for cannabis culture travellers.",
+  },
+};
 
 const cityImages: Record<string, string> = {
   amsterdam:        "/cities/amsterdam-canal-day.png",
@@ -64,6 +86,7 @@ const actionBlocks = [
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(websiteSchema()) }} />
       <PlatformNav />
 
       {/* Hero — full viewport, cinematic slideshow */}

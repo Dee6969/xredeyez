@@ -24,6 +24,9 @@ export async function generateMetadata({ params }: VenuePageProps) {
   return {
     title: `${venue.name} | ${venue.city} Cannabis Guide | XRED EYEZ`,
     description: venue.description,
+    alternates: {
+      canonical: `https://www.redeyez.co.uk/venues/${venue.slug}`,
+    },
     openGraph: {
       title: `${venue.name} | ${venue.city}`,
       description: venue.description,
