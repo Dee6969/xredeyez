@@ -35,7 +35,15 @@ export async function generateMetadata({ params }: CityPageProps) {
     openGraph: city ? {
       title: `${city.name} Cannabis Travel Guide | XRED EYEZ`,
       description: city.summary,
+      type: "website",
+      url: `https://www.redeyez.co.uk/cities/${city.slug}`,
       images: [{ url: city.heroImage }],
+    } : undefined,
+    twitter: city ? {
+      card: "summary_large_image",
+      title: `${city.name} Cannabis Travel Guide | XRED EYEZ`,
+      description: city.summary,
+      images: [city.heroImage],
     } : undefined,
   };
 }

@@ -8,12 +8,13 @@ export const metadata = {
   description: "Explore X Red Eyez places by mood, pace, and lifestyle need.",
 };
 
-export default function VibesPage({
+export default async function VibesPage({
   searchParams,
 }: {
-  searchParams?: { vibe?: string };
+  searchParams?: Promise<{ vibe?: string }>;
 }) {
-  const active = searchParams?.vibe || "creative";
+  const sp = (await searchParams) || {};
+  const active = sp.vibe || "creative";
   const activeVibe = vibes.find((vibe) => vibe.id === active) || vibes[0];
   const matches = getVenuesByVibe(activeVibe.id);
 

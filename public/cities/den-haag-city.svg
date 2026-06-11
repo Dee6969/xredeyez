@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <!-- Sky gradient -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7BA7C4"/>
+      <stop offset="60%" stop-color="#A8C8DC"/>
+      <stop offset="100%" stop-color="#C8DDE8"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6B9DB8"/>
+      <stop offset="100%" stop-color="#4A7A96"/>
+    </linearGradient>
+    <linearGradient id="overlay" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0D1E2C" stop-opacity="0.88"/>
+      <stop offset="45%" stop-color="#0D1E2C" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#0D1E2C" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1600" height="900" fill="url(#sky)"/>
+
+  <!-- Clouds -->
+  <ellipse cx="900" cy="180" rx="220" ry="55" fill="white" opacity="0.6"/>
+  <ellipse cx="1050" cy="155" rx="160" ry="42" fill="white" opacity="0.5"/>
+  <ellipse cx="1280" cy="210" rx="180" ry="48" fill="white" opacity="0.45"/>
+  <ellipse cx="400" cy="200" rx="140" ry="38" fill="white" opacity="0.4"/>
+
+  <!-- Hofvijver pond -->
+  <rect x="0" y="680" width="1600" height="220" fill="url(#water)"/>
+  <!-- Water ripple lines -->
+  <line x1="300" y1="720" x2="700" y2="720" stroke="white" stroke-width="1" opacity="0.18"/>
+  <line x1="500" y1="745" x2="950" y2="745" stroke="white" stroke-width="1" opacity="0.15"/>
+  <line x1="200" y1="768" x2="800" y2="768" stroke="white" stroke-width="1" opacity="0.12"/>
+  <line x1="600" y1="790" x2="1200" y2="790" stroke="white" stroke-width="1" opacity="0.1"/>
+
+  <!-- Ground/embankment -->
+  <rect x="0" y="665" width="1600" height="20" fill="#4A6741"/>
+
+  <!-- Binnenhof — main building (long horizontal parliament) -->
+  <!-- Main long facade -->
+  <rect x="420" y="370" width="780" height="295" fill="#C8A87A"/>
+  <!-- Roof line -->
+  <rect x="420" y="358" width="780" height="18" fill="#B89668"/>
+  <!-- Window row 1 -->
+  <rect x="450" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="498" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="546" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="594" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="642" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="690" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="738" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="786" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="834" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="882" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="930" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="978" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="1026" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="1074" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <rect x="1122" y="395" width="28" height="42" fill="#2A3E52" opacity="0.8"/>
+  <!-- Window row 2 -->
+  <rect x="450" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="498" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="546" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="594" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="642" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="690" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="738" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="786" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="834" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="882" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="930" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="978" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="1026" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="1074" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <rect x="1122" y="455" width="28" height="42" fill="#2A3E52" opacity="0.7"/>
+  <!-- Window row 3 -->
+  <rect x="450" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="498" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="546" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="594" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="690" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="738" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="786" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="834" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="930" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="978" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="1026" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+  <rect x="1122" y="515" width="28" height="42" fill="#2A3E52" opacity="0.65"/>
+
+  <!-- Ridderzaal (central gothic hall) - taller section -->
+  <rect x="755" y="285" width="110" height="388" fill="#B89668"/>
+  <rect x="755" y="272" width="110" height="18" fill="#A0845A"/>
+  <!-- Gothic peak roof -->
+  <polygon points="755,272 810,208 865,272" fill="#966E46"/>
+  <!-- Rose window -->
+  <circle cx="810" cy="252" r="18" fill="#2A3E52" opacity="0.6"/>
+  <!-- Tower spire -->
+  <rect x="800" y="175" width="20" height="38" fill="#7A5834"/>
+  <polygon points="800,175 810,148 820,175" fill="#6A4828"/>
+
+  <!-- Left corner tower -->
+  <rect x="395" y="410" width="30" height="258" fill="#B89668"/>
+  <rect x="390" y="398" width="40" height="16" fill="#A0845A"/>
+  <polygon points="390,398 415,368 440,398" fill="#966E46"/>
+  <rect x="405" y="340" width="18" height="32" fill="#7A5834"/>
+  <polygon points="405,340 414,318 423,340" fill="#6A4828"/>
+
+  <!-- Right corner tower -->
+  <rect x="1195" y="410" width="30" height="258" fill="#B89668"/>
+  <rect x="1190" y="398" width="40" height="16" fill="#A0845A"/>
+  <polygon points="1190,398 1210,368 1230,398" fill="#966E46"/>
+  <rect x="1200" y="340" width="18" height="32" fill="#7A5834"/>
+  <polygon points="1200,340 1209,318 1218,340" fill="#6A4828"/>
+
+  <!-- Buildings reflection in water -->
+  <rect x="420" y="685" width="780" height="120" fill="#C8A87A" opacity="0.18"/>
+  <rect x="755" y="685" width="110" height="140" fill="#B89668" opacity="0.2"/>
+
+  <!-- Trees lining pond -->
+  <ellipse cx="350" cy="640" rx="38" ry="50" fill="#3A5A30"/>
+  <rect x="345" y="660" width="10" height="20" fill="#2A3A22"/>
+  <ellipse cx="420" cy="650" rx="30" ry="40" fill="#4A6A3A"/>
+  <ellipse cx="1220" cy="648" rx="30" ry="42" fill="#3A5A30"/>
+  <ellipse cx="1290" cy="640" rx="38" ry="50" fill="#4A6A3A"/>
+  <rect x="1285" y="660" width="10" height="20" fill="#2A3A22"/>
+
+  <!-- Gradient overlay left for text legibility -->
+  <rect width="1600" height="900" fill="url(#overlay)"/>
+
+  <!-- XRED EYEZ label -->
+  <text x="68" y="88" font-family="'Courier New', monospace" font-size="13" fill="#84C51F" letter-spacing="3" font-weight="600">XRED EYEZ — NETHERLANDS</text>
+
+  <!-- City name -->
+  <text x="64" y="220" font-family="Georgia, 'Times New Roman', serif" font-size="98" fill="#F5F0E6" font-weight="700" letter-spacing="-2">DEN HAAG</text>
+
+  <!-- Descriptor line -->
+  <text x="68" y="268" font-family="'Courier New', monospace" font-size="15" fill="rgba(245,240,230,0.62)" letter-spacing="1">Court city cannabis / Binnenhof / North Sea coast</text>
+
+  <!-- Accent line -->
+  <rect x="68" y="288" width="180" height="3" fill="#84C51F" opacity="0.9"/>
+
+  <!-- Bottom left meta -->
+  <text x="68" y="840" font-family="'Courier New', monospace" font-size="11" fill="rgba(245,240,230,0.38)" letter-spacing="2">THE HAGUE · 52.0705°N 4.3007°E</text>
+</svg>

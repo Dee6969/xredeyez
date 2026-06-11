@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0E0C"/>
+      <stop offset="100%" stop-color="#080b09"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <!-- texture lines -->
+  <g opacity="0.06" stroke="#70C898" stroke-width="0.5">
+    <line x1="0" y1="160" x2="1600" y2="220"/>
+    <line x1="0" y1="340" x2="1600" y2="300"/>
+    <line x1="0" y1="520" x2="1600" y2="560"/>
+    <line x1="0" y1="720" x2="1600" y2="680"/>
+  </g>
+
+  <g opacity="0.42"><rect x="700" y="540" width="900" height="220" fill="#000" opacity="0.4"/><path d="M800,540 Q788,420 806,300" stroke="#38644c" stroke-width="6" fill="none" opacity="0.6"/><path d="M806,300 Q812,261 806,250" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M806,300 Q829.5,264.34936490538905 841,256.69872981077805" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M806,300 Q842.3108891324554,273.5 866.6217782649107,275" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M806,300 Q847,286 876,300" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M806,300 Q842.3108891324554,298.5 866.6217782649107,325" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M806,300 Q829.5,307.65063509461095 841,343.30127018922195" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M806,300 Q812,311 806,350" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="806" cy="544" rx="22" ry="4" fill="#000" opacity="0.3"/><path d="M980,540 Q968,400 986,260" stroke="#38644c" stroke-width="6" fill="none" opacity="0.6"/><path d="M986,260 Q992,221 986,210" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M986,260 Q1009.5,224.34936490538905 1021,216.69872981077808" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M986,260 Q1022.3108891324554,233.5 1046.6217782649107,235" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M986,260 Q1027,246 1056,260" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M986,260 Q1022.3108891324554,258.5 1046.6217782649107,285" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M986,260 Q1009.5,267.65063509461095 1021,303.30127018922195" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M986,260 Q992,271 986,310" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="986" cy="544" rx="22" ry="4" fill="#000" opacity="0.3"/><path d="M1180,540 Q1168,430 1186,320" stroke="#38644c" stroke-width="6" fill="none" opacity="0.6"/><path d="M1186,320 Q1192,281 1186,270" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1186,320 Q1209.5,284.34936490538905 1221,276.69872981077805" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1186,320 Q1222.3108891324555,293.5 1246.6217782649107,295" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1186,320 Q1227,306 1256,320" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1186,320 Q1222.3108891324555,318.5 1246.6217782649107,345" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1186,320 Q1209.5,327.65063509461095 1221,363.30127018922195" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1186,320 Q1192,331 1186,370" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="1186" cy="544" rx="22" ry="4" fill="#000" opacity="0.3"/><path d="M1370,540 Q1358,410 1376,280" stroke="#38644c" stroke-width="6" fill="none" opacity="0.6"/><path d="M1376,280 Q1382,241 1376,230" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1376,280 Q1399.5,244.34936490538905 1411,236.69872981077808" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1376,280 Q1412.3108891324555,253.5 1436.6217782649107,255" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1376,280 Q1417,266 1446,280" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1376,280 Q1412.3108891324555,278.5 1436.6217782649107,305" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1376,280 Q1399.5,287.65063509461095 1411,323.30127018922195" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1376,280 Q1382,291 1376,330" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="1376" cy="544" rx="22" ry="4" fill="#000" opacity="0.3"/><path d="M1520,540 Q1508,440 1526,340" stroke="#38644c" stroke-width="6" fill="none" opacity="0.6"/><path d="M1526,340 Q1532,301 1526,290" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1526,340 Q1549.5,304.34936490538905 1561,296.69872981077805" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1526,340 Q1562.3108891324555,313.5 1586.6217782649107,315" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1526,340 Q1567,326 1596,340" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1526,340 Q1562.3108891324555,338.5 1586.6217782649107,365" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1526,340 Q1549.5,347.65063509461095 1561,383.30127018922195" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><path d="M1526,340 Q1532,351 1526,390" stroke="#70C898" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="1526" cy="544" rx="22" ry="4" fill="#000" opacity="0.3"/></g>
+
+  <!-- left text overlay -->
+  <rect x="0" y="0" width="780" height="900" fill="#0A0E0C" opacity="0.82"/>
+
+  <!-- XRED EYEZ label -->
+  <text x="68" y="92" font-family="'Courier New', monospace" font-size="12" fill="#70C898" letter-spacing="4" opacity="0.9">XRED EYEZ CULTURE</text>
+
+  <!-- Wordmark -->
+  <text x="64" y="222" font-family="Georgia, 'Times New Roman', serif" font-size="78" fill="#F5F0E6" font-weight="700" letter-spacing="-1">HAAD TIEN</text>
+  <text x="64" y="308" font-family="Georgia, 'Times New Roman', serif" font-size="78" fill="#F5F0E6" font-weight="700" letter-spacing="-1">BEACH RESORT</text>
+
+  <!-- Accent strip -->
+  <text x="68" y="372" font-family="'Courier New', monospace" font-size="13" fill="#70C898" letter-spacing="1" opacity="0.92">Boat access only. Private bay. East coast isolation.</text>
+  <rect x="68" y="390" width="180" height="2.5" fill="#70C898" opacity="0.85"/>
+
+  <text x="68" y="430" font-family="'Courier New', monospace" font-size="11" fill="rgba(245,240,230,0.4)" letter-spacing="1">Haad Tien / East Coast · Boutique Beach Resort</text>
+
+  <text x="68" y="852" font-family="'Courier New', monospace" font-size="10" fill="#70C898" letter-spacing="3" opacity="0.45">KOH PHANGAN</text>
+</svg>

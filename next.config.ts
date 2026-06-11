@@ -10,10 +10,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
-      { protocol: "https", hostname: "cdn.shopify.com" },
-      { protocol: "https", hostname: "files.cdn.printful.com" },
-      { protocol: "https", hostname: "*.printful.com" },
-      { protocol: "https", hostname: "ucarecdn.com" },
+      { protocol: "https", hostname: "**" },
     ],
   },
 };

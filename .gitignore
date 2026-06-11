@@ -41,3 +41,10 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# claude code local config
+/.claude/
+
+# generated venue-banner temp data (regen via scripts/)
+/scripts/venues-need-banner.txt
+/scripts/banner-patch.txt

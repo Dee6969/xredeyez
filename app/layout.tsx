@@ -20,6 +20,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.redeyez.co.uk"),
   title: "XRED EYEZ",
   description: "Premium cannabis culture discovery. Find cities, venues, vibes, and routes.",
   verification: {
@@ -30,6 +31,7 @@ export const metadata: Metadata = {
     description: "Premium cannabis culture discovery. Find cities, venues, vibes, and routes.",
     type: "website",
     url: "https://www.redeyez.co.uk",
+    siteName: "XRED EYEZ",
   },
   twitter: {
     card: "summary_large_image",

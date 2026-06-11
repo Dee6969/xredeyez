@@ -4978,14 +4978,14 @@ body {
 .vlp-mobile-strip {
   display: none;
   position: fixed;
-  bottom: 0;
+  /* sit above the platform bottom nav (≈72px + safe area) */
+  bottom: calc(72px + env(safe-area-inset-bottom, 0px));
   left: 0;
   right: 0;
-  z-index: 60;
+  z-index: 70;
   background: var(--bg-dark);
   border-top: 1px solid rgba(255,255,255,0.1);
   padding: 12px clamp(16px, 4vw, 24px);
-  padding-bottom: max(12px, env(safe-area-inset-bottom));
   backdrop-filter: blur(16px);
   gap: 8px;
   align-items: center;
@@ -4993,8 +4993,8 @@ body {
 }
 @media (max-width: 760px) {
   .vlp-mobile-strip { display: flex; }
-  /* push content above mobile strip on venue pages only */
-  main.venue-page { padding-bottom: 72px; }
+  /* clear strip (≈64px) + bottom nav (≈72px) + safe area */
+  main.venue-page { padding-bottom: calc(152px + env(safe-area-inset-bottom, 0px)); }
 }
 .vlp-mobile-strip-meta {
   display: flex;

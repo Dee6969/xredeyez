@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <radialGradient id="spaceGlow" cx="0.72" cy="0.5" r="0.55">
+      <stop offset="0%" stop-color="#6600CC" stop-opacity="0.4"/>
+      <stop offset="40%" stop-color="#330066" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orangeGlow" cx="0.75" cy="0.5" r="0.3">
+      <stop offset="0%" stop-color="#FF6600" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FF6600" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="#030108"/>
+  <rect width="1600" height="900" fill="url(#spaceGlow)"/>
+  <rect width="1600" height="900" fill="url(#orangeGlow)"/>
+
+  <!-- Stars -->
+  <circle cx="820" cy="80" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="950" cy="50" r="1" fill="white" opacity="0.5"/>
+  <circle cx="1100" cy="90" r="2" fill="white" opacity="0.8"/>
+  <circle cx="1250" cy="40" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="1380" cy="120" r="1" fill="white" opacity="0.5"/>
+  <circle cx="1480" cy="60" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="880" cy="140" r="1" fill="white" opacity="0.4"/>
+  <circle cx="1020" cy="30" r="1" fill="white" opacity="0.6"/>
+  <circle cx="1320" cy="80" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="1550" cy="100" r="1" fill="white" opacity="0.6"/>
+
+  <!-- Planet 13 sphere + ring motif -->
+  <!-- Outer ring -->
+  <ellipse cx="1150" cy="450" rx="360" ry="90" fill="none" stroke="#FF6600" stroke-width="2" opacity="0.5" transform="rotate(-15, 1150, 450)"/>
+  <ellipse cx="1150" cy="450" rx="360" ry="90" fill="none" stroke="#9933FF" stroke-width="1" opacity="0.35" transform="rotate(-12, 1150, 450)"/>
+  <!-- Inner ring -->
+  <ellipse cx="1150" cy="450" rx="240" ry="60" fill="none" stroke="#FF6600" stroke-width="1.5" opacity="0.4" transform="rotate(-15, 1150, 450)"/>
+  <!-- The planet/sphere -->
+  <circle cx="1150" cy="450" r="200" fill="#0A0520" opacity="0.9"/>
+  <circle cx="1150" cy="450" r="200" fill="none" stroke="#9933FF" stroke-width="2.5" opacity="0.7"/>
+  <!-- Planet surface glow lines (atmosphere) -->
+  <circle cx="1150" cy="450" r="210" fill="none" stroke="#6600CC" stroke-width="4" opacity="0.25"/>
+  <circle cx="1150" cy="450" r="220" fill="none" stroke="#FF6600" stroke-width="2" opacity="0.15"/>
+  <!-- Planet 13 illuminated surface detail -->
+  <path d="M 960 380 Q 1050 360 1150 370 Q 1250 380 1340 400" fill="none" stroke="#FF6600" stroke-width="1" opacity="0.3"/>
+  <path d="M 960 430 Q 1060 415 1150 420 Q 1240 425 1340 440" fill="none" stroke="#9933FF" stroke-width="1" opacity="0.3"/>
+  <path d="M 980 480 Q 1080 468 1150 470 Q 1220 472 1320 485" fill="none" stroke="#FF6600" stroke-width="1" opacity="0.25"/>
+  <!-- Glow at planet center -->
+  <circle cx="1150" cy="420" r="60" fill="#330066" opacity="0.3"/>
+  <!-- "13" numeral faint on planet -->
+  <text x="1120" y="460" font-family="Georgia, serif" font-size="72" fill="#9933FF" opacity="0.15" font-weight="700">13</text>
+
+  <!-- Grid floor (dispensary floor) -->
+  <g opacity="0.15" stroke="#9933FF" stroke-width="0.5">
+    <line x1="800" y1="750" x2="1600" y2="680"/>
+    <line x1="800" y1="780" x2="1600" y2="710"/>
+    <line x1="800" y1="810" x2="1600" y2="740"/>
+    <line x1="900" y1="680" x2="900" y2="820"/>
+    <line x1="1000" y1="668" x2="1000" y2="820"/>
+    <line x1="1100" y1="656" x2="1100" y2="820"/>
+    <line x1="1200" y1="644" x2="1200" y2="820"/>
+    <line x1="1300" y1="632" x2="1300" y2="820"/>
+    <line x1="1400" y1="620" x2="1400" y2="820"/>
+    <line x1="1500" y1="608" x2="1500" y2="820"/>
+  </g>
+
+  <!-- Left text area fade -->
+  <rect x="0" y="0" width="900" height="900" fill="#030108" opacity="0.65"/>
+
+  <!-- XRED EYEZ label -->
+  <text x="68" y="90" font-family="'Courier New', monospace" font-size="12" fill="#FF6600" letter-spacing="4" opacity="0.9">XRED EYEZ CULTURE</text>
+
+  <!-- Wordmark -->
+  <text x="64" y="218" font-family="Georgia, 'Times New Roman', serif" font-size="76" fill="#F5F0E6" font-weight="700" letter-spacing="-1">PLANET 13</text>
+
+  <!-- Tagline -->
+  <text x="68" y="268" font-family="'Courier New', monospace" font-size="13" fill="#FF6600" letter-spacing="1" opacity="0.9">World's largest cannabis dispensary.</text>
+  <rect x="68" y="288" width="200" height="2.5" fill="#9933FF" opacity="0.8"/>
+
+  <text x="68" y="326" font-family="'Courier New', monospace" font-size="11" fill="rgba(245,240,230,0.38)" letter-spacing="1">West Sahara · Dispensary · Open 24hrs</text>
+
+  <text x="68" y="850" font-family="'Courier New', monospace" font-size="10" fill="rgba(153,51,255,0.4)" letter-spacing="3">LAS VEGAS</text>
+</svg>

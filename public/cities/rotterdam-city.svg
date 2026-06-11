@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="rSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1C2B3A"/>
+      <stop offset="35%" stop-color="#2E4A62"/>
+      <stop offset="70%" stop-color="#4A7A9B"/>
+      <stop offset="100%" stop-color="#6B9AB8"/>
+    </linearGradient>
+    <linearGradient id="rRiver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A3A52"/>
+      <stop offset="100%" stop-color="#0E2438"/>
+    </linearGradient>
+    <linearGradient id="rOverlay" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0A1822" stop-opacity="0.92"/>
+      <stop offset="40%" stop-color="#0A1822" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0A1822" stop-opacity="0.08"/>
+    </linearGradient>
+    <!-- City lights glow -->
+    <radialGradient id="cityGlow" cx="0.7" cy="0.65" r="0.45">
+      <stop offset="0%" stop-color="#FF9A3C" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FF9A3C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1600" height="900" fill="url(#rSky)"/>
+  <!-- City glow -->
+  <rect width="1600" height="900" fill="url(#cityGlow)"/>
+
+  <!-- Stars -->
+  <circle cx="750" cy="60" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="920" cy="40" r="1" fill="white" opacity="0.5"/>
+  <circle cx="1100" cy="80" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="1300" cy="50" r="1" fill="white" opacity="0.4"/>
+  <circle cx="850" cy="95" r="1" fill="white" opacity="0.5"/>
+  <circle cx="1200" cy="30" r="1.5" fill="white" opacity="0.6"/>
+
+  <!-- Maas river -->
+  <rect x="0" y="680" width="1600" height="220" fill="url(#rRiver)"/>
+  <!-- River reflections -->
+  <line x1="600" y1="710" x2="1400" y2="710" stroke="#4A7A9B" stroke-width="2" opacity="0.3"/>
+  <line x1="400" y1="735" x2="1200" y2="735" stroke="#4A7A9B" stroke-width="1.5" opacity="0.2"/>
+  <line x1="700" y1="758" x2="1500" y2="758" stroke="#4A7A9B" stroke-width="1" opacity="0.15"/>
+
+  <!-- Riverbank -->
+  <rect x="0" y="668" width="1600" height="18" fill="#1E2E3A"/>
+
+  <!-- ERASMUS BRIDGE — iconic cable-stay -->
+  <!-- Main pylon (the "Swan neck") -->
+  <!-- Pylon base -->
+  <rect x="970" y="540" width="22" height="132" fill="#E8E0D0"/>
+  <!-- Pylon neck - angled back like a swan -->
+  <path d="M 970 540 Q 985 480 1000 380 L 1014 380 Q 1006 480 992 540 Z" fill="#E8E0D0"/>
+  <!-- Pylon top section -->
+  <rect x="998" y="330" width="16" height="55" fill="#D8D0C0"/>
+  <!-- Pylon cap -->
+  <polygon points="998,330 1006,308 1014,330" fill="#C8C0B0"/>
+
+  <!-- Stay cables from pylon top - right side -->
+  <line x1="1006" y1="320" x2="1200" y2="668" stroke="#C8C0B0" stroke-width="1.8" opacity="0.85"/>
+  <line x1="1006" y1="325" x2="1160" y2="668" stroke="#C8C0B0" stroke-width="1.5" opacity="0.8"/>
+  <line x1="1006" y1="330" x2="1120" y2="668" stroke="#C8C0B0" stroke-width="1.4" opacity="0.75"/>
+  <line x1="1006" y1="335" x2="1080" y2="668" stroke="#C8C0B0" stroke-width="1.3" opacity="0.7"/>
+  <line x1="1006" y1="338" x2="1040" y2="668" stroke="#C8C0B0" stroke-width="1.2" opacity="0.65"/>
+
+  <!-- Stay cables from pylon top - left side -->
+  <line x1="1006" y1="320" x2="820" y2="668" stroke="#C8C0B0" stroke-width="1.8" opacity="0.85"/>
+  <line x1="1006" y1="325" x2="858" y2="668" stroke="#C8C0B0" stroke-width="1.5" opacity="0.8"/>
+  <line x1="1006" y1="330" x2="896" y2="668" stroke="#C8C0B0" stroke-width="1.4" opacity="0.75"/>
+  <line x1="1006" y1="335" x2="934" y2="668" stroke="#C8C0B0" stroke-width="1.3" opacity="0.7"/>
+
+  <!-- Bridge deck -->
+  <rect x="780" y="658" width="460" height="12" fill="#D8D0C0"/>
+  <!-- Deck road lines -->
+  <line x1="790" y1="664" x2="1230" y2="664" stroke="white" stroke-width="1" opacity="0.4" stroke-dasharray="20,12"/>
+
+  <!-- Bridge reflections -->
+  <line x1="1006" y1="690" x2="1200" y2="850" stroke="#4A7A9B" stroke-width="1" opacity="0.2"/>
+  <line x1="1006" y1="690" x2="820" y2="840" stroke="#4A7A9B" stroke-width="1" opacity="0.2"/>
+
+  <!-- Rotterdam skyline - modern architecture -->
+  <!-- De Rotterdam building (stacked towers) -->
+  <rect x="680" y="420" width="55" height="250" fill="#2A3A4A"/>
+  <rect x="710" y="390" width="55" height="280" fill="#324255"/>
+  <rect x="740" y="360" width="55" height="310" fill="#2A3A4A"/>
+  <!-- Windows -->
+  <rect x="686" y="430" width="8" height="10" fill="#5580A0" opacity="0.7"/>
+  <rect x="700" y="430" width="8" height="10" fill="#5580A0" opacity="0.7"/>
+  <rect x="714" y="430" width="8" height="10" fill="#7FB0D8" opacity="0.9"/>
+  <rect x="686" y="448" width="8" height="10" fill="#5580A0" opacity="0.6"/>
+  <rect x="700" y="448" width="8" height="10" fill="#7FB0D8" opacity="0.85"/>
+  <rect x="714" y="448" width="8" height="10" fill="#5580A0" opacity="0.7"/>
+  <rect x="716" y="370" width="8" height="10" fill="#7FB0D8" opacity="0.9"/>
+  <rect x="730" y="370" width="8" height="10" fill="#5580A0" opacity="0.7"/>
+  <rect x="744" y="370" width="8" height="10" fill="#7FB0D8" opacity="0.85"/>
+  <rect x="758" y="370" width="8" height="10" fill="#5580A0" opacity="0.6"/>
+  <rect x="716" y="388" width="8" height="10" fill="#5580A0" opacity="0.7"/>
+  <rect x="730" y="388" width="8" height="10" fill="#7FB0D8" opacity="0.9"/>
+  <rect x="744" y="388" width="8" height="10" fill="#5580A0" opacity="0.65"/>
+  <rect x="758" y="388" width="8" height="10" fill="#7FB0D8" opacity="0.8"/>
+
+  <!-- Maastoren tower -->
+  <rect x="820" y="480" width="40" height="190" fill="#263545"/>
+  <!-- Maastoren top crown -->
+  <rect x="815" y="465" width="50" height="20" fill="#1E2D3C"/>
+  <rect x="822" y="445" width="36" height="22" fill="#263545"/>
+  <rect x="830" y="428" width="20" height="20" fill="#1E2D3C"/>
+  <rect x="836" y="410" width="8" height="22" fill="#4A7A9B" opacity="0.8"/>
+  <!-- Lit windows -->
+  <rect x="826" y="492" width="7" height="9" fill="#7FB0D8" opacity="0.9"/>
+  <rect x="840" y="492" width="7" height="9" fill="#5580A0" opacity="0.7"/>
+  <rect x="826" y="508" width="7" height="9" fill="#5580A0" opacity="0.65"/>
+  <rect x="840" y="508" width="7" height="9" fill="#7FB0D8" opacity="0.85"/>
+  <rect x="826" y="524" width="7" height="9" fill="#7FB0D8" opacity="0.9"/>
+  <rect x="840" y="540" width="7" height="9" fill="#5580A0" opacity="0.7"/>
+
+  <!-- Cube houses (Kubuswoningen) silhouette -->
+  <g transform="translate(1240, 480)">
+    <polygon points="0,60 30,0 60,60" fill="#3A4A5A" transform="rotate(45, 30, 30) translate(-10, 0)"/>
+    <polygon points="0,60 30,0 60,60" fill="#3A4A5A" transform="rotate(45, 30, 30) translate(48, 0)"/>
+    <polygon points="0,60 30,0 60,60" fill="#3A4A5A" transform="rotate(45, 30, 30) translate(106, 0)"/>
+    <!-- Stalks -->
+    <rect x="18" y="60" width="8" height="90" fill="#2A3A4A"/>
+    <rect x="76" y="60" width="8" height="90" fill="#2A3A4A"/>
+    <rect x="134" y="60" width="8" height="90" fill="#2A3A4A"/>
+  </g>
+
+  <!-- Smaller buildings -->
+  <rect x="1130" y="540" width="50" height="130" fill="#1E2D3C"/>
+  <rect x="1190" y="560" width="40" height="110" fill="#263545"/>
+  <rect x="880" y="540" width="65" height="130" fill="#1E2D3C"/>
+  <!-- Lights -->
+  <circle cx="890" cy="544" r="3" fill="#FF9A3C" opacity="0.8"/>
+  <circle cx="1006" cy="308" r="4" fill="#FF0000" opacity="0.7"/>
+
+  <!-- Gradient overlay for text -->
+  <rect width="1600" height="900" fill="url(#rOverlay)"/>
+
+  <!-- XRED EYEZ label -->
+  <text x="68" y="88" font-family="'Courier New', monospace" font-size="13" fill="#B52426" letter-spacing="3" font-weight="600">XRED EYEZ — NETHERLANDS</text>
+
+  <!-- City name -->
+  <text x="64" y="220" font-family="Georgia, 'Times New Roman', serif" font-size="98" fill="#F5F0E6" font-weight="700" letter-spacing="-2">ROTTERDAM</text>
+
+  <!-- Descriptor -->
+  <text x="68" y="268" font-family="'Courier New', monospace" font-size="15" fill="rgba(245,240,230,0.62)" letter-spacing="1">Port city cannabis / Erasmus Bridge / modern architecture</text>
+
+  <!-- Accent line -->
+  <rect x="68" y="288" width="180" height="3" fill="#B52426" opacity="0.9"/>
+
+  <!-- Coordinates -->
+  <text x="68" y="840" font-family="'Courier New', monospace" font-size="11" fill="rgba(245,240,230,0.38)" letter-spacing="2">ROTTERDAM · 51.9244°N 4.4777°E</text>
+</svg>

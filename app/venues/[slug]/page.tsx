@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: VenuePageProps) {
   const { slug } = await params;
   const venue = getVenue(slug);
   if (!venue) return { title: "Venue | XRED EYEZ" };
+  const heroImage = venue.brand?.bannerUrl || venue.galleryImages?.[0] || venue.image;
   return {
     title: `${venue.name} | ${venue.city} Cannabis Guide | XRED EYEZ`,
     description: venue.description,
@@ -30,7 +31,15 @@ export async function generateMetadata({ params }: VenuePageProps) {
     openGraph: {
       title: `${venue.name} | ${venue.city}`,
       description: venue.description,
-      ...(venue.image ? { images: [{ url: venue.image }] } : {}),
+      type: "article",
+      url: `https://www.redeyez.co.uk/venues/${venue.slug}`,
+      ...(heroImage ? { images: [{ url: heroImage }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${venue.name} | ${venue.city}`,
+      description: venue.description,
+      ...(heroImage ? { images: [heroImage] } : {}),
     },
   };
 }
@@ -62,7 +71,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
   const primaryRgb = brand ? hexToRgb(brand.primaryColor) : "24,22,15";
   const accentRgb = brand ? hexToRgb(brand.accentColor) : "181,36,38";
   const accent = brand?.accentColor || "#B52426";
-  const heroBanner = brand?.bannerUrl || venue.image;
+  const heroBanner = brand?.bannerUrl ?? null;
   const hasBanner = !!heroBanner;
   const gallery = venue.galleryImages || [];
   const isPartner = venue.claimStatus === "partner";
