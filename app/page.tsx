@@ -46,8 +46,8 @@ const cityImages: Record<string, string> = {
   "south-africa":   "/cities/south-africa-cape-town.png",
   usa:              "/cities/usa-market-hero.png",
   canada:           "/cities/canada-market-hero.png",
-  "den-haag":       "/cities/den-haag-market.png",
-  rotterdam:        "/cities/rotterdam-market.png",
+  "den-haag":       "/cities/den-haag-binnenhof.jpg",
+  rotterdam:        "/cities/rotterdam-erasmusbrug.jpg",
 };
 
 const actionBlocks = [
