@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BookingHotelStrip from "../../components/BookingHotelStrip";
+import CitySectionNav from "../../components/CitySectionNav";
 import FeaturedPlacementSlot from "../../components/FeaturedPlacementSlot";
 import PlatformShell from "../../components/PlatformShell";
 import Reveal from "../../components/Reveal";
@@ -107,7 +108,11 @@ export default async function CityPage({ params }: CityPageProps) {
           fill
           priority
           sizes="100vw"
-          style={{ objectFit: "cover", filter: "brightness(0.72) contrast(1.1)" }}
+          style={{
+            objectFit: "cover",
+            filter: "brightness(0.72) contrast(1.1)",
+            viewTransitionName: `city-hero-${city.slug}`,
+          } as React.CSSProperties}
         />
         <div className="platform-city-hero-overlay" />
         <div className="relative z-10">
@@ -167,10 +172,21 @@ export default async function CityPage({ params }: CityPageProps) {
         </div>
       </Reveal>
 
+      <CitySectionNav
+        items={[
+          { id: "overview", label: "Overview" },
+          { id: "layers", label: "Layers" },
+          ...(city.neighborhoods.length > 0 ? [{ id: "neighbourhoods", label: "Neighbourhoods" }] : []),
+          ...(city.routes.length > 0 ? [{ id: "routes", label: "Routes" }] : []),
+          { id: "access", label: "Access" },
+        ]}
+        mapHref={isLive ? `/cities/${city.slug}/map` : undefined}
+      />
+
       {/* Lazy Traveller Picks — "Just tell me where to go" */}
       {lazyPicks && (
         <Reveal>
-          <section className="platform-section">
+          <section className="platform-section" id="overview">
             <div className="lazy-picks-box">
               <div className="lazy-picks-header">
                 <span className="eyebrow">Lazy Traveller</span>
@@ -228,7 +244,7 @@ export default async function CityPage({ params }: CityPageProps) {
 
       {/* Layer overview */}
       <Reveal>
-        <section className="platform-section">
+        <section className="platform-section" id="layers">
           <div className="platform-section-head">
             <div>
               <div className="eyebrow">City Layers</div>
@@ -256,7 +272,7 @@ export default async function CityPage({ params }: CityPageProps) {
       {/* Neighborhoods */}
       {city.neighborhoods.length > 0 && (
         <Reveal>
-          <div className="city-neighborhoods">
+          <div className="city-neighborhoods" id="neighbourhoods">
             <div className="city-neighborhoods-head">
               <h2 className="city-neighborhoods-title">Know the neighbourhoods.</h2>
               <span className="eyebrow">{city.neighborhoods.length} areas</span>
@@ -310,7 +326,7 @@ export default async function CityPage({ params }: CityPageProps) {
 
       {/* Access & etiquette */}
       <Reveal>
-        <section className="platform-section">
+        <section className="platform-section" id="access">
           <div className="platform-section-head">
             <div>
               <div className="eyebrow">Access & Etiquette</div>
@@ -326,7 +342,7 @@ export default async function CityPage({ params }: CityPageProps) {
       {/* Routes */}
       {city.routes.length > 0 && (
         <Reveal>
-          <section className="platform-section">
+          <section className="platform-section" id="routes">
             <div className="platform-section-head">
               <div>
                 <div className="eyebrow">City Flows</div>

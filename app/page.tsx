@@ -6,7 +6,13 @@ import HeroSlideshow from "./components/HeroSlideshow";
 import MembershipTeaser from "./components/MembershipTeaser";
 import SiteFooter from "./components/SiteFooter";
 import Reveal from "./components/Reveal";
-import { cities } from "./data/platform";
+import TiltCard from "./components/motion/TiltCard";
+import MagneticButton from "./components/motion/MagneticButton";
+import StaggerReveal from "./components/motion/StaggerReveal";
+import CountUp from "./components/motion/CountUp";
+import SiteMobileCTA from "./components/motion/SiteMobileCTA";
+import { cities, venues } from "./data/platform";
+import { guides } from "./data/guides";
 import { websiteSchema, toJsonLd } from "./lib/schema";
 
 export const metadata: Metadata = {
@@ -84,6 +90,10 @@ const actionBlocks = [
 ];
 
 export default function Home() {
+  const venueCount = venues.length;
+  const cityCount = cities.filter(c => c.status === "flagship" || c.status === "live").length;
+  const guideCount = guides.length;
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(websiteSchema()) }} />
@@ -100,12 +110,14 @@ export default function Home() {
             Cannabis culture travel. City guides, venues, routes and hotels — curated for real travellers.
           </p>
           <div className="home-hero-actions anim-fade-up delay-4">
-            <Link href="/cities" className="home-hero-cta">
-              Explore destinations
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </Link>
+            <MagneticButton>
+              <Link href="/cities" className="home-hero-cta">
+                Explore destinations
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+            </MagneticButton>
             <Link href="/map" className="home-hero-cta-secondary">
               Open Map
             </Link>
@@ -149,6 +161,24 @@ export default function Home() {
         </section>
       </Reveal>
 
+      {/* Stat strip — venues / cities / guides */}
+      <Reveal>
+        <section className="home-stat-strip" aria-label="Platform stats">
+          <div className="home-stat-cell">
+            <strong><CountUp to={venueCount} suffix="+" /></strong>
+            <span>Venues</span>
+          </div>
+          <div className="home-stat-cell">
+            <strong><CountUp to={cityCount} /></strong>
+            <span>Live cities</span>
+          </div>
+          <div className="home-stat-cell">
+            <strong><CountUp to={guideCount} /></strong>
+            <span>Long-form guides</span>
+          </div>
+        </section>
+      </Reveal>
+
       {/* Brand statement */}
       <Reveal>
         <div className="scene-interlude">
@@ -161,25 +191,24 @@ export default function Home() {
       </Reveal>
 
       {/* All destinations */}
-      <Reveal>
-        <section className="home-section" aria-label="All destinations">
-          <div className="home-section-header">
-            <div>
-              <p className="eyebrow">Where to go</p>
-              <h2 className="home-section-title" style={{ marginTop: "8px" }}>
-                Pick a country.<br />Find the culture.
-              </h2>
-            </div>
-            <Link href="/cities" className="platform-inline-link">Full guide list →</Link>
+      <section className="home-section" aria-label="All destinations">
+        <div className="home-section-header">
+          <div>
+            <p className="eyebrow">Where to go</p>
+            <h2 className="home-section-title" style={{ marginTop: "8px" }}>
+              Pick a country.<br />Find the culture.
+            </h2>
           </div>
+          <Link href="/cities" className="platform-inline-link">Full guide list →</Link>
+        </div>
 
-          <div className="home-destinations-grid">
-            {cities.map((city) => {
-              const img = cityImages[city.slug] || city.heroImage;
-              const isLive = city.status === "flagship" || city.status === "live";
-              return (
+        <StaggerReveal className="home-destinations-grid" itemClassName="home-dest-slot">
+          {cities.map((city) => {
+            const img = cityImages[city.slug] || city.heroImage;
+            const isLive = city.status === "flagship" || city.status === "live";
+            return (
+              <TiltCard key={city.id} className="home-dest-tilt">
                 <Link
-                  key={city.id}
                   href={`/cities/${city.slug}`}
                   className="home-dest-card"
                   aria-label={`${city.name}, ${city.country}`}
@@ -190,7 +219,7 @@ export default function Home() {
                       alt={city.name}
                       fill
                       sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: "cover", viewTransitionName: `city-hero-${city.slug}` } as React.CSSProperties}
                     />
                     <div className="home-dest-wash" />
                   </div>
@@ -202,25 +231,25 @@ export default function Home() {
                     </span>
                   </div>
                 </Link>
-              );
-            })}
+              </TiltCard>
+            );
+          })}
 
-            {[0, 1].map((i) => (
-              <div key={i} className="home-dest-card home-dest-next" aria-label="Next destination — coming soon">
-                <div className="home-dest-next-inner">
-                  <div className="home-dest-next-ring">
-                    <span className="home-dest-next-ring-dot" />
-                  </div>
-                  <div className="home-dest-next-brand">
-                    <strong>Who is next?</strong>
-                    <span>Drop incoming</span>
-                  </div>
+          {[0, 1].map((i) => (
+            <div key={i} className="home-dest-card home-dest-next" aria-label="Next destination — coming soon">
+              <div className="home-dest-next-inner">
+                <div className="home-dest-next-ring">
+                  <span className="home-dest-next-ring-dot" />
+                </div>
+                <div className="home-dest-next-brand">
+                  <strong>Who is next?</strong>
+                  <span>Drop incoming</span>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
-      </Reveal>
+            </div>
+          ))}
+        </StaggerReveal>
+      </section>
 
       {/* Brand statement */}
       <Reveal>
@@ -241,6 +270,7 @@ export default function Home() {
       </Reveal>
 
       <SiteFooter />
+      <SiteMobileCTA />
     </>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState, useCallback, useRef } from "react";
+import { useMemo, useState, useCallback, useRef, useDeferredValue } from "react";
 import VenueCard from "./VenueCard";
 import { discoveryLayers, getVenueLayer, type City, type DiscoveryLayer, type Venue } from "../data/platform";
 
@@ -23,11 +23,13 @@ export default function ExploreDirectory({
   cities: City[];
 }) {
   const [query, setQuery]           = useState("");
+  const deferredQuery                = useDeferredValue(query);
   const [activeLayer, setActiveLayer] = useState<DiscoveryLayer | "all">("all");
   const [activeCity, setActiveCity] = useState<string>("all");
   const [sort, setSort]             = useState<SortOption>("featured");
   const [sheetOpen, setSheetOpen]   = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
+  const isStale = query !== deferredQuery;
 
   const liveCities = useMemo(
     () => cities.filter(c => c.status === "flagship" || c.status === "live"),
@@ -43,8 +45,8 @@ export default function ExploreDirectory({
     if (activeCity !== "all") {
       result = result.filter(v => v.cityId === activeCity);
     }
-    if (query.trim()) {
-      const q = query.toLowerCase();
+    if (deferredQuery.trim()) {
+      const q = deferredQuery.toLowerCase();
       result = result.filter(
         v =>
           v.name.toLowerCase().includes(q) ||
@@ -64,7 +66,7 @@ export default function ExploreDirectory({
     return [...result].sort(
       (a, b) => a.city.localeCompare(b.city) || a.name.localeCompare(b.name)
     );
-  }, [venues, activeLayer, activeCity, query, sort]);
+  }, [venues, activeLayer, activeCity, deferredQuery, sort]);
 
   const resetFilters = useCallback(() => {
     setQuery("");
@@ -102,7 +104,7 @@ export default function ExploreDirectory({
               value={query}
               onChange={e => setQuery(e.target.value)}
               placeholder="Search venues, types, neighbourhoods…"
-              className="xdir-search-input"
+              className={`xdir-search-input${isStale ? " is-stale" : ""}`}
               autoComplete="off"
               autoCorrect="off"
               spellCheck={false}

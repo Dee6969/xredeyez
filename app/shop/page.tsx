@@ -141,13 +141,7 @@ export default async function ShopPage() {
                 </span>
               </div>
 
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-                  gap: "28px",
-                }}
-              >
+              <div className="shop-product-grid">
                 {products.map((product) => (
                   <Link
                     key={product.id}

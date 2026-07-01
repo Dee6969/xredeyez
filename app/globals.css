@@ -280,6 +280,18 @@ body {
 .shop-product-card:hover .shop-product-img {
   transform: scale(1.04);
 }
+.shop-product-card:active { transform: scale(0.98); transition-duration: 60ms; }
+.shop-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .shop-product-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+}
+@media (min-width: 1024px) {
+  .shop-product-grid { gap: 28px; }
+}
 
 /* =====================================================
    NAVIGATION — MOBILE BOTTOM
@@ -1732,6 +1744,7 @@ body {
   border-color: rgba(181,36,38,0.28);
   color: var(--accent-red);
 }
+.save-button:active { transform: scale(0.96); transition-duration: 60ms; }
 
 /* =====================================================
    CITY HERO (dark, photography-led)
@@ -3209,6 +3222,15 @@ body {
   min-height: 600px;
   overflow: hidden;
   background: var(--bg-dark);
+  perspective: 1200px;
+}
+@media (max-width: 600px) {
+  .home-hero { min-height: 560px; padding-bottom: 32px; }
+  .home-hero-scroll { display: none; }
+}
+@media (max-width: 480px) {
+  .home-hero-headline { font-size: clamp(42px, 12vw, 72px) !important; }
+  .home-hero-content { bottom: 108px !important; }
 }
 
 .home-hero-image { position: absolute; inset: 0; }
@@ -5581,6 +5603,208 @@ body {
   .home-hero-slide img { animation: none; }
   .home-hero-scroll { animation: none; }
   .home-dest-status.is-live::before { animation: none; }
+  /* motion-primitive kills */
+  .tilt-card,
+  .tilt-card-inner,
+  .magnetic,
+  .parallax-image { transform: none !important; }
+  .tilt-card-inner { transform: none !important; }
+  .tilt-card-glare { display: none !important; }
+  .sticky-mobile-cta { transition: none !important; }
+}
+
+/* =====================================================
+   MOTION PRIMITIVES — 3D TILT, MAGNETIC, PARALLAX
+   ===================================================== */
+.tilt-card { width: 100%; height: 100%; display: block; }
+.tilt-card-inner { width: 100%; height: 100%; border-radius: inherit; }
+/* Disable tilt on touch/coarse pointer — CSS-only fallback */
+@media (pointer: coarse) {
+  .tilt-card-inner { transform: none !important; }
+  .tilt-card-glare { display: none !important; }
+  .magnetic { transform: none !important; }
+}
+
+/* Homepage destination — grid slot wraps tilt */
+.home-dest-slot {
+  position: relative;
+  aspect-ratio: 4/3;
+  display: block;
+  border-radius: 14px;
+  transform-style: preserve-3d;
+}
+.home-dest-tilt { border-radius: 14px; }
+/* the anchor inside the tilt fills its box */
+.home-dest-tilt > .tilt-card-inner > .home-dest-card,
+.home-dest-slot > .home-dest-card {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  height: 100%;
+  width: 100%;
+}
+
+/* =====================================================
+   HOMEPAGE — STAT STRIP
+   ===================================================== */
+.home-stat-strip {
+  max-width: 1180px;
+  margin: 40px auto 0;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-card);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.home-stat-cell {
+  padding: 28px 20px;
+  text-align: center;
+  border-right: 1px solid var(--border-light);
+}
+.home-stat-cell:last-child { border-right: none; }
+.home-stat-cell strong {
+  display: block;
+  font-family: var(--font-playfair, Georgia, serif);
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.home-stat-cell strong .count-up::after {
+  content: "";
+}
+.home-stat-cell span {
+  display: block;
+  margin-top: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+@media (max-width: 480px) {
+  .home-stat-strip { margin-top: 28px; }
+  .home-stat-cell { padding: 20px 8px; }
+  .home-stat-cell strong { font-size: 26px; }
+  .home-stat-cell span { font-size: 9px; letter-spacing: 0.18em; }
+}
+
+/* =====================================================
+   STICKY MOBILE CTA
+   ===================================================== */
+.sticky-mobile-cta {
+  position: fixed;
+  bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  right: 16px;
+  z-index: 60;
+}
+.sticky-mobile-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--accent-red);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: 0 12px 32px rgba(181,36,38,0.36), 0 2px 6px rgba(0,0,0,0.24);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.sticky-mobile-cta-pill:active {
+  transform: scale(0.96);
+  box-shadow: 0 6px 18px rgba(181,36,38,0.28);
+}
+
+/* =====================================================
+   CITY SECTION NAV — sticky sub-nav
+   ===================================================== */
+.city-section-nav {
+  position: sticky;
+  top: 64px;
+  z-index: 40;
+  background: rgba(250,248,244,0.90);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-light);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+.city-section-nav.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.city-section-nav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.city-section-nav-inner::-webkit-scrollbar { display: none; }
+.city-section-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 99px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 180ms ease, color 180ms ease;
+}
+.city-section-nav-link:hover { color: var(--text-primary); background: rgba(26,24,20,0.04); }
+.city-section-nav-link.is-active {
+  color: var(--accent-red);
+  background: var(--accent-red-soft);
+}
+.city-section-nav-map {
+  margin-left: auto;
+  color: var(--accent-red);
+  background: rgba(181,36,38,0.06);
+}
+@media (max-width: 767px) {
+  .city-section-nav { top: 56px; }
+  .city-section-nav-inner { padding: 8px 14px; }
+  .city-section-nav-map { margin-left: 0; }
+}
+
+/* =====================================================
+   TAP FEEDBACK — touch users
+   ===================================================== */
+.home-hero-cta:active,
+.home-hero-cta-secondary:active,
+.home-action-block:active,
+.home-dest-card:active,
+.platform-primary-action:active,
+.platform-secondary-action:active,
+.platform-nav-pill:active,
+.xdir-chip:active,
+.city-qa-btn:active {
+  transform: scale(0.98);
+  transition-duration: 60ms;
 }
 
 /* =====================================================
@@ -6089,6 +6313,9 @@ body {
   margin: -24px 0 0;
   position: relative;
   z-index: 10;
+}
+@media (max-width: 480px) {
+  .home-action-blocks { margin-top: -12px; gap: 10px; }
 }
 @media (min-width: 640px) {
   .home-action-blocks { grid-template-columns: repeat(3, 1fr); }
@@ -7652,6 +7879,23 @@ body {
 }
 /* native search cancel button */
 .xdir-search-input::-webkit-search-cancel-button { display: none; }
+.xdir-search-input.is-stale {
+  border-color: rgba(132,197,31,0.35);
+  background: rgba(132,197,31,0.04);
+}
+.xdir-search-input.is-stale + .xdir-search-clear::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  border: 1.5px solid rgba(132,197,31,0.6);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: gs-spin 700ms linear infinite;
+}
 .xdir-search-clear {
   position: absolute;
   right: 10px;
