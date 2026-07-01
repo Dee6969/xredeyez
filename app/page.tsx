@@ -6,7 +6,6 @@ import HeroSlideshow from "./components/HeroSlideshow";
 import MembershipTeaser from "./components/MembershipTeaser";
 import SiteFooter from "./components/SiteFooter";
 import Reveal from "./components/Reveal";
-import TiltCard from "./components/motion/TiltCard";
 import MagneticButton from "./components/motion/MagneticButton";
 import StaggerReveal from "./components/motion/StaggerReveal";
 import CountUp from "./components/motion/CountUp";
@@ -202,36 +201,35 @@ export default function Home() {
           <Link href="/cities" className="platform-inline-link">Full guide list →</Link>
         </div>
 
-        <StaggerReveal className="home-destinations-grid" itemClassName="home-dest-slot">
+        <StaggerReveal className="home-destinations-grid">
           {cities.map((city) => {
             const img = cityImages[city.slug] || city.heroImage;
             const isLive = city.status === "flagship" || city.status === "live";
             return (
-              <TiltCard key={city.id} className="home-dest-tilt">
-                <Link
-                  href={`/cities/${city.slug}`}
-                  className="home-dest-card"
-                  aria-label={`${city.name}, ${city.country}`}
-                >
-                  <div className="home-dest-img">
-                    <Image
-                      src={img}
-                      alt={city.name}
-                      fill
-                      sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      style={{ objectFit: "cover", viewTransitionName: `city-hero-${city.slug}` } as React.CSSProperties}
-                    />
-                    <div className="home-dest-wash" />
-                  </div>
-                  <div className="home-dest-info">
-                    <span className="home-dest-country">{city.country}</span>
-                    <strong className="home-dest-city">{city.name}</strong>
-                    <span className={`home-dest-status${isLive ? " is-live" : ""}`}>
-                      {isLive ? "Live guide" : "Coming soon"}
-                    </span>
-                  </div>
-                </Link>
-              </TiltCard>
+              <Link
+                key={city.id}
+                href={`/cities/${city.slug}`}
+                className="home-dest-card"
+                aria-label={`${city.name}, ${city.country}`}
+              >
+                <div className="home-dest-img">
+                  <Image
+                    src={img}
+                    alt={city.name}
+                    fill
+                    sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    style={{ objectFit: "cover", viewTransitionName: `city-hero-${city.slug}` } as React.CSSProperties}
+                  />
+                  <div className="home-dest-wash" />
+                </div>
+                <div className="home-dest-info">
+                  <span className="home-dest-country">{city.country}</span>
+                  <strong className="home-dest-city">{city.name}</strong>
+                  <span className={`home-dest-status${isLive ? " is-live" : ""}`}>
+                    {isLive ? "Live guide" : "Coming soon"}
+                  </span>
+                </div>
+              </Link>
             );
           })}
 
