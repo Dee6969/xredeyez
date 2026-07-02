@@ -2,6 +2,11 @@
 import { animate, useInView, useMotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
+/**
+ * Server-renders the real value so crawlers, link previews and no-JS
+ * visitors never see "0". The count-up animation runs client-side
+ * once the element scrolls into view.
+ */
 export default function CountUp({
   to,
   duration = 1.6,
@@ -14,7 +19,7 @@ export default function CountUp({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
   const mv = useMotionValue(0);
-  const [display, setDisplay] = useState("0");
+  const [display, setDisplay] = useState(String(to));
 
   useEffect(() => {
     if (!inView) return;

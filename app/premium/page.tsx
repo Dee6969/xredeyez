@@ -3,8 +3,17 @@ import PlatformShell from "../components/PlatformShell";
 import Reveal from "../components/Reveal";
 
 export const metadata = {
-  title: "Premium | XRED EYEZ",
+  title: "Premium Membership — Full City Access, Routes & Saves | XRED EYEZ",
   description: "Unlock the full XRED EYEZ travel layer. All cities, curated routes, insider picks, unlimited saves — launching soon.",
+  alternates: {
+    canonical: "https://www.redeyez.co.uk/premium",
+  },
+  openGraph: {
+    title: "XRED EYEZ Premium",
+    description: "The full travel layer: every city, every route, unlimited saves, insider drops. Founding rate for waitlist members.",
+    type: "website",
+    url: "https://www.redeyez.co.uk/premium",
+  },
 };
 
 const benefits = [

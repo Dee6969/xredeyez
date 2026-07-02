@@ -292,6 +292,20 @@ export default function SiteFooter() {
               <span style={{ color: "#84C51F", opacity: 0.56 }}>Powered by Hemp</span>
             </div>
           </div>
+
+          <div
+            style={{
+              paddingTop: "18px",
+              color: "rgba(245,240,230,0.30)",
+              fontSize: "11.5px",
+              lineHeight: 1.7,
+              maxWidth: "760px",
+            }}
+          >
+            For adults. Editorial guide only — cannabis laws vary by country and region; always check
+            current local rules and only visit venues operating lawfully. XRED EYEZ does not sell cannabis,
+            facilitate purchases, or provide consumption or medical advice. Travel respectfully.
+          </div>
         </div>
       </div>
     </footer>

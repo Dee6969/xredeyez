@@ -6,7 +6,8 @@ import VenueCard from "../../components/VenueCard";
 import VenueMobileStrip from "../../components/VenueMobileStrip";
 import VenueReveal from "../../components/VenueReveal";
 import VenueShell from "../../components/VenueShell";
-import { getSortedVenuesByCity, getVenue, venues } from "../../data/platform";
+import ComplianceNote from "../../components/ComplianceNote";
+import { getCity, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
 import { breadcrumbSchema, localBusinessSchema, toJsonLd } from "../../lib/schema";
 
 interface VenuePageProps {
@@ -480,6 +481,17 @@ export default async function VenuePage({ params }: VenuePageProps) {
         {/* ══════════════════════════════════════
             RELATED VENUES
             ══════════════════════════════════════ */}
+        {/* Compliance / etiquette for cannabis-layer venues */}
+        {(getVenueLayer(venue) === "cannabis" || venue.cannabisFriendly) && (
+          <VenueReveal>
+            <section className="vlp-related">
+              <div className="vlp-related-inner">
+                <ComplianceNote legalContext={getCity(venue.cityId)?.legalContext} />
+              </div>
+            </section>
+          </VenueReveal>
+        )}
+
         {related.length > 0 && (
           <VenueReveal>
             <section className="vlp-related">

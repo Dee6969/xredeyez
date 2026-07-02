@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import BookingHotelStrip from "../../components/BookingHotelStrip";
 import CitySectionNav from "../../components/CitySectionNav";
+import ComplianceNote from "../../components/ComplianceNote";
+import PremiumLockCard from "../../components/PremiumLockCard";
 import FeaturedPlacementSlot from "../../components/FeaturedPlacementSlot";
 import PlatformShell from "../../components/PlatformShell";
 import Reveal from "../../components/Reveal";
@@ -336,6 +338,7 @@ export default async function CityPage({ params }: CityPageProps) {
           <div className="platform-legal-panel">
             <p>{city.legalContext}</p>
           </div>
+          <ComplianceNote compact />
         </section>
       </Reveal>
 
@@ -368,6 +371,15 @@ export default async function CityPage({ params }: CityPageProps) {
                   <em>Build this route</em>
                 </Link>
               ))}
+              {isLive && (
+                <PremiumLockCard
+                  eyebrow="Premium route"
+                  title={`The ${city.name} Insider Circuit`}
+                  teaser="The editor-planned deep cut: hidden rooms, exact timings, food resets and the stay anchor that makes the whole day work."
+                  meta="Full day · Members only"
+                  source={`city_routes_${city.slug}`}
+                />
+              )}
               <Link href="/partners/list" className="platform-flow-card is-commercial">
                 <span>Partner Ready</span>
                 <h3>Own a city moment.</h3>

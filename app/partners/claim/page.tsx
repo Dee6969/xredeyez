@@ -9,11 +9,11 @@ export const metadata = {
 };
 
 interface ClaimListingPageProps {
-  searchParams: Promise<{ venue?: string }>;
+  searchParams: Promise<{ venue?: string; package?: string }>;
 }
 
 export default async function ClaimListingPage({ searchParams }: ClaimListingPageProps) {
-  const { venue } = await searchParams;
+  const { venue, package: packageId } = await searchParams;
   const currentVenue = venue ? getVenue(venue) : undefined;
   const slimVenues = venues.map(({ id, name, city, slug }) => ({ id, name, city, slug }));
 
@@ -57,6 +57,7 @@ export default async function ClaimListingPage({ searchParams }: ClaimListingPag
           <PartnerClaimForm
             venues={slimVenues}
             currentVenue={currentVenue ? { id: currentVenue.id, name: currentVenue.name, city: currentVenue.city, slug: currentVenue.slug } : undefined}
+            packageId={packageId}
           />
 
           <aside className="platform-panel">

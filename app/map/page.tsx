@@ -1,11 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import PlatformShell from "../components/PlatformShell";
+import NetworkMap from "../components/NetworkMap";
 import { cities } from "../data/platform";
 
 export const metadata = {
-  title: "Map | XRED EYEZ",
-  description: "Choose a city and open its live cannabis culture map.",
+  title: "Cannabis Culture City Maps — Live Venue Discovery | XRED EYEZ",
+  description:
+    "Explore the XRED EYEZ network on the live map. Coffeeshops, social clubs, hotels, restaurants and things to do across Amsterdam, Barcelona, Prague and beyond.",
+  alternates: {
+    canonical: "https://www.redeyez.co.uk/map",
+  },
+  openGraph: {
+    title: "Live City Maps | XRED EYEZ",
+    description: "Map-first discovery for cannabis culture travel. Pick a city, filter the layers, save what matters.",
+    type: "website",
+    url: "https://www.redeyez.co.uk/map",
+  },
 };
 
 export default function MapIndexPage() {
@@ -16,10 +27,16 @@ export default function MapIndexPage() {
     <PlatformShell>
       <div className="map-index-header">
         <div className="eyebrow map-eyebrow">MAP</div>
-        <h1 className="map-index-title">Choose a city.</h1>
+        <h1 className="map-index-title">The network, live.</h1>
         <p className="map-index-sub">
           {liveCities.length} cities live · tap a pin · filter by vibe · save what matters.
         </p>
+      </div>
+
+      <NetworkMap cities={cities} />
+
+      <div className="map-index-header" style={{ marginTop: "56px" }}>
+        <h2 className="map-index-title" style={{ fontSize: "clamp(26px, 4vw, 40px)" }}>Or choose a city.</h2>
       </div>
 
       <div className="map-city-picker-grid">

@@ -2,8 +2,17 @@ import Link from "next/link";
 import PlatformShell from "../../components/PlatformShell";
 
 export const metadata = {
-  title: "List Your Business | XRED EYEZ",
+  title: "List Your Business — Reach Cannabis Travellers | XRED EYEZ",
   description: "Get your cannabis café, social club, hotel, restaurant or brand listed on XRED EYEZ. Reach cannabis travellers across Europe and beyond. From €49/month.",
+  alternates: {
+    canonical: "https://www.redeyez.co.uk/partners/list",
+  },
+  openGraph: {
+    title: "List Your Business | XRED EYEZ",
+    description: "City guide placement, map pins, featured cards and sponsorships. Reach travellers actively planning cannabis culture trips. From €49/month.",
+    type: "website",
+    url: "https://www.redeyez.co.uk/partners/list",
+  },
 };
 
 const benefits = [

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { trackEvent } from "../lib/analytics";
 import type { SearchItem, SearchResponse } from "../api/search/route";
 
 const QUICK_LINKS: SearchItem[] = [
@@ -125,6 +126,7 @@ export default function GlobalSearch() {
       .then((data: SearchResponse) => {
         setResults(data);
         setSelectedIndex(-1);
+        trackEvent("search_query", { length: debouncedQuery.length });
       })
       .catch(() => setResults(null))
       .finally(() => setLoading(false));
