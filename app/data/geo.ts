@@ -21,13 +21,13 @@ export function getTileConfig(): { url: string; attribution: string; maxZoom: nu
   const maptilerKey = process.env.NEXT_PUBLIC_MAPTILER_KEY;
   if (maptilerKey) {
     return {
-      url: `https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}{r}.png?key=${maptilerKey}`,
+      url: `https://api.maptiler.com/maps/streets-v2-dark/{z}/{x}/{y}{r}.png?key=${maptilerKey}`,
       attribution: '&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; OpenStreetMap contributors',
       maxZoom: 20,
     };
   }
   return {
-    url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
     attribution: '&copy; OpenStreetMap contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     maxZoom: 20,
   };

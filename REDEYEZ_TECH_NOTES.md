@@ -44,3 +44,11 @@ Not hot-swapped in this pass because a mixed public/private state could silently
 - New route-shaped content should use `CuratedRoute` from `app/lib/types/routes.ts`, not ad-hoc shapes.
 - City coordinates live in `app/data/geo.ts` — single source for all map surfaces.
 - All lead-capturing endpoints must persist before they notify (blob first, email second).
+
+## Night Field Guide re-skin (dark theme) — implementation notes
+- The entire theme flip lives in the `:root` token block of `globals.css` plus ~40 surgical remaps of hardcoded ink/glass values. To tune the theme, edit tokens — don't scatter new hex values.
+- `--text-inverse` deliberately stays bone (#F5F0E6): 150+ legacy dark-surface rules (map sheet, popups, footer, hero overlays) depend on it. Treat it as "text on dark accents", not a literal inverse.
+- Basemaps switched to CARTO `dark_all` (retina). `NEXT_PUBLIC_MAPTILER_KEY` now selects MapTiler `streets-v2-dark`.
+- The atmosphere signature is a single fixed `body::before` smoke field (amber haze top-right, ember low-left). Resist adding more glows — the red ember is reserved for primary money CTAs only.
+- Venue brand rooms (`--venue-accent` color-mix gradients) were intentionally left self-contained; they carry their own palettes.
+- Pre-dark stylesheet snapshot: `git show` the commit before this one, or `/tmp/globals.css.pre-dark` during this session.

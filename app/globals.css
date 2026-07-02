@@ -4,45 +4,46 @@
    DESIGN TOKENS
    ===================================================== */
 :root {
-  /* Backgrounds */
-  --bg-primary:    #FAF8F4;
-  --bg-secondary:  #F2EDE4;
-  --bg-card:       #FFFFFF;
-  --bg-dark:       #18160F;
+  /* Backgrounds — night field guide: warm smoke-black, never blue */
+  --bg-primary:    #131109;
+  --bg-secondary:  #1A1710;
+  --bg-card:       #1E1B12;
+  --bg-dark:       #0E0C07;
 
   /* Text */
-  --text-primary:  #1A1814;
-  --text-secondary:#6B6456;
-  --text-inverse:  #F5F0E6;
-  --text-muted:    #9E9587;
+  --text-primary:  #F5F0E6;
+  --text-secondary:#B3AA97;
+  --text-inverse:  #F5F0E6; /* kept bone: legacy dark surfaces depend on it */
+  --text-muted:    #857C6B;
 
   /* Brand accents */
-  --accent-red:      #B52426;
-  --accent-red-soft: rgba(181,36,38,0.08);
-  --accent-gold:     #9E8B6A;
-  --accent-olive:    #4A5240;
+  --accent-red:      #E23438;
+  --accent-red-soft: rgba(226,52,56,0.14);
+  --accent-gold:     #C2A878;
+  --accent-olive:    #9DB16C;
 
-  /* Borders */
-  --border-light:  rgba(26,24,20,0.08);
-  --border-medium: rgba(26,24,20,0.16);
-  --border-dark:   rgba(26,24,20,0.28);
+  /* Borders — bone on smoke */
+  --border-light:  rgba(245,240,230,0.09);
+  --border-medium: rgba(245,240,230,0.17);
+  --border-dark:   rgba(245,240,230,0.30);
 
-  /* Shadows */
-  --shadow-card:   0 2px 12px rgba(26,24,20,0.08);
-  --shadow-raised: 0 8px 32px rgba(26,24,20,0.12);
-  --shadow-float:  0 24px 64px rgba(26,24,20,0.16);
+  /* Shadows + the one glow */
+  --shadow-card:   0 4px 18px rgba(0,0,0,0.45);
+  --shadow-raised: 0 12px 36px rgba(0,0,0,0.52);
+  --shadow-float:  0 28px 70px rgba(0,0,0,0.58);
+  --glow-ember:    0 0 42px rgba(226,52,56,0.15);
 
   /* Legacy compatibility tokens */
-  --void:        #18160F;
-  --charcoal:    #2A2620;
-  --xred:        #B52426;
-  --xred-hot:    #D42B2D;
+  --void:        #0E0C07;
+  --charcoal:    #262117;
+  --xred:        #E23438;
+  --xred-hot:    #FF4B4F;
   --xgreen:      #84C51F;
   --xgreen-soft: rgba(132,197,31,0.12);
   --xgreen-faint:rgba(132,197,31,0.06);
-  --ember:       #7A1F1F;
+  --ember:       #8A2424;
   --bone:        #F5F0E6;
-  --brass:       #9E8B6A;
+  --brass:       #C2A878;
   --smoke:       rgba(255,255,255,0.04);
   /* Aliases used in map/card components */
   --accent-green: #84C51F;
@@ -112,12 +113,12 @@ body {
   justify-content: space-between;
   gap: 12px;
   height: 64px;
-  border-bottom: 1px solid rgba(26,24,20,0.10);
-  background: rgba(250,248,244,0.88);
+  border-bottom: 1px solid rgba(245,240,230,0.11);
+  background: rgba(16,14,9,0.86);
   padding: 0 24px;
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  box-shadow: 0 1px 0 rgba(26,24,20,0.06), 0 4px 24px rgba(26,24,20,0.08);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.13), 0 4px 24px rgba(0,0,0,0.18);
   transition: background 400ms ease, border-color 400ms ease, box-shadow 400ms ease, backdrop-filter 400ms ease;
 }
 
@@ -189,7 +190,7 @@ body {
 
 .platform-nav-pill:hover {
   color: var(--text-primary);
-  background: rgba(26,24,20,0.06);
+  background: rgba(245,240,230,0.06);
 }
 
 .platform-nav-pill.is-active {
@@ -443,8 +444,8 @@ body {
   min-height: 260px;
   background:
     radial-gradient(circle at 18% 12%, rgba(132, 197, 31, 0.16), transparent 34%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(246, 244, 238, 0.82));
-  border: 1px solid rgba(26, 24, 20, 0.08);
+    linear-gradient(135deg, rgba(30,27,18,0.94), rgba(22,19,12,0.86));
+  border: 1px solid rgba(245,240,230,0.08);
   border-radius: 28px;
   box-shadow: var(--shadow-soft);
 }
@@ -486,7 +487,7 @@ body {
   min-height: 28px;
   padding: 7px 11px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(26,23,16,0.88);
   color: #14120e;
   font-size: 10px;
   font-weight: 800;
@@ -532,8 +533,8 @@ body {
   min-height: 42px;
   padding: 11px 18px;
   border-radius: 999px;
-  border: 1px solid rgba(26, 24, 20, 0.14);
-  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(245,240,230,0.15);
+  background: rgba(26,23,16,0.72);
   color: var(--text-primary);
   font-size: 14px;
   font-weight: 700;
@@ -558,7 +559,7 @@ body {
   justify-content: center;
   gap: 14px;
   padding: 22px;
-  border-left: 1px solid rgba(26, 24, 20, 0.08);
+  border-left: 1px solid rgba(245,240,230,0.08);
   background: rgba(255, 255, 255, 0.46);
 }
 
@@ -592,9 +593,9 @@ body {
   gap: 14px;
   min-height: 62px;
   padding: 13px 14px;
-  border: 1px solid rgba(26, 24, 20, 0.08);
+  border: 1px solid rgba(245,240,230,0.08);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.74);
+  background: rgba(26,23,16,0.74);
   color: var(--text-primary);
   text-decoration: none;
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
@@ -603,7 +604,7 @@ body {
 .country-business-row:hover {
   transform: translateY(-1px);
   border-color: rgba(132, 197, 31, 0.45);
-  box-shadow: 0 18px 38px rgba(26, 24, 20, 0.08);
+  box-shadow: 0 18px 38px rgba(0,0,0,0.18);
 }
 
 .country-business-row span {
@@ -639,7 +640,7 @@ body {
 
 .country-business-empty {
   padding: 18px;
-  border: 1px dashed rgba(26, 24, 20, 0.16);
+  border: 1px dashed rgba(245,240,230,0.17);
   border-radius: 16px;
   color: var(--text-secondary);
   font-size: 14px;
@@ -712,6 +713,7 @@ body {
   padding: 14px 30px;
   background: var(--accent-red);
   color: white;
+  box-shadow: 0 6px 22px rgba(226,52,56,0.26);
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -883,12 +885,12 @@ body {
 .city-card:hover .city-card-media img { transform: scale(1.04); }
 
 .city-card-wash {
-  background: linear-gradient(180deg, transparent 42%, rgba(24,22,15,0.72));
+  background: linear-gradient(180deg, transparent 42%, rgba(245,240,230,0.76));
 }
 
 .city-status-chip {
   border: none;
-  background: rgba(255,255,255,0.92);
+  background: rgba(14,12,7,0.85);
   backdrop-filter: blur(8px);
   padding: 5px 12px;
   color: var(--text-primary);
@@ -977,7 +979,7 @@ body {
 .venue-tile-type {
   left: 14px;
   border: 1px solid rgba(255,255,255,0.28);
-  background: rgba(255,255,255,0.88);
+  background: rgba(14,12,7,0.82);
   backdrop-filter: blur(10px);
   padding: 5px 11px;
   border-radius: 99px;
@@ -1363,14 +1365,14 @@ body {
   align-content: space-between;
   gap: 16px;
   padding: 20px;
-  border: 1px solid rgba(20,20,18,0.10);
+  border: 1px solid rgba(245,240,230,0.11);
   border-radius: 20px;
   background:
     radial-gradient(circle at 18% 14%, rgba(132,197,31,0.16), transparent 34%),
-    linear-gradient(145deg, rgba(255,255,255,0.98), rgba(244,240,232,0.86));
+    linear-gradient(145deg, rgba(32,28,19,0.98), rgba(22,19,12,0.92));
   color: var(--text-primary);
   text-decoration: none;
-  box-shadow: 0 20px 48px rgba(24,22,15,0.08);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.18);
   transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
 }
 
@@ -1382,7 +1384,7 @@ body {
   height: 42px;
   border-radius: 999px;
   border: 1px solid rgba(132,197,31,0.45);
-  background: rgba(255,255,255,0.42);
+  background: rgba(245,240,230,0.10);
   box-shadow: 0 0 28px rgba(132,197,31,0.18);
 }
 
@@ -1393,7 +1395,7 @@ body {
   background:
     radial-gradient(circle at 18% 14%, rgba(132,197,31,0.24), transparent 38%),
     linear-gradient(145deg, rgba(255,255,255,1), rgba(239,244,230,0.92));
-  box-shadow: 0 26px 58px rgba(24,22,15,0.14);
+  box-shadow: 0 26px 58px rgba(0,0,0,0.31);
 }
 
 .platform-layer-card span {
@@ -1401,7 +1403,7 @@ body {
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(24,22,15,0.48);
+  color: rgba(245,240,230,0.50);
 }
 
 .platform-layer-card strong {
@@ -1440,15 +1442,15 @@ body {
   gap: 18px;
   overflow: hidden;
   padding: 24px;
-  border: 1px solid rgba(20,20,18,0.10);
+  border: 1px solid rgba(245,240,230,0.11);
   border-radius: 22px;
   background:
     linear-gradient(90deg, rgba(132,197,31,0.16), transparent 2px),
     radial-gradient(circle at 16% 12%, rgba(132,197,31,0.18), transparent 34%),
-    linear-gradient(145deg, rgba(255,255,255,0.99), rgba(244,240,232,0.90));
+    linear-gradient(145deg, rgba(34,30,20,0.99), rgba(23,20,13,0.94));
   color: var(--text-primary);
   text-decoration: none;
-  box-shadow: 0 22px 54px rgba(24,22,15,0.09);
+  box-shadow: 0 22px 54px rgba(0,0,0,0.20);
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
 }
 
@@ -1468,7 +1470,7 @@ body {
 .platform-flow-card:focus-visible {
   transform: translateY(-4px);
   border-color: rgba(132,197,31,0.42);
-  box-shadow: 0 30px 72px rgba(24,22,15,0.15);
+  box-shadow: 0 30px 72px rgba(0,0,0,0.33);
 }
 
 .platform-flow-card > * {
@@ -1481,7 +1483,7 @@ body {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(24,22,15,0.48);
+  color: rgba(245,240,230,0.50);
 }
 
 .platform-flow-card h3 {
@@ -1510,10 +1512,10 @@ body {
   align-items: center;
   min-height: 30px;
   padding: 7px 10px;
-  border: 1px solid rgba(20,20,18,0.10);
+  border: 1px solid rgba(245,240,230,0.11);
   border-radius: 999px;
-  background: rgba(255,255,255,0.66);
-  color: rgba(24,22,15,0.74);
+  background: rgba(245,240,230,0.08);
+  color: rgba(245,240,230,0.82);
   font-size: 12px;
   font-weight: 600;
 }
@@ -1592,7 +1594,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 38%, rgba(24,22,15,0.84));
+  background: linear-gradient(180deg, transparent 38%, rgba(245,240,230,0.88));
   border-radius: 16px;
 }
 
@@ -1605,7 +1607,7 @@ body {
   bottom: 16px;
   z-index: 1;
   padding: 14px 16px;
-  background: rgba(24,22,15,0.56);
+  background: rgba(245,240,230,0.59);
   backdrop-filter: blur(12px);
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.1);
@@ -1766,8 +1768,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(24,22,15,0.72), rgba(24,22,15,0.16)),
-    linear-gradient(0deg, rgba(24,22,15,0.84), transparent 52%);
+    linear-gradient(90deg, rgba(245,240,230,0.76), rgba(245,240,230,0.17)),
+    linear-gradient(0deg, rgba(245,240,230,0.88), transparent 52%);
   border-radius: 20px;
 }
 
@@ -1790,9 +1792,9 @@ body {
   gap: 2px;
   overflow: hidden;
   border-radius: 14px;
-  border: 1px solid rgba(26,24,20,0.09);
-  background: rgba(26,24,20,0.06);
-  box-shadow: 0 2px 16px rgba(26,24,20,0.06);
+  border: 1px solid rgba(245,240,230,0.09);
+  background: rgba(245,240,230,0.06);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.13);
 }
 
 .platform-info-strip div {
@@ -1900,9 +1902,9 @@ body {
 
 .home-leaflet-map .leaflet-control-zoom {
   overflow: hidden;
-  border: 1px solid rgba(24,22,15,0.12);
+  border: 1px solid rgba(245,240,230,0.13);
   border-radius: 12px;
-  box-shadow: 0 18px 40px rgba(24,22,15,0.16);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
 }
 
 .home-leaflet-map .leaflet-control-zoom a {
@@ -1914,8 +1916,8 @@ body {
 }
 
 .home-leaflet-map .leaflet-control-attribution {
-  background: rgba(255,255,255,0.76);
-  color: rgba(24,22,15,0.58);
+  background: rgba(20,17,11,0.78);
+  color: rgba(245,240,230,0.61);
   font-size: 10px;
 }
 
@@ -1928,7 +1930,7 @@ body {
   background:
     radial-gradient(circle at 24% 22%, rgba(132,197,31,0.18), transparent 25%),
     linear-gradient(135deg, #eee7da, #d9ecdc);
-  color: rgba(24,22,15,0.58);
+  color: rgba(245,240,230,0.61);
   font-family: "Courier New", monospace;
   font-size: 11px;
   letter-spacing: 0.16em;
@@ -1941,9 +1943,9 @@ body {
 
 .platform-leaflet-map .leaflet-control-zoom {
   overflow: hidden;
-  border: 1px solid rgba(24,22,15,0.12);
+  border: 1px solid rgba(245,240,230,0.13);
   border-radius: 12px;
-  box-shadow: 0 18px 40px rgba(24,22,15,0.16);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
 }
 
 .platform-leaflet-map .leaflet-control-zoom a {
@@ -1955,8 +1957,8 @@ body {
 }
 
 .platform-leaflet-map .leaflet-control-attribution {
-  background: rgba(255,255,255,0.76);
-  color: rgba(24,22,15,0.58);
+  background: rgba(20,17,11,0.78);
+  color: rgba(245,240,230,0.61);
   font-size: 10px;
 }
 
@@ -2003,7 +2005,7 @@ body {
   width: 12px;
   height: 8px;
   border-radius: 3px;
-  background: rgba(255,255,255,0.92);
+  background: rgba(14,12,7,0.85);
   box-shadow: none;
 }
 .xred-leaflet-marker.is-hotel.is-active {
@@ -2038,7 +2040,7 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.88);
+  background: rgba(14,12,7,0.82);
   box-shadow: none;
 }
 .xred-leaflet-marker.is-restaurant.is-active {
@@ -2070,7 +2072,7 @@ body {
   border: 2px solid rgba(255,255,255,0.76);
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(132,197,31,0.95) 0 20%, rgba(24,22,15,0.96) 22% 100%);
+    radial-gradient(circle, rgba(132,197,31,0.95) 0 20%, rgba(245,240,230,0.90) 22% 100%);
   box-shadow: 0 0 0 10px rgba(132,197,31,0.16), 0 18px 38px rgba(0,0,0,0.34);
 }
 
@@ -2284,9 +2286,9 @@ body {
 
 .mapboxgl-ctrl-group {
   overflow: hidden;
-  border: 1px solid rgba(24,22,15,0.12) !important;
+  border: 1px solid rgba(245,240,230,0.13) !important;
   border-radius: 12px !important;
-  box-shadow: 0 18px 40px rgba(24,22,15,0.16) !important;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35) !important;
 }
 
 .mapboxgl-ctrl-group button {
@@ -2384,7 +2386,7 @@ body {
   bottom: auto;
   z-index: 10;
   border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(24,22,15,0.72);
+  background: rgba(245,240,230,0.76);
   backdrop-filter: blur(10px);
   padding: 10px 14px;
   border-radius: 8px;
@@ -2401,7 +2403,7 @@ body {
   bottom: 16px;
   z-index: 10;
   border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(24,22,15,0.82);
+  background: rgba(245,240,230,0.86);
   backdrop-filter: blur(10px);
   padding: 10px 14px;
   border-radius: 8px;
@@ -2444,7 +2446,7 @@ body {
   pointer-events: all;
 }
 .platform-map-region-btn {
-  background: rgba(24,22,15,0.88);
+  background: rgba(245,240,230,0.90);
   border: 1px solid rgba(255,255,255,0.14);
   color: rgba(245,240,230,0.8);
   font-family: var(--font-mono, monospace);
@@ -3312,7 +3314,7 @@ body {
   left: 0;
   right: 0;
   height: 64px;
-  background: rgba(24,22,15,0.6);
+  background: rgba(245,240,230,0.63);
   backdrop-filter: blur(16px);
   z-index: 2;
 }
@@ -3373,7 +3375,7 @@ body {
   margin-top: 32px;
   padding: 16px 32px;
   background: rgba(255,255,255,0.96);
-  color: var(--text-primary);
+  color: #14120B;
   font-size: 15px;
   font-weight: 600;
   border-radius: 99px;
@@ -3386,7 +3388,7 @@ body {
 .home-hero-cta:hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 12px 40px rgba(0,0,0,0.36);
-  background: #fff;
+  background: var(--bone);
 }
 
 .home-hero-scroll {
@@ -3583,7 +3585,7 @@ body {
   bottom: 16px;
   z-index: 10;
   border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(24,22,15,0.72);
+  background: rgba(245,240,230,0.76);
   backdrop-filter: blur(10px);
   padding: 8px 14px;
   border-radius: 8px;
@@ -4284,8 +4286,8 @@ body {
 .flagship-grid {
   opacity: 0.12;
   background-image:
-    linear-gradient(rgba(26,24,20,0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26,24,20,0.1) 1px, transparent 1px);
+    linear-gradient(rgba(245,240,230,0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,240,230,0.11) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse at center, black 0%, transparent 72%);
 }
@@ -4408,7 +4410,7 @@ body {
 
   .country-business-panel {
     border-left: 0;
-    border-top: 1px solid rgba(26, 24, 20, 0.08);
+    border-top: 1px solid rgba(245,240,230,0.08);
   }
 
   .platform-booking-strip {
@@ -5731,7 +5733,7 @@ body {
   position: sticky;
   top: 64px;
   z-index: 40;
-  background: rgba(250,248,244,0.90);
+  background: rgba(16,14,9,0.88);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border-light);
@@ -5775,7 +5777,7 @@ body {
   text-decoration: none;
   transition: background 180ms ease, color 180ms ease;
 }
-.city-section-nav-link:hover { color: var(--text-primary); background: rgba(26,24,20,0.04); }
+.city-section-nav-link:hover { color: var(--text-primary); background: rgba(245,240,230,0.04); }
 .city-section-nav-link.is-active {
   color: var(--accent-red);
   background: var(--accent-red-soft);
@@ -6939,7 +6941,7 @@ body {
 }
 .gs-trigger:hover {
   color: var(--text-primary);
-  background: rgba(26,24,20,0.06);
+  background: rgba(245,240,230,0.06);
   border-color: var(--border-dark);
 }
 .platform-top-nav.is-hero .gs-trigger {
@@ -8321,7 +8323,7 @@ body {
 .prem-benefit-card {
   background:
     radial-gradient(circle at 10% 10%, color-mix(in srgb, var(--b-accent, #84C51F) 10%, transparent), transparent 50%),
-    #fff;
+    var(--bg-card);
   border: 1px solid rgba(0,0,0,0.07);
   padding: 32px 28px 36px;
   display: flex;
@@ -8371,7 +8373,7 @@ body {
 
 .prem-plan-card {
   position: relative;
-  background: #fff;
+  background: var(--bg-card);
   border: 1px solid rgba(0,0,0,0.1);
   border-radius: 20px;
   padding: 28px 24px 32px;
@@ -8929,7 +8931,7 @@ body {
   flex-direction: column;
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: var(--bg-card);
   border: 1px solid rgba(0,0,0,0.08);
   text-decoration: none;
   transition: border-color 180ms, transform 180ms, box-shadow 180ms;
@@ -9145,7 +9147,7 @@ body {
 }
 .guide-quickfacts {
   padding: 22px 22px 24px;
-  background: #fff;
+  background: var(--bg-card);
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 12px;
 }
@@ -9173,7 +9175,7 @@ body {
 
 .guide-sidebar-links {
   padding: 20px 22px;
-  background: #fff;
+  background: var(--bg-card);
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 12px;
 }
@@ -9428,13 +9430,13 @@ body {
   box-shadow: 0 6px 18px rgba(181, 36, 38, 0.42);
 }
 .map-action-btn.is-street {
-  background: rgba(24, 22, 15, 0.06);
+  background: rgba(245,240,230,0.06);
   border: 1px solid var(--border-medium);
   color: var(--text-primary);
 }
 .map-action-btn.is-street:hover {
   transform: translateY(-1px);
-  background: rgba(24, 22, 15, 0.1);
+  background: rgba(245,240,230,0.11);
 }
 .map-action-icon {
   font-size: 12px;
@@ -9460,19 +9462,19 @@ body {
   height: 44px;
   border-radius: 50%;
   border: 1px solid var(--border-medium);
-  background: #fff;
+  background: var(--bg-card);
   color: var(--accent-red);
   font-size: 19px;
   line-height: 1;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(26, 24, 20, 0.18);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.40);
   transition: transform 160ms ease, box-shadow 160ms ease;
   display: grid;
   place-items: center;
 }
 .map-locate-btn:hover {
   transform: scale(1.06);
-  box-shadow: 0 6px 20px rgba(26, 24, 20, 0.26);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.57);
 }
 .map-locate-btn.is-locating {
   animation: locate-spin 900ms linear infinite;
@@ -9523,7 +9525,7 @@ body {
   gap: 12px;
   margin-top: 8px;
   padding-top: 8px;
-  border-top: 1px solid rgba(26, 24, 20, 0.1);
+  border-top: 1px solid rgba(245,240,230,0.11);
 }
 .xred-popup-nav a {
   font-size: 12px;
@@ -9558,4 +9560,35 @@ body {
     flex: 1;
     justify-content: center;
   }
+}
+
+/* ═══════════════════════════════════════════
+   NIGHT FIELD GUIDE — atmosphere signature
+   One fixed smoke field: warm haze top, ember
+   breath low. Everything else stays disciplined.
+   ═══════════════════════════════════════════ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 52% at 76% -6%, rgba(194,168,120,0.055), transparent 60%),
+    radial-gradient(ellipse 72% 44% at 12% 108%, rgba(226,52,56,0.05), transparent 58%);
+}
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background: rgba(226,52,56,0.85);
+  color: #F5F0E6;
+}
+
+/* Reduce heavy raster edges on dark: soften imagery into the smoke */
+.platform-card img,
+.map-city-picker-card img {
+  filter: saturate(0.96) contrast(1.02);
 }
