@@ -1,0 +1,7 @@
+{"event":"task_completed","teammate":"","task_id":"8","subject":"Den Haag + Rotterdam tile images","description":"Fetch Unsplash photos for Den Haag (Binnenhof) + Rotterdam (Erasmusbrug/Markthal), save to public/ci","timestamp":"2026-07-01T12:10:18Z"}
+{"event":"task_completed","teammate":"","task_id":"9","subject":"Den Haag +6 venues","description":"Research + add ~6 Stay/Eat/Do venues for Den Haag with real names, coords, address","timestamp":"2026-07-01T18:00:05Z"}
+{"event":"task_completed","teammate":"","task_id":"10","subject":"Rotterdam +6 venues","description":"Research + add ~6 Stay/Eat/Do venues for Rotterdam","timestamp":"2026-07-01T18:00:06Z"}
+{"event":"task_completed","teammate":"","task_id":"11","subject":"Tenerife +8 venues","description":"Add Stay/Eat/Do venues; currently 8 mostly clubs","timestamp":"2026-07-01T18:02:19Z"}
+{"event":"task_completed","teammate":"","task_id":"12","subject":"Marbella +8 venues","description":"Add Stay/Eat/Do venues; currently 11","timestamp":"2026-07-01T18:02:19Z"}
+{"event":"task_completed","teammate":"","task_id":"13","subject":"Germany +10 venues","description":"Add Stay/Eat/Do venues (Berlin focus); currently 9 all industry","timestamp":"2026-07-01T18:04:31Z"}
+{"event":"task_completed","teammate":"","task_id":"14","subject":"Czech +10 venues","description":"Add Stay/Eat/Do for Prague; currently 9 industry","timestamp":"2026-07-01T18:04:33Z"}
