@@ -1,8 +1,12 @@
+"use client";
 import type { Venue } from "../data/platform";
+import { walkingDirectionsUrl, streetViewUrl } from "./MapActions";
+import { trackEvent } from "../lib/analytics";
 
 export default function VenueMobileStrip({ venue }: { venue: Venue }) {
-  const mapsUrl = venue.coordinates?.lat
-    ? `https://www.google.com/maps/search/?api=1&query=${venue.coordinates.lat},${venue.coordinates.lng}`
+  const hasGeo = Boolean(venue.coordinates?.lat && venue.coordinates?.lng);
+  const walkUrl = hasGeo
+    ? walkingDirectionsUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.name)
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${venue.name} ${venue.city}`)}`;
 
   return (
@@ -14,33 +18,36 @@ export default function VenueMobileStrip({ venue }: { venue: Venue }) {
         </span>
       </div>
       <div className="vlp-mobile-strip-actions">
-        <a
-          href={mapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="vlp-mobile-btn"
-        >
-          Directions
-        </a>
         {venue.partnerUrl ? (
           <a
             href={venue.partnerUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="vlp-mobile-btn vlp-mobile-btn-primary"
+            className="vlp-mobile-btn"
+            onClick={() => trackEvent("partner_click", { venue: venue.id, source: "mobile_strip" })}
           >
             Website ↗
           </a>
-        ) : (
+        ) : hasGeo ? (
           <a
-            href={mapsUrl}
+            href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!)}
             target="_blank"
             rel="noopener noreferrer"
-            className="vlp-mobile-btn vlp-mobile-btn-primary"
+            className="vlp-mobile-btn"
+            onClick={() => trackEvent("streetview_click", { venue: venue.id })}
           >
-            Open Maps
+            ◉ Street
           </a>
-        )}
+        ) : null}
+        <a
+          href={walkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="vlp-mobile-btn vlp-mobile-btn-primary"
+          onClick={() => trackEvent("directions_click", { venue: venue.id, mode: "walk" })}
+        >
+          ➤ Walk there
+        </a>
       </div>
     </div>
   );

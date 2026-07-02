@@ -5,7 +5,7 @@ import L from "leaflet";
 import Link from "next/link";
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
 import type { City } from "../data/platform";
-import { CITY_CENTERS } from "../data/geo";
+import { CITY_CENTERS, getTileConfig } from "../data/geo";
 
 const liveIcon = L.divIcon({
   className: "xred-leaflet-marker",
@@ -39,8 +39,9 @@ export default function NetworkMapInner({ cities }: { cities: City[] }) {
       worldCopyJump
     >
       <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution={getTileConfig().attribution}
+        url={getTileConfig().url}
+        maxZoom={getTileConfig().maxZoom}
       />
       <ZoomControl position="bottomright" />
       {pins.map(({ city, center }) => {

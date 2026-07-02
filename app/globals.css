@@ -9384,3 +9384,178 @@ body {
     border-radius: 18px;
   }
 }
+
+/* ═══════════════════════════════════════════
+   MAP v2 — modern maps-app feel
+   ═══════════════════════════════════════════ */
+
+/* Walk / Street View action row */
+.map-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.map-actions.is-compact {
+  margin-top: 10px;
+  gap: 8px;
+}
+.map-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+.map-actions.is-compact .map-action-btn {
+  height: 32px;
+  padding: 0 13px;
+  font-size: 12px;
+}
+.map-action-btn.is-walk {
+  background: var(--accent-red);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(181, 36, 38, 0.32);
+}
+.map-action-btn.is-walk:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(181, 36, 38, 0.42);
+}
+.map-action-btn.is-street {
+  background: rgba(24, 22, 15, 0.06);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+}
+.map-action-btn.is-street:hover {
+  transform: translateY(-1px);
+  background: rgba(24, 22, 15, 0.1);
+}
+.map-action-icon {
+  font-size: 12px;
+  line-height: 1;
+}
+/* Dark surfaces (map sheet) get inverted street button */
+.map-zen-sheet .map-action-btn.is-street {
+  background: rgba(245, 240, 230, 0.08);
+  border-color: rgba(245, 240, 230, 0.18);
+  color: var(--text-inverse);
+}
+.map-zen-sheet .map-action-btn.is-street:hover {
+  background: rgba(245, 240, 230, 0.14);
+}
+
+/* Locate-me control */
+.map-locate-btn {
+  position: absolute;
+  right: 12px;
+  bottom: 96px;
+  z-index: 1000;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-medium);
+  background: #fff;
+  color: var(--accent-red);
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(26, 24, 20, 0.18);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  display: grid;
+  place-items: center;
+}
+.map-locate-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(26, 24, 20, 0.26);
+}
+.map-locate-btn.is-locating {
+  animation: locate-spin 900ms linear infinite;
+}
+@keyframes locate-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* User location marker — blue pulse, maps-app style */
+.xred-leaflet-user-marker span {
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #2f7cf6;
+  border: 2.5px solid #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+.xred-leaflet-user-marker i {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: rgba(47, 124, 246, 0.28);
+  animation: user-pulse 2.2s ease-out infinite;
+}
+@keyframes user-pulse {
+  0%   { transform: scale(0.55); opacity: 0.9; }
+  70%  { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* Marker life: selected pin pulse ring */
+.xred-leaflet-marker.is-active span::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+  border: 2px solid rgba(181, 36, 38, 0.55);
+  animation: pin-pulse 1.6s ease-out infinite;
+}
+@keyframes pin-pulse {
+  0%   { transform: scale(0.7); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Popup walk/street nav row */
+.xred-popup-nav {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(26, 24, 20, 0.1);
+}
+.xred-popup-nav a {
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent-red) !important;
+}
+.xred-popup-nav a:last-child {
+  color: var(--text-secondary) !important;
+}
+
+/* Smoother tile fade + grab cursor = app feel */
+.platform-leaflet-map .leaflet-tile,
+.network-map-canvas .leaflet-tile {
+  transition: opacity 260ms ease;
+}
+.platform-leaflet-map,
+.network-map-canvas {
+  cursor: grab;
+}
+.platform-leaflet-map:active,
+.network-map-canvas:active {
+  cursor: grabbing;
+}
+
+@media (max-width: 640px) {
+  .map-locate-btn {
+    bottom: 148px;
+    right: 10px;
+  }
+  .map-action-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}

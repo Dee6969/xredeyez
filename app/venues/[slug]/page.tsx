@@ -7,6 +7,7 @@ import VenueMobileStrip from "../../components/VenueMobileStrip";
 import VenueReveal from "../../components/VenueReveal";
 import VenueShell from "../../components/VenueShell";
 import ComplianceNote from "../../components/ComplianceNote";
+import MapActions from "../../components/MapActions";
 import { getCity, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
 import { breadcrumbSchema, localBusinessSchema, toJsonLd } from "../../lib/schema";
 
@@ -473,6 +474,12 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   {isPartner ? "Partner dashboard" : "Claim or upgrade"} →
                 </Link>
                 <SaveButton itemType="venue" itemId={venue.id} label="Save this venue" />
+                <MapActions
+                  lat={venue.coordinates?.lat}
+                  lng={venue.coordinates?.lng}
+                  name={venue.name}
+                  venueId={venue.id}
+                />
               </div>
             </div>
           </section>

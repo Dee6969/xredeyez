@@ -24,7 +24,10 @@ export type AnalyticsEvent =
   | "enquiry_submit"
   | "waitlist_join"
   | "search_query"
-  | "route_build_click";
+  | "route_build_click"
+  | "directions_click"
+  | "streetview_click"
+  | "locate_me";
 
 export type AnalyticsProps = Record<string, string | number | boolean>;
 

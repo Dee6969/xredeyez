@@ -10,6 +10,29 @@ export interface CityCenter {
   zoom: number;
 }
 
+/**
+ * Basemap configuration for all Leaflet surfaces.
+ * Default: CARTO Voyager — a modern, Google-Maps-grade vector-styled
+ * raster basemap with retina support ({r} → @2x automatically).
+ * Set NEXT_PUBLIC_MAPTILER_KEY to switch to MapTiler Streets for
+ * higher usage tiers without touching any component.
+ */
+export function getTileConfig(): { url: string; attribution: string; maxZoom: number } {
+  const maptilerKey = process.env.NEXT_PUBLIC_MAPTILER_KEY;
+  if (maptilerKey) {
+    return {
+      url: `https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}{r}.png?key=${maptilerKey}`,
+      attribution: '&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; OpenStreetMap contributors',
+      maxZoom: 20,
+    };
+  }
+  return {
+    url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    attribution: '&copy; OpenStreetMap contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    maxZoom: 20,
+  };
+}
+
 export const CITY_CENTERS: Record<string, CityCenter> = {
   amsterdam: { lat: 52.3707, lng: 4.8977, zoom: 13 },
   "den-haag": { lat: 52.0800, lng: 4.3007, zoom: 13 },

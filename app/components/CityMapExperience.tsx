@@ -5,6 +5,7 @@ import { useMemo, useState, useCallback } from "react";
 import { discoveryLayers, getVenueLayer, type City, type DiscoveryLayer, type Venue } from "../data/platform";
 import SaveButton from "./SaveButton";
 import { trackEvent } from "../lib/analytics";
+import MapActions from "./MapActions";
 import { CITY_CENTERS, REGION_BUTTONS } from "../data/geo";
 
 function buildBookingLink(venue: Venue): string {
@@ -253,6 +254,13 @@ export default function CityMapExperience({
                 ); })()}
                 <SaveButton itemType="venue" itemId={selected.id} />
               </div>
+              <MapActions
+                lat={selected.coordinates.lat}
+                lng={selected.coordinates.lng}
+                name={selected.name}
+                venueId={selected.id}
+                compact
+              />
             </>
           ) : (
             <div className="map-zen-sheet-venue-name" style={{ color: "rgba(245,240,230,0.48)", fontSize: "14px" }}>

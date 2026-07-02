@@ -1,10 +1,13 @@
 "use client";
 
 import "leaflet/dist/leaflet.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import L from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl, useMap } from "react-leaflet";
 import type { City, Venue } from "../data/platform";
+import { getTileConfig } from "../data/geo";
+import { walkingDirectionsUrl, streetViewUrl } from "./MapActions";
+import { trackEvent } from "../lib/analytics";
 
 function FlyTo({ lat, lng, zoom }: { lat: number; lng: number; zoom: number }) {
   const map = useMap();
@@ -107,6 +110,50 @@ const londonBrandIcon = L.divIcon({
   popupAnchor: [0, -54],
 });
 
+const userLocationIcon = L.divIcon({
+  className: "xred-leaflet-user-marker",
+  html: "<span></span><i></i>",
+  iconSize: [22, 22],
+  iconAnchor: [11, 11],
+});
+
+function LocateButton() {
+  const map = useMap();
+  const [position, setPosition] = useState<{ lat: number; lng: number } | null>(null);
+  const [state, setState] = useState<"idle" | "locating" | "denied">("idle");
+
+  const locate = () => {
+    if (!navigator.geolocation) { setState("denied"); return; }
+    setState("locating");
+    trackEvent("locate_me", {});
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const next = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        setPosition(next);
+        setState("idle");
+        map.flyTo([next.lat, next.lng], Math.max(map.getZoom(), 15), { duration: 1.1 });
+      },
+      () => setState("denied"),
+      { enableHighAccuracy: true, timeout: 8000 },
+    );
+  };
+
+  return (
+    <>
+      <button
+        type="button"
+        className={`map-locate-btn${state === "locating" ? " is-locating" : ""}`}
+        onClick={locate}
+        aria-label="Show my location"
+        title={state === "denied" ? "Location permission denied" : "Show my location"}
+      >
+        {state === "locating" ? "…" : "◎"}
+      </button>
+      {position && <Marker position={[position.lat, position.lng]} icon={userLocationIcon} zIndexOffset={500} />}
+    </>
+  );
+}
+
 const LONDON_CENTER = { lat: 51.5074, lng: -0.1278 };
 
 export default function LeafletCityMap({
@@ -131,16 +178,18 @@ export default function LeafletCityMap({
       center={[center.lat, center.lng]}
       zoom={center.zoom}
       minZoom={3}
-      maxZoom={18}
+      maxZoom={19}
       zoomControl={false}
       scrollWheelZoom
       className="platform-leaflet-map"
     >
       <FlyTo lat={center.lat} lng={center.lng} zoom={center.zoom} />
       <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution={getTileConfig().attribution}
+        url={getTileConfig().url}
+        maxZoom={getTileConfig().maxZoom}
       />
+      <LocateButton />
       {venues.map((venue) => {
         const isHotel = venue.layer === "stay";
         const isRestaurant = venue.layer === "eat";
@@ -179,6 +228,20 @@ export default function LeafletCityMap({
                   View profile →
                 </a>
               )}
+              <span className="xred-popup-nav">
+                <a
+                  href={walkingDirectionsUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.name)}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => trackEvent("directions_click", { venue: venue.id, mode: "walk" })}
+                >➤ Walk</a>
+                <a
+                  href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!)}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => trackEvent("streetview_click", { venue: venue.id })}
+                >◉ Street View</a>
+              </span>
             </Popup>
           </Marker>
         );
