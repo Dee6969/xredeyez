@@ -9707,3 +9707,131 @@ textarea:focus-visible,
   font-size: 13px;
   resize: vertical;
 }
+
+/* ═══════════════════════════════════════════
+   VENUE PAGES — HIGH BETA
+   ═══════════════════════════════════════════ */
+
+/* Honest trust strip (replaces fabricated stats) */
+.vlp-trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  justify-content: center;
+  padding: 18px 22px;
+  background: #14110A;
+  border-bottom: 1px solid rgba(245,240,230,0.09);
+}
+.vlp-trust-item {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,230,0.55);
+  font-weight: 600;
+}
+.vlp-trust-item.is-verified { color: #84C51F; }
+.vlp-trust-item.is-premium { color: #D4A847; }
+
+/* Breadcrumb */
+.vlp-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 22px 20px 0;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+.vlp-breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.vlp-breadcrumb a:hover { color: var(--text-primary); }
+.vlp-breadcrumb [aria-current] { color: var(--text-primary); }
+
+/* Hours-gap claim link */
+.vlp-hours-claim {
+  color: var(--accent-red);
+  text-decoration: none;
+  font-weight: 600;
+}
+.vlp-hours-claim:hover { text-decoration: underline; }
+
+/* Add to route */
+.route-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(245,240,230,0.28);
+  background: rgba(245,240,230,0.06);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+.route-add-btn:hover { transform: translateY(-1px); background: rgba(245,240,230,0.11); }
+.route-add-btn.is-added {
+  border-color: #84C51F;
+  color: #84C51F;
+  background: rgba(132,197,31,0.08);
+}
+
+/* Location intelligence card */
+.venue-location-card {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  border-radius: 22px;
+  background: var(--bg-card);
+}
+.venue-minimap,
+.venue-minimap-canvas {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+}
+.venue-minimap-loading {
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.venue-location-body {
+  padding: 28px;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+}
+.venue-location-address { display: grid; gap: 4px; }
+.venue-location-address strong { font-size: 17px; line-height: 1.35; }
+.venue-location-address span { font-size: 13.5px; color: var(--text-secondary); }
+.venue-location-maplink {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.venue-location-maplink:hover { color: var(--text-primary); }
+
+/* Nearby cards with walking time */
+.vlp-nearby-item { position: relative; display: grid; gap: 10px; }
+.vlp-nearby-walk {
+  justify-self: start;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent-red);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 760px) {
+  .venue-location-card { grid-template-columns: 1fr; }
+  .venue-minimap, .venue-minimap-canvas { min-height: 220px; }
+}

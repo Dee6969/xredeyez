@@ -8,6 +8,9 @@ import VenueReveal from "../../components/VenueReveal";
 import VenueShell from "../../components/VenueShell";
 import ComplianceNote from "../../components/ComplianceNote";
 import MapActions from "../../components/MapActions";
+import AddToRouteButton from "../../components/AddToRouteButton";
+import VenueLocationCard from "../../components/VenueLocationCard";
+import { formatWalk, nearestVenues } from "../../lib/distance";
 import { getCity, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
 import { breadcrumbSchema, localBusinessSchema, toJsonLd } from "../../lib/schema";
 
@@ -65,9 +68,8 @@ export default async function VenuePage({ params }: VenuePageProps) {
   const venue = getVenue(slug);
   if (!venue) notFound();
 
-  const related = getSortedVenuesByCity(venue.cityId)
-    .filter((item) => item.id !== venue.id)
-    .slice(0, 3);
+  const nearby = nearestVenues(venue, getSortedVenuesByCity(venue.cityId), 3);
+  const related = nearby.map((n) => n.venue);
 
   const brand = venue.brand;
   const primaryRgb = brand ? hexToRgb(brand.primaryColor) : "24,22,15";
@@ -163,6 +165,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                 </a>
               )}
               <SaveButton itemType="venue" itemId={venue.id} label="Save" />
+              <AddToRouteButton venueId={venue.id} cityId={venue.cityId} accent={accent} />
               <Link href={`/cities/${venue.cityId}/map`} className="vlp-btn-ghost">
                 View on Map
               </Link>
@@ -194,30 +197,26 @@ export default async function VenuePage({ params }: VenuePageProps) {
         {/* ══════════════════════════════════════
             STATS BAR — premium partners only
             ══════════════════════════════════════ */}
-        {isPartner && isPremium && (
-          <div className="vlp-stats-bar">
-            <div className="vlp-stat">
-              <span className="vlp-stat-val">2.4k</span>
-              <span className="vlp-stat-label">Views this month</span>
-            </div>
-            <div className="vlp-stat">
-              <span className="vlp-stat-val">148</span>
-              <span className="vlp-stat-label">Saves</span>
-            </div>
-            <div className="vlp-stat">
-              <span className="vlp-stat-val" style={{ color: accent }}>#2</span>
-              <span className="vlp-stat-label">City ranking</span>
-            </div>
-            <div className="vlp-stat">
-              <span className="vlp-stat-val">38</span>
-              <span className="vlp-stat-label">Referral clicks</span>
-            </div>
+        {isPartner && (
+          <div className="vlp-trust-strip">
+            <span className="vlp-trust-item is-verified">✓ Verified partner</span>
+            <span className="vlp-trust-item">Editor reviewed</span>
+            <span className="vlp-trust-item">On the {venue.city} live map</span>
+            {isPremium && <span className="vlp-trust-item is-premium">Premium listing</span>}
           </div>
         )}
 
         {/* ══════════════════════════════════════
             TITLE CARD — venue name large
             ══════════════════════════════════════ */}
+        <nav className="vlp-breadcrumb" aria-label="Breadcrumb">
+          <Link href="/cities">Cities</Link>
+          <span aria-hidden>/</span>
+          <Link href={`/cities/${venue.cityId}`}>{venue.city}</Link>
+          <span aria-hidden>/</span>
+          <span aria-current="page">{venue.name}</span>
+        </nav>
+
         <VenueReveal>
           <section className="vlp-title-card">
             <p className="vlp-title-card-eyebrow">
@@ -291,12 +290,19 @@ export default async function VenuePage({ params }: VenuePageProps) {
                     </span>
                   </div>
                 )}
-                {venue.openingHours && (
-                  <div className="vlp-story-fact-row">
-                    <span className="vlp-story-fact-label">Hours</span>
-                    <span className="vlp-story-fact-val">{venue.openingHours}</span>
-                  </div>
-                )}
+                <div className="vlp-story-fact-row">
+                  <span className="vlp-story-fact-label">Hours</span>
+                  <span className="vlp-story-fact-val">
+                    {venue.openingHours || (
+                      <>
+                        Not verified yet —{" "}
+                        <Link href={`/partners/claim?venue=${venue.slug}`} className="vlp-hours-claim">
+                          own this place? Update it
+                        </Link>
+                      </>
+                    )}
+                  </span>
+                </div>
                 <div className="vlp-story-fact-row">
                   <span className="vlp-story-fact-label">Neighborhood</span>
                   <span className="vlp-story-fact-val">{venue.neighborhood}</span>
@@ -323,6 +329,17 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   {brand?.logoText || venue.name} official site →
                 </a>
               )}
+            </div>
+          </section>
+        </VenueReveal>
+
+        {/* ══════════════════════════════════════
+            LOCATION INTELLIGENCE
+            ══════════════════════════════════════ */}
+        <VenueReveal>
+          <section className="vlp-related">
+            <div className="vlp-related-inner">
+              <VenueLocationCard venue={venue} accent={accent} />
             </div>
           </section>
         </VenueReveal>
@@ -508,8 +525,13 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   Keep moving.
                 </h2>
                 <div className="platform-card-grid">
-                  {related.map((item) => (
-                    <VenueCard key={item.id} venue={item} />
+                  {nearby.map(({ venue: item, metres }) => (
+                    <div key={item.id} className="vlp-nearby-item">
+                      <VenueCard venue={item} />
+                      {metres !== null && (
+                        <span className="vlp-nearby-walk">➤ {formatWalk(metres)}</span>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>

@@ -1,0 +1,554 @@
+From 9576896f00a2a69f80e6e2f23b988c634a081f1b Mon Sep 17 00:00:00 2001
+From: Claude <claude@anthropic.com>
+Date: Fri, 3 Jul 2026 13:37:46 +0000
+Subject: [PATCH] Venue pages high beta: honest trust strip (fake stats
+ removed), live mini-map, proximity nearby with walk times, add-to-route,
+ hours-gap claim conversion, breadcrumbs
+
+---
+ app/components/AddToRouteButton.tsx  |  85 ++++++++++++++++++
+ app/components/VenueLocationCard.tsx |  50 +++++++++++
+ app/components/VenueMiniMap.tsx      |  40 +++++++++
+ app/globals.css                      | 128 +++++++++++++++++++++++++++
+ app/lib/distance.ts                  |  57 ++++++++++++
+ app/venues/[slug]/page.tsx           |  80 +++++++++++------
+ 6 files changed, 411 insertions(+), 29 deletions(-)
+ create mode 100644 app/components/AddToRouteButton.tsx
+ create mode 100644 app/components/VenueLocationCard.tsx
+ create mode 100644 app/components/VenueMiniMap.tsx
+ create mode 100644 app/lib/distance.ts
+
+diff --git a/app/components/AddToRouteButton.tsx b/app/components/AddToRouteButton.tsx
+new file mode 100644
+index 0000000..3969b40
+--- /dev/null
++++ b/app/components/AddToRouteButton.tsx
+@@ -0,0 +1,85 @@
++"use client";
++
++import { useEffect, useState } from "react";
++import { trackEvent } from "../lib/analytics";
++
++const DRAFT_KEY = "xred-route-draft";
++
++interface RouteDraft {
++  cityId: string;
++  venueIds: string[];
++}
++
++function readDraft(): RouteDraft | null {
++  if (typeof window === "undefined") return null;
++  try {
++    return JSON.parse(window.localStorage.getItem(DRAFT_KEY) || "null");
++  } catch {
++    return null;
++  }
++}
++
++function writeDraft(draft: RouteDraft | null) {
++  if (draft && draft.venueIds.length > 0) {
++    window.localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
++  } else {
++    window.localStorage.removeItem(DRAFT_KEY);
++  }
++  window.dispatchEvent(new Event("xred-route-draft-change"));
++}
++
++/**
++ * Route Builder foundation: travellers assemble a draft route as they
++ * browse. Stored locally for now; becomes a synced CuratedRoute once
++ * accounts land. Starting a route in a different city resets the draft.
++ */
++export default function AddToRouteButton({
++  venueId,
++  cityId,
++  accent,
++}: {
++  venueId: string;
++  cityId: string;
++  accent?: string;
++}) {
++  const [inRoute, setInRoute] = useState(false);
++  const [count, setCount] = useState(0);
++
++  useEffect(() => {
++    const sync = () => {
++      const draft = readDraft();
++      setInRoute(Boolean(draft && draft.cityId === cityId && draft.venueIds.includes(venueId)));
++      setCount(draft && draft.cityId === cityId ? draft.venueIds.length : 0);
++    };
++    sync();
++    window.addEventListener("xred-route-draft-change", sync);
++    return () => window.removeEventListener("xred-route-draft-change", sync);
++  }, [venueId, cityId]);
++
++  const toggle = () => {
++    const existing = readDraft();
++    const draft: RouteDraft =
++      existing && existing.cityId === cityId ? existing : { cityId, venueIds: [] };
++
++    if (draft.venueIds.includes(venueId)) {
++      draft.venueIds = draft.venueIds.filter((id) => id !== venueId);
++    } else {
++      draft.venueIds = [...draft.venueIds, venueId];
++      trackEvent("route_build_click", { venue: venueId, city: cityId, stops: draft.venueIds.length });
++    }
++    writeDraft(draft);
++  };
++
++  return (
++    <button
++      type="button"
++      data-hover
++      onClick={toggle}
++      className={`route-add-btn${inRoute ? " is-added" : ""}`}
++      style={accent && inRoute ? { borderColor: accent, color: accent } : undefined}
++      aria-pressed={inRoute}
++    >
++      {inRoute ? `✓ In your route${count > 1 ? ` (${count})` : ""}` : "+ Add to route"}
++    </button>
++  );
++}
+diff --git a/app/components/VenueLocationCard.tsx b/app/components/VenueLocationCard.tsx
+new file mode 100644
+index 0000000..8549cdd
+--- /dev/null
++++ b/app/components/VenueLocationCard.tsx
+@@ -0,0 +1,50 @@
++"use client";
++
++import dynamic from "next/dynamic";
++import Link from "next/link";
++import MapActions from "./MapActions";
++import type { Venue } from "../data/platform";
++
++const VenueMiniMap = dynamic(() => import("./VenueMiniMap"), {
++  ssr: false,
++  loading: () => <div className="venue-minimap venue-minimap-loading">Loading map…</div>,
++});
++
++/**
++ * The location intelligence block on every venue page:
++ * live mini-map, address, and native navigation actions.
++ */
++export default function VenueLocationCard({ venue, accent }: { venue: Venue; accent?: string }) {
++  const hasGeo = Boolean(venue.coordinates?.lat && venue.coordinates?.lng);
++
++  return (
++    <div className="venue-location-card">
++      {hasGeo && <VenueMiniMap venue={venue} />}
++      <div className="venue-location-body">
++        <div className="eyebrow" style={accent ? { color: accent } : undefined}>Find it</div>
++        <div className="venue-location-address">
++          {venue.address ? (
++            <>
++              <strong>{venue.address}{venue.postcode ? `, ${venue.postcode}` : ""}</strong>
++              <span>{venue.neighborhood} · {venue.city}</span>
++            </>
++          ) : (
++            <>
++              <strong>{venue.neighborhood}</strong>
++              <span>{venue.city}</span>
++            </>
++          )}
++        </div>
++        <MapActions
++          lat={venue.coordinates?.lat}
++          lng={venue.coordinates?.lng}
++          name={venue.name}
++          venueId={venue.id}
++        />
++        <Link href={`/cities/${venue.cityId}/map`} className="venue-location-maplink">
++          See it on the {venue.city} map →
++        </Link>
++      </div>
++    </div>
++  );
++}
+diff --git a/app/components/VenueMiniMap.tsx b/app/components/VenueMiniMap.tsx
+new file mode 100644
+index 0000000..3ff45cf
+--- /dev/null
++++ b/app/components/VenueMiniMap.tsx
+@@ -0,0 +1,40 @@
++"use client";
++
++import "leaflet/dist/leaflet.css";
++import L from "leaflet";
++import { MapContainer, Marker, TileLayer } from "react-leaflet";
++import type { Venue } from "../data/platform";
++import { getTileConfig } from "../data/geo";
++
++const pinIcon = L.divIcon({
++  className: "xred-leaflet-marker is-active",
++  html: "<span></span>",
++  iconSize: [38, 38],
++  iconAnchor: [19, 19],
++});
++
++export default function VenueMiniMap({ venue }: { venue: Venue }) {
++  const lat = venue.coordinates.lat!;
++  const lng = venue.coordinates.lng!;
++  const tiles = getTileConfig();
++
++  return (
++    <div className="venue-minimap">
++      <MapContainer
++        center={[lat, lng]}
++        zoom={15}
++        zoomControl={false}
++        scrollWheelZoom={false}
++        dragging={false}
++        doubleClickZoom={false}
++        touchZoom={false}
++        keyboard={false}
++        attributionControl={false}
++        className="venue-minimap-canvas"
++      >
++        <TileLayer url={tiles.url} attribution={tiles.attribution} maxZoom={tiles.maxZoom} />
++        <Marker position={[lat, lng]} icon={pinIcon} interactive={false} />
++      </MapContainer>
++    </div>
++  );
++}
+diff --git a/app/globals.css b/app/globals.css
+index 3a072cf..fec4b0b 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -9707,3 +9707,131 @@ textarea:focus-visible,
+   font-size: 13px;
+   resize: vertical;
+ }
++
++/* ═══════════════════════════════════════════
++   VENUE PAGES — HIGH BETA
++   ═══════════════════════════════════════════ */
++
++/* Honest trust strip (replaces fabricated stats) */
++.vlp-trust-strip {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 10px 26px;
++  justify-content: center;
++  padding: 18px 22px;
++  background: #14110A;
++  border-bottom: 1px solid rgba(245,240,230,0.09);
++}
++.vlp-trust-item {
++  font-size: 12px;
++  letter-spacing: 0.12em;
++  text-transform: uppercase;
++  color: rgba(245,240,230,0.55);
++  font-weight: 600;
++}
++.vlp-trust-item.is-verified { color: #84C51F; }
++.vlp-trust-item.is-premium { color: #D4A847; }
++
++/* Breadcrumb */
++.vlp-breadcrumb {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 8px;
++  align-items: center;
++  max-width: 1080px;
++  margin: 0 auto;
++  padding: 22px 20px 0;
++  font-size: 12.5px;
++  color: var(--text-muted);
++}
++.vlp-breadcrumb a {
++  color: var(--text-secondary);
++  text-decoration: none;
++}
++.vlp-breadcrumb a:hover { color: var(--text-primary); }
++.vlp-breadcrumb [aria-current] { color: var(--text-primary); }
++
++/* Hours-gap claim link */
++.vlp-hours-claim {
++  color: var(--accent-red);
++  text-decoration: none;
++  font-weight: 600;
++}
++.vlp-hours-claim:hover { text-decoration: underline; }
++
++/* Add to route */
++.route-add-btn {
++  display: inline-flex;
++  align-items: center;
++  gap: 7px;
++  height: 44px;
++  padding: 0 20px;
++  border-radius: 999px;
++  border: 1px solid rgba(245,240,230,0.28);
++  background: rgba(245,240,230,0.06);
++  color: var(--text-primary);
++  font-size: 13.5px;
++  font-weight: 600;
++  cursor: pointer;
++  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
++}
++.route-add-btn:hover { transform: translateY(-1px); background: rgba(245,240,230,0.11); }
++.route-add-btn.is-added {
++  border-color: #84C51F;
++  color: #84C51F;
++  background: rgba(132,197,31,0.08);
++}
++
++/* Location intelligence card */
++.venue-location-card {
++  display: grid;
++  grid-template-columns: 1.2fr 1fr;
++  gap: 0;
++  overflow: hidden;
++  border: 1px solid var(--border-light);
++  border-radius: 22px;
++  background: var(--bg-card);
++}
++.venue-minimap,
++.venue-minimap-canvas {
++  width: 100%;
++  height: 100%;
++  min-height: 280px;
++}
++.venue-minimap-loading {
++  display: grid;
++  place-items: center;
++  color: var(--text-muted);
++  font-size: 13px;
++}
++.venue-location-body {
++  padding: 28px;
++  display: grid;
++  align-content: center;
++  gap: 14px;
++}
++.venue-location-address { display: grid; gap: 4px; }
++.venue-location-address strong { font-size: 17px; line-height: 1.35; }
++.venue-location-address span { font-size: 13.5px; color: var(--text-secondary); }
++.venue-location-maplink {
++  font-size: 13.5px;
++  font-weight: 600;
++  color: var(--text-secondary);
++  text-decoration: none;
++}
++.venue-location-maplink:hover { color: var(--text-primary); }
++
++/* Nearby cards with walking time */
++.vlp-nearby-item { position: relative; display: grid; gap: 10px; }
++.vlp-nearby-walk {
++  justify-self: start;
++  font-size: 12.5px;
++  font-weight: 600;
++  color: var(--accent-red);
++  letter-spacing: 0.02em;
++}
++
++@media (max-width: 760px) {
++  .venue-location-card { grid-template-columns: 1fr; }
++  .venue-minimap, .venue-minimap-canvas { min-height: 220px; }
++}
+diff --git a/app/lib/distance.ts b/app/lib/distance.ts
+new file mode 100644
+index 0000000..2b98657
+--- /dev/null
++++ b/app/lib/distance.ts
+@@ -0,0 +1,57 @@
++import type { Venue } from "../data/platform";
++
++/** Haversine distance in metres between two coordinates. */
++export function distanceMetres(aLat: number, aLng: number, bLat: number, bLng: number): number {
++  const R = 6371000;
++  const dLat = ((bLat - aLat) * Math.PI) / 180;
++  const dLng = ((bLng - aLng) * Math.PI) / 180;
++  const la1 = (aLat * Math.PI) / 180;
++  const la2 = (bLat * Math.PI) / 180;
++  const h =
++    Math.sin(dLat / 2) ** 2 + Math.cos(la1) * Math.cos(la2) * Math.sin(dLng / 2) ** 2;
++  return 2 * R * Math.asin(Math.sqrt(h));
++}
++
++/** Rough walking time — 80m/min (~4.8 km/h), minimum 1 minute. */
++export function walkMinutes(metres: number): number {
++  return Math.max(1, Math.round(metres / 80));
++}
++
++export function formatWalk(metres: number): string {
++  const mins = walkMinutes(metres);
++  if (mins <= 45) return `${mins} min walk`;
++  const km = (metres / 1000).toFixed(1);
++  return `${km} km away`;
++}
++
++/**
++ * Nearest venues by real distance when the anchor has coordinates,
++ * ranked by proximity with a light boost for featured/premium listings
++ * at similar distance. Falls back to the city's editorial sort.
++ */
++export function nearestVenues(
++  anchor: Venue,
++  pool: Venue[],
++  limit = 3,
++): { venue: Venue; metres: number | null }[] {
++  const others = pool.filter((v) => v.id !== anchor.id && v.cityId === anchor.cityId);
++  const aLat = anchor.coordinates?.lat;
++  const aLng = anchor.coordinates?.lng;
++
++  if (!aLat || !aLng) {
++    return others.slice(0, limit).map((venue) => ({ venue, metres: null }));
++  }
++
++  return others
++    .filter((v) => v.coordinates?.lat && v.coordinates?.lng)
++    .map((venue) => ({
++      venue,
++      metres: distanceMetres(aLat, aLng, venue.coordinates.lat!, venue.coordinates.lng!),
++    }))
++    .sort((a, b) => {
++      const boost = (v: Venue) =>
++        v.listingTier === "premium" ? 0.82 : v.listingTier === "featured" ? 0.9 : 1;
++      return a.metres * boost(a.venue) - b.metres * boost(b.venue);
++    })
++    .slice(0, limit);
++}
+diff --git a/app/venues/[slug]/page.tsx b/app/venues/[slug]/page.tsx
+index d73a2f4..c32e0bd 100644
+--- a/app/venues/[slug]/page.tsx
++++ b/app/venues/[slug]/page.tsx
+@@ -8,6 +8,9 @@ import VenueReveal from "../../components/VenueReveal";
+ import VenueShell from "../../components/VenueShell";
+ import ComplianceNote from "../../components/ComplianceNote";
+ import MapActions from "../../components/MapActions";
++import AddToRouteButton from "../../components/AddToRouteButton";
++import VenueLocationCard from "../../components/VenueLocationCard";
++import { formatWalk, nearestVenues } from "../../lib/distance";
+ import { getCity, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
+ import { breadcrumbSchema, localBusinessSchema, toJsonLd } from "../../lib/schema";
+ 
+@@ -65,9 +68,8 @@ export default async function VenuePage({ params }: VenuePageProps) {
+   const venue = getVenue(slug);
+   if (!venue) notFound();
+ 
+-  const related = getSortedVenuesByCity(venue.cityId)
+-    .filter((item) => item.id !== venue.id)
+-    .slice(0, 3);
++  const nearby = nearestVenues(venue, getSortedVenuesByCity(venue.cityId), 3);
++  const related = nearby.map((n) => n.venue);
+ 
+   const brand = venue.brand;
+   const primaryRgb = brand ? hexToRgb(brand.primaryColor) : "24,22,15";
+@@ -163,6 +165,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
+                 </a>
+               )}
+               <SaveButton itemType="venue" itemId={venue.id} label="Save" />
++              <AddToRouteButton venueId={venue.id} cityId={venue.cityId} accent={accent} />
+               <Link href={`/cities/${venue.cityId}/map`} className="vlp-btn-ghost">
+                 View on Map
+               </Link>
+@@ -194,30 +197,26 @@ export default async function VenuePage({ params }: VenuePageProps) {
+         {/* ══════════════════════════════════════
+             STATS BAR — premium partners only
+             ══════════════════════════════════════ */}
+-        {isPartner && isPremium && (
+-          <div className="vlp-stats-bar">
+-            <div className="vlp-stat">
+-              <span className="vlp-stat-val">2.4k</span>
+-              <span className="vlp-stat-label">Views this month</span>
+-            </div>
+-            <div className="vlp-stat">
+-              <span className="vlp-stat-val">148</span>
+-              <span className="vlp-stat-label">Saves</span>
+-            </div>
+-            <div className="vlp-stat">
+-              <span className="vlp-stat-val" style={{ color: accent }}>#2</span>
+-              <span className="vlp-stat-label">City ranking</span>
+-            </div>
+-            <div className="vlp-stat">
+-              <span className="vlp-stat-val">38</span>
+-              <span className="vlp-stat-label">Referral clicks</span>
+-            </div>
++        {isPartner && (
++          <div className="vlp-trust-strip">
++            <span className="vlp-trust-item is-verified">✓ Verified partner</span>
++            <span className="vlp-trust-item">Editor reviewed</span>
++            <span className="vlp-trust-item">On the {venue.city} live map</span>
++            {isPremium && <span className="vlp-trust-item is-premium">Premium listing</span>}
+           </div>
+         )}
+ 
+         {/* ══════════════════════════════════════
+             TITLE CARD — venue name large
+             ══════════════════════════════════════ */}
++        <nav className="vlp-breadcrumb" aria-label="Breadcrumb">
++          <Link href="/cities">Cities</Link>
++          <span aria-hidden>/</span>
++          <Link href={`/cities/${venue.cityId}`}>{venue.city}</Link>
++          <span aria-hidden>/</span>
++          <span aria-current="page">{venue.name}</span>
++        </nav>
++
+         <VenueReveal>
+           <section className="vlp-title-card">
+             <p className="vlp-title-card-eyebrow">
+@@ -291,12 +290,19 @@ export default async function VenuePage({ params }: VenuePageProps) {
+                     </span>
+                   </div>
+                 )}
+-                {venue.openingHours && (
+-                  <div className="vlp-story-fact-row">
+-                    <span className="vlp-story-fact-label">Hours</span>
+-                    <span className="vlp-story-fact-val">{venue.openingHours}</span>
+-                  </div>
+-                )}
++                <div className="vlp-story-fact-row">
++                  <span className="vlp-story-fact-label">Hours</span>
++                  <span className="vlp-story-fact-val">
++                    {venue.openingHours || (
++                      <>
++                        Not verified yet —{" "}
++                        <Link href={`/partners/claim?venue=${venue.slug}`} className="vlp-hours-claim">
++                          own this place? Update it
++                        </Link>
++                      </>
++                    )}
++                  </span>
++                </div>
+                 <div className="vlp-story-fact-row">
+                   <span className="vlp-story-fact-label">Neighborhood</span>
+                   <span className="vlp-story-fact-val">{venue.neighborhood}</span>
+@@ -327,6 +333,17 @@ export default async function VenuePage({ params }: VenuePageProps) {
+           </section>
+         </VenueReveal>
+ 
++        {/* ══════════════════════════════════════
++            LOCATION INTELLIGENCE
++            ══════════════════════════════════════ */}
++        <VenueReveal>
++          <section className="vlp-related">
++            <div className="vlp-related-inner">
++              <VenueLocationCard venue={venue} accent={accent} />
++            </div>
++          </section>
++        </VenueReveal>
++
+         {/* ══════════════════════════════════════
+             FULL-BLEED PHOTO BREAK
+             ══════════════════════════════════════ */}
+@@ -508,8 +525,13 @@ export default async function VenuePage({ params }: VenuePageProps) {
+                   Keep moving.
+                 </h2>
+                 <div className="platform-card-grid">
+-                  {related.map((item) => (
+-                    <VenueCard key={item.id} venue={item} />
++                  {nearby.map(({ venue: item, metres }) => (
++                    <div key={item.id} className="vlp-nearby-item">
++                      <VenueCard venue={item} />
++                      {metres !== null && (
++                        <span className="vlp-nearby-walk">➤ {formatWalk(metres)}</span>
++                      )}
++                    </div>
+                   ))}
+                 </div>
+               </div>
+-- 
+2.43.0
+
