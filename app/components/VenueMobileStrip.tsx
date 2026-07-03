@@ -6,7 +6,7 @@ import { trackEvent } from "../lib/analytics";
 export default function VenueMobileStrip({ venue }: { venue: Venue }) {
   const hasGeo = Boolean(venue.coordinates?.lat && venue.coordinates?.lng);
   const walkUrl = hasGeo
-    ? walkingDirectionsUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.name)
+    ? walkingDirectionsUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.name, venue.address, venue.city)
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${venue.name} ${venue.city}`)}`;
 
   return (

@@ -495,6 +495,8 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   lat={venue.coordinates?.lat}
                   lng={venue.coordinates?.lng}
                   name={venue.name}
+                  address={venue.address}
+                  city={venue.city}
                   venueId={venue.id}
                 />
               </div>

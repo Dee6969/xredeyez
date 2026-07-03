@@ -230,7 +230,7 @@ export default function LeafletCityMap({
               )}
               <span className="xred-popup-nav">
                 <a
-                  href={walkingDirectionsUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.name)}
+                  href={walkingDirectionsUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.name, venue.address, venue.city)}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => trackEvent("directions_click", { venue: venue.id, mode: "walk" })}

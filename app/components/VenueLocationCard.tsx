@@ -39,6 +39,8 @@ export default function VenueLocationCard({ venue, accent }: { venue: Venue; acc
           lat={venue.coordinates?.lat}
           lng={venue.coordinates?.lng}
           name={venue.name}
+          address={venue.address}
+          city={venue.city}
           venueId={venue.id}
         />
         <Link href={`/cities/${venue.cityId}/map`} className="venue-location-maplink">

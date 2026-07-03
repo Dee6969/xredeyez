@@ -258,6 +258,8 @@ export default function CityMapExperience({
                 lat={selected.coordinates.lat}
                 lng={selected.coordinates.lng}
                 name={selected.name}
+                address={selected.address}
+                city={selected.city}
                 venueId={selected.id}
                 compact
               />

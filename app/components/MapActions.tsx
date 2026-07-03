@@ -17,13 +17,27 @@ function isAppleDevice(): boolean {
   return /iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
-export function walkingDirectionsUrl(lat: number, lng: number, name?: string): string {
+/**
+ * Directions destination strategy: prefer the human address.
+ * Google/Apple resolve "Name, Street, City" against their own business
+ * registry and route to the real entrance — more accurate than our pin,
+ * which may sit on a rooftop or street centreline. Raw coordinates are
+ * the fallback when no address exists.
+ */
+export function walkingDirectionsUrl(
+  lat: number,
+  lng: number,
+  name?: string,
+  address?: string,
+  city?: string,
+): string {
+  const destination =
+    address && city ? `${name ? `${name}, ` : ""}${address}, ${city}` : `${lat},${lng}`;
   if (isAppleDevice()) {
-    const params = new URLSearchParams({ daddr: `${lat},${lng}`, dirflg: "w" });
-    if (name) params.set("q", name);
+    const params = new URLSearchParams({ daddr: destination, dirflg: "w" });
     return `https://maps.apple.com/?${params.toString()}`;
   }
-  return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=walking`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=walking`;
 }
 
 export function streetViewUrl(lat: number, lng: number): string {
@@ -34,12 +48,16 @@ export default function MapActions({
   lat,
   lng,
   name,
+  address,
+  city,
   venueId,
   compact = false,
 }: {
   lat?: number;
   lng?: number;
   name?: string;
+  address?: string;
+  city?: string;
   venueId?: string;
   compact?: boolean;
 }) {
@@ -48,7 +66,7 @@ export default function MapActions({
   return (
     <div className={`map-actions${compact ? " is-compact" : ""}`}>
       <a
-        href={walkingDirectionsUrl(lat, lng, name)}
+        href={walkingDirectionsUrl(lat, lng, name, address, city)}
         target="_blank"
         rel="noopener noreferrer"
         className="map-action-btn is-walk"

@@ -469,7 +469,7 @@ export const venues: Venue[] = [
     highlights: ["American-owned since 1993", "Connoisseur-grade menu", "Tiny room, massive reputation", "Cult status worldwide"],
     bestFor: ["Experienced visitors", "Connoisseur stop", "Culture history"],
     vibeIds: ["hidden", "tourist", "creative"],
-    coordinates: { x: 48, y: 38, lat: 52.3727, lng: 4.8899 },
+    coordinates: { x: 48, y: 38, lat: 52.374596, lng: 4.888972 },
     guideNote: "Grey Area doesn't need to explain itself. The queue outside does that. Go with patience, no large groups, and respect for a small space that punches far above its size.",
     openingHours: "Daily 12:00–21:00",
     listingTier: "featured",
