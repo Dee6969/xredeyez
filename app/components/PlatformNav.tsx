@@ -118,6 +118,7 @@ export default function PlatformNav() {
             <Link href="/partners/list" className="platform-nav-pill platform-list-pill">
               List Your Business
             </Link>
+            {(pathname?.startsWith("/shop") || itemCount > 0) && (
             <button
               onClick={() => cartDispatch({ type: "OPEN" })}
               aria-label={`Cart${itemCount > 0 ? ` (${itemCount} items)` : ""}`}
@@ -132,6 +133,7 @@ export default function PlatformNav() {
                 <span className="platform-cart-count">{itemCount}</span>
               )}
             </button>
+            )}
             <Link href="/premium" className="platform-secondary-action" style={{ minHeight: "38px", padding: "9px 20px", fontSize: "13px" }}>
               Premium
             </Link>
