@@ -1,54 +1,45 @@
-import type { Metadata } from "next";
-import AdminLogin from "../../components/AdminLogin";
-import AdminNav from "../../components/AdminNav";
 import { isAdminAuthed } from "../../lib/adminAuth";
+import { formatAdminDate } from "../../lib/adminData";
 import { readContacts } from "../../lib/outreach/store";
-
-export const metadata: Metadata = {
-  title: "Outreach Pipeline | XRED EYEZ Admin",
-  robots: { index: false, follow: false },
-};
 
 export const dynamic = "force-dynamic";
 
-function formatDate(iso?: string): string {
-  if (!iso) return "—";
-  try {
-    return new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
-  } catch {
-    return iso;
-  }
-}
-
 export default async function AdminOutreachPage() {
-  if (!(await isAdminAuthed())) {
-    return (
-      <main className="admin-leads-shell">
-        <AdminLogin />
-      </main>
-    );
-  }
+  if (!(await isAdminAuthed())) return null;
 
   const contacts = await readContacts().catch(() => []);
+  const active = contacts.filter((c) => c.status === "active").length;
+  const complete = contacts.filter((c) => c.status === "complete").length;
+  const unsubscribed = contacts.filter((c) => c.status === "unsubscribed").length;
   const sorted = [...contacts].sort((a, b) => (b.lastSentAt || b.createdAt).localeCompare(a.lastSentAt || a.createdAt));
 
   return (
-    <main className="admin-leads-shell">
-      <header className="admin-leads-head">
-        <div className="eyebrow">XRED EYEZ ADMIN</div>
-        <h1>Outreach pipeline</h1>
-        <AdminNav />
+    <>
+      <header className="adm-page-head">
+        <div>
+          <h1>Outreach pipeline</h1>
+          <p className="adm-page-sub">
+            {contacts.length} contacts · daily cron at 08:00 · sequences via Resend.
+          </p>
+        </div>
+        <div className="adm-head-pills">
+          <span className="adm-pill is-green">{active} active</span>
+          <span className="adm-pill">{complete} complete</span>
+          <span className="adm-pill is-red">{unsubscribed} unsubscribed</span>
+        </div>
       </header>
 
-      {sorted.length === 0 ? (
-        <p className="admin-leads-empty">No outreach contacts in storage.</p>
+      {contacts.length === 0 ? (
+        <div className="adm-empty">
+          <strong>No outreach contacts.</strong>
+          <p>Contacts appear once added to the outreach store.</p>
+        </div>
       ) : (
-        <div className="admin-table-wrap">
-          <table className="admin-table">
+        <div className="adm-panel adm-panel-flush">
+          <table className="adm-table">
             <thead>
               <tr>
                 <th>Business</th>
-                <th>Email</th>
                 <th>Sector</th>
                 <th>Sequence</th>
                 <th>Step</th>
@@ -59,21 +50,25 @@ export default async function AdminOutreachPage() {
             <tbody>
               {sorted.map((c) => (
                 <tr key={c.id}>
-                  <td>{c.businessName}{c.venueName ? ` (${c.venueName})` : ""}</td>
-                  <td><a href={`mailto:${c.email}`}>{c.email}</a></td>
-                  <td>{c.sector}</td>
-                  <td>{c.sequence}</td>
-                  <td>{c.step}</td>
                   <td>
-                    <span className={`admin-status is-${c.status}`}>{c.status}</span>
+                    <strong className="adm-cell-primary">{c.businessName}</strong>
+                    <a className="adm-cell-link" href={`mailto:${c.email}`}>{c.email}</a>
                   </td>
-                  <td>{formatDate(c.lastSentAt || c.createdAt)}</td>
+                  <td className="adm-cell-sub">{c.sector}</td>
+                  <td className="adm-cell-sub">{c.sequence}</td>
+                  <td className="adm-cell-time">{c.step}</td>
+                  <td>
+                    <span className={`adm-pill${c.status === "active" ? " is-green" : c.status === "unsubscribed" ? " is-red" : ""}`}>
+                      {c.status}
+                    </span>
+                  </td>
+                  <td className="adm-cell-time">{formatAdminDate(c.lastSentAt || c.createdAt)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       )}
-    </main>
+    </>
   );
 }
