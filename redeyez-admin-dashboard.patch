@@ -1,0 +1,658 @@
+From 98ec100d6c5f6f20a0d8eff7cab944f15ca09dfb Mon Sep 17 00:00:00 2001
+From: Claude <claude@anthropic.com>
+Date: Fri, 3 Jul 2026 14:31:08 +0000
+Subject: [PATCH] Admin control room: session auth, overview dashboard,
+ leads/outreach/orders views
+
+---
+ app/admin/leads/page.tsx       |  16 ++---
+ app/admin/orders/page.tsx      |  92 +++++++++++++++++++++++++
+ app/admin/outreach/page.tsx    |  79 ++++++++++++++++++++++
+ app/admin/page.tsx             | 102 ++++++++++++++++++++++++++++
+ app/api/admin/session/route.ts |  28 ++++++++
+ app/components/AdminLogin.tsx  |  44 ++++++++++++
+ app/components/AdminNav.tsx    |  38 +++++++++++
+ app/globals.css                | 119 +++++++++++++++++++++++++++++++++
+ app/lib/adminAuth.ts           |  35 ++++++++++
+ 9 files changed, 543 insertions(+), 10 deletions(-)
+ create mode 100644 app/admin/orders/page.tsx
+ create mode 100644 app/admin/outreach/page.tsx
+ create mode 100644 app/admin/page.tsx
+ create mode 100644 app/api/admin/session/route.ts
+ create mode 100644 app/components/AdminLogin.tsx
+ create mode 100644 app/components/AdminNav.tsx
+ create mode 100644 app/lib/adminAuth.ts
+
+diff --git a/app/admin/leads/page.tsx b/app/admin/leads/page.tsx
+index dfd2c38..4429740 100644
+--- a/app/admin/leads/page.tsx
++++ b/app/admin/leads/page.tsx
+@@ -1,5 +1,8 @@
+ import type { Metadata } from "next";
+ import { get, list } from "@vercel/blob";
++import AdminLogin from "../../components/AdminLogin";
++import AdminNav from "../../components/AdminNav";
++import { isAdminAuthed } from "../../lib/adminAuth";
+ 
+ export const metadata: Metadata = {
+   title: "Leads Inbox | XRED EYEZ Admin",
+@@ -82,19 +85,11 @@ export default async function AdminLeadsPage({
+   searchParams: Promise<{ key?: string }>;
+ }) {
+   const { key } = await searchParams;
+-  const secret = process.env.ADMIN_DASH_SECRET || process.env.OUTREACH_ADMIN_SECRET;
+ 
+-  if (!secret || key !== secret) {
++  if (!(await isAdminAuthed(key))) {
+     return (
+       <main className="admin-leads-shell">
+-        <div className="admin-leads-lock">
+-          <div className="eyebrow">XRED EYEZ ADMIN</div>
+-          <h1>Locked.</h1>
+-          <p>
+-            Append <code>?key=&lt;ADMIN_DASH_SECRET&gt;</code> to this URL.
+-            {!secret && " (No admin secret is configured in the environment yet.)"}
+-          </p>
+-        </div>
++        <AdminLogin />
+       </main>
+     );
+   }
+@@ -111,6 +106,7 @@ export default async function AdminLeadsPage({
+       <header className="admin-leads-head">
+         <div className="eyebrow">XRED EYEZ ADMIN</div>
+         <h1>Leads inbox</h1>
++        <AdminNav />
+         <div className="admin-leads-stats">
+           <div className="admin-leads-stat">
+             <strong>{partnerLeads.length}</strong>
+diff --git a/app/admin/orders/page.tsx b/app/admin/orders/page.tsx
+new file mode 100644
+index 0000000..a4036ff
+--- /dev/null
++++ b/app/admin/orders/page.tsx
+@@ -0,0 +1,92 @@
++import type { Metadata } from "next";
++import AdminLogin from "../../components/AdminLogin";
++import AdminNav from "../../components/AdminNav";
++import { isAdminAuthed } from "../../lib/adminAuth";
++
++export const metadata: Metadata = {
++  title: "Orders | XRED EYEZ Admin",
++  robots: { index: false, follow: false },
++};
++
++export const dynamic = "force-dynamic";
++
++interface OrderRow {
++  id: string;
++  amount: string;
++  status: string;
++  email: string;
++  created: string;
++}
++
++async function fetchOrders(): Promise<OrderRow[] | null> {
++  if (!process.env.STRIPE_SECRET_KEY) return null;
++  try {
++    const { default: getStripe } = await import("../../lib/stripe");
++    const stripe = getStripe();
++    const intents = await stripe.paymentIntents.list({ limit: 50 });
++    return intents.data.map((p) => ({
++      id: p.id,
++      amount: `${(p.amount / 100).toFixed(2)} ${p.currency.toUpperCase()}`,
++      status: p.status,
++      email: p.receipt_email || "—",
++      created: new Date(p.created * 1000).toLocaleString("en-GB", {
++        day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit",
++      }),
++    }));
++  } catch {
++    return [];
++  }
++}
++
++export default async function AdminOrdersPage() {
++  if (!(await isAdminAuthed())) {
++    return (
++      <main className="admin-leads-shell">
++        <AdminLogin />
++      </main>
++    );
++  }
++
++  const orders = await fetchOrders();
++
++  return (
++    <main className="admin-leads-shell">
++      <header className="admin-leads-head">
++        <div className="eyebrow">XRED EYEZ ADMIN</div>
++        <h1>Shop orders</h1>
++        <AdminNav />
++      </header>
++
++      {orders === null ? (
++        <p className="admin-leads-empty">Stripe isn&apos;t configured in this environment.</p>
++      ) : orders.length === 0 ? (
++        <p className="admin-leads-empty">No payments found.</p>
++      ) : (
++        <div className="admin-table-wrap">
++          <table className="admin-table">
++            <thead>
++              <tr>
++                <th>Created</th>
++                <th>Amount</th>
++                <th>Status</th>
++                <th>Customer</th>
++                <th>Payment ID</th>
++              </tr>
++            </thead>
++            <tbody>
++              {orders.map((o) => (
++                <tr key={o.id}>
++                  <td>{o.created}</td>
++                  <td>{o.amount}</td>
++                  <td><span className={`admin-status is-${o.status === "succeeded" ? "complete" : "active"}`}>{o.status}</span></td>
++                  <td>{o.email !== "—" ? <a href={`mailto:${o.email}`}>{o.email}</a> : "—"}</td>
++                  <td className="admin-mono">{o.id}</td>
++                </tr>
++              ))}
++            </tbody>
++          </table>
++        </div>
++      )}
++    </main>
++  );
++}
+diff --git a/app/admin/outreach/page.tsx b/app/admin/outreach/page.tsx
+new file mode 100644
+index 0000000..50f00d9
+--- /dev/null
++++ b/app/admin/outreach/page.tsx
+@@ -0,0 +1,79 @@
++import type { Metadata } from "next";
++import AdminLogin from "../../components/AdminLogin";
++import AdminNav from "../../components/AdminNav";
++import { isAdminAuthed } from "../../lib/adminAuth";
++import { readContacts } from "../../lib/outreach/store";
++
++export const metadata: Metadata = {
++  title: "Outreach Pipeline | XRED EYEZ Admin",
++  robots: { index: false, follow: false },
++};
++
++export const dynamic = "force-dynamic";
++
++function formatDate(iso?: string): string {
++  if (!iso) return "—";
++  try {
++    return new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
++  } catch {
++    return iso;
++  }
++}
++
++export default async function AdminOutreachPage() {
++  if (!(await isAdminAuthed())) {
++    return (
++      <main className="admin-leads-shell">
++        <AdminLogin />
++      </main>
++    );
++  }
++
++  const contacts = await readContacts().catch(() => []);
++  const sorted = [...contacts].sort((a, b) => (b.lastSentAt || b.createdAt).localeCompare(a.lastSentAt || a.createdAt));
++
++  return (
++    <main className="admin-leads-shell">
++      <header className="admin-leads-head">
++        <div className="eyebrow">XRED EYEZ ADMIN</div>
++        <h1>Outreach pipeline</h1>
++        <AdminNav />
++      </header>
++
++      {sorted.length === 0 ? (
++        <p className="admin-leads-empty">No outreach contacts in storage.</p>
++      ) : (
++        <div className="admin-table-wrap">
++          <table className="admin-table">
++            <thead>
++              <tr>
++                <th>Business</th>
++                <th>Email</th>
++                <th>Sector</th>
++                <th>Sequence</th>
++                <th>Step</th>
++                <th>Status</th>
++                <th>Last sent</th>
++              </tr>
++            </thead>
++            <tbody>
++              {sorted.map((c) => (
++                <tr key={c.id}>
++                  <td>{c.businessName}{c.venueName ? ` (${c.venueName})` : ""}</td>
++                  <td><a href={`mailto:${c.email}`}>{c.email}</a></td>
++                  <td>{c.sector}</td>
++                  <td>{c.sequence}</td>
++                  <td>{c.step}</td>
++                  <td>
++                    <span className={`admin-status is-${c.status}`}>{c.status}</span>
++                  </td>
++                  <td>{formatDate(c.lastSentAt || c.createdAt)}</td>
++                </tr>
++              ))}
++            </tbody>
++          </table>
++        </div>
++      )}
++    </main>
++  );
++}
+diff --git a/app/admin/page.tsx b/app/admin/page.tsx
+new file mode 100644
+index 0000000..15b1f98
+--- /dev/null
++++ b/app/admin/page.tsx
+@@ -0,0 +1,102 @@
++import type { Metadata } from "next";
++import Link from "next/link";
++import { list } from "@vercel/blob";
++import AdminLogin from "../components/AdminLogin";
++import AdminNav from "../components/AdminNav";
++import { isAdminAuthed } from "../lib/adminAuth";
++import { readContacts } from "../lib/outreach/store";
++import { cities, venues } from "../data/platform";
++import { guides } from "../data/guides";
++
++export const metadata: Metadata = {
++  title: "Control Room | XRED EYEZ Admin",
++  robots: { index: false, follow: false },
++};
++
++export const dynamic = "force-dynamic";
++
++async function countBlobs(prefix: string): Promise<number> {
++  try {
++    const { blobs } = await list({ prefix });
++    return blobs.length;
++  } catch {
++    return 0;
++  }
++}
++
++async function stripeSnapshot(): Promise<{ count: number; revenue: string } | null> {
++  if (!process.env.STRIPE_SECRET_KEY) return null;
++  try {
++    const { default: getStripe } = await import("../lib/stripe");
++    const stripe = getStripe();
++    const intents = await stripe.paymentIntents.list({ limit: 100 });
++    const paid = intents.data.filter((p) => p.status === "succeeded");
++    const total = paid.reduce((sum, p) => sum + p.amount, 0);
++    const currency = paid[0]?.currency?.toUpperCase() || "GBP";
++    return { count: paid.length, revenue: `${(total / 100).toFixed(2)} ${currency}` };
++  } catch {
++    return null;
++  }
++}
++
++export default async function AdminOverviewPage() {
++  if (!(await isAdminAuthed())) {
++    return (
++      <main className="admin-leads-shell">
++        <AdminLogin />
++      </main>
++    );
++  }
++
++  const [partnerLeadCount, waitlistCount, contacts, orders] = await Promise.all([
++    countBlobs("leads/partner/"),
++    countBlobs("leads/waitlist/"),
++    readContacts().catch(() => []),
++    stripeSnapshot(),
++  ]);
++
++  const liveCities = cities.filter((c) => c.status === "flagship" || c.status === "live");
++  const claimed = venues.filter((v) => v.claimStatus !== "unclaimed").length;
++  const partners = venues.filter((v) => v.claimStatus === "partner").length;
++  const outreachActive = contacts.filter((c) => c.status === "active").length;
++  const outreachDone = contacts.filter((c) => c.status === "complete").length;
++  const outreachUnsub = contacts.filter((c) => c.status === "unsubscribed").length;
++
++  const cards = [
++    { label: "Partner enquiries", value: partnerLeadCount, href: "/admin/leads", note: "captured leads" },
++    { label: "Waitlist emails", value: waitlistCount, href: "/admin/leads", note: "premium sign-ups" },
++    { label: "Outreach pipeline", value: outreachActive, href: "/admin/outreach", note: `${outreachDone} complete · ${outreachUnsub} unsubscribed` },
++    { label: "Shop orders", value: orders ? orders.count : "—", href: "/admin/orders", note: orders ? `${orders.revenue} collected` : "Stripe not connected" },
++    { label: "Venues live", value: venues.length, href: "/cities", note: `${claimed} claimed · ${partners} partners` },
++    { label: "Cities live", value: liveCities.length, href: "/cities", note: `${cities.length - liveCities.length} coming · ${guides.length} guides` },
++  ];
++
++  return (
++    <main className="admin-leads-shell">
++      <header className="admin-leads-head">
++        <div className="eyebrow">XRED EYEZ ADMIN</div>
++        <h1>Control room</h1>
++        <AdminNav />
++      </header>
++
++      <div className="admin-overview-grid">
++        {cards.map((card) => (
++          <Link key={card.label} href={card.href} className="admin-overview-card">
++            <strong>{card.value}</strong>
++            <span className="admin-overview-label">{card.label}</span>
++            <span className="admin-overview-note">{card.note}</span>
++          </Link>
++        ))}
++      </div>
++
++      <section className="admin-leads-section">
++        <h2>Notes</h2>
++        <ul className="admin-notes">
++          <li>“Sign-ups” today = the premium waitlist. Real member accounts arrive with Supabase Auth in Phase 2 and will appear here.</li>
++          <li>Product analytics (saves, map filters, premium clicks, walk-to taps) live in the Vercel Analytics dashboard under custom events.</li>
++          <li>Leads are stored privately in Vercel Blob and mirrored to email/webhook when configured — see REDEYEZ_TECH_NOTES.md.</li>
++        </ul>
++      </section>
++    </main>
++  );
++}
+diff --git a/app/api/admin/session/route.ts b/app/api/admin/session/route.ts
+new file mode 100644
+index 0000000..ba0ad45
+--- /dev/null
++++ b/app/api/admin/session/route.ts
+@@ -0,0 +1,28 @@
++import { NextRequest, NextResponse } from "next/server";
++import { ADMIN_COOKIE, adminSecret, hashSecret } from "../../../lib/adminAuth";
++
++export async function POST(req: NextRequest) {
++  const secret = adminSecret();
++  if (!secret) {
++    return NextResponse.json({ error: "No admin secret configured" }, { status: 500 });
++  }
++  const { key } = await req.json().catch(() => ({ key: "" }));
++  if (typeof key !== "string" || key !== secret) {
++    return NextResponse.json({ error: "Wrong key" }, { status: 401 });
++  }
++  const res = NextResponse.json({ success: true });
++  res.cookies.set(ADMIN_COOKIE, hashSecret(secret), {
++    httpOnly: true,
++    secure: true,
++    sameSite: "lax",
++    path: "/",
++    maxAge: 60 * 60 * 24 * 7,
++  });
++  return res;
++}
++
++export async function DELETE() {
++  const res = NextResponse.json({ success: true });
++  res.cookies.set(ADMIN_COOKIE, "", { path: "/", maxAge: 0 });
++  return res;
++}
+diff --git a/app/components/AdminLogin.tsx b/app/components/AdminLogin.tsx
+new file mode 100644
+index 0000000..3b731d4
+--- /dev/null
++++ b/app/components/AdminLogin.tsx
+@@ -0,0 +1,44 @@
++"use client";
++
++import { useState } from "react";
++import { useRouter } from "next/navigation";
++
++export default function AdminLogin() {
++  const [key, setKey] = useState("");
++  const [state, setState] = useState<"idle" | "checking" | "wrong">("idle");
++  const router = useRouter();
++
++  async function submit(e: React.FormEvent) {
++    e.preventDefault();
++    setState("checking");
++    const res = await fetch("/api/admin/session", {
++      method: "POST",
++      headers: { "Content-Type": "application/json" },
++      body: JSON.stringify({ key }),
++    });
++    if (res.ok) {
++      router.refresh();
++    } else {
++      setState("wrong");
++    }
++  }
++
++  return (
++    <form className="admin-leads-lock" onSubmit={submit}>
++      <div className="eyebrow">XRED EYEZ ADMIN</div>
++      <h1>Control room.</h1>
++      <input
++        type="password"
++        value={key}
++        onChange={(e) => setKey(e.target.value)}
++        placeholder="Admin key"
++        className="admin-login-input"
++        autoFocus
++      />
++      {state === "wrong" && <p className="claim-error">Wrong key.</p>}
++      <button type="submit" className="platform-primary-action" disabled={state === "checking"} style={{ marginTop: "12px" }}>
++        {state === "checking" ? "Checking…" : "Enter"}
++      </button>
++    </form>
++  );
++}
+diff --git a/app/components/AdminNav.tsx b/app/components/AdminNav.tsx
+new file mode 100644
+index 0000000..6bd2ebe
+--- /dev/null
++++ b/app/components/AdminNav.tsx
+@@ -0,0 +1,38 @@
++"use client";
++
++import Link from "next/link";
++import { usePathname, useRouter } from "next/navigation";
++
++const LINKS = [
++  { href: "/admin", label: "Overview" },
++  { href: "/admin/leads", label: "Leads" },
++  { href: "/admin/outreach", label: "Outreach" },
++  { href: "/admin/orders", label: "Orders" },
++];
++
++export default function AdminNav() {
++  const pathname = usePathname();
++  const router = useRouter();
++
++  async function logout() {
++    await fetch("/api/admin/session", { method: "DELETE" });
++    router.refresh();
++  }
++
++  return (
++    <nav className="admin-nav">
++      {LINKS.map((link) => (
++        <Link
++          key={link.href}
++          href={link.href}
++          className={`admin-nav-link${pathname === link.href ? " is-active" : ""}`}
++        >
++          {link.label}
++        </Link>
++      ))}
++      <button type="button" onClick={logout} className="admin-nav-logout">
++        Log out
++      </button>
++    </nav>
++  );
++}
+diff --git a/app/globals.css b/app/globals.css
+index fec4b0b..396a20c 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -9835,3 +9835,122 @@ textarea:focus-visible,
+   .venue-location-card { grid-template-columns: 1fr; }
+   .venue-minimap, .venue-minimap-canvas { min-height: 220px; }
+ }
++
++/* ═══════════════════════════════════════════
++   ADMIN DASHBOARD
++   ═══════════════════════════════════════════ */
++.admin-login-input {
++  width: 100%;
++  margin-top: 16px;
++  border: 1px solid var(--border-medium);
++  border-radius: 10px;
++  background: var(--bg-primary);
++  color: var(--text-primary);
++  padding: 13px 16px;
++  font-size: 15px;
++}
++.admin-nav {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 8px;
++  margin: 14px 0 22px;
++}
++.admin-nav-link {
++  padding: 8px 16px;
++  border-radius: 999px;
++  border: 1px solid var(--border-light);
++  color: var(--text-secondary);
++  text-decoration: none;
++  font-size: 13px;
++  font-weight: 600;
++}
++.admin-nav-link:hover { color: var(--text-primary); border-color: var(--border-medium); }
++.admin-nav-link.is-active {
++  background: var(--accent-red);
++  border-color: var(--accent-red);
++  color: #fff;
++}
++.admin-nav-logout {
++  margin-left: auto;
++  padding: 8px 16px;
++  border-radius: 999px;
++  border: 1px solid transparent;
++  background: none;
++  color: var(--text-muted);
++  font-size: 13px;
++  cursor: pointer;
++}
++.admin-nav-logout:hover { color: var(--accent-red); }
++.admin-overview-grid {
++  display: grid;
++  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
++  gap: 14px;
++}
++.admin-overview-card {
++  display: grid;
++  gap: 4px;
++  padding: 22px;
++  border: 1px solid var(--border-light);
++  border-radius: 18px;
++  background: var(--bg-card);
++  text-decoration: none;
++  color: inherit;
++  transition: transform 160ms ease, border-color 160ms ease;
++}
++.admin-overview-card:hover { transform: translateY(-2px); border-color: var(--border-medium); }
++.admin-overview-card strong { font-size: 30px; line-height: 1; }
++.admin-overview-label {
++  font-size: 12px;
++  letter-spacing: 0.09em;
++  text-transform: uppercase;
++  color: var(--text-secondary);
++  font-weight: 600;
++}
++.admin-overview-note { font-size: 12.5px; color: var(--text-muted); }
++.admin-notes {
++  display: grid;
++  gap: 10px;
++  padding-left: 18px;
++  color: var(--text-secondary);
++  font-size: 14px;
++  line-height: 1.6;
++}
++.admin-table-wrap {
++  overflow-x: auto;
++  border: 1px solid var(--border-light);
++  border-radius: 16px;
++  background: var(--bg-card);
++}
++.admin-table {
++  width: 100%;
++  border-collapse: collapse;
++  font-size: 13.5px;
++}
++.admin-table th {
++  text-align: left;
++  padding: 14px 16px;
++  font-size: 11px;
++  letter-spacing: 0.1em;
++  text-transform: uppercase;
++  color: var(--text-muted);
++  border-bottom: 1px solid var(--border-light);
++}
++.admin-table td {
++  padding: 12px 16px;
++  border-bottom: 1px solid rgba(245,240,230,0.06);
++  color: var(--text-secondary);
++}
++.admin-table tr:last-child td { border-bottom: none; }
++.admin-table a { color: var(--accent-red); text-decoration: none; }
++.admin-status {
++  padding: 3px 10px;
++  border-radius: 99px;
++  font-size: 11.5px;
++  font-weight: 700;
++  text-transform: uppercase;
++  letter-spacing: 0.05em;
++}
++.admin-status.is-active { background: rgba(212,168,71,0.14); color: #D4A847; }
++.admin-status.is-complete { background: rgba(132,197,31,0.12); color: #84C51F; }
++.admin-status.is-unsubscribed { background: rgba(245,240,230,0.08); color: var(--text-muted); }
++.admin-mono { font-family: monospace; font-size: 12px; }
+diff --git a/app/lib/adminAuth.ts b/app/lib/adminAuth.ts
+new file mode 100644
+index 0000000..d6f46af
+--- /dev/null
++++ b/app/lib/adminAuth.ts
+@@ -0,0 +1,35 @@
++import { createHash, timingSafeEqual } from "node:crypto";
++import { cookies } from "next/headers";
++
++/**
++ * Admin session: the login form posts the admin secret once; a httpOnly
++ * cookie carrying SHA-256(secret) authorises subsequent requests. Interim
++ * scheme until real accounts land in Phase 2 — the secret itself is never
++ * stored in the browser.
++ */
++
++export const ADMIN_COOKIE = "xred_admin";
++
++export function adminSecret(): string | undefined {
++  return process.env.ADMIN_DASH_SECRET || process.env.OUTREACH_ADMIN_SECRET;
++}
++
++export function hashSecret(secret: string): string {
++  return createHash("sha256").update(secret).digest("hex");
++}
++
++function safeEqual(a: string, b: string): boolean {
++  const bufA = Buffer.from(a);
++  const bufB = Buffer.from(b);
++  return bufA.length === bufB.length && timingSafeEqual(bufA, bufB);
++}
++
++/** True when the request carries a valid admin cookie (or legacy ?key). */
++export async function isAdminAuthed(legacyKey?: string): Promise<boolean> {
++  const secret = adminSecret();
++  if (!secret) return false;
++  if (legacyKey && safeEqual(legacyKey, secret)) return true;
++  const store = await cookies();
++  const cookie = store.get(ADMIN_COOKIE)?.value;
++  return Boolean(cookie && safeEqual(cookie, hashSecret(secret)));
++}
+-- 
+2.43.0
+

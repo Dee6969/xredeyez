@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { get, list } from "@vercel/blob";
+import AdminLogin from "../../components/AdminLogin";
+import AdminNav from "../../components/AdminNav";
+import { isAdminAuthed } from "../../lib/adminAuth";
 
 export const metadata: Metadata = {
   title: "Leads Inbox | XRED EYEZ Admin",
@@ -82,19 +85,11 @@ export default async function AdminLeadsPage({
   searchParams: Promise<{ key?: string }>;
 }) {
   const { key } = await searchParams;
-  const secret = process.env.ADMIN_DASH_SECRET || process.env.OUTREACH_ADMIN_SECRET;
 
-  if (!secret || key !== secret) {
+  if (!(await isAdminAuthed(key))) {
     return (
       <main className="admin-leads-shell">
-        <div className="admin-leads-lock">
-          <div className="eyebrow">XRED EYEZ ADMIN</div>
-          <h1>Locked.</h1>
-          <p>
-            Append <code>?key=&lt;ADMIN_DASH_SECRET&gt;</code> to this URL.
-            {!secret && " (No admin secret is configured in the environment yet.)"}
-          </p>
-        </div>
+        <AdminLogin />
       </main>
     );
   }
@@ -111,6 +106,7 @@ export default async function AdminLeadsPage({
       <header className="admin-leads-head">
         <div className="eyebrow">XRED EYEZ ADMIN</div>
         <h1>Leads inbox</h1>
+        <AdminNav />
         <div className="admin-leads-stats">
           <div className="admin-leads-stat">
             <strong>{partnerLeads.length}</strong>
