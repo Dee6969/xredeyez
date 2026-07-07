@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { getSectorLabel, type Sector } from "@/app/lib/outreach/content";
 
-const SECTORS: Sector[] = ["cannabis", "stay", "eat"];
+const SECTORS: Sector[] = ["coffeeshop", "social-club", "cannabis", "stay", "eat"];
 
 interface ContactRow {
   id: string;
@@ -194,7 +194,7 @@ export default function OutreachAdminPage() {
         </div>
 
         <div style={{ marginTop: "24px", fontSize: "11px", color: "rgba(240,235,226,0.25)", lineHeight: 1.8 }}>
-          Cron runs daily at 08:00 UTC · Sequences: Cold (day 0, 3, 7) → Nurture (day 0, 3 after "more info" click)
+          Cron runs daily at 08:00 UTC · Sequences: Cold (day 0, 3, 7) → Nurture (day 0, 3 after &quot;more info&quot; click)
         </div>
       </div>
     </div>

@@ -1,0 +1,221 @@
+From 2aa2dcde23e46195667f30676ae681a99e6830e2 Mon Sep 17 00:00:00 2001
+From: Claude <claude@anthropic.com>
+Date: Tue, 7 Jul 2026 07:55:09 +0000
+Subject: [PATCH] Sector-specific outreach: coffeeshop (NL) + social club (ES)
+ sequences with compliance-aware positioning, honest hotel claims, venue-type
+ classifier
+
+---
+ app/lib/outreach/content.ts    | 150 ++++++++++++++++++++++++++++++++-
+ app/partners/outreach/page.tsx |   4 +-
+ 2 files changed, 149 insertions(+), 5 deletions(-)
+
+diff --git a/app/lib/outreach/content.ts b/app/lib/outreach/content.ts
+index 741cfb8..dbd1e91 100644
+--- a/app/lib/outreach/content.ts
++++ b/app/lib/outreach/content.ts
+@@ -1,4 +1,4 @@
+-export type Sector = "cannabis" | "stay" | "eat";
++export type Sector = "cannabis" | "stay" | "eat" | "coffeeshop" | "social-club";
+ export type SequenceType = "cold" | "nurture";
+ 
+ export interface EmailContent {
+@@ -15,6 +15,131 @@ export const MORE_INFO_PATH = "/api/outreach/more-info";
+ const BRAND = "XRED EYEZ";
+ 
+ export const EMAIL_CONTENT: Record<Sector, Record<SequenceType, EmailContent[]>> = {
++  coffeeshop: {
++    cold: [
++      {
++        subject: "Tourists choose their first coffeeshop before they land",
++        headline: "The planning happens weeks before the flight.",
++        body: [
++          "Travelers coming to the Netherlands research coffeeshop culture in advance — which neighbourhoods, which houses, what the etiquette is. By the time they arrive, the shortlist is made.",
++          `${BRAND} is the travel guide they make it with: city guides, neighbourhood maps, and venue profiles built for people who want to do this properly.`,
++          "A featured listing puts your house on that shortlist — premium pin on the live city map, top placement in the cannabis layer, verified hours, and your house rules stated your way.",
++          "Featured listings are £49/month. Your basic profile already exists — this is about how it ranks and what it says.",
++        ],
++        ctaLabel: "Upgrade your listing",
++        showMoreInfo: true,
++      },
++      {
++        subject: "You can't advertise. You can be found.",
++        headline: "A guide listing is visibility that respects the rules.",
++        body: [
++          "Dutch advertising restrictions leave coffeeshops with almost no compliant way to reach visitors. Editorial guide presence is the exception — travelers seek the information out themselves.",
++          `${BRAND} readers arrive informed: they've read the etiquette guides, they know the norms, they respect the house. That's the customer worth having.`,
++          "Featured houses get the top pin, accurate hours, a 'know before you go' module for your rules, and walking directions straight to your door.",
++          "One neighbourhood, limited featured slots. £49/month, cancel anytime.",
++        ],
++        ctaLabel: "Claim your featured spot",
++        showMoreInfo: true,
++      },
++      {
++        subject: "One last note from us",
++        headline: "This is the last time we'll reach out.",
++        body: [
++          `If a featured listing isn't right for you now, no problem — your profile stays live, and you can claim or upgrade it any time at redeyez.co.uk/partners/claim.`,
++          "If you'd like to see how featured placement works on your city's map before deciding, the button below shows you.",
++        ],
++        ctaLabel: "Upgrade for £49/month",
++        showMoreInfo: true,
++      },
++    ],
++    nurture: [
++      {
++        subject: "What a featured coffeeshop listing includes",
++        headline: "The full picture, no surprises.",
++        body: [
++          "Premium map pin — top of your city's live cannabis layer, where every traveler starts.",
++          "Verified profile — hours, house rules, and 'know before you go' notes written your way, so guests arrive informed and respectful.",
++          "Guide placement — featured position in the city guide's coffeeshop section and eligibility for curated route inclusion.",
++          "Walk-there directions and Street View from every profile, so people actually find the door.",
++          "£49/month. No setup fee. Cancel anytime.",
++        ],
++        ctaLabel: "Set up featured — £49/month",
++        showMoreInfo: false,
++      },
++      {
++        subject: "Complete your listing setup in 2 minutes",
++        headline: "Two minutes and it's live.",
++        body: [
++          "Hit the button, confirm your details, and your featured placement goes live on the next publish — usually within 48 hours.",
++          "You control the profile: hours, house rules, photos, and how your house is described.",
++        ],
++        ctaLabel: "Finish setup",
++        showMoreInfo: false,
++      },
++    ],
++  },
++  "social-club": {
++    cold: [
++      {
++        subject: "Travelers arrive at your door misinformed",
++        headline: "The problem isn't demand. It's expectations.",
++        body: [
++          "Visitors to Barcelona find club information from outdated blogs and street promoters. They arrive expecting a walk-in bar — and someone has to turn them away.",
++          `${BRAND} works differently: our guides explain the association model before anyone travels — membership, ID, invitation norms, discretion. Readers arrive knowing how it works.`,
++          "A verified profile lets you state your process your way: what your club is, how membership works, and what you expect from guests. Information, not promotion.",
++          "Verified profiles are £49/month, presented discreetly within the city guide. You control every word.",
++        ],
++        ctaLabel: "Verify your profile",
++        showMoreInfo: true,
++      },
++      {
++        subject: "The tout economy is how tourists find clubs. Fix it.",
++        headline: "Your reputation deserves better than street promoters.",
++        body: [
++          "Right now, the loudest information wins — promoters on La Rambla, forum rumours, third-party pages you've never seen describing your association inaccurately.",
++          `${BRAND} readers are the other kind of visitor: they read the etiquette layer first, they understand private membership, and they respect discretion because we tell them to.`,
++          "A verified profile is your official presence: accurate, discreet, and written by you — not by whoever got to the internet first.",
++          "Limited verified slots per neighbourhood. £49/month, cancel anytime.",
++        ],
++        ctaLabel: "Take control of your profile",
++        showMoreInfo: true,
++      },
++      {
++        subject: "One last note from us",
++        headline: "This is the last time we'll reach out.",
++        body: [
++          "If a verified profile isn't right for your association now, no problem — you can claim or correct your listing any time at redeyez.co.uk/partners/claim.",
++          "If you'd like to see how verified clubs are presented within the guide before deciding, the button below shows you.",
++        ],
++        ctaLabel: "Verify for £49/month",
++        showMoreInfo: true,
++      },
++    ],
++    nurture: [
++      {
++        subject: "What a verified club profile includes",
++        headline: "Discreet, accurate, yours.",
++        body: [
++          "Your association described your way — membership process, house expectations, and etiquette notes stated clearly so guests arrive prepared.",
++          "Discreet placement in the city guide's cannabis layer — presented as a private members' association, never as a walk-in venue.",
++          "An audience that reads the etiquette guide first: our Barcelona pages explain the association model before any profile is shown.",
++          "Corrections and updates any time. £49/month, cancel anytime.",
++        ],
++        ctaLabel: "Verify your profile — £49/month",
++        showMoreInfo: false,
++      },
++      {
++        subject: "Complete your profile in 2 minutes",
++        headline: "Two minutes and it's accurate.",
++        body: [
++          "Hit the button, confirm your association's details, and your verified profile goes live on the next publish — usually within 48 hours.",
++          "Everything is written your way, reviewed by you before it publishes.",
++        ],
++        ctaLabel: "Finish setup",
++        showMoreInfo: false,
++      },
++    ],
++  },
+   stay: {
+     cold: [
+       {
+@@ -30,7 +155,7 @@ export const EMAIL_CONTENT: Record<Sector, Record<SequenceType, EmailContent[]>>
+         showMoreInfo: true,
+       },
+       {
+-        subject: `Featured hotels on ${BRAND} see 3× more profile clicks`,
++        subject: `The travelers picking hotels in your city right now`,
+         headline: "Your competitors are building a first-mover advantage.",
+         body: [
+           "Cannabis tourism is growing. The travelers it brings are high-spend, experience-led, and loyal to recommendations they trust.",
+@@ -213,12 +338,31 @@ export const EMAIL_CONTENT: Record<Sector, Record<SequenceType, EmailContent[]>>
+ export function getSectorLabel(sector: Sector): string {
+   const labels: Record<Sector, string> = {
+     stay: "Hotel / Accommodation",
+-    cannabis: "Cannabis Café / Social Club",
++    cannabis: "Cannabis Venue (general)",
++    coffeeshop: "Coffeeshop (NL)",
++    "social-club": "Cannabis Social Club",
+     eat: "Restaurant / Dining",
+   };
+   return labels[sector];
+ }
+ 
++/**
++ * Classify a venue into its outreach sector from its type string.
++ * More specific than layerToSector: a Dutch coffeeshop and a Barcelona
++ * social club get different sequences even though both sit in the
++ * cannabis layer.
++ */
++export function venueTypeToSector(type: string, layer?: string): Sector | null {
++  const t = type.toLowerCase();
++  if (t.includes("coffeeshop") || t.includes("coffee shop")) return "coffeeshop";
++  if (t.includes("social club") || t.includes("club") || t.includes("asociaci")) return "social-club";
++  if (t.includes("cannabis") || t.includes("dispensary") || t.includes("smart shop") || t.includes("smartshop")) return "cannabis";
++  if (t.includes("hotel") || t.includes("hostel") || t.includes("apartment") || t.includes("stay") || t.includes("resort")) return "stay";
++  if (t.includes("restaurant") || t.includes("café") || t.includes("cafe") || t.includes("bar") || t.includes("bakery") || t.includes("dining")) return "eat";
++  if (layer) return layerToSector(layer);
++  return null;
++}
++
+ export function layerToSector(layer: string): Sector | null {
+   const map: Record<string, Sector> = {
+     stay: "stay",
+diff --git a/app/partners/outreach/page.tsx b/app/partners/outreach/page.tsx
+index 5fa9ae2..b05bb2f 100644
+--- a/app/partners/outreach/page.tsx
++++ b/app/partners/outreach/page.tsx
+@@ -2,7 +2,7 @@
+ import { useState } from "react";
+ import { getSectorLabel, type Sector } from "@/app/lib/outreach/content";
+ 
+-const SECTORS: Sector[] = ["cannabis", "stay", "eat"];
++const SECTORS: Sector[] = ["coffeeshop", "social-club", "cannabis", "stay", "eat"];
+ 
+ interface ContactRow {
+   id: string;
+@@ -194,7 +194,7 @@ export default function OutreachAdminPage() {
+         </div>
+ 
+         <div style={{ marginTop: "24px", fontSize: "11px", color: "rgba(240,235,226,0.25)", lineHeight: 1.8 }}>
+-          Cron runs daily at 08:00 UTC · Sequences: Cold (day 0, 3, 7) → Nurture (day 0, 3 after "more info" click)
++          Cron runs daily at 08:00 UTC · Sequences: Cold (day 0, 3, 7) → Nurture (day 0, 3 after &quot;more info&quot; click)
+         </div>
+       </div>
+     </div>
+-- 
+2.43.0
+
