@@ -30,7 +30,13 @@ export function walkingDirectionsUrl(
   name?: string,
   address?: string,
   city?: string,
+  placeId?: string,
 ): string {
+  // Google Place ID is the gold standard: routes to the registered
+  // business entrance regardless of our pin accuracy.
+  if (placeId && !isAppleDevice()) {
+    return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=${placeId}&travelmode=walking`;
+  }
   const destination =
     address && city ? `${name ? `${name}, ` : ""}${address}, ${city}` : `${lat},${lng}`;
   if (isAppleDevice()) {
@@ -40,8 +46,14 @@ export function walkingDirectionsUrl(
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=walking`;
 }
 
-export function streetViewUrl(lat: number, lng: number): string {
-  return `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
+export function streetViewUrl(lat: number, lng: number, heading?: number): string {
+  const head = typeof heading === "number" ? `&heading=${heading}` : "";
+  return `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}${head}`;
+}
+
+export function placeUrl(lat: number, lng: number, placeId?: string): string {
+  const pid = placeId ? `&query_place_id=${placeId}` : "";
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}${pid}`;
 }
 
 export default function MapActions({
@@ -50,6 +62,8 @@ export default function MapActions({
   name,
   address,
   city,
+  placeId,
+  heading,
   venueId,
   compact = false,
 }: {
@@ -58,6 +72,8 @@ export default function MapActions({
   name?: string;
   address?: string;
   city?: string;
+  placeId?: string;
+  heading?: number;
   venueId?: string;
   compact?: boolean;
 }) {
@@ -66,7 +82,7 @@ export default function MapActions({
   return (
     <div className={`map-actions${compact ? " is-compact" : ""}`}>
       <a
-        href={walkingDirectionsUrl(lat, lng, name, address, city)}
+        href={walkingDirectionsUrl(lat, lng, name, address, city, placeId)}
         target="_blank"
         rel="noopener noreferrer"
         className="map-action-btn is-walk"
@@ -77,7 +93,7 @@ export default function MapActions({
         Walk there
       </a>
       <a
-        href={streetViewUrl(lat, lng)}
+        href={streetViewUrl(lat, lng, heading)}
         target="_blank"
         rel="noopener noreferrer"
         className="map-action-btn is-street"

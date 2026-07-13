@@ -51,15 +51,15 @@ function venueCta(venue: Venue): { href: string; label: string; cls: string; ext
 export default function CityMapExperience({
   city,
   venues,
-  networkCities,
+  networkCities, initialVenueId,
 }: {
   city: City;
   venues: Venue[];
-  networkCities: City[];
+  networkCities: City[]; initialVenueId?: string;
 }) {
   const [activeLayer, setActiveLayer] = useState<DiscoveryLayer | "all">("all");
-  const [selectedId, setSelectedId] = useState<string>("");
-  const [sheetMode, setSheetMode] = useState<SheetMode>("hidden");
+  const [selectedId, setSelectedId] = useState<string>(initialVenueId ?? "");
+  const [sheetMode, setSheetMode] = useState<SheetMode>(initialVenueId ? "compact" : "hidden");
   const defaultCenter = CITY_CENTERS[city.slug] || CITY_CENTERS.amsterdam;
   const [mapCenter, setMapCenter] = useState(defaultCenter);
   const regionButtons = REGION_BUTTONS[city.slug] || [];
@@ -255,11 +255,13 @@ export default function CityMapExperience({
                 <SaveButton itemType="venue" itemId={selected.id} />
               </div>
               <MapActions
-                lat={selected.coordinates.lat}
-                lng={selected.coordinates.lng}
+                lat={selected.entranceLat ?? selected.coordinates.lat}
+                lng={selected.entranceLng ?? selected.coordinates.lng}
                 name={selected.name}
                 address={selected.address}
                 city={selected.city}
+                placeId={selected.googlePlaceId}
+                heading={selected.streetViewHeading}
                 venueId={selected.id}
                 compact
               />

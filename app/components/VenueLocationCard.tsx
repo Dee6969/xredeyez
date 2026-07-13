@@ -36,14 +36,16 @@ export default function VenueLocationCard({ venue, accent }: { venue: Venue; acc
           )}
         </div>
         <MapActions
-          lat={venue.coordinates?.lat}
-          lng={venue.coordinates?.lng}
+          lat={venue.entranceLat ?? venue.coordinates?.lat}
+          lng={venue.entranceLng ?? venue.coordinates?.lng}
           name={venue.name}
           address={venue.address}
           city={venue.city}
+          placeId={venue.googlePlaceId}
+          heading={venue.streetViewHeading}
           venueId={venue.id}
         />
-        <Link href={`/cities/${venue.cityId}/map`} className="venue-location-maplink">
+        <Link href={`/cities/${venue.cityId}/map?venue=${venue.id}`} className="venue-location-maplink">
           See it on the {venue.city} map →
         </Link>
       </div>

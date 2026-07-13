@@ -11,7 +11,7 @@ import MapActions from "../../components/MapActions";
 import AddToRouteButton from "../../components/AddToRouteButton";
 import VenueLocationCard from "../../components/VenueLocationCard";
 import { formatWalk, nearestVenues } from "../../lib/distance";
-import { getCity, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
+import { getCity, getImageState, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
 import { breadcrumbSchema, localBusinessSchema, toJsonLd } from "../../lib/schema";
 
 interface VenuePageProps {
@@ -26,7 +26,10 @@ export async function generateMetadata({ params }: VenuePageProps) {
   const { slug } = await params;
   const venue = getVenue(slug);
   if (!venue) return { title: "Venue | XRED EYEZ" };
-  const heroImage = venue.brand?.bannerUrl || venue.galleryImages?.[0] || venue.image;
+  const imageTrusted = ["verified", "official-source", "partner-supplied"].includes(getImageState(venue));
+  // Brand banners are stylised art (not photos) and stay; unverified photos
+  // never render as the venue hero — the branded gradient does instead.
+  const heroImage = venue.brand?.bannerUrl || venue.galleryImages?.[0] || (imageTrusted ? venue.image : undefined);
   return {
     title: `${venue.name} | ${venue.city} Cannabis Guide | XRED EYEZ`,
     description: venue.description,
@@ -166,7 +169,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
               )}
               <SaveButton itemType="venue" itemId={venue.id} label="Save" />
               <AddToRouteButton venueId={venue.id} cityId={venue.cityId} accent={accent} />
-              <Link href={`/cities/${venue.cityId}/map`} className="vlp-btn-ghost">
+              <Link href={`/cities/${venue.cityId}/map?venue=${venue.id}`} className="vlp-btn-ghost">
                 View on Map
               </Link>
             </div>
@@ -492,11 +495,13 @@ export default async function VenuePage({ params }: VenuePageProps) {
                 </Link>
                 <SaveButton itemType="venue" itemId={venue.id} label="Save this venue" />
                 <MapActions
-                  lat={venue.coordinates?.lat}
-                  lng={venue.coordinates?.lng}
+                  lat={venue.entranceLat ?? venue.coordinates?.lat}
+                  lng={venue.entranceLng ?? venue.coordinates?.lng}
                   name={venue.name}
                   address={venue.address}
                   city={venue.city}
+                  placeId={venue.googlePlaceId}
+                  heading={venue.streetViewHeading}
                   venueId={venue.id}
                 />
               </div>

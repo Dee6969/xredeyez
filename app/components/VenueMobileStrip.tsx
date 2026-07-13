@@ -6,7 +6,7 @@ import { trackEvent } from "../lib/analytics";
 export default function VenueMobileStrip({ venue }: { venue: Venue }) {
   const hasGeo = Boolean(venue.coordinates?.lat && venue.coordinates?.lng);
   const walkUrl = hasGeo
-    ? walkingDirectionsUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.name, venue.address, venue.city)
+    ? walkingDirectionsUrl(venue.entranceLat ?? venue.coordinates.lat!, venue.entranceLng ?? venue.coordinates.lng!, venue.name, venue.address, venue.city, venue.googlePlaceId)
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${venue.name} ${venue.city}`)}`;
 
   return (
@@ -30,7 +30,7 @@ export default function VenueMobileStrip({ venue }: { venue: Venue }) {
           </a>
         ) : hasGeo ? (
           <a
-            href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!)}
+            href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.streetViewHeading)}
             target="_blank"
             rel="noopener noreferrer"
             className="vlp-mobile-btn"

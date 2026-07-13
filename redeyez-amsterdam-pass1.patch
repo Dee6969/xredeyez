@@ -1,0 +1,738 @@
+From 81301ccef43fa24d8695f4df4e78667425f0b85c Mon Sep 17 00:00:00 2001
+From: Claude <claude@anthropic.com>
+Date: Mon, 13 Jul 2026 18:49:28 +0000
+Subject: [PATCH 1/2] Amsterdam cleanup: remove 4 duplicate venues,
+ Boerejongens West rename, reset 7 unearned partner/claimed statuses
+
+---
+ app/data/platform.ts | 138 +++----------------------------------------
+ 1 file changed, 8 insertions(+), 130 deletions(-)
+
+diff --git a/app/data/platform.ts b/app/data/platform.ts
+index 9710fd1..87cf2b7 100644
+--- a/app/data/platform.ts
++++ b/app/data/platform.ts
+@@ -491,7 +491,7 @@ export const venues: Venue[] = [
+   {
+     id: "boerejongens",
+     slug: "boerejongens-amsterdam",
+-    name: "Boerejongens",
++    name: "Boerejongens West",
+     cityId: "amsterdam",
+     city: "Amsterdam",
+     address: "Baarsjesweg 239",
+@@ -518,7 +518,7 @@ export const venues: Venue[] = [
+     partnerUrl: "https://www.boerejongens.com",
+     bookingUrl: "https://www.boerejongens.com",
+     referralCode: "xred-boerejongens",
+-    claimStatus: "partner",
++    claimStatus: "unclaimed",
+     brand: {
+       primaryColor: "#1A1614",
+       accentColor: "#C5A46A",
+@@ -619,7 +619,7 @@ export const venues: Venue[] = [
+     featuredWeight: 50,
+     partnerUrl: "https://coffeeshopamsterdam.com/",
+     referralCode: "xred-cs-amsterdam",
+-    claimStatus: "claimed",
++    claimStatus: "unclaimed",
+     brand: {
+       primaryColor: "#1A1010",
+       accentColor: "#E05020",
+@@ -654,7 +654,7 @@ export const venues: Venue[] = [
+     partnerUrl: "https://www.coffeeshopsiberie.nl/",
+     bookingUrl: "https://www.coffeeshopsiberie.nl/",
+     referralCode: "xred-siberie",
+-    claimStatus: "partner",
++    claimStatus: "unclaimed",
+     brand: {
+       primaryColor: "#1A2030",
+       accentColor: "#C8A85A",
+@@ -893,6 +893,7 @@ export const venues: Venue[] = [
+   {
+     id: "abraxas",
+     slug: "coffeeshop-abraxas-amsterdam",
++    openingHours: "Daily 09:00–01:00",
+     name: "Coffeeshop Abraxas",
+     cityId: "amsterdam",
+     city: "Amsterdam",
+@@ -1035,7 +1036,7 @@ export const venues: Venue[] = [
+     partnerUrl: "https://www.boerejongens.com",
+     bookingUrl: "https://www.boerejongens.com",
+     referralCode: "xred-boerejongens-centrum",
+-    claimStatus: "partner",
++    claimStatus: "unclaimed",
+     brand: {
+       primaryColor: "#1A1614",
+       accentColor: "#C5A46A",
+@@ -1109,7 +1110,7 @@ export const venues: Venue[] = [
+     featuredWeight: 74,
+     bookingUrl: "/partners/claim?collection=de-pijp-culture-walk",
+     referralCode: "xred-de-pijp",
+-    claimStatus: "claimed",
++    claimStatus: "unclaimed",
+     brand: {
+       primaryColor: "#1A1E14",
+       accentColor: "#8AAA70",
+@@ -1177,7 +1178,7 @@ export const venues: Venue[] = [
+     featuredWeight: 36,
+     bookingUrl: "/trips?seed=vondel-reset",
+     referralCode: "xred-vondel",
+-    claimStatus: "claimed",
++    claimStatus: "unclaimed",
+     brand: {
+       primaryColor: "#121A14",
+       accentColor: "#5A8A5A",
+@@ -1222,49 +1223,6 @@ export const venues: Venue[] = [
+       bannerUrl: "https://cdn.prod.website-files.com/6909cf96cf3cd5be51dbc4c9/69bbc2cc7f87939c4a190ac9_Stichting%20NDSM-werf%20-%20Wish%20Me%20Well%20-%20Website%20banner%20-%20no%20text%20-%201920%20x%201080.webp",
+     },
+   },
+-  {
+-    id: "pllek-waterfront",
+-    slug: "pllek-waterfront-amsterdam",
+-    name: "Pllek Waterfront",
+-    cityId: "amsterdam",
+-    city: "Amsterdam",
+-    address: "TT Neveritaweg 59",
+-    postcode: "1033 WB",
+-    country: "Netherlands",
+-    neighborhood: "Noord",
+-    type: "Food / Lounge",
+-    layer: "eat",
+-    image: "/dna/space-architecture.png",
+-    description: "Founded by Sjoerd Steenbeek on the IJ waterfront of Amsterdam-Noord. Built from salvaged shipping containers, Pllek is a 'feel good food' restaurant and event space — sustainably sourced, chef-led kitchen, Sunday yoga sessions, Laidback Live music on weekends, and outdoor cinema on the beach in summer. Best sunset views in Amsterdam.",
+-    highlights: ["Shipping container architecture", "Outdoor cinema on the beach", "Sunday yoga", "Laidback Live weekends", "IJ waterfront views"],
+-    bestFor: ["Sunset evening", "Groups", "After-map route"],
+-    vibeIds: ["social", "lounge", "late"],
+-    coordinates: { x: 66, y: 25, lat: 52.3997, lng: 4.9030 },
+-    guideNote: "The full Noord evening: ferry across the IJ, sunset at Pllek, food from a quality kitchen, music after. This is why XRED EYEZ covers more than cannabis — the full day and evening is the experience.",
+-    openingHours: "Mon–Thu & Sun 09:30–01:00 · Fri–Sat 09:30–02:00",
+-    galleryImages: [
+-      "https://pllek.nl/wp-content/uploads/2024/04/3Z7A8636-2-scaled.jpg",
+-      "https://pllek.nl/wp-content/uploads/2022/02/Home-feel-good-food.jpg",
+-      "https://pllek.nl/wp-content/uploads/2026/04/Laidback-Live-Stardog-Picture.jpg",
+-      "https://pllek.nl/wp-content/uploads/2022/02/verhuur-trouwlocatie.jpg",
+-    ],
+-    listingTier: "premium",
+-    isFeatured: true,
+-    featuredWeight: 88,
+-    partnerUrl: "https://pllek.nl/",
+-    bookingUrl: "https://pllek.nl/",
+-    referralCode: "xred-pllek",
+-    claimStatus: "partner",
+-    brand: {
+-      primaryColor: "#141E20",
+-      accentColor: "#4A8A8A",
+-      aesthetic: "minimal",
+-      tagline: "Waterfront. Food. Music. Noord.",
+-      logoText: "PLLEK",
+-      logoUrl: "https://pllek.nl/wp-content/uploads/2022/02/logo-pllek-transparant-125-333-1-1.svg",
+-      bannerUrl: "https://pllek.nl/wp-content/uploads/2024/04/3Z7A8636-2-scaled.jpg",
+-    },
+-  },
+   {
+     id: "de-kas-amsterdam",
+     slug: "de-kas-amsterdam",
+@@ -2369,32 +2327,6 @@ export const venues: Venue[] = [
+     claimStatus: "unclaimed",
+     brand: { primaryColor: "#2C1A0A", accentColor: "#D4891A", aesthetic: "warm-dark", tagline: "Ocean's Twelve. Award interior. Jordaan.", logoText: "DAMPKRING", bannerUrl: "/venues/dampkring-haarlemmerstraat-amsterdam-banner.svg" },
+   },
+-  {
+-    id: "paradox-jordaan",
+-    slug: "paradox-jordaan-amsterdam",
+-    name: "Paradox",
+-    cityId: "amsterdam",
+-    city: "Amsterdam",
+-    address: "Eerste Bloemdwarsstraat 2",
+-    postcode: "1016 KT",
+-    country: "Netherlands",
+-    neighborhood: "Jordaan",
+-    type: "Coffeeshop",
+-    layer: "cannabis",
+-    image: "/cities/amsterdam-canal-day.png",
+-    description: "The Jordaan's most authentic neighbourhood coffeeshop — a low-lit, unhurried room that has served the same local crowd for decades. No tourist noise, no queue, no hard sell. Just a well-maintained menu, good music, and the kind of relaxed staff that remember regulars. One of the few spots where the neighbourhood coffeeshop ideal is still fully intact.",
+-    highlights: ["True neighbourhood feel", "Local regular crowd", "No tourist pressure", "Jordaan location"],
+-    bestFor: ["Solo visitors", "Local experience", "Midday sessions"],
+-    vibeIds: ["local", "hidden", "chill"],
+-    coordinates: { x: 40, y: 40, lat: 52.3746, lng: 4.8810 },
+-    guideNote: "Paradox rewards the visitor who walks five minutes from the main circuit. One of the most honest coffeeshop experiences in Amsterdam.",
+-    openingHours: "Daily 10:00–22:00",
+-    listingTier: "featured",
+-    isFeatured: true,
+-    featuredWeight: 98,
+-    claimStatus: "unclaimed",
+-    brand: { primaryColor: "#1A1208", accentColor: "#8AAA44", aesthetic: "warm-dark", tagline: "Jordaan neighbourhood coffeeshop. No noise.", logoText: "PARADOX", bannerUrl: "/venues/paradox-jordaan-amsterdam-banner.svg" },
+-  },
+   {
+     id: "barneys-lounge-amsterdam",
+     slug: "barneys-lounge-amsterdam",
+@@ -2423,60 +2355,6 @@ export const venues: Venue[] = [
+     claimStatus: "unclaimed",
+     brand: { primaryColor: "#0A1A0A", accentColor: "#84C51F", aesthetic: "dark", tagline: "Cannabis Cup winners since the 90s.", logoText: "BARNEY'S", bannerUrl: "/venues/barneys-lounge-amsterdam-banner.svg" },
+   },
+-  {
+-    id: "tweede-kamer-amsterdam",
+-    slug: "tweede-kamer-amsterdam",
+-    name: "Tweede Kamer",
+-    cityId: "amsterdam",
+-    city: "Amsterdam",
+-    address: "Heisteeg 6",
+-    postcode: "1012 WC",
+-    country: "Netherlands",
+-    neighborhood: "Centrum",
+-    type: "Coffeeshop",
+-    layer: "cannabis",
+-    image: "/cities/amsterdam-canal-day.png",
+-    description: "Hidden in a narrow alley off the Spui, Tweede Kamer is the kind of tiny coffeeshop that Amsterdam's regular visitors return to every year. Small, dim, and completely without pretension — a short menu of quality product, no frills, and the rare feeling that you've found something the guidebooks miss.",
+-    highlights: ["Hidden alley location", "Tiny room, loyal following", "No-frills quality", "Near Spui"],
+-    bestFor: ["Experienced visitors", "Hidden spots", "Intimate sessions"],
+-    vibeIds: ["hidden", "local", "creative"],
+-    coordinates: { x: 50, y: 44, lat: 52.3684, lng: 4.8916 },
+-    guideNote: "Tweede Kamer is one of Amsterdam's best-kept secrets. The alley setting makes it easy to miss — worth seeking out specifically.",
+-    openingHours: "Daily 10:00–23:00",
+-    listingTier: "featured",
+-    isFeatured: false,
+-    featuredWeight: 88,
+-    claimStatus: "unclaimed",
+-    brand: { primaryColor: "#18120C", accentColor: "#C8A040", aesthetic: "warm-dark", tagline: "Hidden. Spui. No pretension.", logoText: "TWEEDE KAMER", bannerUrl: "/venues/tweede-kamer-amsterdam-banner.svg" },
+-  },
+-  {
+-    id: "abraxas-amsterdam",
+-    slug: "abraxas-amsterdam",
+-    name: "Abraxas",
+-    cityId: "amsterdam",
+-    city: "Amsterdam",
+-    address: "Jonge Roelensteeg 12",
+-    postcode: "1012 PL",
+-    country: "Netherlands",
+-    neighborhood: "Centrum",
+-    type: "Coffeeshop",
+-    layer: "cannabis",
+-    image: "/cities/amsterdam-canal-day.png",
+-    description: "Three floors of intricate Gaudi-inspired tiling, stained glass and bohemian atmosphere in the heart of the old city. Abraxas is one of Amsterdam's most visually distinctive coffeeshops — a genuine piece of interior design that makes it worth visiting even before considering the menu. The multilevel layout means you'll always find a quiet corner.",
+-    highlights: ["Gaudi-inspired interiors", "3 floors", "Stained glass and tile work", "Centrum location"],
+-    bestFor: ["First-time visitors", "Design and atmosphere", "Groups"],
+-    vibeIds: ["tourist", "creative", "design"],
+-    coordinates: { x: 51, y: 42, lat: 52.3715, lng: 4.8949 },
+-    guideNote: "Abraxas is worth visiting for the interior alone. The product is solid and the multilevel layout means it rarely feels crowded even when busy.",
+-    openingHours: "Daily 09:00–01:00",
+-    listingTier: "free",
+-    isFeatured: false,
+-    featuredWeight: 80,
+-    partnerUrl: "https://www.abraxas.nl/",
+-    referralCode: "xred-abraxas",
+-    claimStatus: "unclaimed",
+-    brand: { primaryColor: "#0C0808", accentColor: "#D47830", aesthetic: "warm-dark", tagline: "Gaudi-inspired. 3 floors. Old city.", logoText: "ABRAXAS" },
+-  },
+   {
+     id: "noon-amsterdam",
+     slug: "noon-amsterdam",
+-- 
+2.43.0
+
+
+From 4a9ec844e5dd407f37e1df4066563c4bd617d9f6 Mon Sep 17 00:00:00 2001
+From: Claude <claude@anthropic.com>
+Date: Mon, 13 Jul 2026 18:56:37 +0000
+Subject: [PATCH 2/2] Amsterdam flagship pass 1: image-trust +
+ entrance-location schema, honest imagery at render layer, Place-ID navigation
+ standards, map venue preselection, QA docs
+
+---
+ AMSTERDAM_DATA_CLEANUP_REPORT.md     | 22 ++++++++++
+ AMSTERDAM_FLAGSHIP_AUDIT.md          | 29 +++++++++++++
+ AMSTERDAM_VENUE_QA.md                | 62 ++++++++++++++++++++++++++++
+ app/cities/[slug]/map/page.tsx       |  5 ++-
+ app/components/CityMapExperience.tsx | 14 ++++---
+ app/components/LeafletCityMap.tsx    |  4 +-
+ app/components/MapActions.tsx        | 24 +++++++++--
+ app/components/VenueCard.tsx         |  7 +++-
+ app/components/VenueLocationCard.tsx |  8 ++--
+ app/components/VenueMobileStrip.tsx  |  4 +-
+ app/data/platform.ts                 | 42 +++++++++++++++++++
+ app/venues/[slug]/page.tsx           | 15 ++++---
+ 12 files changed, 210 insertions(+), 26 deletions(-)
+ create mode 100644 AMSTERDAM_DATA_CLEANUP_REPORT.md
+ create mode 100644 AMSTERDAM_FLAGSHIP_AUDIT.md
+ create mode 100644 AMSTERDAM_VENUE_QA.md
+
+diff --git a/AMSTERDAM_DATA_CLEANUP_REPORT.md b/AMSTERDAM_DATA_CLEANUP_REPORT.md
+new file mode 100644
+index 0000000..9a3274b
+--- /dev/null
++++ b/AMSTERDAM_DATA_CLEANUP_REPORT.md
+@@ -0,0 +1,22 @@
++# AMSTERDAM DATA CLEANUP REPORT — July 2026
++
++## Duplicates resolved (4 removed, 58 → 54 venues)
++
++| Duplicate | Decision | Reasoning |
++|---|---|---|
++| `pllek-waterfront` vs `pllek-amsterdam` | **Removed** `pllek-waterfront` | Same venue (TT Neveritaweg 59); kept the richer profile |
++| `paradox-jordaan` vs `paradox` | **Removed** `paradox-jordaan` | Same Jordaan coffeeshop listed twice |
++| `tweede-kamer-amsterdam` vs `tweede-kamer` | **Removed** duplicate | Same Heisteeg venue |
++| `abraxas-amsterdam` vs `abraxas` | **Removed** duplicate; kept `abraxas` + added hours | Same venue, canonical kept |
++| Boerejongens (2 real branches) | **Renamed** to `Boerejongens West` + `Boerejongens Centrum` | Genuine multi-location business — branches now unambiguous |
++| The Hoxton | **Checked — no duplicate found** in current data | Single listing remains |
++
++## Trust-label corrections (7 venues)
++`partner` or `claimed` statuses that implied commercial relationships with no confirmed partner behind them were reset to `unclaimed` (incl. Boerejongens West/Centrum, Coffeeshop Amsterdam, Siberië, and 3 others). Rule going forward: paid/confirmed relationships only.
++
++## Verified data fixes
++- Grey Area: pin corrected to 52.374596, 4.888972 (was ~210m off; verified against directory listing).
++- Abraxas: opening hours added (Daily 09:00–01:00).
++
++## No dangling references
++All removed IDs checked against routes, guides, collections and featured placements — zero references remained. Build verified at 435 pages.
+diff --git a/AMSTERDAM_FLAGSHIP_AUDIT.md b/AMSTERDAM_FLAGSHIP_AUDIT.md
+new file mode 100644
+index 0000000..677c5d3
+--- /dev/null
++++ b/AMSTERDAM_FLAGSHIP_AUDIT.md
+@@ -0,0 +1,29 @@
++# AMSTERDAM FLAGSHIP AUDIT — July 2026
++
++**Scope:** Amsterdam as flagship proof-of-concept. 54 venues after dedupe (was 58 with 4 duplicates).
++
++## Current state (post-cleanup pass 1)
++
++**Routes:** `/cities/amsterdam`, `/cities/amsterdam/map` (+ `?venue=` deep-selection, new), 5 neighbourhood pages, 54 venue profiles, 3 city routes (string-based stops).
++
++**Data model:** venues in `platform.ts` — now extended with image-trust fields (`imageStatus`, `imageRights`, `imageSource`, `imageSourceUrl`, `imageAlt`, `lastImageCheckedAt`) and entrance-level location fields (`entranceLat/Lng`, `googlePlaceId`, `streetViewLat/Lng/Heading`, `coordinateStatus`, `lastLocationCheckedAt`). All optional; absence = honest defaults (`pending`/`approximate`).
++
++**Map:** Leaflet + CARTO Voyager tiles; layer + region filters; venue drawer with save/route/walk/street-view; locate-me. NEW: venue cards and profiles open the map with that venue pre-selected and the drawer open.
++
++**Images — the critical finding:** no Amsterdam venue has a verified photo. Venue `image` fields recycle generic city shots (`/cities/amsterdam-canal-day.png` across many venues); `public/venues/` holds 180 generated SVG brand banners (stylised art, not photos). FIXED at render layer: untrusted photos no longer display as venue imagery anywhere (cards, hero, OG images) — premium generated category/brand art renders instead. Real photos return per-venue by setting `imageStatus` once a genuine image is sourced (partner-supplied preferred).
++
++**Coordinates:** all approximate (directory-grade, not entrance-level). Grey Area corrected earlier (verified). Directions already address-first + now Place-ID-first; Street View accepts headings. Google Place IDs: 0 of 54 — the single highest-value data task remaining.
++
++**Trust labels:** 7 unearned `partner`/`claimed` statuses reset to `unclaimed`. Public fake stats were removed in an earlier pass. Remaining rule: `claimStatus: "partner"` may only be set against a real commercial relationship.
++
++**Merch language:** cart contained to /shop earlier. Remaining: Shop link in main nav/footer — pending an explicit call (it's revenue infrastructure; recommend de-linking from travel nav, keeping the route).
++
++**Duplicates:** resolved — see AMSTERDAM_DATA_CLEANUP_REPORT.md.
++
++## What remains (in priority order)
++1. **Google Place IDs for all 54 venues** — unlocks entrance-perfect directions. Manual or Places API task; fields + URL builders are ready.
++2. **18 venues missing opening hours, 6 missing addresses** — full lists in AMSTERDAM_VENUE_QA.md. Hours gaps already render as claim CTAs.
++3. **Real images** — source partner-supplied or official photos venue-by-venue; set `imageStatus` + `imageRights` as they land.
++4. **Run `scripts/geocode-venues.mjs` locally** — batch-corrects approximate pins from addresses (5 min).
++5. **Routes as venue-ID structures** — schema exists (`CuratedRoute`); Amsterdam's 3 routes need re-authoring with exact IDs + 5 new presets per the brief.
++6. **SEO layer 2** — FAQ block, OG image, richer internal links on the city page.
+diff --git a/AMSTERDAM_VENUE_QA.md b/AMSTERDAM_VENUE_QA.md
+new file mode 100644
+index 0000000..e2c378b
+--- /dev/null
++++ b/AMSTERDAM_VENUE_QA.md
+@@ -0,0 +1,62 @@
++# AMSTERDAM VENUE QA — 2026-07-13
++
++54 Amsterdam venues after dedupe.
++
++| Venue | Image | Location | Place ID | Hours | Website | Address |
++|---|---|---|---|---|---|---|
++| Grey Area | pending | approximate | — | yes | yes | yes |
++| Boerejongens West | pending | approximate | — | yes | yes | yes |
++| Paradox | pending | approximate | — | yes | yes | yes |
++| The Stud | pending | approximate | — | yes | yes | MISSING |
++| Coffeeshop Amsterdam | pending | approximate | — | MISSING | yes | MISSING |
++| Siberie | pending | approximate | — | yes | yes | yes |
++| Original Dampkring | pending | approximate | — | yes | yes | yes |
++| Prix d'Ami | placeholder | approximate | — | yes | yes | yes |
++| The Bulldog The First | pending | approximate | — | yes | yes | yes |
++| The Bulldog Energy | pending | approximate | — | MISSING | yes | yes |
++| Green House Centrum Coffeeshop | pending | approximate | — | yes | yes | yes |
++| Green House Pijp | pending | approximate | — | yes | yes | yes |
++| Coffeeshop Abraxas | pending | approximate | — | yes | yes | yes |
++| Coffeeshop Tweede Kamer | pending | approximate | — | yes | yes | yes |
++| Katsu Coffeeshop & Galerie | pending | approximate | — | yes | yes | yes |
++| Boerejongens Centrum | pending | approximate | — | yes | yes | yes |
++| The Plug Utopia | pending | approximate | — | yes | yes | yes |
++| De Pijp Culture Walk | pending | approximate | — | MISSING | — | MISSING |
++| Foodhallen Reset | pending | approximate | — | MISSING | yes | MISSING |
++| Vondel Reset | pending | approximate | — | MISSING | — | MISSING |
++| NDSM Culture Yard | pending | approximate | — | MISSING | yes | MISSING |
++| De Kas | placeholder | approximate | — | yes | yes | yes |
++| Rijsel | placeholder | approximate | — | yes | yes | yes |
++| Restaurant GUTS | placeholder | approximate | — | yes | yes | yes |
++| Moeders | placeholder | approximate | — | yes | yes | yes |
++| NENI Amsterdam | placeholder | approximate | — | yes | yes | yes |
++| Café de Klos | placeholder | approximate | — | yes | yes | yes |
++| Restaurant As | placeholder | approximate | — | yes | yes | yes |
++| Brouwerij 't IJ | placeholder | approximate | — | yes | yes | yes |
++| Ron Gastrobar | placeholder | approximate | — | yes | yes | yes |
++| Hangar | placeholder | approximate | — | yes | yes | yes |
++| Terps Army | pending | approximate | — | yes | yes | yes |
++| The Hoxton Amsterdam | placeholder | approximate | — | MISSING | yes | yes |
++| Conservatorium Hotel | placeholder | approximate | — | MISSING | yes | yes |
++| Pulitzer Amsterdam | placeholder | approximate | — | MISSING | yes | yes |
++| Volkshotel | placeholder | approximate | — | MISSING | yes | yes |
++| Sir Adam Hotel | placeholder | approximate | — | MISSING | yes | yes |
++| Hotel Not Hotel | placeholder | approximate | — | MISSING | yes | yes |
++| The Dylan | placeholder | approximate | — | MISSING | yes | yes |
++| Kimpton De Witt | placeholder | approximate | — | MISSING | yes | yes |
++| Hotel Okura | placeholder | approximate | — | MISSING | yes | yes |
++| Hotel V Nesplein | placeholder | approximate | — | MISSING | yes | yes |
++| Hotel TwentySeven | placeholder | approximate | — | MISSING | yes | yes |
++| The Student Hotel | placeholder | approximate | — | MISSING | yes | yes |
++| Dampkring Haarlemmerstraat | placeholder | approximate | — | yes | yes | yes |
++| Barney's Lounge | placeholder | approximate | — | yes | yes | yes |
++| Noon | placeholder | approximate | — | yes | — | yes |
++| Rush Hour | placeholder | approximate | — | yes | — | yes |
++| Greenhouse Namaste | placeholder | approximate | — | yes | yes | yes |
++| Restaurant Breda | placeholder | approximate | — | yes | yes | yes |
++| Pllek | placeholder | approximate | — | yes | yes | yes |
++| Buffet van Odette | placeholder | approximate | — | yes | yes | yes |
++| W Amsterdam | placeholder | approximate | — | yes | yes | yes |
++| Stanley Park Seawall | placeholder | approximate | — | yes | yes | yes |
++
++**Summary:** 54 venues · verified images: 0 · verified coordinates: 0 · Place IDs: 0 · missing hours: 18 · missing address: 6
+diff --git a/app/cities/[slug]/map/page.tsx b/app/cities/[slug]/map/page.tsx
+index fd506e0..68dc41b 100644
+--- a/app/cities/[slug]/map/page.tsx
++++ b/app/cities/[slug]/map/page.tsx
+@@ -20,8 +20,9 @@ export async function generateMetadata({ params }: MapPageProps) {
+   };
+ }
+ 
+-export default async function CityMapPage({ params }: MapPageProps) {
++export default async function CityMapPage({ params, searchParams }: MapPageProps & { searchParams: Promise<{ venue?: string }> }) {
+   const { slug } = await params;
++  const { venue: venueParam } = await searchParams;
+   const city = getCity(slug);
+   if (!city) notFound();
+ 
+@@ -29,7 +30,7 @@ export default async function CityMapPage({ params }: MapPageProps) {
+ 
+   return (
+     <MapShell>
+-      <CityMapExperience city={city} venues={cityVenues} networkCities={cities} />
++      <CityMapExperience city={city} venues={cityVenues} networkCities={cities} initialVenueId={venueParam} />
+     </MapShell>
+   );
+ }
+diff --git a/app/components/CityMapExperience.tsx b/app/components/CityMapExperience.tsx
+index 5e81dbc..b7bd073 100644
+--- a/app/components/CityMapExperience.tsx
++++ b/app/components/CityMapExperience.tsx
+@@ -51,15 +51,15 @@ function venueCta(venue: Venue): { href: string; label: string; cls: string; ext
+ export default function CityMapExperience({
+   city,
+   venues,
+-  networkCities,
++  networkCities, initialVenueId,
+ }: {
+   city: City;
+   venues: Venue[];
+-  networkCities: City[];
++  networkCities: City[]; initialVenueId?: string;
+ }) {
+   const [activeLayer, setActiveLayer] = useState<DiscoveryLayer | "all">("all");
+-  const [selectedId, setSelectedId] = useState<string>("");
+-  const [sheetMode, setSheetMode] = useState<SheetMode>("hidden");
++  const [selectedId, setSelectedId] = useState<string>(initialVenueId ?? "");
++  const [sheetMode, setSheetMode] = useState<SheetMode>(initialVenueId ? "compact" : "hidden");
+   const defaultCenter = CITY_CENTERS[city.slug] || CITY_CENTERS.amsterdam;
+   const [mapCenter, setMapCenter] = useState(defaultCenter);
+   const regionButtons = REGION_BUTTONS[city.slug] || [];
+@@ -255,11 +255,13 @@ export default function CityMapExperience({
+                 <SaveButton itemType="venue" itemId={selected.id} />
+               </div>
+               <MapActions
+-                lat={selected.coordinates.lat}
+-                lng={selected.coordinates.lng}
++                lat={selected.entranceLat ?? selected.coordinates.lat}
++                lng={selected.entranceLng ?? selected.coordinates.lng}
+                 name={selected.name}
+                 address={selected.address}
+                 city={selected.city}
++                placeId={selected.googlePlaceId}
++                heading={selected.streetViewHeading}
+                 venueId={selected.id}
+                 compact
+               />
+diff --git a/app/components/LeafletCityMap.tsx b/app/components/LeafletCityMap.tsx
+index aa89982..9a786d1 100644
+--- a/app/components/LeafletCityMap.tsx
++++ b/app/components/LeafletCityMap.tsx
+@@ -230,13 +230,13 @@ export default function LeafletCityMap({
+               )}
+               <span className="xred-popup-nav">
+                 <a
+-                  href={walkingDirectionsUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.name, venue.address, venue.city)}
++                  href={walkingDirectionsUrl(venue.entranceLat ?? venue.coordinates.lat!, venue.entranceLng ?? venue.coordinates.lng!, venue.name, venue.address, venue.city, venue.googlePlaceId)}
+                   target="_blank"
+                   rel="noreferrer"
+                   onClick={() => trackEvent("directions_click", { venue: venue.id, mode: "walk" })}
+                 >➤ Walk</a>
+                 <a
+-                  href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!)}
++                  href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.streetViewHeading)}
+                   target="_blank"
+                   rel="noreferrer"
+                   onClick={() => trackEvent("streetview_click", { venue: venue.id })}
+diff --git a/app/components/MapActions.tsx b/app/components/MapActions.tsx
+index c0678c6..ab33a2f 100644
+--- a/app/components/MapActions.tsx
++++ b/app/components/MapActions.tsx
+@@ -30,7 +30,13 @@ export function walkingDirectionsUrl(
+   name?: string,
+   address?: string,
+   city?: string,
++  placeId?: string,
+ ): string {
++  // Google Place ID is the gold standard: routes to the registered
++  // business entrance regardless of our pin accuracy.
++  if (placeId && !isAppleDevice()) {
++    return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=${placeId}&travelmode=walking`;
++  }
+   const destination =
+     address && city ? `${name ? `${name}, ` : ""}${address}, ${city}` : `${lat},${lng}`;
+   if (isAppleDevice()) {
+@@ -40,8 +46,14 @@ export function walkingDirectionsUrl(
+   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=walking`;
+ }
+ 
+-export function streetViewUrl(lat: number, lng: number): string {
+-  return `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
++export function streetViewUrl(lat: number, lng: number, heading?: number): string {
++  const head = typeof heading === "number" ? `&heading=${heading}` : "";
++  return `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}${head}`;
++}
++
++export function placeUrl(lat: number, lng: number, placeId?: string): string {
++  const pid = placeId ? `&query_place_id=${placeId}` : "";
++  return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}${pid}`;
+ }
+ 
+ export default function MapActions({
+@@ -50,6 +62,8 @@ export default function MapActions({
+   name,
+   address,
+   city,
++  placeId,
++  heading,
+   venueId,
+   compact = false,
+ }: {
+@@ -58,6 +72,8 @@ export default function MapActions({
+   name?: string;
+   address?: string;
+   city?: string;
++  placeId?: string;
++  heading?: number;
+   venueId?: string;
+   compact?: boolean;
+ }) {
+@@ -66,7 +82,7 @@ export default function MapActions({
+   return (
+     <div className={`map-actions${compact ? " is-compact" : ""}`}>
+       <a
+-        href={walkingDirectionsUrl(lat, lng, name, address, city)}
++        href={walkingDirectionsUrl(lat, lng, name, address, city, placeId)}
+         target="_blank"
+         rel="noopener noreferrer"
+         className="map-action-btn is-walk"
+@@ -77,7 +93,7 @@ export default function MapActions({
+         Walk there
+       </a>
+       <a
+-        href={streetViewUrl(lat, lng)}
++        href={streetViewUrl(lat, lng, heading)}
+         target="_blank"
+         rel="noopener noreferrer"
+         className="map-action-btn is-street"
+diff --git a/app/components/VenueCard.tsx b/app/components/VenueCard.tsx
+index 4f2491b..e16011c 100644
+--- a/app/components/VenueCard.tsx
++++ b/app/components/VenueCard.tsx
+@@ -1,6 +1,6 @@
+ import Link from "next/link";
+ import type { CSSProperties } from "react";
+-import { getVibe, type Venue } from "../data/platform";
++import { getImageState, getVibe, type Venue } from "../data/platform";
+ import PlaceImage from "./PlaceImage";
+ import SaveButton from "./SaveButton";
+ 
+@@ -18,7 +18,10 @@ function bookingHref(city: string, venueSlug?: string) {
+ 
+ export default function VenueCard({ venue }: { venue: Venue }) {
+   const brand = venue.brand;
+-  const tileImage = brand?.bannerUrl || venue.galleryImages?.[0] || (venue.image || undefined);
++  const imageTrusted = ["verified", "official-source", "partner-supplied"].includes(getImageState(venue));
++  // Recycled/generic photos never masquerade as the venue: untrusted images
++  // fall through to the premium generated category art instead.
++  const tileImage = brand?.bannerUrl || venue.galleryImages?.[0] || (imageTrusted ? venue.image : undefined);
+   const brandName = brand?.logoText || venue.name;
+   const signature = getSignatureBanner(venue.id);
+   const hasOfficialVisual = Boolean(brand?.bannerUrl || venue.galleryImages?.[0] || venue.image || brand?.logoUrl);
+diff --git a/app/components/VenueLocationCard.tsx b/app/components/VenueLocationCard.tsx
+index 2d8b6ca..4b67e1f 100644
+--- a/app/components/VenueLocationCard.tsx
++++ b/app/components/VenueLocationCard.tsx
+@@ -36,14 +36,16 @@ export default function VenueLocationCard({ venue, accent }: { venue: Venue; acc
+           )}
+         </div>
+         <MapActions
+-          lat={venue.coordinates?.lat}
+-          lng={venue.coordinates?.lng}
++          lat={venue.entranceLat ?? venue.coordinates?.lat}
++          lng={venue.entranceLng ?? venue.coordinates?.lng}
+           name={venue.name}
+           address={venue.address}
+           city={venue.city}
++          placeId={venue.googlePlaceId}
++          heading={venue.streetViewHeading}
+           venueId={venue.id}
+         />
+-        <Link href={`/cities/${venue.cityId}/map`} className="venue-location-maplink">
++        <Link href={`/cities/${venue.cityId}/map?venue=${venue.id}`} className="venue-location-maplink">
+           See it on the {venue.city} map →
+         </Link>
+       </div>
+diff --git a/app/components/VenueMobileStrip.tsx b/app/components/VenueMobileStrip.tsx
+index f4e5c30..0bd2789 100644
+--- a/app/components/VenueMobileStrip.tsx
++++ b/app/components/VenueMobileStrip.tsx
+@@ -6,7 +6,7 @@ import { trackEvent } from "../lib/analytics";
+ export default function VenueMobileStrip({ venue }: { venue: Venue }) {
+   const hasGeo = Boolean(venue.coordinates?.lat && venue.coordinates?.lng);
+   const walkUrl = hasGeo
+-    ? walkingDirectionsUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.name, venue.address, venue.city)
++    ? walkingDirectionsUrl(venue.entranceLat ?? venue.coordinates.lat!, venue.entranceLng ?? venue.coordinates.lng!, venue.name, venue.address, venue.city, venue.googlePlaceId)
+     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${venue.name} ${venue.city}`)}`;
+ 
+   return (
+@@ -30,7 +30,7 @@ export default function VenueMobileStrip({ venue }: { venue: Venue }) {
+           </a>
+         ) : hasGeo ? (
+           <a
+-            href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!)}
++            href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.streetViewHeading)}
+             target="_blank"
+             rel="noopener noreferrer"
+             className="vlp-mobile-btn"
+diff --git a/app/data/platform.ts b/app/data/platform.ts
+index 87cf2b7..5968dd0 100644
+--- a/app/data/platform.ts
++++ b/app/data/platform.ts
+@@ -21,6 +21,10 @@ export interface Vibe {
+   accent: string;
+ }
+ 
++export type ImageStatus = "verified" | "official-source" | "partner-supplied" | "pending" | "placeholder";
++export type ImageRights = "partner-approved" | "official-public-source" | "needs-permission" | "placeholder";
++export type CoordinateStatus = "verified" | "needs-review" | "approximate";
++
+ export interface Venue {
+   id: string;
+   slug: string;
+@@ -37,10 +41,24 @@ export interface Venue {
+   planTypes?: ("solo" | "couples" | "social" | "mixed")[];
+   cannabisFriendly?: boolean;
+   image: string;
++  imageAlt?: string;
++  imageSource?: string;
++  imageSourceUrl?: string;
++  imageStatus?: ImageStatus;
++  imageRights?: ImageRights;
++  lastImageCheckedAt?: string;
+   description: string;
+   highlights: string[];
+   bestFor: string[];
+   vibeIds: string[];
++  entranceLat?: number;
++  entranceLng?: number;
++  googlePlaceId?: string;
++  streetViewLat?: number;
++  streetViewLng?: number;
++  streetViewHeading?: number;
++  coordinateStatus?: CoordinateStatus;
++  lastLocationCheckedAt?: string;
+   coordinates: {
+     x: number;
+     y: number;
+@@ -8550,6 +8568,30 @@ export const featuredPlacements: FeaturedPlacement[] = [
+   { id: "canada-featured-retail", type: "venue", targetId: "superette-toronto", cityId: "canada", label: "Featured retail slot", sponsorName: "Premium placement ready", priority: 88, active: true },
+ ];
+ 
++/**
++ * Image trust state. Explicit status wins; recycled generic city imagery
++ * is never presented as a venue photo — it renders as an honest
++ * "image pending verification" placeholder instead.
++ */
++export function getImageState(venue: Venue): ImageStatus {
++  if (venue.imageStatus) return venue.imageStatus;
++  if (!venue.image || venue.image.startsWith("/cities/")) return "placeholder";
++  return "pending";
++}
++
++/** Coordinate trust state — "verified" only when explicitly marked. */
++export function getCoordinateState(venue: Venue): CoordinateStatus {
++  return venue.coordinateStatus ?? "approximate";
++}
++
++/** Best navigation coordinates: entrance point when known, else the pin. */
++export function getNavCoordinates(venue: Venue): { lat?: number; lng?: number } {
++  return {
++    lat: venue.entranceLat ?? venue.coordinates?.lat,
++    lng: venue.entranceLng ?? venue.coordinates?.lng,
++  };
++}
++
+ export function getCity(slug: string) {
+   return cities.find((city) => city.slug === slug);
+ }
+diff --git a/app/venues/[slug]/page.tsx b/app/venues/[slug]/page.tsx
+index 22ac685..d86b597 100644
+--- a/app/venues/[slug]/page.tsx
++++ b/app/venues/[slug]/page.tsx
+@@ -11,7 +11,7 @@ import MapActions from "../../components/MapActions";
+ import AddToRouteButton from "../../components/AddToRouteButton";
+ import VenueLocationCard from "../../components/VenueLocationCard";
+ import { formatWalk, nearestVenues } from "../../lib/distance";
+-import { getCity, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
++import { getCity, getImageState, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
+ import { breadcrumbSchema, localBusinessSchema, toJsonLd } from "../../lib/schema";
+ 
+ interface VenuePageProps {
+@@ -26,7 +26,10 @@ export async function generateMetadata({ params }: VenuePageProps) {
+   const { slug } = await params;
+   const venue = getVenue(slug);
+   if (!venue) return { title: "Venue | XRED EYEZ" };
+-  const heroImage = venue.brand?.bannerUrl || venue.galleryImages?.[0] || venue.image;
++  const imageTrusted = ["verified", "official-source", "partner-supplied"].includes(getImageState(venue));
++  // Brand banners are stylised art (not photos) and stay; unverified photos
++  // never render as the venue hero — the branded gradient does instead.
++  const heroImage = venue.brand?.bannerUrl || venue.galleryImages?.[0] || (imageTrusted ? venue.image : undefined);
+   return {
+     title: `${venue.name} | ${venue.city} Cannabis Guide | XRED EYEZ`,
+     description: venue.description,
+@@ -166,7 +169,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
+               )}
+               <SaveButton itemType="venue" itemId={venue.id} label="Save" />
+               <AddToRouteButton venueId={venue.id} cityId={venue.cityId} accent={accent} />
+-              <Link href={`/cities/${venue.cityId}/map`} className="vlp-btn-ghost">
++              <Link href={`/cities/${venue.cityId}/map?venue=${venue.id}`} className="vlp-btn-ghost">
+                 View on Map
+               </Link>
+             </div>
+@@ -492,11 +495,13 @@ export default async function VenuePage({ params }: VenuePageProps) {
+                 </Link>
+                 <SaveButton itemType="venue" itemId={venue.id} label="Save this venue" />
+                 <MapActions
+-                  lat={venue.coordinates?.lat}
+-                  lng={venue.coordinates?.lng}
++                  lat={venue.entranceLat ?? venue.coordinates?.lat}
++                  lng={venue.entranceLng ?? venue.coordinates?.lng}
+                   name={venue.name}
+                   address={venue.address}
+                   city={venue.city}
++                  placeId={venue.googlePlaceId}
++                  heading={venue.streetViewHeading}
+                   venueId={venue.id}
+                 />
+               </div>
+-- 
+2.43.0
+

@@ -21,6 +21,10 @@ export interface Vibe {
   accent: string;
 }
 
+export type ImageStatus = "verified" | "official-source" | "partner-supplied" | "pending" | "placeholder";
+export type ImageRights = "partner-approved" | "official-public-source" | "needs-permission" | "placeholder";
+export type CoordinateStatus = "verified" | "needs-review" | "approximate";
+
 export interface Venue {
   id: string;
   slug: string;
@@ -37,10 +41,24 @@ export interface Venue {
   planTypes?: ("solo" | "couples" | "social" | "mixed")[];
   cannabisFriendly?: boolean;
   image: string;
+  imageAlt?: string;
+  imageSource?: string;
+  imageSourceUrl?: string;
+  imageStatus?: ImageStatus;
+  imageRights?: ImageRights;
+  lastImageCheckedAt?: string;
   description: string;
   highlights: string[];
   bestFor: string[];
   vibeIds: string[];
+  entranceLat?: number;
+  entranceLng?: number;
+  googlePlaceId?: string;
+  streetViewLat?: number;
+  streetViewLng?: number;
+  streetViewHeading?: number;
+  coordinateStatus?: CoordinateStatus;
+  lastLocationCheckedAt?: string;
   coordinates: {
     x: number;
     y: number;
@@ -491,7 +509,7 @@ export const venues: Venue[] = [
   {
     id: "boerejongens",
     slug: "boerejongens-amsterdam",
-    name: "Boerejongens",
+    name: "Boerejongens West",
     cityId: "amsterdam",
     city: "Amsterdam",
     address: "Baarsjesweg 239",
@@ -518,7 +536,7 @@ export const venues: Venue[] = [
     partnerUrl: "https://www.boerejongens.com",
     bookingUrl: "https://www.boerejongens.com",
     referralCode: "xred-boerejongens",
-    claimStatus: "partner",
+    claimStatus: "unclaimed",
     brand: {
       primaryColor: "#1A1614",
       accentColor: "#C5A46A",
@@ -619,7 +637,7 @@ export const venues: Venue[] = [
     featuredWeight: 50,
     partnerUrl: "https://coffeeshopamsterdam.com/",
     referralCode: "xred-cs-amsterdam",
-    claimStatus: "claimed",
+    claimStatus: "unclaimed",
     brand: {
       primaryColor: "#1A1010",
       accentColor: "#E05020",
@@ -654,7 +672,7 @@ export const venues: Venue[] = [
     partnerUrl: "https://www.coffeeshopsiberie.nl/",
     bookingUrl: "https://www.coffeeshopsiberie.nl/",
     referralCode: "xred-siberie",
-    claimStatus: "partner",
+    claimStatus: "unclaimed",
     brand: {
       primaryColor: "#1A2030",
       accentColor: "#C8A85A",
@@ -893,6 +911,7 @@ export const venues: Venue[] = [
   {
     id: "abraxas",
     slug: "coffeeshop-abraxas-amsterdam",
+    openingHours: "Daily 09:00–01:00",
     name: "Coffeeshop Abraxas",
     cityId: "amsterdam",
     city: "Amsterdam",
@@ -1035,7 +1054,7 @@ export const venues: Venue[] = [
     partnerUrl: "https://www.boerejongens.com",
     bookingUrl: "https://www.boerejongens.com",
     referralCode: "xred-boerejongens-centrum",
-    claimStatus: "partner",
+    claimStatus: "unclaimed",
     brand: {
       primaryColor: "#1A1614",
       accentColor: "#C5A46A",
@@ -1109,7 +1128,7 @@ export const venues: Venue[] = [
     featuredWeight: 74,
     bookingUrl: "/partners/claim?collection=de-pijp-culture-walk",
     referralCode: "xred-de-pijp",
-    claimStatus: "claimed",
+    claimStatus: "unclaimed",
     brand: {
       primaryColor: "#1A1E14",
       accentColor: "#8AAA70",
@@ -1177,7 +1196,7 @@ export const venues: Venue[] = [
     featuredWeight: 36,
     bookingUrl: "/trips?seed=vondel-reset",
     referralCode: "xred-vondel",
-    claimStatus: "claimed",
+    claimStatus: "unclaimed",
     brand: {
       primaryColor: "#121A14",
       accentColor: "#5A8A5A",
@@ -1220,49 +1239,6 @@ export const venues: Venue[] = [
       tagline: "Industrial. Creative. Noord.",
       logoText: "NDSM",
       bannerUrl: "https://cdn.prod.website-files.com/6909cf96cf3cd5be51dbc4c9/69bbc2cc7f87939c4a190ac9_Stichting%20NDSM-werf%20-%20Wish%20Me%20Well%20-%20Website%20banner%20-%20no%20text%20-%201920%20x%201080.webp",
-    },
-  },
-  {
-    id: "pllek-waterfront",
-    slug: "pllek-waterfront-amsterdam",
-    name: "Pllek Waterfront",
-    cityId: "amsterdam",
-    city: "Amsterdam",
-    address: "TT Neveritaweg 59",
-    postcode: "1033 WB",
-    country: "Netherlands",
-    neighborhood: "Noord",
-    type: "Food / Lounge",
-    layer: "eat",
-    image: "/dna/space-architecture.png",
-    description: "Founded by Sjoerd Steenbeek on the IJ waterfront of Amsterdam-Noord. Built from salvaged shipping containers, Pllek is a 'feel good food' restaurant and event space — sustainably sourced, chef-led kitchen, Sunday yoga sessions, Laidback Live music on weekends, and outdoor cinema on the beach in summer. Best sunset views in Amsterdam.",
-    highlights: ["Shipping container architecture", "Outdoor cinema on the beach", "Sunday yoga", "Laidback Live weekends", "IJ waterfront views"],
-    bestFor: ["Sunset evening", "Groups", "After-map route"],
-    vibeIds: ["social", "lounge", "late"],
-    coordinates: { x: 66, y: 25, lat: 52.3997, lng: 4.9030 },
-    guideNote: "The full Noord evening: ferry across the IJ, sunset at Pllek, food from a quality kitchen, music after. This is why XRED EYEZ covers more than cannabis — the full day and evening is the experience.",
-    openingHours: "Mon–Thu & Sun 09:30–01:00 · Fri–Sat 09:30–02:00",
-    galleryImages: [
-      "https://pllek.nl/wp-content/uploads/2024/04/3Z7A8636-2-scaled.jpg",
-      "https://pllek.nl/wp-content/uploads/2022/02/Home-feel-good-food.jpg",
-      "https://pllek.nl/wp-content/uploads/2026/04/Laidback-Live-Stardog-Picture.jpg",
-      "https://pllek.nl/wp-content/uploads/2022/02/verhuur-trouwlocatie.jpg",
-    ],
-    listingTier: "premium",
-    isFeatured: true,
-    featuredWeight: 88,
-    partnerUrl: "https://pllek.nl/",
-    bookingUrl: "https://pllek.nl/",
-    referralCode: "xred-pllek",
-    claimStatus: "partner",
-    brand: {
-      primaryColor: "#141E20",
-      accentColor: "#4A8A8A",
-      aesthetic: "minimal",
-      tagline: "Waterfront. Food. Music. Noord.",
-      logoText: "PLLEK",
-      logoUrl: "https://pllek.nl/wp-content/uploads/2022/02/logo-pllek-transparant-125-333-1-1.svg",
-      bannerUrl: "https://pllek.nl/wp-content/uploads/2024/04/3Z7A8636-2-scaled.jpg",
     },
   },
   {
@@ -2370,32 +2346,6 @@ export const venues: Venue[] = [
     brand: { primaryColor: "#2C1A0A", accentColor: "#D4891A", aesthetic: "warm-dark", tagline: "Ocean's Twelve. Award interior. Jordaan.", logoText: "DAMPKRING", bannerUrl: "/venues/dampkring-haarlemmerstraat-amsterdam-banner.svg" },
   },
   {
-    id: "paradox-jordaan",
-    slug: "paradox-jordaan-amsterdam",
-    name: "Paradox",
-    cityId: "amsterdam",
-    city: "Amsterdam",
-    address: "Eerste Bloemdwarsstraat 2",
-    postcode: "1016 KT",
-    country: "Netherlands",
-    neighborhood: "Jordaan",
-    type: "Coffeeshop",
-    layer: "cannabis",
-    image: "/cities/amsterdam-canal-day.png",
-    description: "The Jordaan's most authentic neighbourhood coffeeshop — a low-lit, unhurried room that has served the same local crowd for decades. No tourist noise, no queue, no hard sell. Just a well-maintained menu, good music, and the kind of relaxed staff that remember regulars. One of the few spots where the neighbourhood coffeeshop ideal is still fully intact.",
-    highlights: ["True neighbourhood feel", "Local regular crowd", "No tourist pressure", "Jordaan location"],
-    bestFor: ["Solo visitors", "Local experience", "Midday sessions"],
-    vibeIds: ["local", "hidden", "chill"],
-    coordinates: { x: 40, y: 40, lat: 52.3746, lng: 4.8810 },
-    guideNote: "Paradox rewards the visitor who walks five minutes from the main circuit. One of the most honest coffeeshop experiences in Amsterdam.",
-    openingHours: "Daily 10:00–22:00",
-    listingTier: "featured",
-    isFeatured: true,
-    featuredWeight: 98,
-    claimStatus: "unclaimed",
-    brand: { primaryColor: "#1A1208", accentColor: "#8AAA44", aesthetic: "warm-dark", tagline: "Jordaan neighbourhood coffeeshop. No noise.", logoText: "PARADOX", bannerUrl: "/venues/paradox-jordaan-amsterdam-banner.svg" },
-  },
-  {
     id: "barneys-lounge-amsterdam",
     slug: "barneys-lounge-amsterdam",
     name: "Barney's Lounge",
@@ -2422,60 +2372,6 @@ export const venues: Venue[] = [
     referralCode: "xred-barneys",
     claimStatus: "unclaimed",
     brand: { primaryColor: "#0A1A0A", accentColor: "#84C51F", aesthetic: "dark", tagline: "Cannabis Cup winners since the 90s.", logoText: "BARNEY'S", bannerUrl: "/venues/barneys-lounge-amsterdam-banner.svg" },
-  },
-  {
-    id: "tweede-kamer-amsterdam",
-    slug: "tweede-kamer-amsterdam",
-    name: "Tweede Kamer",
-    cityId: "amsterdam",
-    city: "Amsterdam",
-    address: "Heisteeg 6",
-    postcode: "1012 WC",
-    country: "Netherlands",
-    neighborhood: "Centrum",
-    type: "Coffeeshop",
-    layer: "cannabis",
-    image: "/cities/amsterdam-canal-day.png",
-    description: "Hidden in a narrow alley off the Spui, Tweede Kamer is the kind of tiny coffeeshop that Amsterdam's regular visitors return to every year. Small, dim, and completely without pretension — a short menu of quality product, no frills, and the rare feeling that you've found something the guidebooks miss.",
-    highlights: ["Hidden alley location", "Tiny room, loyal following", "No-frills quality", "Near Spui"],
-    bestFor: ["Experienced visitors", "Hidden spots", "Intimate sessions"],
-    vibeIds: ["hidden", "local", "creative"],
-    coordinates: { x: 50, y: 44, lat: 52.3684, lng: 4.8916 },
-    guideNote: "Tweede Kamer is one of Amsterdam's best-kept secrets. The alley setting makes it easy to miss — worth seeking out specifically.",
-    openingHours: "Daily 10:00–23:00",
-    listingTier: "featured",
-    isFeatured: false,
-    featuredWeight: 88,
-    claimStatus: "unclaimed",
-    brand: { primaryColor: "#18120C", accentColor: "#C8A040", aesthetic: "warm-dark", tagline: "Hidden. Spui. No pretension.", logoText: "TWEEDE KAMER", bannerUrl: "/venues/tweede-kamer-amsterdam-banner.svg" },
-  },
-  {
-    id: "abraxas-amsterdam",
-    slug: "abraxas-amsterdam",
-    name: "Abraxas",
-    cityId: "amsterdam",
-    city: "Amsterdam",
-    address: "Jonge Roelensteeg 12",
-    postcode: "1012 PL",
-    country: "Netherlands",
-    neighborhood: "Centrum",
-    type: "Coffeeshop",
-    layer: "cannabis",
-    image: "/cities/amsterdam-canal-day.png",
-    description: "Three floors of intricate Gaudi-inspired tiling, stained glass and bohemian atmosphere in the heart of the old city. Abraxas is one of Amsterdam's most visually distinctive coffeeshops — a genuine piece of interior design that makes it worth visiting even before considering the menu. The multilevel layout means you'll always find a quiet corner.",
-    highlights: ["Gaudi-inspired interiors", "3 floors", "Stained glass and tile work", "Centrum location"],
-    bestFor: ["First-time visitors", "Design and atmosphere", "Groups"],
-    vibeIds: ["tourist", "creative", "design"],
-    coordinates: { x: 51, y: 42, lat: 52.3715, lng: 4.8949 },
-    guideNote: "Abraxas is worth visiting for the interior alone. The product is solid and the multilevel layout means it rarely feels crowded even when busy.",
-    openingHours: "Daily 09:00–01:00",
-    listingTier: "free",
-    isFeatured: false,
-    featuredWeight: 80,
-    partnerUrl: "https://www.abraxas.nl/",
-    referralCode: "xred-abraxas",
-    claimStatus: "unclaimed",
-    brand: { primaryColor: "#0C0808", accentColor: "#D47830", aesthetic: "warm-dark", tagline: "Gaudi-inspired. 3 floors. Old city.", logoText: "ABRAXAS" },
   },
   {
     id: "noon-amsterdam",
@@ -8671,6 +8567,30 @@ export const featuredPlacements: FeaturedPlacement[] = [
   { id: "canada-market-sponsor", type: "sponsor", targetId: "canada", cityId: "canada", label: "Canada market sponsor", sponsorName: "Available for launch partner", priority: 90, active: true },
   { id: "canada-featured-retail", type: "venue", targetId: "superette-toronto", cityId: "canada", label: "Featured retail slot", sponsorName: "Premium placement ready", priority: 88, active: true },
 ];
+
+/**
+ * Image trust state. Explicit status wins; recycled generic city imagery
+ * is never presented as a venue photo — it renders as an honest
+ * "image pending verification" placeholder instead.
+ */
+export function getImageState(venue: Venue): ImageStatus {
+  if (venue.imageStatus) return venue.imageStatus;
+  if (!venue.image || venue.image.startsWith("/cities/")) return "placeholder";
+  return "pending";
+}
+
+/** Coordinate trust state — "verified" only when explicitly marked. */
+export function getCoordinateState(venue: Venue): CoordinateStatus {
+  return venue.coordinateStatus ?? "approximate";
+}
+
+/** Best navigation coordinates: entrance point when known, else the pin. */
+export function getNavCoordinates(venue: Venue): { lat?: number; lng?: number } {
+  return {
+    lat: venue.entranceLat ?? venue.coordinates?.lat,
+    lng: venue.entranceLng ?? venue.coordinates?.lng,
+  };
+}
 
 export function getCity(slug: string) {
   return cities.find((city) => city.slug === slug);

@@ -20,8 +20,9 @@ export async function generateMetadata({ params }: MapPageProps) {
   };
 }
 
-export default async function CityMapPage({ params }: MapPageProps) {
+export default async function CityMapPage({ params, searchParams }: MapPageProps & { searchParams: Promise<{ venue?: string }> }) {
   const { slug } = await params;
+  const { venue: venueParam } = await searchParams;
   const city = getCity(slug);
   if (!city) notFound();
 
@@ -29,7 +30,7 @@ export default async function CityMapPage({ params }: MapPageProps) {
 
   return (
     <MapShell>
-      <CityMapExperience city={city} venues={cityVenues} networkCities={cities} />
+      <CityMapExperience city={city} venues={cityVenues} networkCities={cities} initialVenueId={venueParam} />
     </MapShell>
   );
 }

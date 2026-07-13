@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { getVibe, type Venue } from "../data/platform";
+import { getImageState, getVibe, type Venue } from "../data/platform";
 import PlaceImage from "./PlaceImage";
 import SaveButton from "./SaveButton";
 
@@ -18,7 +18,10 @@ function bookingHref(city: string, venueSlug?: string) {
 
 export default function VenueCard({ venue }: { venue: Venue }) {
   const brand = venue.brand;
-  const tileImage = brand?.bannerUrl || venue.galleryImages?.[0] || (venue.image || undefined);
+  const imageTrusted = ["verified", "official-source", "partner-supplied"].includes(getImageState(venue));
+  // Recycled/generic photos never masquerade as the venue: untrusted images
+  // fall through to the premium generated category art instead.
+  const tileImage = brand?.bannerUrl || venue.galleryImages?.[0] || (imageTrusted ? venue.image : undefined);
   const brandName = brand?.logoText || venue.name;
   const signature = getSignatureBanner(venue.id);
   const hasOfficialVisual = Boolean(brand?.bannerUrl || venue.galleryImages?.[0] || venue.image || brand?.logoUrl);
