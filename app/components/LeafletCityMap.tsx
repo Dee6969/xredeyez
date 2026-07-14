@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import L from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl, useMap } from "react-leaflet";
+import { getCoordinateState } from "../data/platform";
 import type { City, Venue } from "../data/platform";
 import { getTileConfig } from "../data/geo";
 import { walkingDirectionsUrl, streetViewUrl } from "./MapActions";
@@ -235,12 +236,14 @@ export default function LeafletCityMap({
                   rel="noreferrer"
                   onClick={() => trackEvent("directions_click", { venue: venue.id, mode: "walk" })}
                 >➤ Walk</a>
+                {getCoordinateState(venue) === "verified" && (
                 <a
                   href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.streetViewHeading)}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => trackEvent("streetview_click", { venue: venue.id })}
                 >◉ Street View</a>
+                )}
               </span>
             </Popup>
           </Marker>

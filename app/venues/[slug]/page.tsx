@@ -11,7 +11,7 @@ import MapActions from "../../components/MapActions";
 import AddToRouteButton from "../../components/AddToRouteButton";
 import VenueLocationCard from "../../components/VenueLocationCard";
 import { formatWalk, nearestVenues } from "../../lib/distance";
-import { getCity, getImageState, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
+import { getCity, getCoordinateState, getImageState, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
 import { breadcrumbSchema, localBusinessSchema, toJsonLd } from "../../lib/schema";
 
 interface VenuePageProps {
@@ -503,6 +503,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   placeId={venue.googlePlaceId}
                   heading={venue.streetViewHeading}
                   venueId={venue.id}
+                  streetView={getCoordinateState(venue) === "verified"}
                 />
               </div>
             </div>

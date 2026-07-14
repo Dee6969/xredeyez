@@ -66,6 +66,7 @@ export default function MapActions({
   heading,
   venueId,
   compact = false,
+  streetView = false,
 }: {
   lat?: number;
   lng?: number;
@@ -76,6 +77,8 @@ export default function MapActions({
   heading?: number;
   venueId?: string;
   compact?: boolean;
+  /** Street View renders ONLY for venues with verified entrance coordinates. */
+  streetView?: boolean;
 }) {
   if (!lat || !lng) return null;
 
@@ -92,6 +95,7 @@ export default function MapActions({
         <span className="map-action-icon" aria-hidden>➤</span>
         Walk there
       </a>
+      {streetView && (
       <a
         href={streetViewUrl(lat, lng, heading)}
         target="_blank"
@@ -103,6 +107,7 @@ export default function MapActions({
         <span className="map-action-icon" aria-hidden>◉</span>
         Street View
       </a>
+      )}
     </div>
   );
 }

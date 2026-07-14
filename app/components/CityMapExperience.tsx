@@ -2,7 +2,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useMemo, useState, useCallback } from "react";
-import { discoveryLayers, getVenueLayer, type City, type DiscoveryLayer, type Venue } from "../data/platform";
+import { discoveryLayers, getCoordinateState, getVenueLayer, type City, type DiscoveryLayer, type Venue } from "../data/platform";
 import SaveButton from "./SaveButton";
 import { trackEvent } from "../lib/analytics";
 import MapActions from "./MapActions";
@@ -264,6 +264,7 @@ export default function CityMapExperience({
                 heading={selected.streetViewHeading}
                 venueId={selected.id}
                 compact
+                streetView={getCoordinateState(selected) === "verified"}
               />
             </>
           ) : (

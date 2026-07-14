@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import MapActions from "./MapActions";
-import type { Venue } from "../data/platform";
+import { getCoordinateState, type Venue } from "../data/platform";
 
 const VenueMiniMap = dynamic(() => import("./VenueMiniMap"), {
   ssr: false,
@@ -44,6 +44,7 @@ export default function VenueLocationCard({ venue, accent }: { venue: Venue; acc
           placeId={venue.googlePlaceId}
           heading={venue.streetViewHeading}
           venueId={venue.id}
+          streetView={getCoordinateState(venue) === "verified"}
         />
         <Link href={`/cities/${venue.cityId}/map?venue=${venue.id}`} className="venue-location-maplink">
           See it on the {venue.city} map →

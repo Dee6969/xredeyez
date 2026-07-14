@@ -1,6 +1,7 @@
 "use client";
 import type { Venue } from "../data/platform";
 import { walkingDirectionsUrl, streetViewUrl } from "./MapActions";
+import { getCoordinateState } from "../data/platform";
 import { trackEvent } from "../lib/analytics";
 
 export default function VenueMobileStrip({ venue }: { venue: Venue }) {
@@ -28,7 +29,7 @@ export default function VenueMobileStrip({ venue }: { venue: Venue }) {
           >
             Website ↗
           </a>
-        ) : hasGeo ? (
+        ) : hasGeo && getCoordinateState(venue) === "verified" ? (
           <a
             href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.streetViewHeading)}
             target="_blank"

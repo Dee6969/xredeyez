@@ -60,3 +60,14 @@
 | Stanley Park Seawall | placeholder | approximate | — | yes | yes | yes |
 
 **Summary:** 54 venues · verified images: 0 · verified coordinates: 0 · Place IDs: 0 · missing hours: 18 · missing address: 6
+
+---
+
+## Street View policy (July 13 update)
+Street View buttons now render ONLY for venues with `coordinateStatus: "verified"`. Current state: **2 verified (Grey Area, Prix d'Ami — both checked against directory listings), 1 needs-review, 51 approximate.** Approximate venues show Walk-there (address-resolved, entrance-accurate) but no Street View until verified.
+
+## Barney's Lounge — identity conflict (editorial decision needed)
+Our listing "Barney's Lounge" carries Haarlemmerstraat 105 — but per Barney's own site that address is **Barney's Uptown** (the bar/restaurant). The coffeeshop is at Haarlemmerstraat 102, and a further Barney's location is at Reguliersgracht 27. Decide which venue the listing represents, then correct name + address + pin together. Marked `needs-review`.
+
+## The one command that fixes the other 51
+`node scripts/geocode-venues.mjs` (run locally, ~5 min) resolves every address to building-accurate coordinates and writes a review file; `--apply` commits them. After review, set `coordinateStatus: "verified"` in bulk and Street View switches on across the city. Alternative gold standard: add Google Place IDs (directions then ignore pins entirely).

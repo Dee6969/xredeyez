@@ -1,0 +1,227 @@
+From d1a8bac7f59522d908718d2e962af27976a23ca0 Mon Sep 17 00:00:00 2001
+From: Claude <claude@anthropic.com>
+Date: Tue, 14 Jul 2026 08:27:33 +0000
+Subject: [PATCH] Street View trust gate: renders only on verified coordinates;
+ Prix d'Ami pin verified+corrected; Barney's identity conflict flagged
+
+---
+ AMSTERDAM_VENUE_QA.md                | 11 +++++++++++
+ app/components/CityMapExperience.tsx |  3 ++-
+ app/components/LeafletCityMap.tsx    |  3 +++
+ app/components/MapActions.tsx        |  5 +++++
+ app/components/VenueLocationCard.tsx |  3 ++-
+ app/components/VenueMobileStrip.tsx  |  3 ++-
+ app/data/platform.ts                 |  8 +++++++-
+ app/venues/[slug]/page.tsx           |  3 ++-
+ 8 files changed, 34 insertions(+), 5 deletions(-)
+
+diff --git a/AMSTERDAM_VENUE_QA.md b/AMSTERDAM_VENUE_QA.md
+index e2c378b..52f2204 100644
+--- a/AMSTERDAM_VENUE_QA.md
++++ b/AMSTERDAM_VENUE_QA.md
+@@ -60,3 +60,14 @@
+ | Stanley Park Seawall | placeholder | approximate | — | yes | yes | yes |
+ 
+ **Summary:** 54 venues · verified images: 0 · verified coordinates: 0 · Place IDs: 0 · missing hours: 18 · missing address: 6
++
++---
++
++## Street View policy (July 13 update)
++Street View buttons now render ONLY for venues with `coordinateStatus: "verified"`. Current state: **2 verified (Grey Area, Prix d'Ami — both checked against directory listings), 1 needs-review, 51 approximate.** Approximate venues show Walk-there (address-resolved, entrance-accurate) but no Street View until verified.
++
++## Barney's Lounge — identity conflict (editorial decision needed)
++Our listing "Barney's Lounge" carries Haarlemmerstraat 105 — but per Barney's own site that address is **Barney's Uptown** (the bar/restaurant). The coffeeshop is at Haarlemmerstraat 102, and a further Barney's location is at Reguliersgracht 27. Decide which venue the listing represents, then correct name + address + pin together. Marked `needs-review`.
++
++## The one command that fixes the other 51
++`node scripts/geocode-venues.mjs` (run locally, ~5 min) resolves every address to building-accurate coordinates and writes a review file; `--apply` commits them. After review, set `coordinateStatus: "verified"` in bulk and Street View switches on across the city. Alternative gold standard: add Google Place IDs (directions then ignore pins entirely).
+diff --git a/app/components/CityMapExperience.tsx b/app/components/CityMapExperience.tsx
+index b7bd073..59218dc 100644
+--- a/app/components/CityMapExperience.tsx
++++ b/app/components/CityMapExperience.tsx
+@@ -2,7 +2,7 @@
+ import Link from "next/link";
+ import dynamic from "next/dynamic";
+ import { useMemo, useState, useCallback } from "react";
+-import { discoveryLayers, getVenueLayer, type City, type DiscoveryLayer, type Venue } from "../data/platform";
++import { discoveryLayers, getCoordinateState, getVenueLayer, type City, type DiscoveryLayer, type Venue } from "../data/platform";
+ import SaveButton from "./SaveButton";
+ import { trackEvent } from "../lib/analytics";
+ import MapActions from "./MapActions";
+@@ -264,6 +264,7 @@ export default function CityMapExperience({
+                 heading={selected.streetViewHeading}
+                 venueId={selected.id}
+                 compact
++                streetView={getCoordinateState(selected) === "verified"}
+               />
+             </>
+           ) : (
+diff --git a/app/components/LeafletCityMap.tsx b/app/components/LeafletCityMap.tsx
+index 9a786d1..0c4383f 100644
+--- a/app/components/LeafletCityMap.tsx
++++ b/app/components/LeafletCityMap.tsx
+@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
+ import { useEffect, useState } from "react";
+ import L from "leaflet";
+ import { MapContainer, Marker, Popup, TileLayer, ZoomControl, useMap } from "react-leaflet";
++import { getCoordinateState } from "../data/platform";
+ import type { City, Venue } from "../data/platform";
+ import { getTileConfig } from "../data/geo";
+ import { walkingDirectionsUrl, streetViewUrl } from "./MapActions";
+@@ -235,12 +236,14 @@ export default function LeafletCityMap({
+                   rel="noreferrer"
+                   onClick={() => trackEvent("directions_click", { venue: venue.id, mode: "walk" })}
+                 >➤ Walk</a>
++                {getCoordinateState(venue) === "verified" && (
+                 <a
+                   href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.streetViewHeading)}
+                   target="_blank"
+                   rel="noreferrer"
+                   onClick={() => trackEvent("streetview_click", { venue: venue.id })}
+                 >◉ Street View</a>
++                )}
+               </span>
+             </Popup>
+           </Marker>
+diff --git a/app/components/MapActions.tsx b/app/components/MapActions.tsx
+index ab33a2f..2cc3312 100644
+--- a/app/components/MapActions.tsx
++++ b/app/components/MapActions.tsx
+@@ -66,6 +66,7 @@ export default function MapActions({
+   heading,
+   venueId,
+   compact = false,
++  streetView = false,
+ }: {
+   lat?: number;
+   lng?: number;
+@@ -76,6 +77,8 @@ export default function MapActions({
+   heading?: number;
+   venueId?: string;
+   compact?: boolean;
++  /** Street View renders ONLY for venues with verified entrance coordinates. */
++  streetView?: boolean;
+ }) {
+   if (!lat || !lng) return null;
+ 
+@@ -92,6 +95,7 @@ export default function MapActions({
+         <span className="map-action-icon" aria-hidden>➤</span>
+         Walk there
+       </a>
++      {streetView && (
+       <a
+         href={streetViewUrl(lat, lng, heading)}
+         target="_blank"
+@@ -103,6 +107,7 @@ export default function MapActions({
+         <span className="map-action-icon" aria-hidden>◉</span>
+         Street View
+       </a>
++      )}
+     </div>
+   );
+ }
+diff --git a/app/components/VenueLocationCard.tsx b/app/components/VenueLocationCard.tsx
+index 4b67e1f..bd66389 100644
+--- a/app/components/VenueLocationCard.tsx
++++ b/app/components/VenueLocationCard.tsx
+@@ -3,7 +3,7 @@
+ import dynamic from "next/dynamic";
+ import Link from "next/link";
+ import MapActions from "./MapActions";
+-import type { Venue } from "../data/platform";
++import { getCoordinateState, type Venue } from "../data/platform";
+ 
+ const VenueMiniMap = dynamic(() => import("./VenueMiniMap"), {
+   ssr: false,
+@@ -44,6 +44,7 @@ export default function VenueLocationCard({ venue, accent }: { venue: Venue; acc
+           placeId={venue.googlePlaceId}
+           heading={venue.streetViewHeading}
+           venueId={venue.id}
++          streetView={getCoordinateState(venue) === "verified"}
+         />
+         <Link href={`/cities/${venue.cityId}/map?venue=${venue.id}`} className="venue-location-maplink">
+           See it on the {venue.city} map →
+diff --git a/app/components/VenueMobileStrip.tsx b/app/components/VenueMobileStrip.tsx
+index 0bd2789..6d05745 100644
+--- a/app/components/VenueMobileStrip.tsx
++++ b/app/components/VenueMobileStrip.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import type { Venue } from "../data/platform";
+ import { walkingDirectionsUrl, streetViewUrl } from "./MapActions";
++import { getCoordinateState } from "../data/platform";
+ import { trackEvent } from "../lib/analytics";
+ 
+ export default function VenueMobileStrip({ venue }: { venue: Venue }) {
+@@ -28,7 +29,7 @@ export default function VenueMobileStrip({ venue }: { venue: Venue }) {
+           >
+             Website ↗
+           </a>
+-        ) : hasGeo ? (
++        ) : hasGeo && getCoordinateState(venue) === "verified" ? (
+           <a
+             href={streetViewUrl(venue.coordinates.lat!, venue.coordinates.lng!, venue.streetViewHeading)}
+             target="_blank"
+diff --git a/app/data/platform.ts b/app/data/platform.ts
+index 5968dd0..4ff110e 100644
+--- a/app/data/platform.ts
++++ b/app/data/platform.ts
+@@ -473,6 +473,8 @@ export const cities: City[] = [
+ export const venues: Venue[] = [
+   {
+     id: "grey-area",
++    coordinateStatus: "verified",
++    lastLocationCheckedAt: "2026-07-13",
+     slug: "grey-area-amsterdam",
+     name: "Grey Area",
+     cityId: "amsterdam",
+@@ -725,6 +727,8 @@ export const venues: Venue[] = [
+   },
+   {
+     id: "prix-dami",
++    coordinateStatus: "verified",
++    lastLocationCheckedAt: "2026-07-13",
+     slug: "prix-dami-amsterdam",
+     name: "Prix d'Ami",
+     cityId: "amsterdam",
+@@ -739,7 +743,7 @@ export const venues: Venue[] = [
+     highlights: ["Claims world's largest coffeeshop", "Open from 07:00", "Tobacco-free zone", "6,100+ reviews · 4.4★", "2min from Central Station"],
+     bestFor: ["Groups", "First-time visitors", "Rainy-day lounge"],
+     vibeIds: ["tourist", "lounge", "social"],
+-    coordinates: { x: 50, y: 28, lat: 52.3753, lng: 4.8959 },
++    coordinates: { x: 50, y: 28, lat: 52.376747, lng: 4.897478 },
+     guideNote: "The earliest opening and closest proximity to Central Station makes this a natural first stop. The tobacco-free policy and food menu remove most of the friction for new visitors — the scale handles the rest.",
+     openingHours: "Daily 07:00–01:00",
+     listingTier: "featured",
+@@ -2347,6 +2351,8 @@ export const venues: Venue[] = [
+   },
+   {
+     id: "barneys-lounge-amsterdam",
++    coordinateStatus: "needs-review",
++    lastLocationCheckedAt: "2026-07-13",
+     slug: "barneys-lounge-amsterdam",
+     name: "Barney's Lounge",
+     cityId: "amsterdam",
+diff --git a/app/venues/[slug]/page.tsx b/app/venues/[slug]/page.tsx
+index d86b597..62b2edd 100644
+--- a/app/venues/[slug]/page.tsx
++++ b/app/venues/[slug]/page.tsx
+@@ -11,7 +11,7 @@ import MapActions from "../../components/MapActions";
+ import AddToRouteButton from "../../components/AddToRouteButton";
+ import VenueLocationCard from "../../components/VenueLocationCard";
+ import { formatWalk, nearestVenues } from "../../lib/distance";
+-import { getCity, getImageState, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
++import { getCity, getCoordinateState, getImageState, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
+ import { breadcrumbSchema, localBusinessSchema, toJsonLd } from "../../lib/schema";
+ 
+ interface VenuePageProps {
+@@ -503,6 +503,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
+                   placeId={venue.googlePlaceId}
+                   heading={venue.streetViewHeading}
+                   venueId={venue.id}
++                  streetView={getCoordinateState(venue) === "verified"}
+                 />
+               </div>
+             </div>
+-- 
+2.43.0
+

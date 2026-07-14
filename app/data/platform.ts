@@ -473,6 +473,8 @@ export const cities: City[] = [
 export const venues: Venue[] = [
   {
     id: "grey-area",
+    coordinateStatus: "verified",
+    lastLocationCheckedAt: "2026-07-13",
     slug: "grey-area-amsterdam",
     name: "Grey Area",
     cityId: "amsterdam",
@@ -725,6 +727,8 @@ export const venues: Venue[] = [
   },
   {
     id: "prix-dami",
+    coordinateStatus: "verified",
+    lastLocationCheckedAt: "2026-07-13",
     slug: "prix-dami-amsterdam",
     name: "Prix d'Ami",
     cityId: "amsterdam",
@@ -739,7 +743,7 @@ export const venues: Venue[] = [
     highlights: ["Claims world's largest coffeeshop", "Open from 07:00", "Tobacco-free zone", "6,100+ reviews · 4.4★", "2min from Central Station"],
     bestFor: ["Groups", "First-time visitors", "Rainy-day lounge"],
     vibeIds: ["tourist", "lounge", "social"],
-    coordinates: { x: 50, y: 28, lat: 52.3753, lng: 4.8959 },
+    coordinates: { x: 50, y: 28, lat: 52.376747, lng: 4.897478 },
     guideNote: "The earliest opening and closest proximity to Central Station makes this a natural first stop. The tobacco-free policy and food menu remove most of the friction for new visitors — the scale handles the rest.",
     openingHours: "Daily 07:00–01:00",
     listingTier: "featured",
@@ -2347,6 +2351,8 @@ export const venues: Venue[] = [
   },
   {
     id: "barneys-lounge-amsterdam",
+    coordinateStatus: "needs-review",
+    lastLocationCheckedAt: "2026-07-13",
     slug: "barneys-lounge-amsterdam",
     name: "Barney's Lounge",
     cityId: "amsterdam",
