@@ -48,3 +48,7 @@ next-env.d.ts
 # generated venue-banner temp data (regen via scripts/)
 /scripts/venues-need-banner.txt
 /scripts/banner-patch.txt
+
+# local-only tooling — never ship
+scripts/sandbox-build.sh
+*.patch

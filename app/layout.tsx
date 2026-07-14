@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-// sandbox font stub
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import ReadingProgress from "./components/ReadingProgress";
 import ShopProviders from "./components/ShopProviders";
@@ -7,9 +7,17 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { organizationSchema, toJsonLd } from "./lib/schema";
 
-const playfair = { variable: "--font-playfair" };
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
 
-const inter = { variable: "--font-inter" };
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.redeyez.co.uk"),
