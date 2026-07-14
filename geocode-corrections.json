@@ -1,0 +1,1532 @@
+[
+  {
+    "id": "joe-beef-montreal",
+    "name": "Joe Beef",
+    "address": "2491 Notre-Dame Street West",
+    "metresOff": 593928,
+    "oldLat": 45.4821,
+    "oldLng": -73.5756,
+    "newLat": 46.5516268,
+    "newLng": -81.1145931
+  },
+  {
+    "id": "rutz-berlin",
+    "name": "Rutz",
+    "address": "Chausseestraße 8",
+    "metresOff": 20518,
+    "oldLat": 52.5257,
+    "oldLng": 13.3869,
+    "newLat": 52.4149185,
+    "newLng": 13.1446578
+  },
+  {
+    "id": "hotel-botanico-tenerife",
+    "name": "Hotel Botánico",
+    "address": "Calle Richard J. Yeoward 1",
+    "metresOff": 19143,
+    "oldLat": 28.403,
+    "oldLng": -16.342,
+    "newLat": 28.4118816,
+    "newLng": -16.5374645
+  },
+  {
+    "id": "neue-nationalgalerie-berlin",
+    "name": "Neue Nationalgalerie",
+    "address": "Potsdamer Strasse 50",
+    "metresOff": 10965,
+    "oldLat": 52.5075,
+    "oldLng": 13.3672,
+    "newLat": 52.4354259,
+    "newLng": 13.2567255
+  },
+  {
+    "id": "bar-del-pla-barcelona",
+    "name": "Bar del Pla",
+    "address": "Carrer de la Montcada 2",
+    "metresOff": 10311,
+    "oldLat": 41.3843,
+    "oldLng": 2.1816,
+    "newLat": 41.4769088,
+    "newLng": 2.1879496
+  },
+  {
+    "id": "ritz-carlton-montreal",
+    "name": "The Ritz-Carlton Montreal",
+    "address": "1228 Sherbrooke Street West",
+    "metresOff": 6488,
+    "oldLat": 45.5001,
+    "oldLng": -73.5776,
+    "newLat": 45.4593052,
+    "newLng": -73.6370938
+  },
+  {
+    "id": "bo-lan-bangkok",
+    "name": "Bo.lan",
+    "address": "24 Sukhumvit 53",
+    "metresOff": 3233,
+    "oldLat": 13.7184,
+    "oldLng": 100.5956,
+    "newLat": 13.7238582,
+    "newLng": 100.5661992
+  },
+  {
+    "id": "gaggan-anand-bangkok",
+    "name": "Gaggan Anand",
+    "address": "68/1 Soi Langsuan",
+    "metresOff": 1924,
+    "oldLat": 13.7381,
+    "oldLng": 100.5617,
+    "newLat": 13.7415308,
+    "newLng": 100.5442392
+  },
+  {
+    "id": "el-duende-del-fuego-tenerife",
+    "name": "El Duende del Fuego",
+    "address": "Calle Torviscas Alto 11",
+    "metresOff": 1890,
+    "oldLat": 28.0769,
+    "oldLng": -16.7284,
+    "newLat": 28.093877,
+    "newLng": -16.7274235
+  },
+  {
+    "id": "ron-gastrobar-amsterdam",
+    "name": "Ron Gastrobar",
+    "address": "Sophialaan 55",
+    "metresOff": 1784,
+    "oldLat": 52.3551,
+    "oldLng": 4.8826,
+    "newLat": 52.3521264,
+    "newLng": 4.8567933
+  },
+  {
+    "id": "royal-hideaway-corales-tenerife",
+    "name": "Royal Hideaway Corales Beach",
+    "address": "Avenida Bruselas 5",
+    "metresOff": 1762,
+    "oldLat": 28.103,
+    "oldLng": -16.741,
+    "newLat": 28.0883536,
+    "newLng": -16.7341394
+  },
+  {
+    "id": "student-hotel-amsterdam-west",
+    "name": "The Student Hotel",
+    "address": "Jan van Galenstraat 335",
+    "metresOff": 1679,
+    "oldLat": 52.3779,
+    "oldLng": 4.8596,
+    "newLat": 52.3724834,
+    "newLng": 4.8365089
+  },
+  {
+    "id": "rijsel-amsterdam",
+    "name": "Rijsel",
+    "address": "Marcusstraat 52b",
+    "metresOff": 1359,
+    "oldLat": 52.3604,
+    "oldLng": 4.9263,
+    "newLat": 52.3515535,
+    "newLng": 4.912494
+  },
+  {
+    "id": "ellerman-house-cape-town",
+    "name": "Ellerman House",
+    "address": "180 Kloof Road, Bantry Bay",
+    "metresOff": 1124,
+    "oldLat": -33.9196,
+    "oldLng": 18.3817,
+    "newLat": -33.9290724,
+    "newLng": 18.3774595
+  },
+  {
+    "id": "soho-house-berlin",
+    "name": "Soho House Berlin",
+    "address": "Torstraße 1",
+    "metresOff": 1100,
+    "oldLat": 52.532,
+    "oldLng": 13.4012,
+    "newLat": 52.5277668,
+    "newLng": 13.4158895
+  },
+  {
+    "id": "louwman-museum-den-haag",
+    "name": "Louwman Museum",
+    "address": "Leidsestraatweg 57",
+    "metresOff": 1093,
+    "oldLat": 52.1077,
+    "oldLng": 4.3395,
+    "newLat": 52.0996146,
+    "newLng": 4.3485884
+  },
+  {
+    "id": "stanley-park-seawall",
+    "name": "Stanley Park Seawall",
+    "address": "Stanley Park Drive",
+    "metresOff": 1028,
+    "oldLat": 49.3043,
+    "oldLng": -123.1443,
+    "newLat": 49.2970341,
+    "newLng": -123.1355243
+  },
+  {
+    "id": "disfrutar-barcelona",
+    "name": "Disfrutar",
+    "address": "Carrer de Villarroel 163",
+    "metresOff": 1009,
+    "oldLat": 41.3787,
+    "oldLng": 2.1538,
+    "newLat": 41.387762,
+    "newLng": 2.1531722
+  },
+  {
+    "id": "de-pijp-culture-walk",
+    "name": "De Pijp Culture Walk",
+    "address": "Kamerlingh Onneslaan 3",
+    "metresOff": 995,
+    "oldLat": 52.3597,
+    "oldLng": 4.9388,
+    "newLat": 52.3522924,
+    "newLng": 4.9305718
+  },
+  {
+    "id": "the-test-kitchen-cape-town",
+    "name": "The Test Kitchen",
+    "address": "375 Albert Road, Woodstock",
+    "metresOff": 939,
+    "oldLat": -33.9349,
+    "oldLng": 18.4631,
+    "newLat": -33.9276495,
+    "newLng": 18.4578781
+  },
+  {
+    "id": "fg-restaurant-rotterdam",
+    "name": "FG Restaurant (François Geurds)",
+    "address": "Katshoek 37b",
+    "metresOff": 886,
+    "oldLat": 51.9294,
+    "oldLng": 4.4675,
+    "newLat": 51.9263829,
+    "newLng": 4.4794654
+  },
+  {
+    "id": "hangar-amsterdam",
+    "name": "Hangar",
+    "address": "Polderweg 648",
+    "metresOff": 834,
+    "oldLat": 52.3621,
+    "oldLng": 4.9456,
+    "newLat": 52.3576508,
+    "newLng": 4.9357132
+  },
+  {
+    "id": "the-pot-luck-club-cape-town",
+    "name": "The Pot Luck Club",
+    "address": "375 Albert Road, Woodstock",
+    "metresOff": 826,
+    "oldLat": -33.9335,
+    "oldLng": 18.4634,
+    "newLat": -33.9276495,
+    "newLng": 18.4578781
+  },
+  {
+    "id": "pllek-amsterdam",
+    "name": "Pllek",
+    "address": "TT Neveritaweg 59",
+    "metresOff": 807,
+    "oldLat": 52.4012,
+    "oldLng": 4.9045,
+    "newLat": 52.3991339,
+    "newLng": 4.8930985
+  },
+  {
+    "id": "restaurant-hagedis-den-haag",
+    "name": "Restaurant Hagedis",
+    "address": "Waldeck Pyrmontkade 116",
+    "metresOff": 799,
+    "oldLat": 52.0855,
+    "oldLng": 4.2952,
+    "newLat": 52.0784359,
+    "newLng": 4.2930689
+  },
+  {
+    "id": "brouwerij-het-ij",
+    "name": "Brouwerij 't IJ",
+    "address": "Funenkade 7",
+    "metresOff": 766,
+    "oldLat": 52.362,
+    "oldLng": 4.9181,
+    "newLat": 52.3666977,
+    "newLng": 4.9263471
+  },
+  {
+    "id": "cotton-house-hotel-barcelona",
+    "name": "Cotton House Hotel",
+    "address": "Gran Via de les Corts Catalanes 670",
+    "metresOff": 758,
+    "oldLat": 41.3908,
+    "oldLng": 2.1628,
+    "newLat": 41.3917483,
+    "newLng": 2.1718042
+  },
+  {
+    "id": "eska-prague",
+    "name": "Eska",
+    "address": "Pernerova 49",
+    "metresOff": 738,
+    "oldLat": 50.0936,
+    "oldLng": 14.4447,
+    "newLat": 50.0913304,
+    "newLng": 14.4544196
+  },
+  {
+    "id": "cafe-de-klos-amsterdam",
+    "name": "Café de Klos",
+    "address": "Kerkstraat 41",
+    "metresOff": 732,
+    "oldLat": 52.3642,
+    "oldLng": 4.894,
+    "newLat": 52.3640898,
+    "newLng": 4.9047723
+  },
+  {
+    "id": "el-palace-barcelona",
+    "name": "El Palace Barcelona",
+    "address": "Gran Via de les Corts Catalanes 668",
+    "metresOff": 710,
+    "oldLat": 41.3906,
+    "oldLng": 2.1634,
+    "newLat": 41.3917882,
+    "newLng": 2.1717601
+  },
+  {
+    "id": "restaurant-as-amsterdam",
+    "name": "Restaurant As",
+    "address": "Vondelpark 6",
+    "metresOff": 701,
+    "oldLat": 52.3613,
+    "oldLng": 4.8741,
+    "newLat": 52.3589831,
+    "newLng": 4.8645069
+  },
+  {
+    "id": "club-420-barcelona",
+    "name": "Club 420 Barcelona",
+    "address": "Carrer del Parlament, 12, Sant Antoni",
+    "metresOff": 696,
+    "oldLat": 41.378,
+    "oldLng": 2.154,
+    "newLat": 41.3757113,
+    "newLng": 2.161764
+  },
+  {
+    "id": "bar-calders-barcelona",
+    "name": "Bar Calders",
+    "address": "Carrer del Parlament, 25, Sant Antoni",
+    "metresOff": 696,
+    "oldLat": 41.3785,
+    "oldLng": 2.1545,
+    "newLat": 41.3764788,
+    "newLng": 2.1623937
+  },
+  {
+    "id": "barra-berlin",
+    "name": "Barra",
+    "address": "Okerstrasse 2",
+    "metresOff": 684,
+    "oldLat": 52.4728,
+    "oldLng": 13.4172,
+    "newLat": 52.4743368,
+    "newLng": 13.4269746
+  },
+  {
+    "id": "guts-and-glory-amsterdam",
+    "name": "Restaurant GUTS",
+    "address": "Utrechtsestraat 6",
+    "metresOff": 679,
+    "oldLat": 52.3621,
+    "oldLng": 4.9056,
+    "newLat": 52.3656457,
+    "newLng": 4.8974539
+  },
+  {
+    "id": "das-stue-berlin",
+    "name": "Das Stue",
+    "address": "Drakestraße 1",
+    "metresOff": 606,
+    "oldLat": 52.5063,
+    "oldLng": 13.3526,
+    "newLat": 52.5098684,
+    "newLng": 13.3458408
+  },
+  {
+    "id": "parking-pizza-barcelona",
+    "name": "Parking Pizza",
+    "address": "Carrer de Londres 98",
+    "metresOff": 585,
+    "oldLat": 41.3928,
+    "oldLng": 2.1583,
+    "newLat": 41.3938027,
+    "newLng": 2.1514125
+  },
+  {
+    "id": "hotel-new-york-rotterdam",
+    "name": "Hotel New York",
+    "address": "Koninginnenhoofd 1",
+    "metresOff": 549,
+    "oldLat": 51.9052,
+    "oldLng": 4.4923,
+    "newLat": 51.9040923,
+    "newLng": 4.4845052
+  },
+  {
+    "id": "pullman-barcelona-skipper",
+    "name": "Pullman Barcelona Skipper",
+    "address": "Avinguda del Litoral, 10, Vila Olímpica",
+    "metresOff": 547,
+    "oldLat": 41.387,
+    "oldLng": 2.2,
+    "newLat": 41.3915365,
+    "newLng": 2.202545
+  },
+  {
+    "id": "coda-berlin",
+    "name": "Coda Dessert Dining",
+    "address": "Friedelstraße 47",
+    "metresOff": 535,
+    "oldLat": 52.4868,
+    "oldLng": 13.4335,
+    "newLat": 52.4899201,
+    "newLng": 13.427478
+  },
+  {
+    "id": "tweede-kamer",
+    "name": "Coffeeshop Tweede Kamer",
+    "address": "Heisteeg 6",
+    "metresOff": 506,
+    "oldLat": 52.3716,
+    "oldLng": 4.8943,
+    "newLat": 52.368831,
+    "newLng": 4.888386
+  },
+  {
+    "id": "kazan-santa-cruz-tenerife",
+    "name": "Kazan",
+    "address": "Calle Bethencourt Alfonso 7",
+    "metresOff": 489,
+    "oldLat": 28.4636,
+    "oldLng": -16.2518,
+    "newLat": 28.4674675,
+    "newLng": -16.2494258
+  },
+  {
+    "id": "augustine-prague",
+    "name": "Augustine Prague",
+    "address": "Letenská 12",
+    "metresOff": 488,
+    "oldLat": 50.0879,
+    "oldLng": 14.4003,
+    "newLat": 50.0890869,
+    "newLng": 14.4068808
+  },
+  {
+    "id": "bodega-sepulveda-barcelona",
+    "name": "Bodega Sepúlveda",
+    "address": "Carrer de Sepúlveda 184",
+    "metresOff": 484,
+    "oldLat": 41.3795,
+    "oldLng": 2.1605,
+    "newLat": 41.3833673,
+    "newLng": 2.1631561
+  },
+  {
+    "id": "hotel-okura-amsterdam",
+    "name": "Hotel Okura",
+    "address": "Ferdinand Bolstraat 333",
+    "metresOff": 483,
+    "oldLat": 52.3462,
+    "oldLng": 4.8999,
+    "newLat": 52.3487287,
+    "newLng": 4.894117
+  },
+  {
+    "id": "the-stud",
+    "name": "The Stud",
+    "address": "Brouwersgracht 11",
+    "metresOff": 481,
+    "oldLat": 52.3779,
+    "oldLng": 4.8861,
+    "newLat": 52.3788373,
+    "newLng": 4.8930105
+  },
+  {
+    "id": "boerejongens",
+    "name": "Boerejongens West",
+    "address": "Baarsjesweg 239",
+    "metresOff": 476,
+    "oldLat": 52.366,
+    "oldLng": 4.854,
+    "newLat": 52.3623061,
+    "newLng": 4.8575482
+  },
+  {
+    "id": "cinc-sentits-barcelona",
+    "name": "Cinc Sentits",
+    "address": "Carrer d'Entença 60",
+    "metresOff": 474,
+    "oldLat": 41.3821,
+    "oldLng": 2.1552,
+    "newLat": 41.3796787,
+    "newLng": 2.150531
+  },
+  {
+    "id": "vysehrad-prague",
+    "name": "Vysehrad Fortress",
+    "address": "V Pevnosti 159/5b",
+    "metresOff": 450,
+    "oldLat": 50.0644,
+    "oldLng": 14.4171,
+    "newLat": 50.0629591,
+    "newLng": 14.4229852
+  },
+  {
+    "id": "fenix-food-factory-rotterdam",
+    "name": "Fenix Food Factory",
+    "address": "Veerlaan 19D",
+    "metresOff": 445,
+    "oldLat": 51.9012,
+    "oldLng": 4.4901,
+    "newLat": 51.9017458,
+    "newLng": 4.4836798
+  },
+  {
+    "id": "casa-fuster-barcelona",
+    "name": "Hotel Casa Fuster",
+    "address": "Passeig de Gracia 132",
+    "metresOff": 441,
+    "oldLat": 41.402,
+    "oldLng": 2.1595,
+    "newLat": 41.3981762,
+    "newLng": 2.1581098
+  },
+  {
+    "id": "terps-army",
+    "name": "Terps Army",
+    "address": "Nieuwe Nieuwstraat 32",
+    "metresOff": 410,
+    "oldLat": 52.372,
+    "oldLng": 4.896,
+    "newLat": 52.3753772,
+    "newLng": 4.8935768
+  },
+  {
+    "id": "pulitzer-amsterdam",
+    "name": "Pulitzer Amsterdam",
+    "address": "Prinsengracht 315",
+    "metresOff": 406,
+    "oldLat": 52.3716,
+    "oldLng": 4.8826,
+    "newLat": 52.375223,
+    "newLng": 4.8832819
+  },
+  {
+    "id": "barneys-lounge-amsterdam",
+    "name": "Barney's Lounge",
+    "address": "Haarlemmerstraat 105",
+    "metresOff": 406,
+    "oldLat": 52.3822,
+    "oldLng": 4.896,
+    "newLat": 52.3806797,
+    "newLng": 4.8905633
+  },
+  {
+    "id": "club-de-fumadors-barcelona",
+    "name": "Club de Fumadors",
+    "address": "Carrer del Consell de Cent, 267, Eixample",
+    "metresOff": 406,
+    "oldLat": 41.3841,
+    "oldLng": 2.1578,
+    "newLat": 41.3872086,
+    "newLng": 2.1603513
+  },
+  {
+    "id": "la-degustation-prague",
+    "name": "La Degustation Bohême Bourgeoise",
+    "address": "Haštalská 18",
+    "metresOff": 401,
+    "oldLat": 50.0875,
+    "oldLng": 14.424,
+    "newLat": 50.0910323,
+    "newLng": 14.4251059
+  },
+  {
+    "id": "lokal-prague",
+    "name": "Lokál Dlouhááá",
+    "address": "Dlouhá 33",
+    "metresOff": 392,
+    "oldLat": 50.0872,
+    "oldLng": 14.4256,
+    "newLat": 50.0907169,
+    "newLng": 14.4259055
+  },
+  {
+    "id": "siam-park-tenerife",
+    "name": "Siam Park",
+    "address": "Avenida Siam s/n",
+    "metresOff": 392,
+    "oldLat": 28.0718,
+    "oldLng": -16.7266,
+    "newLat": 28.0688677,
+    "newLng": -16.7243807
+  },
+  {
+    "id": "hanting-cuisine-den-haag",
+    "name": "HanTing Cuisine",
+    "address": "Prinsestraat 33",
+    "metresOff": 391,
+    "oldLat": 52.0819,
+    "oldLng": 4.3035,
+    "newLat": 52.0787602,
+    "newLng": 4.3060842
+  },
+  {
+    "id": "boulders-beach-cape-town",
+    "name": "Boulders Beach Penguin Colony",
+    "address": "Kleintuin Road, Simon's Town",
+    "metresOff": 390,
+    "oldLat": -34.1975,
+    "oldLng": 18.4515,
+    "newLat": -34.1952945,
+    "newLng": 18.4482076
+  },
+  {
+    "id": "dox-centre-prague",
+    "name": "DOX Centre for Contemporary Art",
+    "address": "Poupetova 793/1",
+    "metresOff": 386,
+    "oldLat": 50.1063,
+    "oldLng": 14.4422,
+    "newLat": 50.1067852,
+    "newLng": 14.4475546
+  },
+  {
+    "id": "buffet-van-odette-amsterdam",
+    "name": "Buffet van Odette",
+    "address": "Prinsengracht 598",
+    "metresOff": 377,
+    "oldLat": 52.364,
+    "oldLng": 4.8842,
+    "newLat": 52.3622855,
+    "newLng": 4.8889892
+  },
+  {
+    "id": "hoxton-amsterdam",
+    "name": "The Hoxton Amsterdam",
+    "address": "Herengracht 255",
+    "metresOff": 376,
+    "oldLat": 52.3688,
+    "oldLng": 4.8899,
+    "newLat": 52.37181,
+    "newLng": 4.8873904
+  },
+  {
+    "id": "green-house-pijp",
+    "name": "Green House Pijp",
+    "address": "Tolstraat 91",
+    "metresOff": 373,
+    "oldLat": 52.3527,
+    "oldLng": 4.898,
+    "newLat": 52.3523507,
+    "newLng": 4.9034577
+  },
+  {
+    "id": "cross-club-prague",
+    "name": "Cross Club",
+    "address": "Plynarni 1096/23",
+    "metresOff": 372,
+    "oldLat": 50.105,
+    "oldLng": 14.4423,
+    "newLat": 50.1082927,
+    "newLng": 14.4432281
+  },
+  {
+    "id": "green-house-centrum",
+    "name": "Green House Centrum Coffeeshop",
+    "address": "Oudezijds Voorburgwal 191",
+    "metresOff": 354,
+    "oldLat": 52.3725,
+    "oldLng": 4.9007,
+    "newLat": 52.3714676,
+    "newLng": 4.8957642
+  },
+  {
+    "id": "michelberger-hotel-berlin",
+    "name": "Michelberger Hotel",
+    "address": "Warschauer Strasse 39/40",
+    "metresOff": 352,
+    "oldLat": 52.5076,
+    "oldLng": 13.4497,
+    "newLat": 52.504618,
+    "newLng": 13.4479619
+  },
+  {
+    "id": "the-tree-club-barcelona",
+    "name": "The Tree Club",
+    "address": "Carrer de la Diputació, 200, Eixample",
+    "metresOff": 344,
+    "oldLat": 41.385,
+    "oldLng": 2.157,
+    "newLat": 41.3856913,
+    "newLng": 2.1610224
+  },
+  {
+    "id": "dampkring",
+    "name": "Original Dampkring",
+    "address": "Handboogstraat 29",
+    "metresOff": 339,
+    "oldLat": 52.3694,
+    "oldLng": 4.8947,
+    "newLat": 52.3677518,
+    "newLng": 4.8905051
+  },
+  {
+    "id": "dizzy-duck-den-haag",
+    "name": "Dizzy Duck",
+    "address": "Trompstraat 210",
+    "metresOff": 336,
+    "oldLat": 52.0837,
+    "oldLng": 4.2942,
+    "newLat": 52.0837055,
+    "newLng": 4.2991208
+  },
+  {
+    "id": "volkshotel-amsterdam",
+    "name": "Volkshotel",
+    "address": "Wibautstraat 150",
+    "metresOff": 330,
+    "oldLat": 52.3556,
+    "oldLng": 4.9156,
+    "newLat": 52.3537525,
+    "newLng": 4.9117913
+  },
+  {
+    "id": "moeders-amsterdam",
+    "name": "Moeders",
+    "address": "Rozengracht 251",
+    "metresOff": 318,
+    "oldLat": 52.3746,
+    "oldLng": 4.8762,
+    "newLat": 52.3718427,
+    "newLng": 4.8749777
+  },
+  {
+    "id": "la-selecta-barcelona",
+    "name": "La Selecta Weed Club Barcelona",
+    "address": "Carrer de Sagues, 14",
+    "metresOff": 318,
+    "oldLat": 41.397,
+    "oldLng": 2.145,
+    "newLat": 41.3941397,
+    "newLng": 2.145177
+  },
+  {
+    "id": "hotel-v-nesplein-amsterdam",
+    "name": "Hotel V Nesplein",
+    "address": "Nes 49",
+    "metresOff": 315,
+    "oldLat": 52.3728,
+    "oldLng": 4.8974,
+    "newLat": 52.371132,
+    "newLng": 4.8936421
+  },
+  {
+    "id": "prater-garten-berlin",
+    "name": "Prater Garten",
+    "address": "Kastanienallee 7-9",
+    "metresOff": 304,
+    "oldLat": 52.5389,
+    "oldLng": 13.4056,
+    "newLat": 52.5402446,
+    "newLng": 13.4095113
+  },
+  {
+    "id": "bulldog-energy",
+    "name": "The Bulldog Energy",
+    "address": "Oudezijds Voorburgwal 218",
+    "metresOff": 294,
+    "oldLat": 52.371,
+    "oldLng": 4.8998,
+    "newLat": 52.3725137,
+    "newLng": 4.8962514
+  },
+  {
+    "id": "hotel-not-hotel-amsterdam",
+    "name": "Hotel Not Hotel",
+    "address": "Piri Reisplein 37",
+    "metresOff": 294,
+    "oldLat": 52.3679,
+    "oldLng": 4.8636,
+    "newLat": 52.3664285,
+    "newLng": 4.8599963
+  },
+  {
+    "id": "boerejongens-centrum",
+    "name": "Boerejongens Centrum",
+    "address": "Utrechtsestraat 21",
+    "metresOff": 289,
+    "oldLat": 52.363,
+    "oldLng": 4.901,
+    "newLat": 52.364853,
+    "newLng": 4.8980251
+  },
+  {
+    "id": "abraxas",
+    "name": "Coffeeshop Abraxas",
+    "address": "Jonge Roelensteeg 12-14",
+    "metresOff": 284,
+    "oldLat": 52.3712,
+    "oldLng": 4.8951,
+    "newLat": 52.3720587,
+    "newLng": 4.8911669
+  },
+  {
+    "id": "greenhouse-secret-farmers-den-haag",
+    "name": "Greenhouse Secret Farmers",
+    "address": "Elandstraat 18",
+    "metresOff": 283,
+    "oldLat": 52.0797,
+    "oldLng": 4.2989,
+    "newLat": 52.0820546,
+    "newLng": 4.3004808
+  },
+  {
+    "id": "club-311-barcelona",
+    "name": "Club 311 Barcelona",
+    "address": "Carrer de Lepant, 311",
+    "metresOff": 283,
+    "oldLat": 41.406,
+    "oldLng": 2.177,
+    "newLat": 41.4065678,
+    "newLng": 2.1736872
+  },
+  {
+    "id": "breda-amsterdam",
+    "name": "Restaurant Breda",
+    "address": "Singel 210",
+    "metresOff": 282,
+    "oldLat": 52.3713,
+    "oldLng": 4.8888,
+    "newLat": 52.3738307,
+    "newLng": 4.8885781
+  },
+  {
+    "id": "mon-camarade-rotterdam",
+    "name": "Mon Camarade",
+    "address": "1e Middellandstraat 10A",
+    "metresOff": 279,
+    "oldLat": 51.9175,
+    "oldLng": 4.4639,
+    "newLat": 51.9196576,
+    "newLng": 4.4659643
+  },
+  {
+    "id": "w-amsterdam",
+    "name": "W Amsterdam",
+    "address": "Spuistraat 175",
+    "metresOff": 271,
+    "oldLat": 52.3705,
+    "oldLng": 4.8912,
+    "newLat": 52.3727769,
+    "newLng": 4.8897582
+  },
+  {
+    "id": "mont-bar-barcelona",
+    "name": "Mont Bar",
+    "address": "Carrer de la Diputació 220",
+    "metresOff": 269,
+    "oldLat": 41.3873,
+    "oldLng": 2.1588,
+    "newLat": 41.386228,
+    "newLng": 2.1616904
+  },
+  {
+    "id": "the-hoxton-amsterdam",
+    "name": "The Hoxton Amsterdam",
+    "address": "Herengracht 255",
+    "metresOff": 268,
+    "oldLat": 52.3701,
+    "oldLng": 4.8846,
+    "newLat": 52.37181,
+    "newLng": 4.8873904
+  },
+  {
+    "id": "barcelona-cannabis-club-gracia",
+    "name": "Gràcia Cannabis Club",
+    "address": "Carrer de Verdi, 48, Gràcia",
+    "metresOff": 266,
+    "oldLat": 41.403,
+    "oldLng": 2.159,
+    "newLat": 41.4043533,
+    "newLng": 2.1563718
+  },
+  {
+    "id": "nobelhart-schmutzig-berlin",
+    "name": "Nobelhart & Schmutzig",
+    "address": "Friedrichstraße 218",
+    "metresOff": 261,
+    "oldLat": 52.5069,
+    "oldLng": 13.3876,
+    "newLat": 52.5053879,
+    "newLng": 13.3905401
+  },
+  {
+    "id": "one-and-only-cape-town",
+    "name": "One&Only Cape Town",
+    "address": "Dock Road, V&A Waterfront",
+    "metresOff": 260,
+    "oldLat": -33.9073,
+    "oldLng": 18.4181,
+    "newLat": -33.9084681,
+    "newLng": 18.4156627
+  },
+  {
+    "id": "tickets-barcelona",
+    "name": "Tickets",
+    "address": "Avinguda del Paral·lel 164",
+    "metresOff": 254,
+    "oldLat": 41.3735,
+    "oldLng": 2.1548,
+    "newLat": 41.3752209,
+    "newLng": 2.156807
+  },
+  {
+    "id": "fly-ii-den-haag",
+    "name": "Fly II",
+    "address": "Wagenstraat 176",
+    "metresOff": 253,
+    "oldLat": 52.0754,
+    "oldLng": 4.3134,
+    "newLat": 52.0745009,
+    "newLng": 4.3168046
+  },
+  {
+    "id": "lasarte-barcelona",
+    "name": "Lasarte",
+    "address": "Carrer de Mallorca 259",
+    "metresOff": 243,
+    "oldLat": 41.3921,
+    "oldLng": 2.1642,
+    "newLat": 41.3936394,
+    "newLng": 2.162126
+  },
+  {
+    "id": "hotel-san-roque-tenerife",
+    "name": "Hotel San Roque",
+    "address": "Calle Esteban de Ponte 32",
+    "metresOff": 242,
+    "oldLat": 28.3735,
+    "oldLng": -16.762,
+    "newLat": 28.3743112,
+    "newLng": -16.7642914
+  },
+  {
+    "id": "nhow-rotterdam",
+    "name": "nhow Rotterdam",
+    "address": "Wilhelminakade 137",
+    "metresOff": 231,
+    "oldLat": 51.9052,
+    "oldLng": 4.4864,
+    "newLat": 51.9067,
+    "newLng": 4.4887263
+  },
+  {
+    "id": "noon-amsterdam",
+    "name": "Noon",
+    "address": "Zeedijk 22",
+    "metresOff": 230,
+    "oldLat": 52.3736,
+    "oldLng": 4.9001,
+    "newLat": 52.3756288,
+    "newLng": 4.9007369
+  },
+  {
+    "id": "almanac-x-alcron-prague",
+    "name": "Almanac X Alcron Prague",
+    "address": "Stepanska 623/40",
+    "metresOff": 217,
+    "oldLat": 50.0794,
+    "oldLng": 14.4291,
+    "newLat": 50.0799321,
+    "newLng": 14.4261752
+  },
+  {
+    "id": "shangri-la-toronto",
+    "name": "Shangri-La Toronto",
+    "address": "188 University Avenue",
+    "metresOff": 216,
+    "oldLat": 43.651,
+    "oldLng": -79.3873,
+    "newLat": 43.6492023,
+    "newLng": -79.3862916
+  },
+  {
+    "id": "depot-boijmans-rotterdam",
+    "name": "Depot Boijmans Van Beuningen",
+    "address": "Museumpark 24",
+    "metresOff": 212,
+    "oldLat": 51.9151,
+    "oldLng": 4.4736,
+    "newLat": 51.9139529,
+    "newLng": 4.471132
+  },
+  {
+    "id": "neni-amsterdam",
+    "name": "NENI Amsterdam",
+    "address": "Waterlooplein 1",
+    "metresOff": 209,
+    "oldLat": 52.3677,
+    "oldLng": 4.9029,
+    "newLat": 52.3691018,
+    "newLng": 4.9008527
+  },
+  {
+    "id": "boros-collection-berlin",
+    "name": "Boros Collection",
+    "address": "Reinhardtstrasse 20",
+    "metresOff": 206,
+    "oldLat": 52.5241,
+    "oldLng": 13.3811,
+    "newLat": 52.5235502,
+    "newLng": 13.3840015
+  },
+  {
+    "id": "bar-canete-barcelona",
+    "name": "Bar Cañete",
+    "address": "Carrer de la Unio 17",
+    "metresOff": 192,
+    "oldLat": 41.3785,
+    "oldLng": 2.171,
+    "newLat": 41.3791405,
+    "newLng": 2.173138
+  },
+  {
+    "id": "rushour-amsterdam",
+    "name": "Rush Hour",
+    "address": "Spuistraat 216",
+    "metresOff": 190,
+    "oldLat": 52.3701,
+    "oldLng": 4.8903,
+    "newLat": 52.3716739,
+    "newLng": 4.8891981
+  },
+  {
+    "id": "greenhouse-namaste-amsterdam",
+    "name": "Greenhouse Namaste",
+    "address": "Waterlooplein 345",
+    "metresOff": 190,
+    "oldLat": 52.3683,
+    "oldLng": 4.9015,
+    "newLat": 52.36665,
+    "newLng": 4.9022485
+  },
+  {
+    "id": "smoke-signals-barcelona",
+    "name": "Smoke Signals",
+    "address": "Carrer d'Ausias Marc, 13",
+    "metresOff": 186,
+    "oldLat": 41.39,
+    "oldLng": 2.176,
+    "newLat": 41.3904862,
+    "newLng": 2.1738649
+  },
+  {
+    "id": "ace-hotel-toronto",
+    "name": "Ace Hotel Toronto",
+    "address": "51 Camden Street",
+    "metresOff": 186,
+    "oldLat": 43.6478,
+    "oldLng": -79.3963,
+    "newLat": 43.6467146,
+    "newLng": -79.3980546
+  },
+  {
+    "id": "barcelona-weed-club",
+    "name": "Barcelona Weed Club",
+    "address": "Carrer de Casanova, 33",
+    "metresOff": 182,
+    "oldLat": 41.384,
+    "oldLng": 2.159,
+    "newLat": 41.3834082,
+    "newLng": 2.1610394
+  },
+  {
+    "id": "mandarin-oriental-barcelona",
+    "name": "Mandarin Oriental Barcelona",
+    "address": "Passeig de Gràcia 38",
+    "metresOff": 179,
+    "oldLat": 41.3921,
+    "oldLng": 2.165,
+    "newLat": 41.391381,
+    "newLng": 2.166914
+  },
+  {
+    "id": "la-pepita-barcelona",
+    "name": "La Pepita",
+    "address": "Carrer de Muntaner, 79, Eixample Esquerra",
+    "metresOff": 179,
+    "oldLat": 41.387,
+    "oldLng": 2.156,
+    "newLat": 41.387541,
+    "newLng": 2.1580204
+  },
+  {
+    "id": "vinograf-misenska-prague",
+    "name": "Vinograf Misenska",
+    "address": "Misenska 68/8",
+    "metresOff": 176,
+    "oldLat": 50.0879,
+    "oldLng": 14.4103,
+    "newLat": 50.0877296,
+    "newLng": 14.4078486
+  },
+  {
+    "id": "dampkring-haarlemmerstraat",
+    "name": "Dampkring Haarlemmerstraat",
+    "address": "Haarlemmerstraat 44",
+    "metresOff": 172,
+    "oldLat": 52.3816,
+    "oldLng": 4.8933,
+    "newLat": 52.380066,
+    "newLng": 4.8929225
+  },
+  {
+    "id": "skina-marbella",
+    "name": "Skina",
+    "address": "Calle Aduar 12",
+    "metresOff": 169,
+    "oldLat": 36.5106,
+    "oldLng": -4.8873,
+    "newLat": 36.5114606,
+    "newLng": -4.8857387
+  },
+  {
+    "id": "berghain-berlin",
+    "name": "Berghain / Panorama Bar",
+    "address": "Am Wriezener Bahnhof",
+    "metresOff": 169,
+    "oldLat": 52.5111,
+    "oldLng": 13.4432,
+    "newLat": 52.5114484,
+    "newLng": 13.4407738
+  },
+  {
+    "id": "hotel-1898-barcelona",
+    "name": "Hotel 1898",
+    "address": "La Rambla 109",
+    "metresOff": 167,
+    "oldLat": 41.3821,
+    "oldLng": 2.172,
+    "newLat": 41.3834822,
+    "newLng": 2.1712023
+  },
+  {
+    "id": "four-floors-rotterdam",
+    "name": "The Four Floors",
+    "address": "Eendrachtsweg 29A",
+    "metresOff": 166,
+    "oldLat": 51.9167,
+    "oldLng": 4.4744,
+    "newLat": 51.9152634,
+    "newLng": 4.4750699
+  },
+  {
+    "id": "kunsthalle-praha",
+    "name": "Kunsthalle Praha",
+    "address": "Klarov 5",
+    "metresOff": 165,
+    "oldLat": 50.0913,
+    "oldLng": 14.4113,
+    "newLat": 50.0922815,
+    "newLng": 14.4095661
+  },
+  {
+    "id": "trefpunt-rotterdam",
+    "name": "'t Trefpunt",
+    "address": "Botersloot 7",
+    "metresOff": 163,
+    "oldLat": 51.9221,
+    "oldLng": 4.4853,
+    "newLat": 51.9235225,
+    "newLng": 4.4858759
+  },
+  {
+    "id": "truth-coffee-cape-town",
+    "name": "Truth Coffee Roasting",
+    "address": "36 Buitenkant Street",
+    "metresOff": 157,
+    "oldLat": -33.9294,
+    "oldLng": 18.4234,
+    "newLat": -33.928143,
+    "newLng": 18.4226134
+  },
+  {
+    "id": "four-seasons-prague",
+    "name": "Four Seasons Prague",
+    "address": "Veleslavinova 2a",
+    "metresOff": 152,
+    "oldLat": 50.0866,
+    "oldLng": 14.4133,
+    "newLat": 50.0877103,
+    "newLng": 14.4145373
+  },
+  {
+    "id": "published-on-main-vancouver",
+    "name": "Published on Main",
+    "address": "3593 Main Street",
+    "metresOff": 150,
+    "oldLat": 49.2515,
+    "oldLng": -123.1012,
+    "newLat": 49.2528469,
+    "newLng": -123.1011732
+  },
+  {
+    "id": "fairmont-pacific-rim-vancouver",
+    "name": "Fairmont Pacific Rim",
+    "address": "1038 Canada Place",
+    "metresOff": 150,
+    "oldLat": 49.2891,
+    "oldLng": -123.1155,
+    "newLat": 49.2880994,
+    "newLng": -123.116883
+  },
+  {
+    "id": "cerveceria-catalana-barcelona",
+    "name": "Cervecería Catalana",
+    "address": "Carrer de Mallorca, 236, Eixample",
+    "metresOff": 149,
+    "oldLat": 41.392,
+    "oldLng": 2.1592,
+    "newLat": 41.3924032,
+    "newLng": 2.1609008
+  },
+  {
+    "id": "sir-adam-amsterdam",
+    "name": "Sir Adam Hotel",
+    "address": "Overhoeksplein 7",
+    "metresOff": 146,
+    "oldLat": 52.3838,
+    "oldLng": 4.9002,
+    "newLat": 52.3837656,
+    "newLng": 4.9023455
+  },
+  {
+    "id": "bahia-del-duque-tenerife",
+    "name": "Gran Hotel Bahía del Duque",
+    "address": "Calle Gran Bretaña s/n",
+    "metresOff": 143,
+    "oldLat": 28.0773,
+    "oldLng": -16.7323,
+    "newLat": 28.0769472,
+    "newLng": -16.7308957
+  },
+  {
+    "id": "voco-the-hague-den-haag",
+    "name": "voco The Hague",
+    "address": "Kneuterdijk 8",
+    "metresOff": 132,
+    "oldLat": 52.0796,
+    "oldLng": 4.3097,
+    "newLat": 52.080698,
+    "newLng": 4.3089486
+  },
+  {
+    "id": "mandarin-oriental-prague",
+    "name": "Mandarin Oriental Prague",
+    "address": "Nebovidská 459/1",
+    "metresOff": 126,
+    "oldLat": 50.0837,
+    "oldLng": 14.4047,
+    "newLat": 50.08472,
+    "newLng": 14.4054613
+  },
+  {
+    "id": "casa-camper-barcelona",
+    "name": "Casa Camper Barcelona",
+    "address": "Carrer d'Elisabets 11",
+    "metresOff": 122,
+    "oldLat": 41.3822,
+    "oldLng": 2.1688,
+    "newLat": 41.3832738,
+    "newLng": 2.1684891
+  },
+  {
+    "id": "field-restaurant-prague",
+    "name": "Field",
+    "address": "U Milosrdnych 12",
+    "metresOff": 119,
+    "oldLat": 50.0913,
+    "oldLng": 14.4204,
+    "newLat": 50.0917095,
+    "newLng": 14.4219362
+  },
+  {
+    "id": "restaurant-rijks-amsterdam",
+    "name": "Restaurant Rijks",
+    "address": "Museumstraat 2",
+    "metresOff": 118,
+    "oldLat": 52.36,
+    "oldLng": 4.8859,
+    "newLat": 52.3595984,
+    "newLng": 4.8842926
+  },
+  {
+    "id": "bulldog-first",
+    "name": "The Bulldog The First",
+    "address": "Oudezijds Voorburgwal 90",
+    "metresOff": 114,
+    "oldLat": 52.373,
+    "oldLng": 4.899,
+    "newLat": 52.3736586,
+    "newLng": 4.8977039
+  },
+  {
+    "id": "paradox",
+    "name": "Paradox",
+    "address": "Eerste Bloemdwarsstraat 2",
+    "metresOff": 112,
+    "oldLat": 52.3744,
+    "oldLng": 4.8796,
+    "newLat": 52.3745073,
+    "newLng": 4.8812362
+  },
+  {
+    "id": "hotel-arts-barcelona",
+    "name": "Hotel Arts Barcelona",
+    "address": "Carrer de la Marina 19",
+    "metresOff": 112,
+    "oldLat": 41.388,
+    "oldLng": 2.196,
+    "newLat": 41.3870828,
+    "newLng": 2.1965607
+  },
+  {
+    "id": "dos-palillos-barcelona",
+    "name": "Dos Palillos",
+    "address": "Carrer d'Elisabets 9",
+    "metresOff": 111,
+    "oldLat": 41.3824,
+    "oldLng": 2.169,
+    "newLat": 41.3833622,
+    "newLng": 2.1686617
+  },
+  {
+    "id": "granville-island-market-vancouver",
+    "name": "Granville Island Public Market",
+    "address": "1689 Johnston Street",
+    "metresOff": 110,
+    "oldLat": 49.2718,
+    "oldLng": -123.1348,
+    "newLat": 49.2727362,
+    "newLng": -123.1352818
+  },
+  {
+    "id": "conservatorium-amsterdam",
+    "name": "Conservatorium Hotel",
+    "address": "Paulus Potterstraat 50",
+    "metresOff": 102,
+    "oldLat": 52.3582,
+    "oldLng": 4.8798,
+    "newLat": 52.3587108,
+    "newLng": 4.8785502
+  },
+  {
+    "id": "mauritshuis-den-haag",
+    "name": "Mauritshuis",
+    "address": "Plein 29",
+    "metresOff": 96,
+    "oldLat": 52.0801,
+    "oldLng": 4.3135,
+    "newLat": 52.0803787,
+    "newLng": 4.314834
+  },
+  {
+    "id": "cremers-den-haag",
+    "name": "Cremers",
+    "address": "Prinsestraat 84",
+    "metresOff": 95,
+    "oldLat": 52.0787,
+    "oldLng": 4.3038,
+    "newLat": 52.0792074,
+    "newLng": 4.3049173
+  },
+  {
+    "id": "the-reef-rotterdam",
+    "name": "The Reef",
+    "address": "Oppert 1",
+    "metresOff": 94,
+    "oldLat": 51.9234,
+    "oldLng": 4.4839,
+    "newLat": 51.9228161,
+    "newLng": 4.4829155
+  },
+  {
+    "id": "tokyo-smoke-toronto",
+    "name": "Tokyo Smoke",
+    "address": "333 Yonge Street",
+    "metresOff": 92,
+    "oldLat": 43.6578,
+    "oldLng": -79.3816,
+    "newLat": 43.6571571,
+    "newLng": -79.3808792
+  },
+  {
+    "id": "kimpton-de-witt-amsterdam",
+    "name": "Kimpton De Witt",
+    "address": "Nieuwezijds Voorburgwal 5",
+    "metresOff": 90,
+    "oldLat": 52.3764,
+    "oldLng": 4.895,
+    "newLat": 52.3771508,
+    "newLng": 4.8954929
+  },
+  {
+    "id": "the-dylan-amsterdam",
+    "name": "The Dylan",
+    "address": "Keizersgracht 384",
+    "metresOff": 89,
+    "oldLat": 52.369,
+    "oldLng": 4.8847,
+    "newLat": 52.3692629,
+    "newLng": 4.8834577
+  },
+  {
+    "id": "the-plug-utopia",
+    "name": "The Plug Utopia",
+    "address": "Nieuwezijds Voorburgwal 132",
+    "metresOff": 88,
+    "oldLat": 52.3752,
+    "oldLng": 4.8929,
+    "newLat": 52.3750993,
+    "newLng": 4.8916121
+  },
+  {
+    "id": "hotel-twentyseven-amsterdam",
+    "name": "Hotel TwentySeven",
+    "address": "Dam 27",
+    "metresOff": 83,
+    "oldLat": 52.3731,
+    "oldLng": 4.894,
+    "newLat": 52.3725106,
+    "newLng": 4.8932522
+  },
+  {
+    "id": "hotel-neri-barcelona",
+    "name": "Hotel Neri",
+    "address": "Carrer de Sant Sever, 5, Gothic Quarter",
+    "metresOff": 81,
+    "oldLat": 41.383,
+    "oldLng": 2.1764,
+    "newLat": 41.3831572,
+    "newLng": 2.1754501
+  },
+  {
+    "id": "la-degustation-boheme-prague",
+    "name": "La Degustation Boheme Bourgeoise",
+    "address": "Hastalska 18",
+    "metresOff": 80,
+    "oldLat": 50.0917,
+    "oldLng": 14.4247,
+    "newLat": 50.0910323,
+    "newLng": 14.4251059
+  },
+  {
+    "id": "25hours-hotel-bikini-berlin",
+    "name": "25hours Hotel Bikini Berlin",
+    "address": "Budapester Strasse 40",
+    "metresOff": 75,
+    "oldLat": 52.5063,
+    "oldLng": 13.3378,
+    "newLat": 52.5056319,
+    "newLng": 13.3378992
+  },
+  {
+    "id": "superette-toronto",
+    "name": "Superette",
+    "address": "1073 Yonge Street",
+    "metresOff": 73,
+    "oldLat": 43.6795,
+    "oldLng": -79.3903,
+    "newLat": 43.6788886,
+    "newLng": -79.3899721
+  },
+  {
+    "id": "alo-toronto",
+    "name": "Alo",
+    "address": "163 Spadina Avenue",
+    "metresOff": 68,
+    "oldLat": 43.6486,
+    "oldLng": -79.3951,
+    "newLat": 43.6485014,
+    "newLng": -79.3959394
+  },
+  {
+    "id": "van-gogh-museum-amsterdam",
+    "name": "Van Gogh Museum",
+    "address": "Museumplein 6",
+    "metresOff": 55,
+    "oldLat": 52.3584,
+    "oldLng": 4.8811,
+    "newLat": 52.3579248,
+    "newLng": 4.8813227
+  },
+  {
+    "id": "markthal-rotterdam",
+    "name": "Markthal",
+    "address": "Ds. Jan Scharpstraat 298",
+    "metresOff": 46,
+    "oldLat": 51.9202,
+    "oldLng": 4.4869,
+    "newLat": 51.9200811,
+    "newLng": 4.4862615
+  },
+  {
+    "id": "village-bloomery-vancouver",
+    "name": "Village Bloomery",
+    "address": "1540 W 2nd Avenue",
+    "metresOff": 33,
+    "oldLat": 49.2692,
+    "oldLng": -123.1397,
+    "newLat": 49.2693576,
+    "newLng": -123.1400834
+  },
+  {
+    "id": "hotel-des-indes-den-haag",
+    "name": "Hotel Des Indes",
+    "address": "Lange Voorhout 54-56",
+    "metresOff": 32,
+    "oldLat": 52.0821,
+    "oldLng": 4.3122,
+    "newLat": 52.0822955,
+    "newLng": 4.3118638
+  },
+  {
+    "id": "drake-hotel-toronto",
+    "name": "The Drake Hotel",
+    "address": "1150 Queen Street West",
+    "metresOff": 29,
+    "oldLat": 43.643,
+    "oldLng": -79.4246,
+    "newLat": 43.6432545,
+    "newLng": -79.424546
+  },
+  {
+    "id": "aloette-toronto",
+    "name": "Aloette",
+    "address": "163 Spadina Avenue",
+    "metresOff": 29,
+    "oldLat": 43.6485,
+    "oldLng": -79.3963,
+    "newLat": 43.6485014,
+    "newLng": -79.3959394
+  }
+]
