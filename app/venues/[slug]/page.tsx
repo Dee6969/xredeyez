@@ -29,7 +29,8 @@ export async function generateMetadata({ params }: VenuePageProps) {
   const imageTrusted = ["verified", "official-source", "partner-supplied"].includes(getImageState(venue));
   // Brand banners are stylised art (not photos) and stay; unverified photos
   // never render as the venue hero — the branded gradient does instead.
-  const heroImage = venue.brand?.bannerUrl || venue.galleryImages?.[0] || (imageTrusted ? venue.image : undefined);
+  const localBanner = venue.brand?.bannerUrl?.startsWith("/") ? venue.brand.bannerUrl : undefined;
+  const heroImage = localBanner || venue.galleryImages?.find((g) => g.startsWith("/")) || (imageTrusted ? venue.image : undefined);
   return {
     title: `${venue.name} | ${venue.city} Cannabis Guide | XRED EYEZ`,
     description: venue.description,
@@ -78,7 +79,9 @@ export default async function VenuePage({ params }: VenuePageProps) {
   const primaryRgb = brand ? hexToRgb(brand.primaryColor) : "24,22,15";
   const accentRgb = brand ? hexToRgb(brand.accentColor) : "181,36,38";
   const accent = brand?.accentColor || "#B52426";
-  const heroBanner = brand?.bannerUrl ?? null;
+  // Only local, licensed assets render as heroes — never hotlinked
+  // third-party photos. Partner galleries are already trust-gated.
+  const heroBanner = brand?.bannerUrl?.startsWith("/") ? brand.bannerUrl : null;
   const hasBanner = !!heroBanner;
   const gallery = venue.galleryImages || [];
   const isPartner = venue.claimStatus === "partner";

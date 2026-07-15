@@ -18,13 +18,20 @@ function bookingHref(city: string, venueSlug?: string) {
 
 export default function VenueCard({ venue }: { venue: Venue }) {
   const brand = venue.brand;
+  const isPartner = venue.claimStatus === "partner";
   const imageTrusted = ["verified", "official-source", "partner-supplied"].includes(getImageState(venue));
-  // Recycled/generic photos never masquerade as the venue: untrusted images
-  // fall through to the premium generated category art instead.
-  const tileImage = brand?.bannerUrl || venue.galleryImages?.[0] || (imageTrusted ? venue.image : undefined);
+  // Honesty rules for tile imagery:
+  //  - only LOCAL assets render (no hotlinked third-party photos)
+  //  - untrusted photos never masquerade as the venue
+  //  - true partners lead with their real, approved photography
+  const localBanner = brand?.bannerUrl?.startsWith("/") ? brand.bannerUrl : undefined;
+  const localGallery = venue.galleryImages?.find((g) => g.startsWith("/"));
+  const trustedPhoto = imageTrusted && venue.image?.startsWith("/") ? venue.image : undefined;
+  const tileImage = isPartner
+    ? trustedPhoto || localGallery || localBanner
+    : localBanner || localGallery || trustedPhoto;
   const brandName = brand?.logoText || venue.name;
-  const signature = getSignatureBanner(venue.id);
-  const hasOfficialVisual = Boolean(brand?.bannerUrl || venue.galleryImages?.[0] || venue.image || brand?.logoUrl);
+  const hasOfficialVisual = Boolean(tileImage || brand?.logoUrl);
   const isHotelLayer = venue.layer === "stay";
   const isCannabisLayer = venue.layer === "cannabis";
 
@@ -33,33 +40,21 @@ export default function VenueCard({ venue }: { venue: Venue }) {
     "--venue-accent": brand?.accentColor || "var(--accent-gold)",
   } as CSSProperties;
 
-  const tierLabel =
-    signature
-      ? "Top Rated"
-      : venue.listingTier === "premium"
-      ? "Premium Partner"
-      : venue.listingTier === "featured"
-      ? "Featured"
-      : "";
+  // "Premium Partner" is a commercial fact, not a styling tier.
+  const tierLabel = isPartner
+    ? "Premium Partner"
+    : venue.listingTier === "premium"
+    ? "Editor Pick"
+    : venue.listingTier === "featured"
+    ? "Featured"
+    : "";
 
   return (
-    <article className={`platform-card venue-card overflow-hidden is-${venue.listingTier}`} style={cardStyle}>
+    <article className={`platform-card venue-card overflow-hidden is-${venue.listingTier}${isPartner ? " is-partner" : ""}`} style={cardStyle}>
       <Link href={`/venues/${venue.slug}`} style={{ textDecoration: "none", display: "block" }}>
-        <div className={`venue-tile-media${signature ? ` venue-signature-media ${signature.className}` : ""}`}>
+        <div className="venue-tile-media">
 
-          {/* ── Signature (premium hardcoded brands) ── */}
-          {signature ? (
-            <div className="venue-signature-banner" aria-hidden="true">
-              <div className="venue-signature-orbit" />
-              <div className="venue-signature-mark">{signature.mark}</div>
-              <div className="venue-signature-copy">
-                <span>{signature.kicker}</span>
-                <strong>{signature.title}</strong>
-                <em>{signature.subtitle}</em>
-              </div>
-              <div className="venue-signature-meta">{signature.meta}</div>
-            </div>
-          ) : hasOfficialVisual ? (
+          {hasOfficialVisual ? (
             /* ── Real image via PlaceImage (handles load/error/skeleton) ── */
             <>
               <PlaceImage
@@ -73,7 +68,7 @@ export default function VenueCard({ venue }: { venue: Venue }) {
               />
               <div className="venue-tile-shade" />
               <div className="venue-tile-brand-panel">
-                <span className="venue-tile-kicker">Official brand room</span>
+                <span className="venue-tile-kicker">{isPartner ? "Official brand room" : `${venue.neighborhood} · ${venue.type}`}</span>
                 {brand?.logoUrl ? (
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img src={brand.logoUrl} alt={`${venue.name} logo`} className="venue-tile-logo" />
@@ -177,38 +172,4 @@ export default function VenueCard({ venue }: { venue: Venue }) {
       </div>
     </article>
   );
-}
-
-function getSignatureBanner(venueId: string) {
-  switch (venueId) {
-    case "grey-area":
-      return {
-        className: "is-grey-area-signature",
-        kicker: "Amsterdam Top Rated",
-        title: "GREY AREA",
-        subtitle: "The American Dream in Amsterdam",
-        meta: "EST. 1993 / CENTRUM",
-        mark: "GA",
-      };
-    case "terps-army":
-      return {
-        className: "is-terps-army-signature",
-        kicker: "Amsterdam Top Rated",
-        title: "TERPS ARMY",
-        subtitle: "Terpenes. Culture. Amsterdam.",
-        meta: "CONNOISSEUR / CENTRUM",
-        mark: "TA",
-      };
-    case "prix-dami":
-      return {
-        className: "is-prix-dami-signature",
-        kicker: "Amsterdam Top Rated",
-        title: "PRIX D'AMI",
-        subtitle: "Pink is more than a colour.",
-        meta: "CENTRAL STATION / 07:00",
-        mark: "PDA",
-      };
-    default:
-      return null;
-  }
 }

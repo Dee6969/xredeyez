@@ -10019,3 +10019,39 @@ textarea:focus-visible,
   height: clamp(110px, 16vw, 170px);
   max-width: 240px;
 }
+
+/* ═══════════════════════════════════════════
+   PREMIUM PARTNER TILES
+   The tile every venue earns the moment they
+   upgrade: real photography, brand accent ring,
+   truthful badge. Non-partners stay quiet.
+   ═══════════════════════════════════════════ */
+.venue-card.is-partner {
+  border: 1px solid color-mix(in srgb, var(--venue-accent) 55%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--venue-accent) 25%, transparent),
+    0 10px 34px color-mix(in srgb, var(--venue-accent) 16%, rgba(0, 0, 0, 0.4));
+  transition: box-shadow 220ms ease, transform 220ms ease;
+}
+.venue-card.is-partner:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--venue-accent) 45%, transparent),
+    0 16px 44px color-mix(in srgb, var(--venue-accent) 26%, rgba(0, 0, 0, 0.45));
+}
+.venue-card.is-partner .venue-tile-badge {
+  background: var(--venue-accent);
+  color: #0E0C07;
+  border: none;
+  font-weight: 700;
+}
+.venue-card.is-partner .venue-tile-media {
+  min-height: 300px;
+}
+.venue-card.is-partner .venue-tile-kicker {
+  color: color-mix(in srgb, var(--venue-accent) 80%, #fff);
+}
+.venue-card.is-partner .venue-tile-logo {
+  max-height: 72px;
+  filter: drop-shadow(0 2px 14px color-mix(in srgb, var(--venue-accent) 45%, transparent));
+}
