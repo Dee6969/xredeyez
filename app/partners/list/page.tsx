@@ -3,13 +3,13 @@ import PlatformShell from "../../components/PlatformShell";
 
 export const metadata = {
   title: "List Your Business — Reach Cannabis Travellers | XRED EYEZ",
-  description: "Get your cannabis café, social club, hotel, restaurant or brand listed on XRED EYEZ. Reach cannabis travellers across Europe and beyond. From €49/month.",
+  description: "Get your cannabis café, social club, hotel, restaurant or brand listed on XRED EYEZ. Reach cannabis travellers across Europe and beyond. From £9.99/month.",
   alternates: {
     canonical: "https://www.redeyez.co.uk/partners/list",
   },
   openGraph: {
     title: "List Your Business | XRED EYEZ",
-    description: "City guide placement, map pins, featured cards and sponsorships. Reach travellers actively planning cannabis culture trips. From €49/month.",
+    description: "City guide placement, map pins, featured cards and sponsorships. Reach travellers actively planning cannabis culture trips. From £9.99/month.",
     type: "website",
     url: "https://www.redeyez.co.uk/partners/list",
   },
@@ -50,9 +50,28 @@ const benefits = [
 
 const packages = [
   {
+    id: "launch",
+    name: "Launch Partner",
+    price: "£9.99",
+    per: "/month",
+    summary: "Founding-rate premium profile. Full brand landing page — your colours, your photos, your links — at the launch price while we build the network.",
+    features: [
+      "Premium brand-room profile page",
+      "Your brand colours & logo",
+      "Partner photo gallery (verified imagery)",
+      "Social links on your profile",
+      "Verified partner trust badge",
+      "Priority map pin & guide placement",
+      "Walk-there & Street View navigation",
+      "Founding rate locked in",
+    ],
+    cta: "Claim launch rate",
+    highlight: true,
+  },
+  {
     id: "starter",
     name: "Starter",
-    price: "€49",
+    price: "£49",
     per: "/month",
     summary: "Get on the map and in the guide. Perfect for independent venues, cafés, social clubs and restaurants.",
     features: [
@@ -69,7 +88,7 @@ const packages = [
   {
     id: "featured",
     name: "Featured",
-    price: "€149",
+    price: "£149",
     per: "/month",
     summary: "Priority placement in category sections, highlighted card, and route card inclusion.",
     features: [
@@ -81,12 +100,12 @@ const packages = [
       "Know Before You Go details",
     ],
     cta: "Apply for Featured",
-    highlight: true,
+    highlight: false,
   },
   {
     id: "premium",
     name: "Premium Partner",
-    price: "€299",
+    price: "£299",
     per: "/month",
     summary: "Full brand room, homepage module eligibility, partner dashboard, and referral tracking.",
     features: [
@@ -146,7 +165,7 @@ export default function ListYourBusinessPage() {
           </Link>
         </div>
         <p style={{ marginTop: "20px", fontSize: "13px", color: "var(--text-muted)", fontFamily: "'Courier New', monospace", letterSpacing: "0.08em" }}>
-          Listings from €49/month · No setup fee · Cancel anytime
+          Listings from £9.99/month · No setup fee · Cancel anytime
         </p>
       </section>
 
@@ -163,7 +182,7 @@ export default function ListYourBusinessPage() {
           </div>
           <div>
             <span>Starting price</span>
-            <strong>From €49/month</strong>
+            <strong>From £9.99/month</strong>
           </div>
         </div>
       </section>

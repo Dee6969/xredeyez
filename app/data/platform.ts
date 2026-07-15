@@ -11,6 +11,12 @@ export interface VenueBrand {
   logoUrl?: string;
   bannerUrl?: string;
   foundedYear?: number;
+  socials?: {
+    instagram?: string;
+    facebook?: string;
+    youtube?: string;
+    tripadvisor?: string;
+  };
 }
 
 export interface Vibe {
@@ -738,29 +744,44 @@ export const venues: Venue[] = [
     country: "Netherlands",
     neighborhood: "Centrum",
     type: "Coffeeshop",
-    image: "/cities/amsterdam-canal-day.png",
-    description: "Self-described as the largest coffeeshop in the world, Prix d'Ami sits 2 minutes from Amsterdam Central Station on a cobbled canal side street. Open from 7am, tobacco-free throughout, with chef-prepared food and over 6,100 Google reviews at 4.4 stars. One of the most accessible large-format shops in the city.",
-    highlights: ["Claims world's largest coffeeshop", "Open from 07:00", "Tobacco-free zone", "6,100+ reviews · 4.4★", "2min from Central Station"],
+    image: "/venues/prix-dami/exterior-night.jpg",
+    imageAlt: "Prix d'Ami coffeeshop shopfront at night, neon signs glowing pink on Haringpakkerssteeg",
+    imageSource: "Prix d'Ami",
+    imageStatus: "partner-supplied",
+    imageRights: "partner-approved",
+    lastImageCheckedAt: "2026-07-15",
+    galleryImages: [
+      "/venues/prix-dami/lounge.jpg",
+      "/venues/prix-dami/exterior-night.jpg",
+      "/venues/prix-dami/counter-neon.jpg",
+    ],
+    description: "Self-described as the largest coffeeshop in the world, Prix d'Ami sits two minutes from Amsterdam Central Station on a cobbled side street. Open from 7am daily, tobacco-free throughout — with tobacco substitutes available at every table — plus a chef-prepared food menu, famous milkshakes, and multiple floors of lounge space. 6,100+ Google reviews at 4.4 stars.",
+    highlights: ["The world's largest coffeeshop", "Open daily from 07:00", "Tobacco-free · substitutes at every table", "Chef-prepared menu & milkshakes", "6,100+ reviews · 4.4★", "2 min from Central Station"],
     bestFor: ["Groups", "First-time visitors", "Rainy-day lounge"],
     vibeIds: ["tourist", "lounge", "social"],
     coordinates: { x: 50, y: 28, lat: 52.376747, lng: 4.897478 },
-    guideNote: "The earliest opening and closest proximity to Central Station makes this a natural first stop. The tobacco-free policy and food menu remove most of the friction for new visitors — the scale handles the rest.",
+    guideNote: "The earliest opening and closest proximity to Central Station makes this a natural first stop. The tobacco-free policy and full kitchen remove most of the friction for new visitors — the scale handles the rest. Pink isn't decoration here: it's the house philosophy of comfort and safety.",
     openingHours: "Daily 07:00–01:00",
-    listingTier: "featured",
+    listingTier: "premium",
     isFeatured: true,
-    featuredWeight: 118,
+    featuredWeight: 130,
     partnerUrl: "https://www.prixdami.nl/en",
     bookingUrl: "https://www.prixdami.nl/en",
     referralCode: "xred-prix-dami",
-    claimStatus: "unclaimed",
+    claimStatus: "partner",
     brand: {
-      primaryColor: "#D4237A",
-      accentColor: "#1A1A1A",
-      aesthetic: "light",
-      tagline: "Pink is more than a colour.",
+      primaryColor: "#17070F",
+      accentColor: "#FF41B4",
+      aesthetic: "dark",
+      tagline: "The world's largest coffeeshop. Pink is more than a colour.",
       logoText: "PRIX D'AMI",
-      bannerUrl: "https://coffeeshopamsterdam.com/wp-content/uploads/2020/11/image-dibbes-1.jpg",
-      foundedYear: 2008,
+      logoUrl: "/venues/prix-dami/logo.png",
+      bannerUrl: "/venues/prix-dami/counter-neon.jpg",
+      socials: {
+        instagram: "https://www.instagram.com/coffeeshopprixdami/",
+        facebook: "https://www.facebook.com/prixdami.nl",
+        youtube: "https://www.youtube.com/channel/UCzdqC6F29rkhvkQbCCPfoig",
+      },
     },
   },
   {

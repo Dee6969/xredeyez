@@ -109,7 +109,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
             HERO — cinematic, full-bleed
             ══════════════════════════════════════ */}
         <section
-          className="vlp-hero"
+          className={`vlp-hero${isPartner && isPremium ? " vlp-hero-neon" : ""}`}
           style={{ backgroundColor: brand?.primaryColor || "#18160F" }}
         >
           {hasBanner && (
@@ -173,6 +173,31 @@ export default async function VenuePage({ params }: VenuePageProps) {
                 View on Map
               </Link>
             </div>
+
+            {isPartner && brand?.socials && (
+              <div className="vlp-hero-socials">
+                {brand.socials.instagram && (
+                  <a href={brand.socials.instagram} target="_blank" rel="noopener noreferrer" style={{ borderColor: accent }}>
+                    Instagram
+                  </a>
+                )}
+                {brand.socials.facebook && (
+                  <a href={brand.socials.facebook} target="_blank" rel="noopener noreferrer" style={{ borderColor: accent }}>
+                    Facebook
+                  </a>
+                )}
+                {brand.socials.youtube && (
+                  <a href={brand.socials.youtube} target="_blank" rel="noopener noreferrer" style={{ borderColor: accent }}>
+                    YouTube
+                  </a>
+                )}
+                {brand.socials.tripadvisor && (
+                  <a href={brand.socials.tripadvisor} target="_blank" rel="noopener noreferrer" style={{ borderColor: accent }}>
+                    Tripadvisor
+                  </a>
+                )}
+              </div>
+            )}
 
             <div className="vlp-hero-meta">
               <span>{venue.city}</span>

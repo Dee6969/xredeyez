@@ -9971,3 +9971,51 @@ textarea:focus-visible,
   .adm-table { font-size: 12.5px; }
   .adm-table th, .adm-table td { padding: 10px 12px; }
 }
+
+/* ═══════════════════════════════════════════
+   PREMIUM PARTNER BRAND ROOMS — neon signature
+   Grounded in real partner signage (Prix d'Ami's
+   neon shopfront). One glow, everything else quiet.
+   ═══════════════════════════════════════════ */
+.vlp-hero-neon .vlp-hero-logo {
+  filter: drop-shadow(0 0 18px rgba(255, 65, 180, 0.55)) drop-shadow(0 0 46px rgba(255, 65, 180, 0.28));
+  animation: neon-breathe 4.5s ease-in-out infinite;
+}
+.vlp-hero-neon .vlp-hero-tagline {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 0 14px rgba(255, 65, 180, 0.45);
+}
+@keyframes neon-breathe {
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(255, 65, 180, 0.55)) drop-shadow(0 0 46px rgba(255, 65, 180, 0.28)); }
+  50% { filter: drop-shadow(0 0 26px rgba(255, 65, 180, 0.7)) drop-shadow(0 0 62px rgba(255, 65, 180, 0.38)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vlp-hero-neon .vlp-hero-logo { animation: none; }
+}
+
+.vlp-hero-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.vlp-hero-socials a {
+  padding: 7px 16px;
+  border: 1px solid rgba(245, 240, 230, 0.3);
+  border-radius: 999px;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: rgba(245, 240, 230, 0.9);
+  text-decoration: none;
+  transition: background 160ms ease, transform 160ms ease;
+}
+.vlp-hero-socials a:hover {
+  background: rgba(255, 65, 180, 0.14);
+  transform: translateY(-1px);
+}
+/* Tall badge logos (portrait crests) get room to breathe in neon partner heroes */
+.vlp-hero-neon .vlp-hero-logo {
+  height: clamp(110px, 16vw, 170px);
+  max-width: 240px;
+}
