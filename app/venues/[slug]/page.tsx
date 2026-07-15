@@ -79,7 +79,9 @@ export default async function VenuePage({ params }: VenuePageProps) {
   const brand = venue.brand;
   const primaryRgb = brand ? hexToRgb(brand.primaryColor) : "24,22,15";
   const accentRgb = brand ? hexToRgb(brand.accentColor) : "181,36,38";
-  const isBrandTakeover = venue.claimStatus === "partner" && venue.listingTier === "premium";
+  // Every paying partner gets the full brand-page experience;
+  // listingTier controls placement priority, not page features.
+  const isBrandTakeover = venue.claimStatus === "partner";
   const wallpaperMark = (brand?.logoText || venue.name).toUpperCase();
   const wallpaperSvg = brand
     ? `url("data:image/svg+xml,${encodeURIComponent(
@@ -124,7 +126,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
         )}
 
         <section
-          className={`vlp-hero${isPartner && isPremium ? " vlp-hero-neon" : ""}`}
+          className={`vlp-hero${isPartner ? " vlp-hero-neon" : ""}`}
           style={{ backgroundColor: brand?.primaryColor || "#18160F" }}
         >
           {hasBanner && (
@@ -392,7 +394,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
         {/* ══════════════════════════════════════
             FULL-BLEED PHOTO BREAK
             ══════════════════════════════════════ */}
-        {gallery[1] && venue.listingTier !== "free" && (
+        {gallery[1] && (venue.listingTier !== "free" || isPartner) && (
           <VenueReveal>
             <div className="vlp-photo-break">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -422,7 +424,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
         {/* ══════════════════════════════════════
             SECONDARY GALLERY (premium only)
             ══════════════════════════════════════ */}
-        {gallery.length > 2 && isPremium && (
+        {gallery.length > 2 && (isPremium || isPartner) && (
           <VenueReveal>
             <section className="vlp-grid">
               <div className={`vlp-grid-inner vlp-grid-${Math.min(gallery.length - 2, 3)}`}>
