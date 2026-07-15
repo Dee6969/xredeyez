@@ -9,6 +9,7 @@ import VenueShell from "../../components/VenueShell";
 import ComplianceNote from "../../components/ComplianceNote";
 import MapActions from "../../components/MapActions";
 import AddToRouteButton from "../../components/AddToRouteButton";
+import BrandMarquee from "../../components/BrandMarquee";
 import VenueLocationCard from "../../components/VenueLocationCard";
 import { formatWalk, nearestVenues } from "../../lib/distance";
 import { getCity, getCoordinateState, getImageState, getSortedVenuesByCity, getVenue, getVenueLayer, venues } from "../../data/platform";
@@ -78,6 +79,13 @@ export default async function VenuePage({ params }: VenuePageProps) {
   const brand = venue.brand;
   const primaryRgb = brand ? hexToRgb(brand.primaryColor) : "24,22,15";
   const accentRgb = brand ? hexToRgb(brand.accentColor) : "181,36,38";
+  const isBrandTakeover = venue.claimStatus === "partner" && venue.listingTier === "premium";
+  const wallpaperMark = (brand?.logoText || venue.name).toUpperCase();
+  const wallpaperSvg = brand
+    ? `url("data:image/svg+xml,${encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' width='460' height='150'><text x='10' y='95' font-family='Arial, Helvetica, sans-serif' font-size='42' font-weight='900' letter-spacing='7' fill='${brand.accentColor}' fill-opacity='0.045' transform='rotate(-7 230 75)'>${wallpaperMark}</text></svg>`,
+      )}")`
+    : undefined;
   const accent = brand?.accentColor || "#B52426";
   // Only local, licensed assets render as heroes — never hotlinked
   // third-party photos. Partner galleries are already trust-gated.
@@ -111,6 +119,10 @@ export default async function VenuePage({ params }: VenuePageProps) {
         {/* ══════════════════════════════════════
             HERO — cinematic, full-bleed
             ══════════════════════════════════════ */}
+        {isBrandTakeover && wallpaperSvg && (
+          <div className="vlp-brand-wallpaper" style={{ backgroundImage: wallpaperSvg }} aria-hidden />
+        )}
+
         <section
           className={`vlp-hero${isPartner && isPremium ? " vlp-hero-neon" : ""}`}
           style={{ backgroundColor: brand?.primaryColor || "#18160F" }}
@@ -236,6 +248,8 @@ export default async function VenuePage({ params }: VenuePageProps) {
             {isPremium && <span className="vlp-trust-item is-premium">Premium listing</span>}
           </div>
         )}
+
+        {isBrandTakeover && <BrandMarquee venue={venue} />}
 
         {/* ══════════════════════════════════════
             TITLE CARD — venue name large
@@ -551,6 +565,8 @@ export default async function VenuePage({ params }: VenuePageProps) {
             </section>
           </VenueReveal>
         )}
+
+        {isBrandTakeover && <BrandMarquee venue={venue} reverse />}
 
         {related.length > 0 && (
           <VenueReveal>
