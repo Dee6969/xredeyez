@@ -885,7 +885,7 @@ body {
 .city-card:hover .city-card-media img { transform: scale(1.04); }
 
 .city-card-wash {
-  background: linear-gradient(180deg, transparent 42%, rgba(245,240,230,0.76));
+  background: linear-gradient(180deg, transparent 46%, rgba(12, 9, 5, 0.66));
 }
 
 .city-status-chip {
@@ -1600,37 +1600,55 @@ body {
 
 .city-light-card:hover img { transform: scale(1.04); }
 
+.city-light-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 38%, rgba(12, 9, 5, 0.34) 62%, rgba(12, 9, 5, 0.88) 100%);
+  pointer-events: none;
+}
+
 .city-light-glass {
   position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  z-index: 1;
-  padding: 14px 16px;
-  background: rgba(245,240,230,0.59);
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2;
+  padding: 0;
 }
 
 .city-light-glass small {
-  display: block;
-  color: rgba(245,240,230,0.68);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(247, 242, 232, 0.92);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+.city-light-glass small::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #84C51F;
+  box-shadow: 0 0 8px rgba(132, 197, 31, 0.8);
 }
 
 .city-light-glass strong {
   display: block;
-  margin-top: 6px;
-  color: var(--text-inverse);
+  margin-top: 7px;
+  color: #F7F2E8;
   font-family: var(--font-playfair, 'Georgia', serif);
-  font-size: 22px;
+  font-size: clamp(24px, 2.4vw, 30px);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  line-height: 1.08;
+  letter-spacing: 0.005em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
 }
 
 /* =====================================================
@@ -2386,11 +2404,11 @@ body {
   bottom: auto;
   z-index: 10;
   border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(245,240,230,0.76);
+  background: rgba(16,13,8,0.78);
   backdrop-filter: blur(10px);
   padding: 10px 14px;
   border-radius: 8px;
-  color: rgba(245,240,230,0.52);
+  color: rgba(245,240,230,0.72);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -2403,7 +2421,7 @@ body {
   bottom: 16px;
   z-index: 10;
   border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(245,240,230,0.86);
+  background: rgba(16,13,8,0.86);
   backdrop-filter: blur(10px);
   padding: 10px 14px;
   border-radius: 8px;
@@ -2446,7 +2464,7 @@ body {
   pointer-events: all;
 }
 .platform-map-region-btn {
-  background: rgba(245,240,230,0.90);
+  background: rgba(16,13,8,0.88);
   border: 1px solid rgba(255,255,255,0.14);
   color: rgba(245,240,230,0.8);
   font-family: var(--font-mono, monospace);
@@ -2579,7 +2597,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(245,240,230,0.52);
+  color: rgba(245,240,230,0.72);
   font-family: var(--font-mono, monospace);
 }
 .map-city-picker-name {
@@ -3585,11 +3603,11 @@ body {
   bottom: 16px;
   z-index: 10;
   border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(245,240,230,0.76);
+  background: rgba(16,13,8,0.78);
   backdrop-filter: blur(10px);
   padding: 8px 14px;
   border-radius: 8px;
-  color: rgba(245,240,230,0.52);
+  color: rgba(245,240,230,0.72);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -8799,7 +8817,7 @@ body {
 }
 .hood-route-desc {
   font-size: 0.875rem;
-  color: rgba(245,240,230,0.52);
+  color: rgba(245,240,230,0.72);
   line-height: 1.55;
   margin-bottom: 12px;
 }
