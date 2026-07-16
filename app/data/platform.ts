@@ -10,6 +10,9 @@ export interface VenueBrand {
   logoText?: string;
   logoUrl?: string;
   bannerUrl?: string;
+  /** Ambient brand video for the hero (muted loop; poster required). */
+  heroVideoUrl?: string;
+  heroVideoPoster?: string;
   foundedYear?: number;
   socials?: {
     instagram?: string;
@@ -777,6 +780,8 @@ export const venues: Venue[] = [
       logoText: "PRIX D'AMI",
       logoUrl: "/venues/prix-dami/logo.png",
       bannerUrl: "/venues/prix-dami/counter-neon.jpg",
+      heroVideoUrl: "/venues/prix-dami/logo-loop.mp4",
+      heroVideoPoster: "/venues/prix-dami/logo-loop-poster.jpg",
       socials: {
         instagram: "https://www.instagram.com/coffeeshopprixdami/",
         facebook: "https://www.facebook.com/prixdami.nl",

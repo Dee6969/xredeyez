@@ -135,6 +135,19 @@ export default async function VenuePage({ params }: VenuePageProps) {
               style={{ backgroundImage: `url(${heroBanner})` }}
             />
           )}
+          {isPartner && brand?.heroVideoUrl && (
+            <video
+              className="vlp-hero-video"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster={brand.heroVideoPoster}
+              src={brand.heroVideoUrl}
+              aria-hidden
+            />
+          )}
           {!hasBanner && (
             <div className={`vlp-generated-hero is-${brand?.aesthetic || "dark"}`} aria-hidden="true">
               <div className="vlp-generated-hero-grid" />
