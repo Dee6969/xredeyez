@@ -62,6 +62,7 @@ const desktopItems = [
   { label: "Explore", href: "/explore" },
   { label: "Cities", href: "/cities" },
   { label: "Guides", href: "/guides" },
+  { label: "Medical", href: "/medical" },
   { label: "Map", href: "/map" },
 ];
 
