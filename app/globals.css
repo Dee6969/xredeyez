@@ -10210,3 +10210,584 @@ textarea:focus-visible,
   .medical-twin { grid-template-columns: 1fr; }
   .medical-step { grid-template-columns: 44px 1fr; gap: 14px; padding: 18px; }
 }
+
+/* ═══════════════════════════════════════════
+   MEDICAL SCOPE — clinical sub-theme
+   Jade/teal clinical accent inside the night
+   theme. Plus-cross wallpaper, specimen labels,
+   pathway timeline. Calm, precise, trustworthy.
+   ═══════════════════════════════════════════ */
+.med-scope {
+  --med-accent: #4FC3A1;
+  --med-accent-deep: #2E8570;
+  --med-accent-soft: rgba(79, 195, 161, 0.13);
+  position: relative;
+}
+.med-scope .eyebrow { color: var(--med-accent); }
+
+/* Clinical plus-cross wallpaper */
+.med-wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M56 20h8v14h14v8H64v14h-8V42H42v-8h14z' fill='%234FC3A1' fill-opacity='0.045'/%3E%3Cpath d='M8 88h5v9h9v5h-9v9H8v-9h-9v-5h9z' fill='%234FC3A1' fill-opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+
+/* Hero + verified specimen label */
+.med-scope .medical-hero-title { letter-spacing: -0.015em; }
+.med-scope .medical-lede { max-width: 720px; }
+.med-scope .medical-reviewed {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 7px 14px;
+  border: 1px solid rgba(79, 195, 161, 0.3);
+  border-radius: 999px;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(79, 195, 161, 0.9);
+  background: rgba(79, 195, 161, 0.06);
+}
+.med-verified-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--med-accent);
+  box-shadow: 0 0 10px rgba(79, 195, 161, 0.8);
+  animation: med-pulse 2.4s ease-in-out infinite;
+}
+@keyframes med-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+/* Sticky section nav */
+.med-section-nav {
+  position: sticky;
+  top: 70px;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 26px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  background: rgba(22, 19, 13, 0.82);
+  backdrop-filter: blur(14px);
+  width: fit-content;
+}
+.med-section-nav a {
+  padding: 7px 15px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: background 150ms ease, color 150ms ease;
+}
+.med-section-nav a:hover { background: rgba(79, 195, 161, 0.1); color: var(--text-primary); }
+.med-section-nav a.is-clinics {
+  background: var(--med-accent);
+  color: #0E1512;
+  font-weight: 700;
+}
+.med-section-nav a.is-clinics:hover { background: #63D4B3; }
+.med-scope section[id] { scroll-margin-top: 130px; }
+
+/* Facts strip: clinical counters */
+.med-scope .medical-fact strong {
+  color: var(--med-accent);
+  font-variant-numeric: tabular-nums;
+}
+.med-scope .medical-fact {
+  border-left: 2px solid rgba(79, 195, 161, 0.35);
+}
+
+/* Pathway → connected clinical timeline */
+.med-scope .medical-steps { position: relative; }
+.med-scope .medical-step {
+  position: relative;
+  padding-left: 8px;
+  transition: transform 200ms ease;
+}
+.med-scope .medical-step:hover { transform: translateX(4px); }
+.med-scope .medical-step-num {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--med-accent);
+  color: var(--med-accent);
+  font-weight: 700;
+  font-family: ui-monospace, monospace;
+  background: rgba(79, 195, 161, 0.07);
+  box-shadow: 0 0 0 5px rgba(79, 195, 161, 0.05);
+}
+.med-scope .medical-step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 27px;
+  top: 46px;
+  bottom: -18px;
+  width: 1.5px;
+  background: linear-gradient(180deg, rgba(79, 195, 161, 0.45), rgba(79, 195, 161, 0.08));
+}
+
+/* Law cards + FAQ */
+.med-scope .medical-law-card {
+  border-top: 2px solid rgba(79, 195, 161, 0.4);
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+.med-scope .medical-law-card:hover { transform: translateY(-3px); border-top-color: var(--med-accent); }
+.med-scope .medical-faq-item summary {
+  position: relative;
+  padding-right: 34px;
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+.med-scope .medical-faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--med-accent);
+  transition: transform 200ms ease;
+}
+.med-scope .medical-faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.med-scope .medical-faq-item[open] { border-color: rgba(79, 195, 161, 0.35); }
+
+/* Clinics funnel banner */
+.med-clinics-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  flex-wrap: wrap;
+  padding: 30px 34px;
+  border-radius: 20px;
+  border: 1px solid rgba(79, 195, 161, 0.35);
+  background:
+    radial-gradient(circle at 88% 20%, rgba(79, 195, 161, 0.12), transparent 46%),
+    var(--bg-card);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+.med-clinics-banner:hover {
+  transform: translateY(-3px);
+  border-color: var(--med-accent);
+  box-shadow: 0 14px 40px rgba(79, 195, 161, 0.14);
+}
+.med-clinics-banner h2 { margin: 6px 0 8px; font-size: clamp(22px, 3vw, 30px); }
+.med-clinics-banner p { margin: 0; color: var(--text-secondary); max-width: 520px; }
+.med-clinics-banner-cta {
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--med-accent);
+  color: #0E1512;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* CTA panel glow (briefing) */
+.med-scope .medical-cta-panel {
+  border-color: rgba(79, 195, 161, 0.35);
+  box-shadow: 0 0 44px rgba(79, 195, 161, 0.08);
+}
+
+/* ── Clinic comparison table ── */
+.clinic-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  background: var(--bg-card);
+}
+.clinic-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  min-width: 860px;
+}
+.clinic-table th {
+  position: sticky;
+  top: 0;
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(79, 195, 161, 0.9);
+  background: rgba(22, 19, 13, 0.97);
+  border-bottom: 1px solid rgba(79, 195, 161, 0.25);
+  white-space: nowrap;
+}
+.clinic-table td {
+  padding: 18px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+  line-height: 1.55;
+}
+.clinic-table tbody tr:last-child td { border-bottom: none; }
+.clinic-table tbody tr { transition: background 140ms ease; }
+.clinic-table tbody tr:hover { background: rgba(79, 195, 161, 0.045); }
+.clinic-name { display: block; font-size: 16px; font-family: var(--font-playfair, serif); }
+.clinic-site {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--med-accent);
+  text-decoration: none;
+}
+.clinic-site:hover { text-decoration: underline; }
+.clinic-reviews { display: block; margin-top: 6px; font-size: 11.5px; color: var(--text-muted); }
+.clinic-fee { color: var(--med-accent); font-weight: 700; }
+.clinic-noted { margin: 0; padding-left: 16px; color: var(--text-secondary); font-size: 12.5px; }
+.clinic-noted li { margin-bottom: 3px; }
+.clinic-claim {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--med-accent);
+  text-decoration: none;
+}
+.clinic-claim:hover { text-decoration: underline; }
+
+/* Mobile: table becomes cards */
+@media (max-width: 720px) {
+  .clinic-table { min-width: 0; }
+  .clinic-table thead { display: none; }
+  .clinic-table, .clinic-table tbody, .clinic-table tr, .clinic-table td { display: block; }
+  .clinic-table tr { border-bottom: 1px solid var(--border-medium); padding: 8px 0; }
+  .clinic-table td { border: none; padding: 8px 18px; }
+  .clinic-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(79, 195, 161, 0.8);
+    margin-bottom: 3px;
+    font-weight: 700;
+  }
+  .med-section-nav { position: static; width: 100%; border-radius: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .med-verified-dot { animation: none; }
+}
+
+/* ═══════════════════════════════════════════
+   MEDICAL WING — clinical design system
+   Warm-neutral base + muted clinical teal.
+   Red recedes here (urgency-only in medicine).
+   Signature: chart-paper wallpaper + EKG pulse.
+   ═══════════════════════════════════════════ */
+.medical-wing {
+  --med-accent: #3EC9AE;
+  --med-accent-deep: #1E8A73;
+  --med-accent-soft: rgba(62, 201, 174, 0.12);
+  --med-line: rgba(62, 201, 174, 0.35);
+  position: relative;
+}
+
+/* Chart-paper wallpaper: faint clinical grid + soft teal aurora */
+.medical-wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 70% 40% at 70% -5%, rgba(62, 201, 174, 0.07), transparent 60%),
+    linear-gradient(rgba(62, 201, 174, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(62, 201, 174, 0.035) 1px, transparent 1px);
+  background-size: auto, 30px 30px, 30px 30px;
+}
+
+/* Teal takes over the accent role inside the wing */
+.medical-wing .eyebrow { color: var(--med-accent); }
+.medical-wing a:not(.platform-secondary-action):not(.medical-clinics-banner) { color: inherit; }
+.medical-wing .medical-lede a,
+.medical-wing .medical-disclaimer a { color: var(--med-accent); }
+.medical-wing .platform-secondary-action {
+  border-color: var(--med-line);
+  color: var(--med-accent);
+}
+.medical-wing .platform-secondary-action:hover { background: var(--med-accent-soft); }
+
+.medical-hero-title { max-width: 820px; }
+.medical-lede { max-width: 720px; font-size: 17px; line-height: 1.75; color: var(--text-secondary); }
+.medical-reviewed {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 6px 14px;
+  border: 1px solid var(--med-line);
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--med-accent);
+  background: var(--med-accent-soft);
+}
+.med-verified-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--med-accent);
+  box-shadow: 0 0 8px rgba(62, 201, 174, 0.8);
+  animation: med-dot 2.4s ease-in-out infinite;
+}
+@keyframes med-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* Jump nav */
+.medical-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.medical-jump a {
+  padding: 9px 18px;
+  border: 1px solid var(--border-medium);
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary) !important;
+  text-decoration: none;
+  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+.medical-jump a:hover { transform: translateY(-1px); border-color: var(--med-line); background: var(--med-accent-soft); }
+.medical-jump a.is-clinics {
+  background: var(--med-accent);
+  border-color: var(--med-accent);
+  color: #0E1613 !important;
+}
+.medical-jump a.is-clinics:hover { background: #52D6BC; }
+
+/* Key facts */
+.medical-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+.medical-fact {
+  padding: 20px 22px;
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--med-accent);
+  border-radius: 14px;
+  background: var(--bg-card);
+  display: grid;
+  gap: 6px;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+.medical-fact:hover { transform: translateY(-2px); border-left-color: #52D6BC; }
+.medical-fact strong { font-size: 26px; font-variant-numeric: tabular-nums; color: var(--med-accent); }
+.medical-fact span { font-size: 13px; line-height: 1.55; color: var(--text-secondary); }
+
+/* Pathway: connected clinical timeline */
+.medical-steps { display: grid; gap: 0; max-width: 780px; }
+.medical-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 18px;
+  padding: 22px 0;
+}
+.medical-step::before {
+  content: "";
+  position: absolute;
+  left: 25px;
+  top: 62px;
+  bottom: -8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--med-line), rgba(62,201,174,0.08));
+}
+.medical-step:last-child::before { display: none; }
+.medical-step-num {
+  width: 52px; height: 52px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--med-line);
+  background: var(--bg-card);
+  color: var(--med-accent);
+  font-weight: 800;
+  font-size: 18px;
+  position: relative;
+  z-index: 1;
+}
+.medical-step h3 { margin: 6px 0 8px; font-size: 18px; }
+.medical-step p { margin: 0; font-size: 14.5px; line-height: 1.7; color: var(--text-secondary); }
+
+/* Twin panels + law grid */
+.medical-twin { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.medical-panel { display: grid; gap: 10px; align-content: start; }
+.medical-panel h3 { margin: 0; font-size: 19px; }
+.medical-panel p { margin: 0; font-size: 14.5px; line-height: 1.7; color: var(--text-secondary); }
+.medical-law-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.medical-law-card {
+  padding: 20px 22px;
+  border: 1px solid var(--border-light);
+  border-top: 3px solid var(--med-accent);
+  border-radius: 14px;
+  background: var(--bg-card);
+  transition: transform 180ms ease;
+}
+.medical-law-card:hover { transform: translateY(-2px); }
+.medical-law-card h3 { margin: 0 0 8px; font-size: 16px; }
+.medical-law-card p { margin: 0; font-size: 14px; line-height: 1.65; color: var(--text-secondary); }
+
+/* FAQ */
+.medical-faq { display: grid; gap: 10px; max-width: 780px; }
+.medical-faq-item {
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  background: var(--bg-card);
+  overflow: hidden;
+}
+.medical-faq-item summary {
+  cursor: pointer;
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: 15px;
+  list-style: none;
+  position: relative;
+  padding-right: 46px;
+  transition: background 150ms ease;
+}
+.medical-faq-item summary::-webkit-details-marker { display: none; }
+.medical-faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--med-accent);
+  font-size: 20px;
+  font-weight: 400;
+  transition: transform 200ms ease;
+}
+.medical-faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.medical-faq-item summary:hover { background: var(--med-accent-soft); }
+.medical-faq-item p { margin: 0; padding: 0 20px 18px; font-size: 14.5px; line-height: 1.7; color: var(--text-secondary); }
+
+/* Clinics banner on the hub */
+.medical-clinics-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 26px 28px;
+  border: 1px solid var(--med-line);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 90% 20%, rgba(62,201,174,0.14), transparent 45%),
+    var(--bg-card);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.medical-clinics-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 34px rgba(62, 201, 174, 0.14);
+}
+.medical-clinics-banner h3 { margin: 6px 0 8px; font-size: 21px; }
+.medical-clinics-banner p { margin: 0; font-size: 14px; color: var(--text-secondary); }
+.medical-clinics-banner-cta {
+  flex-shrink: 0;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--med-accent);
+  color: #0E1613;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Disclaimer + signup */
+.medical-disclaimer {
+  padding: 22px 24px;
+  border: 1px dashed var(--med-line);
+  border-radius: 16px;
+  background: var(--med-accent-soft);
+}
+.medical-disclaimer p { margin: 8px 0 0; font-size: 13.5px; line-height: 1.7; color: var(--text-secondary); }
+.medical-cta-panel { border-color: var(--med-line); }
+
+/* EKG pulse divider */
+.pulse-divider { max-width: 620px; margin: 8px auto -18px; opacity: 0.75; }
+.pulse-divider svg { width: 100%; height: 34px; display: block; }
+.pulse-divider-trace {
+  stroke: var(--med-accent, #3EC9AE);
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+  animation: pulse-draw 2.8s ease-out forwards;
+  filter: drop-shadow(0 0 6px rgba(62, 201, 174, 0.5));
+}
+@keyframes pulse-draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .pulse-divider-trace { animation: none; stroke-dashoffset: 0; }
+  .med-verified-dot { animation: none; }
+}
+
+/* Clinic comparison table */
+.clinic-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  background: var(--bg-card);
+  -webkit-overflow-scrolling: touch;
+}
+.clinic-table { width: 100%; min-width: 880px; border-collapse: collapse; font-size: 14px; }
+.clinic-table th {
+  position: sticky;
+  top: 0;
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--med-accent);
+  background: #1A211D;
+  border-bottom: 1px solid var(--med-line);
+  white-space: nowrap;
+}
+.clinic-table td {
+  padding: 18px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border-light);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.clinic-table tbody tr:last-child td { border-bottom: none; }
+.clinic-table tbody tr:nth-child(even) { background: rgba(62, 201, 174, 0.025); }
+.clinic-table tbody tr { transition: background 140ms ease; }
+.clinic-table tbody tr:hover { background: var(--med-accent-soft); }
+.clinic-name { display: block; font-size: 16px; color: var(--text-primary); }
+.clinic-site { display: block; margin-top: 3px; font-size: 12.5px; color: var(--med-accent) !important; text-decoration: none; }
+.clinic-site:hover { text-decoration: underline; }
+.clinic-reviews { display: block; margin-top: 6px; font-size: 11.5px; color: var(--text-muted); }
+.clinic-fee { font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.clinic-noted { margin: 0; padding-left: 16px; display: grid; gap: 3px; font-size: 13px; }
+.clinic-claim {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--med-accent) !important;
+  text-decoration: none;
+}
+.clinic-claim:hover { text-decoration: underline; }
+
+@media (max-width: 760px) {
+  .medical-twin { grid-template-columns: 1fr; }
+  .medical-clinics-banner { flex-direction: column; align-items: flex-start; }
+}

@@ -1,4 +1,4 @@
-export type Sector = "cannabis" | "stay" | "eat" | "coffeeshop" | "social-club";
+export type Sector = "cannabis" | "stay" | "eat" | "coffeeshop" | "social-club" | "clinic";
 export type SequenceType = "cold" | "nurture";
 
 export interface EmailContent {
@@ -15,6 +15,68 @@ export const MORE_INFO_PATH = "/api/outreach/more-info";
 const BRAND = "XRED EYEZ";
 
 export const EMAIL_CONTENT: Record<Sector, Record<SequenceType, EmailContent[]>> = {
+  clinic: {
+    cold: [
+      {
+        subject: "Your clinic is already being compared. Own the row.",
+        headline: "Patients compare before they book. Make sure it's accurate.",
+        body: [
+          "The UK market moved fast last year: private cannabis prescriptions rose from 283,000 in 2023 to 659,000 in 2024 (NHS Business Services Authority FOI data) — a patient base now estimated around 82,000, with 99% of prescribing private.",
+          `${BRAND} runs an independent UK medical access hub and clinic comparison — consultation fees, follow-up costs and access schemes, verified and dated. Your clinic's row is already live, compiled from published sources.`,
+          "A claimed profile lets you verify every figure patients see — fees, schemes, focus areas — before they choose. Factual presentation never changes with payment; accuracy is the product.",
+          "Claimed clinic profiles are £9.99/month at the founding rate while we build the network.",
+        ],
+        ctaLabel: "Claim your clinic profile",
+        showMoreInfo: true,
+      },
+      {
+        subject: "659,000 prescriptions. One question: who do patients find first?",
+        headline: "The access moment is a comparison moment.",
+        body: [
+          "Every new patient goes through the same sequence: is it legal, am I eligible, what does it cost, which clinic. Our UK access guide and clinic comparison sit exactly on that sequence — editorial, compliant, and independent.",
+          "In a market growing 130%+ year on year, patient acquisition is the battle. An accurate, claimed profile on an independent comparison is the cheapest credibility a clinic can buy — because the information is verified, not advertised.",
+          "We never make efficacy claims, never promote medicines, and never rank clinics by payment. That discipline is why the page is worth being accurate on.",
+          "£9.99/month founding rate. Cancel anytime. Your row stays either way — claiming just makes it yours.",
+        ],
+        ctaLabel: "Verify your clinic's details",
+        showMoreInfo: true,
+      },
+      {
+        subject: "One last note from us",
+        headline: "This is the last time we'll reach out.",
+        body: [
+          "If claiming your clinic profile isn't a priority now, no problem — the comparison stays editorial and we'll keep verifying figures from published sources on our own cadence.",
+          "If you'd like your team to control that accuracy directly, the button below is the two-minute route.",
+        ],
+        ctaLabel: "Claim for £9.99/month",
+        showMoreInfo: true,
+      },
+    ],
+    nurture: [
+      {
+        subject: "What a claimed clinic profile includes",
+        headline: "Accuracy, controlled by you.",
+        body: [
+          "Verified fees, access schemes and focus areas on the UK clinic comparison — updated by your team, dated for readers.",
+          "A verified profile badge that reflects a real relationship — we never label anything 'partner' that isn't.",
+          "Placement within the UK medical access hub: the guide patients read before they choose anyone.",
+          "£9.99/month at the founding rate. No setup fee. Cancel anytime.",
+        ],
+        ctaLabel: "Set up — £9.99/month",
+        showMoreInfo: false,
+      },
+      {
+        subject: "Complete your clinic profile in 2 minutes",
+        headline: "Two minutes and it's yours.",
+        body: [
+          "Hit the button, confirm your clinic's details, and your claimed profile goes live on the next publish — usually within 48 hours.",
+          "Everything factual stays factual: claiming controls accuracy, not presentation.",
+        ],
+        ctaLabel: "Finish setup",
+        showMoreInfo: false,
+      },
+    ],
+  },
   coffeeshop: {
     cold: [
       {
@@ -341,6 +403,7 @@ export function getSectorLabel(sector: Sector): string {
     cannabis: "Cannabis Venue (general)",
     coffeeshop: "Coffeeshop (NL)",
     "social-club": "Cannabis Social Club",
+    clinic: "Medical Clinic (UK)",
     eat: "Restaurant / Dining",
   };
   return labels[sector];

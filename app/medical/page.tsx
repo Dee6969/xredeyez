@@ -3,6 +3,7 @@ import PlatformShell from "../components/PlatformShell";
 import Reveal from "../components/Reveal";
 import MedicalBriefingSignup from "../components/MedicalBriefingSignup";
 import { medicalUk } from "../data/medical";
+import PulseDivider from "../components/PulseDivider";
 import { breadcrumbSchema, toJsonLd } from "../lib/schema";
 
 export const metadata = {
@@ -34,6 +35,10 @@ export default function MedicalUkPage() {
 
   return (
     <PlatformShell>
+      <div className="medical-wing">
+      <div className="medical-wallpaper" aria-hidden />
+      <div className="med-scope">
+      <div className="med-wallpaper" aria-hidden />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(faqSchema) }} />
       <script
         type="application/ld+json"
@@ -53,7 +58,21 @@ export default function MedicalUkPage() {
           <div className="eyebrow">{m.hero.eyebrow}</div>
           <h1 className="platform-section-title medical-hero-title">{m.hero.title}</h1>
           <p className="medical-lede">{m.hero.lede}</p>
-          <p className="medical-reviewed">Reviewed {m.lastReviewed} · Editorial information, not medical advice</p>
+          <p className="medical-reviewed"><span className="med-verified-dot" aria-hidden />Reviewed {m.lastReviewed} · Editorial information, not medical advice</p>
+          <nav className="medical-jump" aria-label="On this page">
+            <a href="#pathway">The pathway</a>
+            <a href="#law">Know the law</a>
+            <a href="#faq">FAQ</a>
+            <Link href="/medical/clinics" className="is-clinics">Compare clinics →</Link>
+          </nav>
+
+          <nav className="med-section-nav" aria-label="On this page">
+            <a href="#pathway">The pathway</a>
+            <a href="#eligibility">Eligibility</a>
+            <a href="#law">Know the law</a>
+            <a href="#faq">Questions</a>
+            <Link href="/medical/clinics" className="is-clinics">Compare clinics →</Link>
+          </nav>
         </section>
       </Reveal>
 
@@ -70,6 +89,8 @@ export default function MedicalUkPage() {
           </div>
         </section>
       </Reveal>
+
+      <PulseDivider />
 
       {/* Pathway */}
       <Reveal>
@@ -96,7 +117,7 @@ export default function MedicalUkPage() {
 
       {/* Eligibility + NHS */}
       <Reveal>
-        <section className="platform-section">
+        <section className="platform-section" id="eligibility">
           <div className="medical-twin">
             <div className="platform-panel medical-panel">
               <div className="eyebrow">Eligibility</div>
@@ -111,6 +132,8 @@ export default function MedicalUkPage() {
           </div>
         </section>
       </Reveal>
+
+      <PulseDivider />
 
       {/* Law essentials */}
       <Reveal>
@@ -132,6 +155,22 @@ export default function MedicalUkPage() {
         </section>
       </Reveal>
 
+      {/* Clinic directory feature */}
+      <Reveal>
+        <section className="platform-section">
+          <Link href="/medical/clinics" className="medical-clinics-banner" data-hover>
+            <div>
+              <div className="eyebrow">New</div>
+              <h3>Every regulated clinic, one honest table.</h3>
+              <p>Consultation fees, access schemes and focus areas — compared independently, verified July 2026.</p>
+            </div>
+            <span className="medical-clinics-banner-cta">Compare clinics →</span>
+          </Link>
+        </section>
+      </Reveal>
+
+      <PulseDivider />
+
       {/* FAQ */}
       <Reveal>
         <section className="platform-section" id="faq">
@@ -149,6 +188,20 @@ export default function MedicalUkPage() {
               </details>
             ))}
           </div>
+        </section>
+      </Reveal>
+
+      {/* Clinic directory funnel */}
+      <Reveal>
+        <section className="platform-section">
+          <Link href="/medical/clinics" className="med-clinics-banner">
+            <div>
+              <div className="eyebrow">Next Step</div>
+              <h2>Compare every regulated clinic.</h2>
+              <p>Consultation fees, access schemes and focus areas — side by side, verified, no endorsements.</p>
+            </div>
+            <span className="med-clinics-banner-cta">Open the comparison →</span>
+          </Link>
         </section>
       </Reveal>
 
@@ -190,6 +243,8 @@ export default function MedicalUkPage() {
           </aside>
         </section>
       </Reveal>
+      </div>
+      </div>
     </PlatformShell>
   );
 }

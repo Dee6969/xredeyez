@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { getSectorLabel, type Sector } from "@/app/lib/outreach/content";
 
-const SECTORS: Sector[] = ["coffeeshop", "social-club", "cannabis", "stay", "eat"];
+const SECTORS: Sector[] = ["coffeeshop", "social-club", "clinic", "cannabis", "stay", "eat"];
 
 interface ContactRow {
   id: string;
