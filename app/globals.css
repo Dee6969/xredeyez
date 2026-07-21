@@ -11166,24 +11166,29 @@ html {
    ═══════════════════════════════════════════ */
 .xpin-wrap { background: none; border: none; }
 .xpin {
+  position: relative;
   display: grid;
   place-items: center;
   width: 100%;
   height: 100%;
   border-radius: 13px;
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-  color: #0E0C07;
+  border: 2.5px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  color: #FFFFFF;
   transform-origin: 50% 100%;
   animation: pin-pop 340ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
   transition: transform 160ms ease, box-shadow 160ms ease;
   cursor: pointer;
 }
-.xpin svg { width: 58%; height: 58%; }
-.xpin.is-cannabis { background: linear-gradient(150deg, #9CD63A, #6EA818); }
-.xpin.is-stay { background: linear-gradient(150deg, #8CC0EE, #4E86C0); }
-.xpin.is-eat { background: linear-gradient(150deg, #F0B468, #CC7E2E); }
-.xpin.is-do { background: linear-gradient(150deg, #C0A0F0, #8460C8); }
+.xpin svg {
+  width: 64%;
+  height: 64%;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+.xpin.is-cannabis { background: linear-gradient(150deg, #8FCC2E, #5E9412); }
+.xpin.is-stay { background: linear-gradient(150deg, #6FA8DC, #3E6EA8); }
+.xpin.is-eat { background: linear-gradient(150deg, #E8A050, #B5691E); }
+.xpin.is-do { background: linear-gradient(150deg, #A886E0, #6E48B0); }
 .xpin:hover { transform: scale(1.14) translateY(-2px); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4); }
 .xpin.is-selected {
   border-width: 3px;
@@ -11249,4 +11254,71 @@ html {
   .xpin { animation: none; }
   .xpin.is-selected::after { animation: none; opacity: 0.5; }
   .xpin:hover { transform: none; }
+}
+
+/* ═══════════════════════════════════════════
+   MAP SIDEBAR v2 — icon cards, coloured filters,
+   drawer brand-art. One glyph language everywhere.
+   ═══════════════════════════════════════════ */
+.map-zen-row {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+.map-row-chip {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+.map-row-chip svg { width: 22px; height: 22px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)); }
+.map-row-chip.is-cannabis { background: linear-gradient(150deg, #8FCC2E, #5E9412); }
+.map-row-chip.is-stay { background: linear-gradient(150deg, #6FA8DC, #3E6EA8); }
+.map-row-chip.is-eat { background: linear-gradient(150deg, #E8A050, #B5691E); }
+.map-row-chip.is-do { background: linear-gradient(150deg, #A886E0, #6E48B0); }
+.map-row-chip.is-partner {
+  border-color: var(--pin-partner, #FFD700);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--pin-partner, #FFD700) 45%, transparent),
+    0 0 12px color-mix(in srgb, var(--pin-partner, #FFD700) 50%, transparent);
+}
+.map-row-body { display: grid; gap: 2px; min-width: 0; }
+.map-row-body .map-zen-row-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.map-row-partner {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pin-partner, var(--accent-gold));
+}
+
+/* Filter chips carry the layer colour */
+.map-zen-cat { position: relative; transition: background 160ms ease, color 160ms ease, border-color 160ms ease; }
+.map-zen-cat.is-cannabis, .map-zen-cat.is-stay, .map-zen-cat.is-eat, .map-zen-cat.is-do {
+  border-color: color-mix(in srgb, var(--cat-color) 45%, transparent);
+}
+.map-zen-cat.is-cannabis.is-active, .map-zen-cat.is-stay.is-active, .map-zen-cat.is-eat.is-active, .map-zen-cat.is-do.is-active {
+  background: var(--cat-color);
+  border-color: var(--cat-color);
+  color: #fff;
+}
+
+/* Selected drawer: brand art header */
+.map-drawer-art {
+  height: 96px;
+  margin: -4px -4px 12px;
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid var(--border-light);
+  box-shadow: inset 0 -30px 40px rgba(10, 8, 5, 0.5);
 }

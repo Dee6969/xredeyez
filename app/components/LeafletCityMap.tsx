@@ -3,6 +3,7 @@
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import L from "leaflet";
+import { glyphFor } from "./mapGlyphs";
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl, useMap, Tooltip } from "react-leaflet";
 import { getCoordinateState } from "../data/platform";
 import type { City, Venue } from "../data/platform";
@@ -19,16 +20,7 @@ function FlyTo({ lat, lng, zoom }: { lat: number; lng: number; zoom: number }) {
 }
 
 // ── Category pin factory: SVG glyph chips, layer-coloured, partner-aware ──
-const PIN_GLYPHS: Record<string, string> = {
-  cannabis:
-    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c.9 2.4 1.4 4.9 1.2 7.4 1.5-1.9 3.4-3.3 5.6-4.2-1 2.2-1.6 4.6-1.5 7 1.6-.9 3.4-1.4 5.2-1.5-1.3 1.7-2.9 3-4.8 3.9 1.2.3 2.4.8 3.4 1.5-1.6.6-3.3.8-5 .5.6 1 1 2.2 1.1 3.4-1.4-.6-2.6-1.5-3.6-2.6V21h-1.2v-2.6c-1 1.1-2.2 2-3.6 2.6.1-1.2.5-2.4 1.1-3.4-1.7.3-3.4.1-5-.5 1-.7 2.2-1.2 3.4-1.5-1.9-.9-3.5-2.2-4.8-3.9 1.8.1 3.6.6 5.2 1.5-.1-2.4-.5-4.8-1.5-7 2.2.9 4.1 2.3 5.6 4.2-.2-2.5.3-5 1.2-7.4z"/></svg>',
-  stay:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3 18v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6"/><path d="M3 18h18"/><path d="M5 11V7a1 1 0 0 1 1-1h5v5"/><circle cx="8" cy="8.6" r="0.4" fill="currentColor"/></svg>',
-  eat:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M7 3v7a2 2 0 0 0 4 0V3"/><path d="M9 3v18"/><path d="M17 3c-1.7 1.4-2.5 3.4-2.5 5.5 0 1.4.9 2.5 2.5 2.5V21"/></svg>',
-  do:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>',
-};
+
 
 const iconCache = new Map<string, L.DivIcon>();
 function venuePinIcon(layer: string | undefined, selected: boolean, partnerColor?: string): L.DivIcon {
@@ -42,7 +34,7 @@ function venuePinIcon(layer: string | undefined, selected: boolean, partnerColor
     : "";
   const icon = L.divIcon({
     className: `xpin-wrap`,
-    html: `<span class="xpin is-${kind}${selected ? " is-selected" : ""}${partnerColor ? " is-partner" : ""}" ${ring}>${PIN_GLYPHS[kind]}</span>`,
+    html: `<span class="xpin is-${kind}${selected ? " is-selected" : ""}${partnerColor ? " is-partner" : ""}" ${ring}>${glyphFor(kind)}</span>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
     popupAnchor: [0, -(size / 2 + 6)],

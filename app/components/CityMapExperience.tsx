@@ -7,6 +7,7 @@ import SaveButton from "./SaveButton";
 import { trackEvent } from "../lib/analytics";
 import MapActions from "./MapActions";
 import { CITY_CENTERS, REGION_BUTTONS } from "../data/geo";
+import { glyphFor, metaFor } from "./mapGlyphs";
 
 function buildBookingLink(venue: Venue): string {
   const destination = [venue.name, venue.neighborhood, venue.country || venue.city]
@@ -119,7 +120,8 @@ export default function CityMapExperience({
             <button
               key={layer.id}
               type="button"
-              className={`map-zen-cat${activeLayer === layer.id ? " is-active" : ""}`}
+              className={`map-zen-cat is-${layer.id}${activeLayer === layer.id ? " is-active" : ""}`}
+              style={{ "--cat-color": metaFor(layer.id).color } as React.CSSProperties}
               onClick={() => setLayer(layer.id)}
             >{layer.label}</button>
           ))}
@@ -145,6 +147,13 @@ export default function CityMapExperience({
             key={selected.id}
             className={`map-zen-selected${selected.layer === "stay" ? " is-hotel" : ""}${selected.layer === "eat" ? " is-eat" : ""}`}
           >
+            {selected.brand?.bannerUrl?.startsWith("/") && (
+              <div
+                className="map-drawer-art"
+                style={{ backgroundImage: `url(${selected.brand.bannerUrl})` }}
+                aria-hidden
+              />
+            )}
             <div className="map-zen-sel-type">{selected.type} · {selected.neighborhood}</div>
             <div className="map-zen-sel-name">{selected.name}</div>
             {selected.address && (
@@ -194,7 +203,8 @@ export default function CityMapExperience({
             <button
               key={layer.id}
               type="button"
-              className={`map-zen-cat${activeLayer === layer.id ? " is-active" : ""}`}
+              className={`map-zen-cat is-${layer.id}${activeLayer === layer.id ? " is-active" : ""}`}
+              style={{ "--cat-color": metaFor(layer.id).color } as React.CSSProperties}
               onClick={() => setLayer(layer.id)}
             >{layer.label}</button>
           ))}
@@ -212,9 +222,17 @@ export default function CityMapExperience({
               className={`map-zen-row${selectedId === venue.id ? " is-active" : ""}${venue.layer === "stay" ? " is-hotel" : ""}${venue.layer === "eat" ? " is-eat" : ""}`}
               onClick={() => handleSelect(venue.id)}
             >
-              <span className="map-zen-row-type">{venue.type}</span>
-              <strong className="map-zen-row-name">{venue.name}</strong>
-              <span className="map-zen-row-area">{venue.neighborhood}</span>
+              <span
+                className={`map-row-chip is-${venue.layer === "stay" || venue.layer === "eat" || venue.layer === "cannabis" ? venue.layer : "do"}${venue.claimStatus === "partner" ? " is-partner" : ""}`}
+                style={venue.claimStatus === "partner" && venue.brand?.accentColor ? ({ "--pin-partner": venue.brand.accentColor } as React.CSSProperties) : undefined}
+                dangerouslySetInnerHTML={{ __html: glyphFor(venue.layer) }}
+                aria-hidden
+              />
+              <span className="map-row-body">
+                <strong className="map-zen-row-name">{venue.name}</strong>
+                <span className="map-zen-row-area">{venue.type} · {venue.neighborhood}</span>
+                {venue.claimStatus === "partner" && <span className="map-row-partner">Premium Partner</span>}
+              </span>
             </button>
           ))}
         </div>
