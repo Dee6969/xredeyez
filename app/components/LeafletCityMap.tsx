@@ -203,7 +203,7 @@ export default function LeafletCityMap({
               {venue.name}
             </Tooltip>
             <Popup closeButton={false} className={popupClass}>
-              <strong>{venue.name}</strong>
+              <strong style={venue.brand?.accentColor ? { color: venue.brand.accentColor } : undefined}>{venue.name}</strong>
               <span>{venue.type} / {venue.neighborhood}</span>
               {isHotel && (
                 <a href={buildBookingLink(venue)} target="_blank" rel="noreferrer">

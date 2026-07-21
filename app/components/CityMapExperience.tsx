@@ -155,7 +155,7 @@ export default function CityMapExperience({
               />
             )}
             <div className="map-zen-sel-type">{selected.type} · {selected.neighborhood}</div>
-            <div className="map-zen-sel-name">{selected.name}</div>
+            <div className="map-zen-sel-name" style={selected.brand?.accentColor ? { color: selected.brand.accentColor } : undefined}>{selected.name}</div>
             {selected.address && (
               <div className="map-zen-sel-addr">{selected.address}{selected.postcode ? `, ${selected.postcode}` : ""}</div>
             )}
@@ -272,7 +272,7 @@ export default function CityMapExperience({
           {selected ? (
             <>
               <div className="map-zen-sheet-venue-type">{selected.type} · {selected.neighborhood}</div>
-              <div className="map-zen-sheet-venue-name">{selected.name}</div>
+              <div className="map-zen-sheet-venue-name" style={selected.brand?.accentColor ? { color: selected.brand.accentColor } : undefined}>{selected.name}</div>
               <div className="map-zen-sheet-venue-actions">
                 {(() => { const cta = venueCta(selected); return (
                   <Link
