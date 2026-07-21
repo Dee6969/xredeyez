@@ -124,6 +124,13 @@ export default async function VenuePage({ params }: VenuePageProps) {
         {isBrandTakeover && wallpaperSvg && (
           <div className="vlp-brand-wallpaper" style={{ backgroundImage: wallpaperSvg }} aria-hidden />
         )}
+        {isBrandTakeover && (
+          <div
+            className="vlp-brand-frame"
+            style={{ "--frame-color": brand?.accentColor || "#E23438" } as React.CSSProperties}
+            aria-hidden
+          />
+        )}
 
         <section
           className={`vlp-hero${isPartner ? " vlp-hero-neon" : ""}`}
