@@ -10791,3 +10791,104 @@ textarea:focus-visible,
   .medical-twin { grid-template-columns: 1fr; }
   .medical-clinics-banner { flex-direction: column; align-items: flex-start; }
 }
+
+/* ═══════════════════════════════════════════
+   MOBILE "MORE" SHEET — completes mobile IA
+   ═══════════════════════════════════════════ */
+.mobile-more-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 58;
+  background: rgba(8, 6, 3, 0.6);
+  backdrop-filter: blur(2px);
+}
+.mobile-more-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 59;
+  padding: 10px 18px calc(84px + env(safe-area-inset-bottom));
+  background: #16130D;
+  border-top: 1px solid var(--border-medium);
+  border-radius: 20px 20px 0 0;
+  transform: translateY(105%);
+  transition: transform 260ms cubic-bezier(0.32, 0.72, 0.28, 1);
+  box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.5);
+}
+.mobile-more-sheet.is-open { transform: translateY(0); }
+.mobile-more-grab {
+  width: 42px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(245, 240, 230, 0.22);
+  margin: 4px auto 12px;
+}
+.mobile-more-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 15px 4px;
+  min-height: 52px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.mobile-more-link:last-child { border-bottom: none; }
+.mobile-more-link strong { display: block; font-size: 15.5px; font-weight: 600; }
+.mobile-more-link em {
+  display: block;
+  margin-top: 2px;
+  font-style: normal;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+@media (min-width: 768px) {
+  .mobile-more-sheet, .mobile-more-backdrop { display: none; }
+}
+
+/* ═══════════════════════════════════════════
+   MEDICAL WING — mobile pass
+   ═══════════════════════════════════════════ */
+@media (max-width: 720px) {
+  .medical-hero-title { font-size: clamp(30px, 9vw, 38px); }
+  .medical-lede { font-size: 15.5px; line-height: 1.65; }
+  .med-jump-nav {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px;
+    padding-bottom: 6px;
+    margin-inline: -4px;
+    padding-inline: 4px;
+  }
+  .med-jump-nav::-webkit-scrollbar { display: none; }
+  .med-jump-nav a { flex-shrink: 0; min-height: 40px; display: inline-flex; align-items: center; }
+  .medical-twin { grid-template-columns: 1fr; }
+  .med-timeline-step { padding-left: 44px; }
+  .med-faq-q { min-height: 52px; font-size: 15px; }
+  .clinic-table { min-width: 760px; font-size: 13px; }
+  .clinic-table th, .clinic-table td { padding: 11px 12px; }
+  .clinic-table-wrap { position: relative; }
+  .clinic-table-wrap::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 44px;
+    background: linear-gradient(90deg, transparent, rgba(14, 11, 7, 0.85));
+    pointer-events: none;
+  }
+  .clinic-swipe-hint {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--med-accent);
+    margin: 0 0 10px;
+  }
+}
+.clinic-swipe-hint { display: none; }

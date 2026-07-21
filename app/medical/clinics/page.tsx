@@ -75,6 +75,7 @@ export default function ClinicDirectoryPage() {
 
       <Reveal>
         <section className="platform-section">
+          <p className="clinic-swipe-hint" aria-hidden>Swipe to compare <span>→</span></p>
           <div className="clinic-table-wrap">
             <table className="clinic-table">
               <thead>

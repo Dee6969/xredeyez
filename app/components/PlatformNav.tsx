@@ -26,36 +26,31 @@ const mobileNavItems = [
     ),
   },
   {
-    label: "Saved",
-    href: "/saved",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-      </svg>
-    ),
-  },
-  {
-    label: "Book",
+    label: "Cities",
     href: "/cities",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <rect x="3" y="4" width="18" height="18" rx="2"/>
-        <line x1="16" y1="2" x2="16" y2="6"/>
-        <line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
+        <rect x="4" y="8" width="5" height="12"/><rect x="10" y="4" width="5" height="16"/><rect x="16" y="10" width="5" height="10"/>
       </svg>
     ),
   },
   {
-    label: "Profile",
-    href: "/profile",
+    label: "Medical",
+    href: "/medical",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
+        <circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
       </svg>
     ),
   },
+];
+
+const moreSheetItems = [
+  { label: "Guides", href: "/guides", note: "Long-form city intelligence" },
+  { label: "Saved", href: "/saved", note: "Your saved venues & routes" },
+  { label: "Profile", href: "/profile", note: "Your account" },
+  { label: "List Your Business", href: "/partners/list", note: "From £9.99/month" },
+  { label: "Premium", href: "/premium", note: "The traveller tier" },
 ];
 
 const desktopItems = [
@@ -75,6 +70,7 @@ function isActive(pathname: string, href: string) {
 
 export default function PlatformNav() {
   const pathname = usePathname();
+  const [moreOpen, setMoreOpen] = useState(false);
   const isHome = pathname === "/";
   const [heroNav, setHeroNav] = useState(true);
   const { itemCount, dispatch: cartDispatch } = useCart();
@@ -142,7 +138,7 @@ export default function PlatformNav() {
         </div>
       </nav>
 
-      {/* Mobile bottom nav — 5 items */}
+      {/* Mobile bottom nav — 4 destinations + More */}
       <nav className="platform-bottom-nav" aria-label="Mobile navigation">
         {mobileNavItems.map((item) => {
           const active = isActive(pathname, item.href);
@@ -152,6 +148,7 @@ export default function PlatformNav() {
               href={item.href}
               className={`platform-bottom-item${active ? " is-active" : ""}`}
               aria-current={active ? "page" : undefined}
+              onClick={() => setMoreOpen(false)}
             >
               <span style={{ position: "relative", color: active ? "var(--accent-red)" : "var(--text-muted)", transition: "color 200ms ease" }}>
                 {item.icon}
@@ -161,7 +158,46 @@ export default function PlatformNav() {
             </Link>
           );
         })}
+        <button
+          type="button"
+          className={`platform-bottom-item${moreOpen ? " is-active" : ""}`}
+          aria-expanded={moreOpen}
+          aria-controls="mobile-more-sheet"
+          onClick={() => setMoreOpen((v) => !v)}
+        >
+          <span style={{ position: "relative", color: moreOpen ? "var(--accent-red)" : "var(--text-muted)", transition: "color 200ms ease" }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" aria-hidden="true">
+              <circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+              <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+              <circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          More
+          <span className="platform-bottom-dot" />
+        </button>
       </nav>
+
+      {/* More sheet */}
+      {moreOpen && (
+        <div className="mobile-more-backdrop" onClick={() => setMoreOpen(false)} aria-hidden />
+      )}
+      <div
+        id="mobile-more-sheet"
+        className={`mobile-more-sheet${moreOpen ? " is-open" : ""}`}
+        role="dialog"
+        aria-label="More navigation"
+      >
+        <div className="mobile-more-grab" aria-hidden />
+        {moreSheetItems.map((item) => (
+          <Link key={item.href} href={item.href} className="mobile-more-link" onClick={() => setMoreOpen(false)}>
+            <span>
+              <strong>{item.label}</strong>
+              <em>{item.note}</em>
+            </span>
+            <span aria-hidden>→</span>
+          </Link>
+        ))}
+      </div>
     </>
   );
 }
