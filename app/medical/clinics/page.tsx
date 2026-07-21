@@ -74,52 +74,98 @@ export default function ClinicDirectoryPage() {
       </Reveal>
 
       <Reveal>
+        <section className="platform-section clinic-stats-strip" aria-label="Directory summary">
+          <div><strong>{clinicsUk.length}</strong><span>regulated clinics</span></div>
+          <div><strong>£0–£210</strong><span>initial consult range</span></div>
+          <div><strong>July 2026</strong><span>fees verified</span></div>
+          <div><strong>100%</strong><span>CQC-regulated · GMC specialists</span></div>
+        </section>
+      </Reveal>
+
+      <Reveal>
         <section className="platform-section">
-          <p className="clinic-swipe-hint" aria-hidden>Swipe to compare <span>→</span></p>
-          <div className="clinic-table-wrap">
-            <table className="clinic-table">
-              <thead>
-                <tr>
-                  <th>Clinic</th>
-                  <th>Initial consultation</th>
-                  <th>Ongoing costs</th>
-                  <th>Reduced-cost schemes</th>
-                  <th>Noted for</th>
-                </tr>
-              </thead>
-              <tbody>
-                {clinicsUk.map((c) => (
-                  <tr key={c.id}>
-                    <td>
-                      <strong className="clinic-name">{c.name}</strong>
-                      <a className="clinic-site" href={c.website} target="_blank" rel="noopener noreferrer">
-                        Visit site ↗
-                      </a>
-                      {c.reviewNote && <span className="clinic-reviews">{c.reviewNote}</span>}
-                    </td>
-                    <td className="clinic-fee" data-label="Initial consultation">{c.initialConsult}</td>
-                    <td data-label="Ongoing costs">{c.followUps}</td>
-                    <td data-label="Reduced-cost schemes">{c.accessScheme || "—"}</td>
-                    <td data-label="Noted for">
-                      <ul className="clinic-noted">
-                        {c.notedFor.map((n) => (
-                          <li key={n}>{n}</li>
-                        ))}
-                      </ul>
-                      {c.claimStatus === "unclaimed" && (
-                        <Link
-                          href={`/partners/claim?package=launch&venue=`}
-                          className="clinic-claim"
-                        >
-                          Run this clinic? Claim this profile →
-                        </Link>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="clinic-card-grid">
+            {clinicsUk.map((c) => (
+              <article key={c.id} className="clinic-card">
+                <header className="clinic-card-head">
+                  <h2>{c.name}</h2>
+                  {c.reviewNote && <span className="clinic-review-pill">★ {c.reviewNote.replace("Trustpilot reviews", "reviews")}</span>}
+                </header>
+
+                <p className="clinic-standout">{c.standout}</p>
+
+                <div className="clinic-fee-hero">
+                  <span className="clinic-fee-label">Initial consultation</span>
+                  <strong className="clinic-fee-big">{c.feeDisplay}</strong>
+                  <span className="clinic-fee-detail">{c.initialConsult}</span>
+                </div>
+
+                <dl className="clinic-facts">
+                  <div>
+                    <dt>Ongoing costs</dt>
+                    <dd>{c.followUps}</dd>
+                  </div>
+                  {c.accessScheme && (
+                    <div>
+                      <dt>Reduced-cost scheme</dt>
+                      <dd>{c.accessScheme}</dd>
+                    </div>
+                  )}
+                </dl>
+
+                <ul className="clinic-chips" aria-label="Noted for">
+                  {c.notedFor.map((n) => (
+                    <li key={n}>{n}</li>
+                  ))}
+                </ul>
+
+                <footer className="clinic-card-foot">
+                  <a href={c.website} target="_blank" rel="noopener noreferrer" className="clinic-visit">
+                    Visit site ↗
+                  </a>
+                  {c.claimStatus === "unclaimed" && (
+                    <Link href="/partners/claim?package=launch" className="clinic-claim-cta">
+                      Run this clinic? Claim this profile
+                    </Link>
+                  )}
+                </footer>
+                {c.claimStatus === "unclaimed" && (
+                  <p className="clinic-unclaimed-note">Profile compiled independently — not yet verified by the clinic.</p>
+                )}
+              </article>
+            ))}
           </div>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section className="platform-section">
+          <details className="clinic-table-details">
+            <summary>Open the quick comparison table</summary>
+            <p className="clinic-swipe-hint" aria-hidden>Swipe to compare <span>→</span></p>
+            <div className="clinic-table-wrap">
+              <table className="clinic-table">
+                <thead>
+                  <tr>
+                    <th>Clinic</th>
+                    <th>Initial consultation</th>
+                    <th>Ongoing costs</th>
+                    <th>Reduced-cost schemes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {clinicsUk.map((c) => (
+                    <tr key={c.id}>
+                      <td><strong className="clinic-name">{c.name}</strong></td>
+                      <td className="clinic-fee">{c.initialConsult}</td>
+                      <td>{c.followUps}</td>
+                      <td>{c.accessScheme || "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
         </section>
       </Reveal>
 
@@ -152,15 +198,21 @@ export default function ClinicDirectoryPage() {
               </p>
               <MedicalBriefingSignup />
             </div>
-            <div className="platform-panel medical-panel">
+            <div className="platform-panel medical-panel clinic-join-band">
               <div className="eyebrow">For Clinics</div>
-              <h3>Keep your row accurate</h3>
+              <h3>Your patients compare before they book. Own the comparison.</h3>
               <p>
-                Patients compare before they book — make sure what they compare is correct. Claim
-                your profile to verify fees, schemes and focus areas, at the £9.99/month founding
-                rate. Factual presentation never changes with payment.
+                This page exists whether you engage with it or not — patients are already reading it.
+                Claiming your profile means your fees, schemes and focus areas stay exactly right,
+                verified by you, with a trust badge that says so.
               </p>
-              <Link href="/partners/claim?package=launch" className="platform-secondary-action" style={{ justifySelf: "start" }}>
+              <ul className="clinic-join-points">
+                <li>Verify every figure on your row and card</li>
+                <li>Clinic-verified badge on your profile</li>
+                <li>Update fees and schemes any time they change</li>
+                <li>£9.99/month founding rate, locked in permanently</li>
+              </ul>
+              <Link href="/partners/claim?package=launch" className="clinic-claim-cta" style={{ justifySelf: "start" }}>
                 Claim your clinic profile →
               </Link>
             </div>

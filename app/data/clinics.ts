@@ -19,6 +19,10 @@ export interface Clinic {
   followUps: string;
   accessScheme?: string;
   notedFor: string[];
+  /** One-line verified standout — the card's selling point. */
+  standout: string;
+  /** Short headline fee for large display. */
+  feeDisplay: string;
   reviewNote?: string;
   claimStatus: "unclaimed" | "claimed" | "partner";
   lastVerified: string;
@@ -27,6 +31,8 @@ export interface Clinic {
 export const clinicsUk: Clinic[] = [
   {
     id: "releaf",
+    standout: "Refundable eligibility check · members from £7.99/g",
+    feeDisplay: "£99.99",
     name: "Releaf",
     website: "https://releaf.co.uk",
     initialConsult: "£99.99 (refundable if ineligible)",
@@ -39,6 +45,8 @@ export const clinicsUk: Clinic[] = [
   },
   {
     id: "curaleaf-clinic",
+    standout: "£50 route via Access Scheme with free follow-ups",
+    feeDisplay: "£210",
     name: "Curaleaf Clinic",
     website: "https://curaleafclinic.com",
     initialConsult: "£210 standard · £50 via Access Scheme",
@@ -51,6 +59,8 @@ export const clinicsUk: Clinic[] = [
   },
   {
     id: "mamedica",
+    standout: "Lowest long-term clinic fees — £75/year from year two",
+    feeDisplay: "From £75/yr",
     name: "Mamedica",
     website: "https://mamedica.co.uk",
     initialConsult: "Standard market range; reduced-cost scheme available",
@@ -63,6 +73,8 @@ export const clinicsUk: Clinic[] = [
   },
   {
     id: "alternaleaf",
+    standout: "Fast telehealth booking, typically within 1–2 weeks",
+    feeDisplay: "From £99",
     name: "Alternaleaf",
     website: "https://alternaleaf.co.uk",
     initialConsult: "From £99",
@@ -74,6 +86,8 @@ export const clinicsUk: Clinic[] = [
   },
   {
     id: "cantourage-clinic",
+    standout: "European Clinic of the Year 2025 · guided onboarding",
+    feeDisplay: "£99",
     name: "Cantourage Clinic",
     website: "https://cantourage.clinic",
     initialConsult: "£99 (reduced from £149)",
@@ -84,6 +98,8 @@ export const clinicsUk: Clinic[] = [
   },
   {
     id: "lyphe",
+    standout: "Cost-competitive chronic pain pathway since the early days",
+    feeDisplay: "From £99",
     name: "Lyphe",
     website: "https://lyphe.com",
     initialConsult: "From £99",
@@ -94,6 +110,8 @@ export const clinicsUk: Clinic[] = [
   },
   {
     id: "medicann",
+    standout: "No clinic fees at all — pay only £4.99 delivery",
+    feeDisplay: "£0",
     name: "Medicann",
     website: "https://medicann.co.uk",
     initialConsult: "Zero-fee clinic model",
@@ -104,6 +122,8 @@ export const clinicsUk: Clinic[] = [
   },
   {
     id: "elios-clinics",
+    standout: "Online eligibility check before you spend anything",
+    feeDisplay: "From £99",
     name: "Elios Clinics",
     website: "https://www.eliosclinics.com",
     initialConsult: "From £99 where eligible",

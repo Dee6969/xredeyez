@@ -10892,3 +10892,205 @@ textarea:focus-visible,
   }
 }
 .clinic-swipe-hint { display: none; }
+
+/* ═══════════════════════════════════════════
+   CLINIC CARDS — the directory's major lift
+   Bigger type, fee as hero number, teal clinical
+   confidence. Cards sell; the table informs.
+   ═══════════════════════════════════════════ */
+.clinic-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  padding-top: 0 !important;
+}
+.clinic-stats-strip div {
+  padding: 16px 18px;
+  border: 1px solid color-mix(in srgb, var(--med-accent) 25%, transparent);
+  border-radius: 14px;
+  background: var(--med-accent-soft);
+  display: grid;
+  gap: 3px;
+}
+.clinic-stats-strip strong { font-size: 22px; color: var(--med-accent); font-variant-numeric: tabular-nums; }
+.clinic-stats-strip span { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+
+.clinic-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(430px, 100%), 1fr));
+  gap: 20px;
+}
+.clinic-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 26px 26px 22px;
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  background: var(--bg-card);
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+.clinic-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--med-accent) 50%, transparent);
+  box-shadow: 0 14px 40px color-mix(in srgb, var(--med-accent) 12%, rgba(0, 0, 0, 0.4));
+}
+.clinic-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.clinic-card-head h2 {
+  margin: 0;
+  font-family: var(--font-playfair, Georgia, serif);
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.1;
+}
+.clinic-review-pill {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--med-accent-soft);
+  color: var(--med-accent);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.clinic-standout {
+  margin: 0;
+  font-size: 16.5px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  font-weight: 550;
+}
+.clinic-fee-hero {
+  display: grid;
+  gap: 3px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--med-accent) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--med-accent) 22%, transparent);
+}
+.clinic-fee-label {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+.clinic-fee-big {
+  font-size: clamp(30px, 3.4vw, 40px);
+  line-height: 1;
+  color: var(--med-accent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.clinic-fee-detail { font-size: 12.5px; color: var(--text-secondary); }
+.clinic-facts { margin: 0; display: grid; gap: 12px; }
+.clinic-facts div { display: grid; gap: 3px; }
+.clinic-facts dt {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+.clinic-facts dd { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--text-secondary); }
+.clinic-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.clinic-chips li {
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--med-accent) 30%, transparent);
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+.clinic-card-foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 6px;
+}
+.clinic-visit {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.clinic-visit:hover { color: var(--med-accent); }
+.clinic-claim-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 11px;
+  background: var(--med-accent);
+  color: #0A0F0D;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.clinic-claim-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--med-accent) 35%, transparent);
+}
+.clinic-unclaimed-note {
+  margin: -6px 0 0;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.clinic-table-details summary {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--med-accent);
+  padding: 14px 0;
+  min-height: 44px;
+}
+.clinic-table-details[open] summary { margin-bottom: 8px; }
+.clinic-join-band {
+  border-color: color-mix(in srgb, var(--med-accent) 40%, transparent);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--med-accent) 10%, transparent), transparent 60%);
+}
+.clinic-join-band h3 { font-size: clamp(20px, 2.2vw, 26px); }
+.clinic-join-points {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: grid;
+  gap: 9px;
+}
+.clinic-join-points li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 14.5px;
+  color: var(--text-secondary);
+}
+.clinic-join-points li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--med-accent);
+  font-weight: 800;
+}
+@media (max-width: 720px) {
+  .clinic-card { padding: 20px 18px 18px; }
+  .clinic-fee-big { font-size: 34px; }
+  .clinic-card-foot { flex-direction: column; align-items: stretch; }
+  .clinic-claim-cta { justify-content: center; }
+}
