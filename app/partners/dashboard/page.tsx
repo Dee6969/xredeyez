@@ -2,6 +2,8 @@ import Link from "next/link";
 import PlatformShell from "../../components/PlatformShell";
 
 export const metadata = {
+  description: "Partner dashboard.",
+  robots: { index: false, follow: false },
   title: "Partner Dashboard Preview | XRED EYEZ",
 };
 

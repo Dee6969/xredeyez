@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: MapPageProps) {
   const { slug } = await params;
   const city = getCity(slug);
   return {
+    alternates: { canonical: `https://www.redeyez.co.uk/cities/${slug}/map` },
     title: city ? `${city.name} Map | XRED EYEZ` : "Map | XRED EYEZ",
     description: city ? `Discover ${city.name} — cannabis culture, stays, restaurants and more on the live map.` : "Cannabis culture map.",
   };

@@ -3,6 +3,7 @@ import ExploreDirectory from "../components/ExploreDirectory";
 import { cities, venues } from "../data/platform";
 
 export const metadata = {
+  openGraph: { title: "Explore 300+ Cannabis Culture Venues | XRED EYEZ", description: "Coffeeshops, social clubs, cannabis-friendly stays and restaurants across 12 cities — filtered, mapped, verified.", type: "website", url: "https://www.redeyez.co.uk/explore" },
   title: "Find Cannabis Venues, Coffeeshops & Social Clubs | XRED EYEZ",
   description: "Search and filter 245+ cannabis culture venues across Amsterdam, Barcelona, Prague and more. Coffeeshops, social clubs, hotels, restaurants — all in one place.",
   alternates: {

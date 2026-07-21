@@ -6,6 +6,8 @@ import { getCannabisSignals } from "../data/news";
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.redeyez.co.uk/news" },
+  openGraph: { title: "Cannabis Culture News & Signals | XRED EYEZ", description: "Curated signals from the cannabis travel world.", type: "website", url: "https://www.redeyez.co.uk/news" },
   title: "Global Cannabis Signals | XRED EYEZ",
   description: "Daily cannabis news signals covering policy, genetics, culture, wellness, enforcement, and market movement.",
 };

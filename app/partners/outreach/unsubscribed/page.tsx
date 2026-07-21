@@ -1,4 +1,7 @@
+import Link from "next/link";
 export const metadata = {
+  description: "You have been unsubscribed.",
+  robots: { index: false, follow: false },
   title: "Unsubscribed | XRED EYEZ",
 };
 
@@ -12,7 +15,7 @@ export default function UnsubscribedPage() {
         <h1 style={{ fontSize: "32px", fontWeight: 700, marginBottom: "16px" }}>Unsubscribed.</h1>
         <p style={{ fontSize: "14px", color: "rgba(240,235,226,0.5)", lineHeight: 1.7 }}>
           You won&apos;t receive any more outreach from us. If you change your mind, visit{" "}
-          <a href="/partners/claim" style={{ color: "#84C51F" }}>redeyez.co.uk/partners/claim</a>.
+          <Link href="/partners/claim" style={{ color: "#84C51F" }}>redeyez.co.uk/partners/claim</Link>.
         </p>
       </div>
     </main>

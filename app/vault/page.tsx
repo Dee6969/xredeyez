@@ -3,6 +3,8 @@ import PlatformShell from "../components/PlatformShell";
 import Reveal from "../components/Reveal";
 
 export const metadata = {
+  alternates: { canonical: "https://www.redeyez.co.uk/vault" },
+  openGraph: { title: "The Vault | XRED EYEZ", description: "Members-only drops and premium city intelligence.", type: "website", url: "https://www.redeyez.co.uk/vault" },
   title: "Vault Membership | XRED EYEZ",
   description: "XRED EYEZ member layer for saved boards, premium city drops, insider routes, and early access.",
 };

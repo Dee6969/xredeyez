@@ -11094,3 +11094,67 @@ textarea:focus-visible,
   .clinic-card-foot { flex-direction: column; align-items: stretch; }
   .clinic-claim-cta { justify-content: center; }
 }
+
+/* ═══════════════════════════════════════════
+   LAUNCH POLISH LAYER
+   Global professional finish: type alignment,
+   motion discipline, focus a11y, image hygiene.
+   ═══════════════════════════════════════════ */
+
+/* Typographic alignment: balanced headings, no orphans in prose */
+h1, h2, h3 {
+  text-wrap: balance;
+  text-rendering: optimizeLegibility;
+}
+p, li, dd {
+  text-wrap: pretty;
+}
+
+/* Image hygiene: kill baseline gaps and stray overflow everywhere */
+img, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Unified interaction motion */
+a, button {
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease,
+    opacity 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* Accessible, on-brand focus — visible for keyboards, quiet for mouse */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--accent-red);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.med-scope :focus-visible { outline-color: var(--med-accent); }
+
+/* Brand text selection */
+::selection {
+  background: rgba(226, 52, 56, 0.35);
+  color: #F7F2E8;
+}
+.med-scope ::selection { background: rgba(79, 195, 161, 0.35); }
+
+/* Gentle page entrance */
+@keyframes page-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: page-fade 320ms ease;
+}
+
+/* Smooth in-page anchor travel */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body { animation: none; }
+  a, button { transition: none; }
+}

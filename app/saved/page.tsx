@@ -4,6 +4,8 @@ import SavedList from "../components/SavedList";
 import { cities, venues, vibes } from "../data/platform";
 
 export const metadata = {
+  alternates: { canonical: "https://www.redeyez.co.uk/saved" },
+  openGraph: { title: "Saved | XRED EYEZ", description: "Your saved venues and routes.", type: "website", url: "https://www.redeyez.co.uk/saved" },
   title: "Saved | XRED EYEZ",
   description: "Your saved X Red Eyez places, cities, vibes, and routes.",
 };

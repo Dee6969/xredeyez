@@ -3,6 +3,8 @@ import PlatformShell from "../components/PlatformShell";
 import { cities, vibes } from "../data/platform";
 
 export const metadata = {
+  alternates: { canonical: "https://www.redeyez.co.uk/signal" },
+  openGraph: { title: "The Signal | XRED EYEZ", description: "The cannabis culture briefing.", type: "website", url: "https://www.redeyez.co.uk/signal" },
   title: "Signal | XRED EYEZ",
   description: "Daily X Red Eyez culture, city, and discovery prompts.",
 };

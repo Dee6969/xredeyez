@@ -7,6 +7,7 @@ import Reveal from "../components/Reveal";
 import { cities, getSortedVenuesByCity } from "../data/platform";
 
 export const metadata = {
+  openGraph: { title: "Cannabis City Guides — 12 Destinations | XRED EYEZ", description: "Amsterdam, Barcelona, Bangkok, Berlin and more — live venue maps, culture layers and honest city intelligence.", type: "website", url: "https://www.redeyez.co.uk/cities" },
   title: "Cannabis City Guides — Amsterdam, Barcelona, Prague & More | XRED EYEZ",
   description: "Browse XRED EYEZ cannabis culture city guides. Coffeeshops, social clubs, hotels, restaurants and curated routes across Europe and beyond.",
   alternates: {

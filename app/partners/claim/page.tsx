@@ -4,6 +4,8 @@ import PlatformShell from "../../components/PlatformShell";
 import { getVenue, venues } from "../../data/platform";
 
 export const metadata = {
+  alternates: { canonical: "https://www.redeyez.co.uk/partners/claim" },
+  openGraph: { title: "Claim Your Listing | XRED EYEZ Partners", description: "Claim and verify your venue or clinic profile from £9.99/month at the founding rate.", type: "website", url: "https://www.redeyez.co.uk/partners/claim" },
   title: "Claim Listing | XRED EYEZ",
   description: "Claim or upgrade a venue listing on XRED EYEZ.",
 };

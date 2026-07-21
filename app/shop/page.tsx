@@ -15,6 +15,8 @@ async function getProducts(): Promise<PrintfulSyncProduct[]> {
 export const revalidate = 300;
 
 export const metadata = {
+  alternates: { canonical: "https://www.redeyez.co.uk/shop" },
+  openGraph: { title: "XRED EYEZ Shop", description: "Culture-first merchandise from XRED EYEZ.", type: "website", url: "https://www.redeyez.co.uk/shop" },
   title: "Merch — XRED EYEZ",
   description: "Official XRED EYEZ merchandise. Cannabis culture clothing and accessories.",
 };

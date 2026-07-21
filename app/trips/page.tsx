@@ -3,6 +3,8 @@ import PlatformShell from "../components/PlatformShell";
 import Reveal from "../components/Reveal";
 
 export const metadata = {
+  alternates: { canonical: "https://www.redeyez.co.uk/trips" },
+  openGraph: { title: "Trip Builder | XRED EYEZ", description: "Build multi-stop cannabis culture routes across our cities.", type: "website", url: "https://www.redeyez.co.uk/trips" },
   title: "Trips | XRED EYEZ",
   description: "Build city routes from saved venues. Cannabis, food, culture, and recovery — one trip plan.",
 };

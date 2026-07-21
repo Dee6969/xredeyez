@@ -4,6 +4,8 @@ import VenueCard from "../components/VenueCard";
 import { getVenuesByVibe, vibes } from "../data/platform";
 
 export const metadata = {
+  alternates: { canonical: "https://www.redeyez.co.uk/vibes" },
+  openGraph: { title: "Browse by Vibe | XRED EYEZ", description: "Find venues by mood — hidden, luxury, late-night, beginner-friendly and more.", type: "website", url: "https://www.redeyez.co.uk/vibes" },
   title: "Vibes | XRED EYEZ",
   description: "Explore X Red Eyez places by mood, pace, and lifestyle need.",
 };

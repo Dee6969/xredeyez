@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
+  robots: { index: false, follow: false },
   title: "Welcome to XRED EYEZ Partners",
   description: "Your featured listing is being set up.",
 };

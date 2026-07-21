@@ -2,6 +2,8 @@ import Link from "next/link";
 import PlatformShell from "../components/PlatformShell";
 
 export const metadata = {
+  description: "Manage your XRED EYEZ billing.",
+  robots: { index: false, follow: false },
   title: "Billing Preview | XRED EYEZ",
 };
 

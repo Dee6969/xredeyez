@@ -3,6 +3,8 @@ import MembershipTeaser from "../components/MembershipTeaser";
 import PlatformShell from "../components/PlatformShell";
 
 export const metadata = {
+  description: "Your XRED EYEZ profile.",
+  robots: { index: false, follow: false },
   title: "Profile Preview | XRED EYEZ",
 };
 
