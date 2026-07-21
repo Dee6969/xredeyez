@@ -222,12 +222,24 @@ export default function CityMapExperience({
               className={`map-zen-row${selectedId === venue.id ? " is-active" : ""}${venue.layer === "stay" ? " is-hotel" : ""}${venue.layer === "eat" ? " is-eat" : ""}`}
               onClick={() => handleSelect(venue.id)}
             >
-              <span
-                className={`map-row-chip is-${venue.layer === "stay" || venue.layer === "eat" || venue.layer === "cannabis" ? venue.layer : "do"}${venue.claimStatus === "partner" ? " is-partner" : ""}`}
-                style={venue.claimStatus === "partner" && venue.brand?.accentColor ? ({ "--pin-partner": venue.brand.accentColor } as React.CSSProperties) : undefined}
-                dangerouslySetInnerHTML={{ __html: glyphFor(venue.layer) }}
-                aria-hidden
-              />
+              {getVenueLayer(venue) === "cannabis" ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src="/map/leaf-pin.png"
+                  srcSet="/map/leaf-pin@2x.png 2x"
+                  alt=""
+                  className={`map-row-leaf${venue.claimStatus === "partner" ? " is-partner" : ""}`}
+                  style={venue.claimStatus === "partner" && venue.brand?.accentColor ? ({ "--pin-partner": venue.brand.accentColor } as React.CSSProperties) : undefined}
+                  aria-hidden
+                />
+              ) : (
+                <span
+                  className={`map-row-chip is-${(() => { const d = getVenueLayer(venue); return d === "stay" || d === "eat" ? d : "do"; })()}${venue.claimStatus === "partner" ? " is-partner" : ""}`}
+                  style={venue.claimStatus === "partner" && venue.brand?.accentColor ? ({ "--pin-partner": venue.brand.accentColor } as React.CSSProperties) : undefined}
+                  dangerouslySetInnerHTML={{ __html: glyphFor(getVenueLayer(venue)) }}
+                  aria-hidden
+                />
+              )}
               <span className="map-row-body">
                 <strong className="map-zen-row-name">{venue.name}</strong>
                 <span className="map-zen-row-area">{venue.type} · {venue.neighborhood}</span>

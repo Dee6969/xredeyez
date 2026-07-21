@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import L from "leaflet";
 import { glyphFor } from "./mapGlyphs";
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl, useMap, Tooltip } from "react-leaflet";
-import { getCoordinateState } from "../data/platform";
+import { getCoordinateState, getVenueLayer } from "../data/platform";
 import type { City, Venue } from "../data/platform";
 import { getTileConfig } from "../data/geo";
 import { walkingDirectionsUrl, streetViewUrl } from "./MapActions";
@@ -23,22 +23,34 @@ function FlyTo({ lat, lng, zoom }: { lat: number; lng: number; zoom: number }) {
 
 
 const iconCache = new Map<string, L.DivIcon>();
-function venuePinIcon(layer: string | undefined, selected: boolean, partnerColor?: string): L.DivIcon {
-  const kind = layer === "stay" || layer === "eat" ? layer : layer === "cannabis" ? "cannabis" : "do";
+function venuePinIcon(kind: string, selected: boolean, partnerColor?: string): L.DivIcon {
   const key = `${kind}|${selected ? 1 : 0}|${partnerColor || ""}`;
   const hit = iconCache.get(key);
   if (hit) return hit;
-  const size = selected ? 48 : 38;
-  const ring = partnerColor
-    ? `style="--pin-partner:${partnerColor}"`
-    : "";
-  const icon = L.divIcon({
-    className: `xpin-wrap`,
-    html: `<span class="xpin is-${kind}${selected ? " is-selected" : ""}${partnerColor ? " is-partner" : ""}" ${ring}>${glyphFor(kind)}</span>`,
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
-    popupAnchor: [0, -(size / 2 + 6)],
-  });
+  const ring = partnerColor ? `style="--pin-partner:${partnerColor}"` : "";
+
+  let icon: L.DivIcon;
+  if (kind === "cannabis") {
+    // The signature leaf drop-pin: teardrop tip anchors the exact location.
+    const w = selected ? 54 : 42;
+    const h = Math.round(w * 1.31);
+    icon = L.divIcon({
+      className: "xpin-wrap",
+      html: `<span class="xpin-leafpin${selected ? " is-selected" : ""}${partnerColor ? " is-partner" : ""}" ${ring}><img src="/map/leaf-pin.png" srcset="/map/leaf-pin@2x.png 2x" alt="" draggable="false"/></span>`,
+      iconSize: [w, h],
+      iconAnchor: [w / 2, h - 2],
+      popupAnchor: [0, -(h - 6)],
+    });
+  } else {
+    const size = selected ? 48 : 38;
+    icon = L.divIcon({
+      className: `xpin-wrap`,
+      html: `<span class="xpin is-${kind}${selected ? " is-selected" : ""}${partnerColor ? " is-partner" : ""}" ${ring}>${glyphFor(kind)}</span>`,
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+      popupAnchor: [0, -(size / 2 + 6)],
+    });
+  }
   iconCache.set(key, icon);
   return icon;
 }
@@ -173,7 +185,9 @@ export default function LeafletCityMap({
         const isRestaurant = venue.layer === "eat";
         const isSelected = selectedId === venue.id;
         const isPartner = venue.claimStatus === "partner";
-        const icon = venuePinIcon(venue.layer, isSelected, isPartner ? venue.brand?.accentColor : undefined);
+        const derived = getVenueLayer(venue);
+        const kind = derived === "stay" || derived === "eat" ? derived : derived === "cannabis" ? "cannabis" : "do";
+        const icon = venuePinIcon(kind, isSelected, isPartner ? venue.brand?.accentColor : undefined);
 
         const popupClass = `xred-leaflet-popup${isHotel ? " is-hotel-popup" : ""}${isRestaurant ? " is-restaurant-popup" : ""}`;
 
