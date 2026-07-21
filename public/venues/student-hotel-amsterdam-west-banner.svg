@@ -24,14 +24,14 @@
   <text x="68" y="92" font-family="'Courier New', monospace" font-size="12" fill="#D07A8A" letter-spacing="4" opacity="0.9">XRED EYEZ CULTURE</text>
 
   <!-- Wordmark -->
-  <text x="64" y="222" font-family="Georgia, 'Times New Roman', serif" font-size="86" fill="#F5F0E6" font-weight="700" letter-spacing="-1">PULITZER</text>
-  
+  <text x="64" y="222" font-family="Georgia, 'Times New Roman', serif" font-size="78" fill="#F5F0E6" font-weight="700" letter-spacing="-1">THE STUDENT</text>
+  <text x="64" y="308" font-family="Georgia, 'Times New Roman', serif" font-size="78" fill="#F5F0E6" font-weight="700" letter-spacing="-1">HOTEL</text>
 
   <!-- Accent strip -->
-  <text x="68" y="286" font-family="'Courier New', monospace" font-size="13" fill="#D07A8A" letter-spacing="1" opacity="0.92">25 canal houses. One address.</text>
-  <rect x="68" y="306" width="180" height="2.5" fill="#D07A8A" opacity="0.85"/>
+  <text x="68" y="372" font-family="'Courier New', monospace" font-size="13" fill="#D07A8A" letter-spacing="1" opacity="0.92">Rooftop. Co-working. Social travel.</text>
+  <rect x="68" y="390" width="180" height="2.5" fill="#D07A8A" opacity="0.85"/>
 
-  <text x="68" y="346" font-family="'Courier New', monospace" font-size="11" fill="rgba(245,240,230,0.4)" letter-spacing="1">Canal Belt · Heritage Hotel</text>
+  <text x="68" y="430" font-family="'Courier New', monospace" font-size="11" fill="rgba(245,240,230,0.4)" letter-spacing="1">Oud-West · Hybrid Hotel</text>
 
   <text x="68" y="852" font-family="'Courier New', monospace" font-size="10" fill="#D07A8A" letter-spacing="3" opacity="0.45">AMSTERDAM</text>
 </svg>

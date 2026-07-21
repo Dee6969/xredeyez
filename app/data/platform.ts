@@ -1197,12 +1197,12 @@ export const venues: Venue[] = [
     referralCode: "xred-foodhallen",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#1A1410",
-      accentColor: "#E8A820",
+      primaryColor: "#0F0D14",
+      accentColor: "#C8A860",
       aesthetic: "warm-dark",
       tagline: "Food. Reset. Oud-West.",
       logoText: "FOODHALLEN",
-      bannerUrl: "https://flagship-cms.foodhallen.nl/assets/FHA-SLIDER-4.jpg",
+      bannerUrl: "/venues/foodhallen-reset-amsterdam-banner.svg",
     },
   },
   {
@@ -1228,9 +1228,9 @@ export const venues: Venue[] = [
     referralCode: "xred-vondel",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#121A14",
-      accentColor: "#5A8A5A",
-      aesthetic: "warm-dark",
+      primaryColor: "#120E0A",
+      accentColor: "#D98E4A",
+      aesthetic: "warm-dark", bannerUrl: "/venues/vondel-reset-amsterdam-banner.svg",
       tagline: "Green space. Recovery. Vondelpark.",
       logoText: "VONDEL",
     },
@@ -1263,12 +1263,12 @@ export const venues: Venue[] = [
     referralCode: "xred-ndsm",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#0D0D0D",
-      accentColor: "#E84C10",
+      primaryColor: "#0B1016",
+      accentColor: "#6FA8DC",
       aesthetic: "dark",
       tagline: "Industrial. Creative. Noord.",
       logoText: "NDSM",
-      bannerUrl: "https://cdn.prod.website-files.com/6909cf96cf3cd5be51dbc4c9/69bbc2cc7f87939c4a190ac9_Stichting%20NDSM-werf%20-%20Wish%20Me%20Well%20-%20Website%20banner%20-%20no%20text%20-%201920%20x%201080.webp",
+      bannerUrl: "/venues/ndsm-culture-yard-amsterdam-banner.svg",
     },
   },
   {
@@ -1340,12 +1340,12 @@ export const venues: Venue[] = [
     referralCode: "xred-rijsel",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#1A0E08",
-      accentColor: "#C47840",
+      primaryColor: "#100F0C",
+      accentColor: "#CFC9BC",
       aesthetic: "warm-dark",
       tagline: "Belgian bistro. Rotisserie. Oost institution.",
       logoText: "RIJSEL",
-      bannerUrl: "https://rijsel.com/wp-content/uploads/2019/12/Low-Res-Rijsel-2019-Copyright-Janus-van-den-Eijnden-32.jpg",
+      bannerUrl: "/venues/rijsel-amsterdam-banner.svg",
     },
   },
   {
@@ -1412,9 +1412,9 @@ export const venues: Venue[] = [
     referralCode: "xred-moeders",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#1A1208",
-      accentColor: "#C87840",
-      aesthetic: "warm-dark",
+      primaryColor: "#140D10",
+      accentColor: "#D07A8A",
+      aesthetic: "warm-dark", bannerUrl: "/venues/moeders-amsterdam-banner.svg",
       tagline: "Dutch home cooking. Jordaan. Family plates.",
       logoText: "MOEDERS",
     },
@@ -1487,12 +1487,12 @@ export const venues: Venue[] = [
     referralCode: "xred-cafe-de-klos",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#1A0A04",
-      accentColor: "#C84820",
+      primaryColor: "#0D1210",
+      accentColor: "#8FAE7E",
       aesthetic: "warm-dark",
       tagline: "Ribs. No bookings. 40+ years.",
       logoText: "CAFÉ DE KLOS",
-      bannerUrl: "https://www.cafedeklos.nl/Spare%20Ribs2.webp",
+      bannerUrl: "/venues/cafe-de-klos-amsterdam-banner.svg",
     },
   },
   {
@@ -1563,12 +1563,12 @@ export const venues: Venue[] = [
     referralCode: "xred-brouwerij-het-ij",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#0E1408",
-      accentColor: "#D4A020",
+      primaryColor: "#0F0D14",
+      accentColor: "#C8A860",
       aesthetic: "warm-dark",
       tagline: "Windmill brewery. Organic craft. Since 1985.",
       logoText: "BROUWERIJ 'T IJ",
-      bannerUrl: "https://cms.brouwerijhetij.nl/storage/images/Proeflokalen/de-molen/Proeflokaal-de-Molen-Funenkade.jpg",
+      bannerUrl: "/venues/brouwerij-het-ij-amsterdam-banner.svg",
     },
   },
   {
@@ -1603,12 +1603,12 @@ export const venues: Venue[] = [
     referralCode: "xred-ron-gastrobar",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#100C08",
-      accentColor: "#B89050",
+      primaryColor: "#120E0A",
+      accentColor: "#D98E4A",
       aesthetic: "minimal",
       tagline: "Michelin. Indonesian-Dutch. Oud-Zuid.",
       logoText: "RON GASTROBAR",
-      bannerUrl: "https://rongastrobar.nl/wp-content/uploads/2022/05/rongastrobar-homepage-nina-1-761x1024.jpg",
+      bannerUrl: "/venues/ron-gastrobar-amsterdam-banner.svg",
     },
   },
   {
@@ -1639,9 +1639,9 @@ export const venues: Venue[] = [
     referralCode: "xred-hangar",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#141010",
-      accentColor: "#C05028",
-      aesthetic: "dark",
+      primaryColor: "#0B1016",
+      accentColor: "#6FA8DC",
+      aesthetic: "dark", bannerUrl: "/venues/hangar-amsterdam-banner.svg",
       tagline: "Industrial warehouse. Riverside. Oost.",
       logoText: "HANGAR",
     },
@@ -1792,7 +1792,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.google.com/maps/search/?api=1&query=Fly+II+Coffeeshop+Den+Haag",
     referralCode: "xred-fly-ii-den-haag",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0D10", accentColor: "#68D2FF", aesthetic: "dark", tagline: "Quick Hague centre access.", logoText: "FLY II" },
+    brand: { primaryColor: "#0C1014", accentColor: "#78A8D0", aesthetic: "dark", bannerUrl: "/venues/fly-ii-den-haag-banner.svg", tagline: "Quick Hague centre access.", logoText: "FLY II" },
   },
   {
     id: "the-reef-rotterdam",
@@ -1879,7 +1879,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.google.com/maps/search/?api=1&query=Mon+Camarade+Coffeeshop+Rotterdam",
     referralCode: "xred-mon-camarade",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0C10", accentColor: "#D3358C", aesthetic: "dark", tagline: "West-side Rotterdam rhythm.", logoText: "MON CAMARADE" },
+    brand: { primaryColor: "#0E1112", accentColor: "#78C8C8", aesthetic: "dark", bannerUrl: "/venues/mon-camarade-rotterdam-banner.svg", tagline: "West-side Rotterdam rhythm.", logoText: "MON CAMARADE" },
   },
   {
     id: "four-floors-rotterdam",
@@ -1937,12 +1937,12 @@ export const venues: Venue[] = [
     referralCode: "xred-hoxton-amsterdam",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#16120E",
-      accentColor: "#CFAE7C",
+      primaryColor: "#100F0C",
+      accentColor: "#CFC9BC",
       aesthetic: "warm-dark",
       tagline: "Canal-house base. Design-led city movement.",
       logoText: "THE HOXTON",
-      bannerUrl: "https://thehoxton.com/wp-content/uploads/sites/5/2020/05/Hoxton_AMS_4_3070-3.jpg",
+      bannerUrl: "/venues/the-hoxton-amsterdam-banner.svg",
     },
   },
   {
@@ -2012,12 +2012,12 @@ export const venues: Venue[] = [
     referralCode: "xred-pulitzer",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#1A1209",
-      accentColor: "#C9A96E",
+      primaryColor: "#140D10",
+      accentColor: "#D07A8A",
       aesthetic: "warm-dark",
       tagline: "25 canal houses. One address.",
       logoText: "PULITZER",
-      bannerUrl: "https://www.pulitzeramsterdam.com/media/q01blgsx/exterior-10.jpg",
+      bannerUrl: "/venues/pulitzer-amsterdam-banner.svg",
     },
   },
   {
@@ -2087,12 +2087,12 @@ export const venues: Venue[] = [
     referralCode: "xred-sir-adam",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#0D0D0D",
-      accentColor: "#E8314A",
+      primaryColor: "#0D1210",
+      accentColor: "#8FAE7E",
       aesthetic: "dark",
       tagline: "Record player. IJ views. Rock identity.",
       logoText: "SIR ADAM",
-      bannerUrl: "https://www.sirhotels.com/media/images/11-Adam_tIKUV4b.fbb92987.fill-2040x1005.format-jpeg.jpg",
+      bannerUrl: "/venues/sir-adam-hotel-amsterdam-banner.svg",
     },
   },
   {
@@ -2122,9 +2122,9 @@ export const venues: Venue[] = [
     referralCode: "xred-hotel-not-hotel",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#1A1A2E",
-      accentColor: "#A8C5DA",
-      aesthetic: "dark",
+      primaryColor: "#0F0D14",
+      accentColor: "#C8A860",
+      aesthetic: "dark", bannerUrl: "/venues/hotel-not-hotel-amsterdam-banner.svg",
       tagline: "No two rooms the same.",
       logoText: "HOTEL NOT HOTEL",
     },
@@ -2161,12 +2161,12 @@ export const venues: Venue[] = [
     referralCode: "xred-the-dylan",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#12110E",
-      accentColor: "#BFA882",
+      primaryColor: "#120E0A",
+      accentColor: "#D98E4A",
       aesthetic: "minimal",
       tagline: "Canal Belt. 40 rooms. Michelin restaurant.",
       logoText: "THE DYLAN",
-      bannerUrl: "https://www.dylanamsterdam.com/wp-content/uploads/2026/01/The-Dylan_1_LRS-2.jpg",
+      bannerUrl: "/venues/the-dylan-amsterdam-banner.svg",
     },
   },
   {
@@ -2235,12 +2235,12 @@ export const venues: Venue[] = [
     referralCode: "xred-hotel-okura",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#0E0E10",
-      accentColor: "#C4B48A",
+      primaryColor: "#0B1016",
+      accentColor: "#6FA8DC",
       aesthetic: "minimal",
       tagline: "Japanese luxury. Two Michelin stars. De Pijp.",
       logoText: "OKURA",
-      bannerUrl: "https://lirp.cdn-website.com/8f717bcf/dms3rep/multi/opt/Hotel-Okura-Amsterdam---Hotel-Exterior---Amstel-Canal-2a54243c-748w.jpg",
+      bannerUrl: "/venues/hotel-okura-amsterdam-banner.svg",
     },
   },
   {
@@ -2270,9 +2270,9 @@ export const venues: Venue[] = [
     referralCode: "xred-hotel-v-nesplein",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#161410",
-      accentColor: "#84C51F",
-      aesthetic: "dark",
+      primaryColor: "#100F0C",
+      accentColor: "#CFC9BC",
+      aesthetic: "dark", bannerUrl: "/venues/hotel-v-nesplein-amsterdam-banner.svg",
       tagline: "Nes theatre street. Design base. Old Centre.",
       logoText: "HOTEL V",
     },
@@ -2339,9 +2339,9 @@ export const venues: Venue[] = [
     referralCode: "xred-student-hotel-west",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#14181C",
-      accentColor: "#84C51F",
-      aesthetic: "dark",
+      primaryColor: "#140D10",
+      accentColor: "#D07A8A",
+      aesthetic: "dark", bannerUrl: "/venues/student-hotel-amsterdam-west-banner.svg",
       tagline: "Rooftop. Co-working. Social travel.",
       logoText: "THE STUDENT HOTEL",
     },
@@ -2570,7 +2570,7 @@ export const venues: Venue[] = [
     partnerUrl: "https://www.buffetvanodette.nl/",
     referralCode: "xred-buffet-odette",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#1A1208", accentColor: "#D4A840", aesthetic: "warm-dark", tagline: "Prinsengracht lunch. Jordaan institution.", logoText: "BUFFET VAN ODETTE" },
+    brand: { primaryColor: "#0D1210", accentColor: "#8FAE7E", aesthetic: "warm-dark", bannerUrl: "/venues/buffet-van-odette-amsterdam-banner.svg", tagline: "Prinsengracht lunch. Jordaan institution.", logoText: "BUFFET VAN ODETTE" },
   },
   // ─── AMSTERDAM — NEW HOTELS ─────────────────────────────────────────────────
   {
@@ -2731,9 +2731,9 @@ export const venues: Venue[] = [
     referralCode: "xred-club-311",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#101820",
-      accentColor: "#D6C39A",
-      aesthetic: "minimal",
+      primaryColor: "#160E08",
+      accentColor: "#E0784A",
+      aesthetic: "minimal", bannerUrl: "/venues/club-311-barcelona-banner.svg",
       tagline: "Sagrada Familia route. Member access.",
       logoText: "CLUB 311",
     },
@@ -2924,9 +2924,9 @@ export const venues: Venue[] = [
     referralCode: "xred-usa-chicago",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#101820",
-      accentColor: "#68D2FF",
-      aesthetic: "minimal",
+      primaryColor: "#0D0D12",
+      accentColor: "#8A7AE8",
+      aesthetic: "minimal", bannerUrl: "/venues/chicago-cannabis-market-banner.svg",
       tagline: "Midwest scale. City rhythm.",
       logoText: "CHICAGO",
     },
@@ -3019,9 +3019,9 @@ export const venues: Venue[] = [
     referralCode: "xred-usa-portland",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#121A14",
-      accentColor: "#88D95F",
-      aesthetic: "warm-dark",
+      primaryColor: "#120C0C",
+      accentColor: "#E25858",
+      aesthetic: "warm-dark", bannerUrl: "/venues/portland-cannabis-market-banner.svg",
       tagline: "Craft culture. Slow routes.",
       logoText: "PORTLAND",
     },
@@ -3143,7 +3143,7 @@ export const venues: Venue[] = [
       "https://cdn.prod.website-files.com/6981ad8672f6252d7d7bb320/698ad6446547cd2f2f643482_Downtown%20Los%20Angeles.png",
       "https://cdn.prod.website-files.com/6981ad8672f6252d7d7bb320/69b35b1f97fd1dfac5160a68_Locations%20Header.png",
     ],
-    brand: { primaryColor: "#080C08", accentColor: "#84C51F", aesthetic: "dark", tagline: "LA genetics. Single-origin. Downtown flagship.", logoText: "JUNGLE BOYS", bannerUrl: "https://cdn.prod.website-files.com/6981ad8672f6252d7d7bb320/698ad6446547cd2f2f643482_Downtown%20Los%20Angeles.png" },
+    brand: { primaryColor: "#0A1214", accentColor: "#4AC8C0", aesthetic: "dark", tagline: "LA genetics. Single-origin. Downtown flagship.", logoText: "JUNGLE BOYS", bannerUrl: "/venues/jungle-boys-downtown-la-banner.svg" },
   },
 
   // ─── LA HOTELS ────────────────────────────────────────────────────────────
@@ -3171,7 +3171,7 @@ export const venues: Venue[] = [
     bookingUrl: "/partners/booking?destination=Chateau+Marmont%2C+West+Hollywood%2C+USA&city=usa&venue=chateau-marmont-la&source=venue-data&ref=xred-chateau-marmont",
     referralCode: "xred-chateau-marmont",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0C0A06", accentColor: "#C8A870", aesthetic: "dark", tagline: "Sunset Strip castle. Bungalows. Absolute discretion.", logoText: "CHATEAU MARMONT", bannerUrl: "https://chateaumarmont.com/imgs/cm-outline-pan-2.png" },
+    brand: { primaryColor: "#14110A", accentColor: "#D9C08A", aesthetic: "dark", tagline: "Sunset Strip castle. Bungalows. Absolute discretion.", logoText: "CHATEAU MARMONT", bannerUrl: "/venues/chateau-marmont-la-banner.svg" },
   },
   {
     id: "beverly-hills-hotel-la",
@@ -3228,7 +3228,7 @@ export const venues: Venue[] = [
       "https://1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/Pool_182w1620.jpg",
       "https://1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/kt3f4nkj34gtfcsn4pn5p5h/4R3A6098w1920.jpg",
     ],
-    brand: { primaryColor: "#0C1008", accentColor: "#98B870", aesthetic: "minimal", tagline: "Rooftop pool. Sustainability. Sunset Strip.", logoText: "1 HOTEL WEST HOLLYWOOD", bannerUrl: "https://1hotels.com/sites/1hotels.com/files/styles/card_wide/public/brandfolder/c92r974nbgbw474h3wnzrf46/1_Hotel_WH_2019_46h2880.jpg" },
+    brand: { primaryColor: "#0C1408", accentColor: "#9CC85A", aesthetic: "minimal", tagline: "Rooftop pool. Sustainability. Sunset Strip.", logoText: "1 HOTEL WEST HOLLYWOOD", bannerUrl: "/venues/1-hotel-west-hollywood-la-banner.svg" },
   },
 
   // ─── LA RESTAURANTS ───────────────────────────────────────────────────────
@@ -3257,7 +3257,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.noburestaurants.com/malibu/",
     referralCode: "xred-nobu-malibu",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0C10", accentColor: "#C0A870", aesthetic: "dark", tagline: "Pacific cliffside. Black cod miso. LA power dining.", logoText: "NOBU MALIBU", bannerUrl: "https://www.noburestaurants.com/assets/Uploads/Artboard-812x_Resampled.jpg" },
+    brand: { primaryColor: "#120A14", accentColor: "#C878E8", aesthetic: "dark", tagline: "Pacific cliffside. Black cod miso. LA power dining.", logoText: "NOBU MALIBU", bannerUrl: "/venues/nobu-malibu-la-banner.svg" },
   },
   {
     id: "n-naka-la",
@@ -3430,7 +3430,7 @@ export const venues: Venue[] = [
       "https://markhotel-production.s3.amazonaws.com/app/uploads/2015/03/home_1-2000x1002.jpg",
       "https://markhotel-production.s3.amazonaws.com/app/uploads/2020/12/bar-crop-2-1024x635.jpg",
     ],
-    brand: { primaryColor: "#0A0C10", accentColor: "#C0A878", aesthetic: "minimal", tagline: "Upper East Side. Jean-Georges. Quiet luxury.", logoText: "THE MARK", bannerUrl: "https://markhotel-production.s3.amazonaws.com/app/uploads/2015/03/home_1-2000x1002.jpg" },
+    brand: { primaryColor: "#101014", accentColor: "#A8B8D8", aesthetic: "minimal", tagline: "Upper East Side. Jean-Georges. Quiet luxury.", logoText: "THE MARK", bannerUrl: "/venues/the-mark-hotel-nyc-banner.svg" },
   },
   {
     id: "1-hotel-central-park-nyc",
@@ -3460,7 +3460,7 @@ export const venues: Venue[] = [
       "https://www.1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/w7v59bpc6ts7q4qrqm7q4r9/Exterior_Central_Park_01_0187w720.jpg",
       "https://www.1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/39p3hfhb898hcc2ks7rwmv6f/Park_Terrace_Kingh1320.jpg",
     ],
-    brand: { primaryColor: "#0C100A", accentColor: "#98B870", aesthetic: "minimal", tagline: "Central Park. Sustainability. Living walls.", logoText: "1 HOTEL CENTRAL PARK", bannerUrl: "https://www.1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/4b8np46qpcr6rpqw9fqvnj/Facade_1_Hotel_Central_Park_Photo_Credit_Eric_Laignel-1200x900-e339a72h1440.jpg" },
+    brand: { primaryColor: "#0D0D12", accentColor: "#8A7AE8", aesthetic: "minimal", tagline: "Central Park. Sustainability. Living walls.", logoText: "1 HOTEL CENTRAL PARK", bannerUrl: "/venues/1-hotel-central-park-nyc-banner.svg" },
   },
   {
     id: "soho-grand-nyc",
@@ -3491,7 +3491,7 @@ export const venues: Venue[] = [
       "https://djmzubtjl6upi.cloudfront.net/wp-content/uploads/sites/2/2021/04/Soho-terrace-suite.jpg",
       "https://djmzubtjl6upi.cloudfront.net/wp-content/uploads/sites/2/2021/04/soho-diner-drinks.jpeg",
     ],
-    brand: { primaryColor: "#0A0A0C", accentColor: "#C0A080", aesthetic: "dark", tagline: "SoHo original. Grand Bar. Downtown energy.", logoText: "SOHO GRAND", bannerUrl: "https://djmzubtjl6upi.cloudfront.net/wp-content/uploads/sites/2/2021/04/Soho-terrace-suite.jpg" },
+    brand: { primaryColor: "#120C0C", accentColor: "#E25858", aesthetic: "dark", tagline: "SoHo original. Grand Bar. Downtown energy.", logoText: "SOHO GRAND", bannerUrl: "/venues/soho-grand-nyc-banner.svg" },
   },
 
   // ─── NYC RESTAURANTS ──────────────────────────────────────────────────────
@@ -3551,7 +3551,7 @@ export const venues: Venue[] = [
       "https://cdn.sanity.io/images/gb1p0gbj/production/e1dc13afd3787e46214ce6375980bfb012ca93b1-3500x2335.jpg",
       "https://cdn.sanity.io/images/gb1p0gbj/production/7465bad9054f42c684c220220d77eeff58ec40fb-5568x3712.jpg",
     ],
-    brand: { primaryColor: "#140808", accentColor: "#C04030", aesthetic: "dark", tagline: "NYC's most wanted table. Italian-American. The scene.", logoText: "CARBONE", bannerUrl: "https://cdn.sanity.io/images/gb1p0gbj/production/783c85fd5a4b8f6c2d60f3fd0793cb6cec37c6a0-1440x695.png" },
+    brand: { primaryColor: "#0A1214", accentColor: "#4AC8C0", aesthetic: "dark", tagline: "NYC's most wanted table. Italian-American. The scene.", logoText: "CARBONE", bannerUrl: "/venues/carbone-nyc-banner.svg" },
   },
   {
     id: "katzs-deli-nyc",
@@ -3697,7 +3697,7 @@ export const venues: Venue[] = [
       "https://cdn.wynnresorts.com/image/upload/v1587100192/Wynn%20Las%20Vegas/Generic%20Teaser%20Cards/721_Wynn_Resort_Pool_Barbara_kraft",
       "https://cdn.wynnresorts.com/image/upload/v1625771450/Wynn%20Las%20Vegas/Experiences/Golf/Golf-18th%20Green%20WIDE-Barbara%20Kraft_10-24-828x466",
     ],
-    brand: { primaryColor: "#0A0808", accentColor: "#C8A860", aesthetic: "dark", tagline: "Vegas luxury benchmark. Golf. Five-star dining.", logoText: "WYNN LAS VEGAS", bannerUrl: "https://cdn.wynnresorts.com/image/upload/w_auto,f_auto,q_auto/v1681489645/Wynn%20Las%20Vegas/Home%20Page/Heros/wynn-home-poster-image-desktop" },
+    brand: { primaryColor: "#14110A", accentColor: "#D9C08A", aesthetic: "dark", tagline: "Vegas luxury benchmark. Golf. Five-star dining.", logoText: "WYNN LAS VEGAS", bannerUrl: "/venues/wynn-las-vegas-banner.svg" },
   },
   {
     id: "bellagio-las-vegas",
@@ -3952,7 +3952,7 @@ export const venues: Venue[] = [
       "https://www.faena.com/sites/default/files/styles/big_callout_d/public/2026-01/20251201-DSC01013_0.jpg?h=b95b27cf&itok=kLw7gUAt",
       "https://www.faena.com/sites/default/files/styles/three_column_image_callout_m/public/2026-03/20251201-DJI_0319.jpg?h=9c86ceb9&itok=7Md1p93C",
     ],
-    brand: { primaryColor: "#14080A", accentColor: "#D04858", aesthetic: "dark", tagline: "Damien Hirst. Theatrical luxury. Miami's most dramatic hotel.", logoText: "FAENA MIAMI BEACH", bannerUrl: "https://www.faena.com/sites/default/files/styles/big_callout_d/public/2025-06/Faena%20Suite_Bedroom_Photo%20by%20Nik%20Koenig.jpg?h=3e8da8cb&itok=qfOsXf44" },
+    brand: { primaryColor: "#0C1408", accentColor: "#9CC85A", aesthetic: "dark", tagline: "Damien Hirst. Theatrical luxury. Miami's most dramatic hotel.", logoText: "FAENA MIAMI BEACH", bannerUrl: "/venues/faena-hotel-miami-beach-banner.svg" },
   },
   {
     id: "1-hotel-south-beach-miami",
@@ -3982,7 +3982,7 @@ export const venues: Venue[] = [
       "https://www.1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/7b9bx9cbk65j9ngxk35fq7bv/Main_Pool_4w1440.jpg",
       "https://www.1hotels.com/sites/1hotels.com/files/styles/card/public/brandfolder/Audix1HotelSouthBeachFinal-11h2879.jpg",
     ],
-    brand: { primaryColor: "#0A100C", accentColor: "#80B870", aesthetic: "minimal", tagline: "Beachfront. Bamford Spa. Sustainability-forward.", logoText: "1 HOTEL SOUTH BEACH", bannerUrl: "https://www.1hotels.com/sites/1hotels.com/files/styles/card_wide/public/brandfolder/hxsf5wt7smjb347sqh9kvx/1_Hotels_MIA_Walkabout_02_0187-1920w1620.jpg" },
+    brand: { primaryColor: "#120A14", accentColor: "#C878E8", aesthetic: "minimal", tagline: "Beachfront. Bamford Spa. Sustainability-forward.", logoText: "1 HOTEL SOUTH BEACH", bannerUrl: "/venues/1-hotel-south-beach-miami-banner.svg" },
   },
   {
     id: "edition-miami-beach",
@@ -4013,7 +4013,7 @@ export const venues: Venue[] = [
       "https://www.editionhotels.com/wp-content/uploads/2016/01/Beach-Club-2000x1000.jpg",
       "https://www.editionhotels.com/wp-content/uploads/2016/01/The-Spa-at-The-Miami-Beach-EDITION-Relaxation-Room-2000x1000.jpg",
     ],
-    brand: { primaryColor: "#0A0C10", accentColor: "#A0C0E0", aesthetic: "dark", tagline: "Ian Schrager. Jean-Georges. Bowling and pool in one hotel.", logoText: "MIAMI BEACH EDITION", bannerUrl: "https://www.editionhotels.com/wp-content/uploads/2016/01/Oceanfront-Balcony-King-2000x1000.jpg" },
+    brand: { primaryColor: "#101014", accentColor: "#A8B8D8", aesthetic: "dark", tagline: "Ian Schrager. Jean-Georges. Bowling and pool in one hotel.", logoText: "MIAMI BEACH EDITION", bannerUrl: "/venues/edition-miami-beach-banner.svg" },
   },
 
   // ─── MIAMI RESTAURANTS ────────────────────────────────────────────────────
@@ -4134,7 +4134,7 @@ export const venues: Venue[] = [
       "https://media.dispensary33.com/display-cases.jpg",
       "https://media.dispensary33.com/d33wbez-2.jpg",
     ],
-    brand: { primaryColor: "#0A0C10", accentColor: "#4878D8", aesthetic: "dark", tagline: "Andersonville independent. Craft Illinois. Education-first.", logoText: "DISPENSARY 33", bannerUrl: "https://media.dispensary33.com/display-case-reach.jpg" },
+    brand: { primaryColor: "#0D0D12", accentColor: "#8A7AE8", aesthetic: "dark", tagline: "Andersonville independent. Craft Illinois. Education-first.", logoText: "DISPENSARY 33", bannerUrl: "/venues/dispensary-33-chicago-banner.svg" },
   },
   {
     id: "sunnyside-chicago-wicker",
@@ -4188,7 +4188,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.risedispensaries.com/",
     referralCode: "xred-rise-chicago",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0C08", accentColor: "#88D040", aesthetic: "minimal", tagline: "Multiple locations. Wide selection. Citywide Chicago.", logoText: "RISE DISPENSARIES" },
+    brand: { primaryColor: "#120C0C", accentColor: "#E25858", aesthetic: "minimal", bannerUrl: "/venues/rise-dispensary-chicago-banner.svg", tagline: "Multiple locations. Wide selection. Citywide Chicago.", logoText: "RISE DISPENSARIES" },
   },
 
   // ─── CHICAGO HOTELS ───────────────────────────────────────────────────────
@@ -4273,7 +4273,7 @@ export const venues: Venue[] = [
       "https://assets.langhamhotels.com/is/image/langhamhotelsstage/tlchi-chuan-spa-moon-gate",
       "https://assets.langhamhotels.com/is/image/langhamhotelsstage/tlchi-dine-travelle-main-dining-room",
     ],
-    brand: { primaryColor: "#0A0A0E", accentColor: "#9090C0", aesthetic: "minimal", tagline: "Mies van der Rohe building. Chuan Spa. River views.", logoText: "THE LANGHAM CHICAGO", bannerUrl: "https://assets.langhamhotels.com/is/image/langhamhotelsstage/tlchi-linger-longer" },
+    brand: { primaryColor: "#0A1214", accentColor: "#4AC8C0", aesthetic: "minimal", tagline: "Mies van der Rohe building. Chuan Spa. River views.", logoText: "THE LANGHAM CHICAGO", bannerUrl: "/venues/langham-chicago-banner.svg" },
   },
 
   // ─── CHICAGO RESTAURANTS ──────────────────────────────────────────────────
@@ -4307,7 +4307,7 @@ export const venues: Venue[] = [
       "https://images.squarespace-cdn.com/content/v1/6091adceeec0df416e2b512e/1620245506638-QYQC5XJMNTCP2GI41SLQ/20160429_gilsonAlinea_0005.jpg",
       "https://images.squarespace-cdn.com/content/v1/6091adceeec0df416e2b512e/1620245788581-XACF8LIM8DF28GZAB4HP/20171102_alinea_0039.jpg",
     ],
-    brand: { primaryColor: "#080808", accentColor: "#E8E0D0", aesthetic: "minimal", tagline: "Three Michelin stars. Helium balloons. World's 50 Best.", logoText: "ALINEA", bannerUrl: "https://images.squarespace-cdn.com/content/v1/6091adceeec0df416e2b512e/1620244610795-GANI6Y4MZVZK7FGYILVG/20171102_alinea_0280.jpg" },
+    brand: { primaryColor: "#14110A", accentColor: "#D9C08A", aesthetic: "minimal", tagline: "Three Michelin stars. Helium balloons. World's 50 Best.", logoText: "ALINEA", bannerUrl: "/venues/alinea-chicago-banner.svg" },
   },
   {
     id: "girl-and-the-goat-chicago",
@@ -4537,7 +4537,7 @@ export const venues: Venue[] = [
       "https://saisonsf.com/wp-content/uploads/2025/08/Antelope-Show-LEE_6180sm.jpg",
       "https://saisonsf.com/wp-content/uploads/2025/09/AdahliaColexSaisonshootJuly2023-5-1.jpg",
     ],
-    brand: { primaryColor: "#0A0808", accentColor: "#D08840", aesthetic: "dark", tagline: "Three Michelin stars. Live-fire hearth. Own farm and boat.", logoText: "SAISON", bannerUrl: "https://saisonsf.com/wp-content/uploads/2025/06/grill.jpg" },
+    brand: { primaryColor: "#0C1408", accentColor: "#9CC85A", aesthetic: "dark", tagline: "Three Michelin stars. Live-fire hearth. Own farm and boat.", logoText: "SAISON", bannerUrl: "/venues/saison-sf-banner.svg" },
   },
   {
     id: "zuni-cafe-sf",
@@ -4569,7 +4569,7 @@ export const venues: Venue[] = [
       "https://zunicafe.com/wp-content/uploads/Zuni-Favorites-6-1400x934.jpg",
       "https://zunicafe.com/wp-content/uploads/zuni-12-1400x934.jpg",
     ],
-    brand: { primaryColor: "#100C06", accentColor: "#C89030", aesthetic: "warm-dark", tagline: "Iconic roast chicken. 1979 institution. SF culture canon.", logoText: "ZUNI CAFÉ", bannerUrl: "https://zunicafe.com/wp-content/uploads/zuni-8-1400x934.jpg" },
+    brand: { primaryColor: "#120A14", accentColor: "#C878E8", aesthetic: "warm-dark", tagline: "Iconic roast chicken. 1979 institution. SF culture canon.", logoText: "ZUNI CAFÉ", bannerUrl: "/venues/zuni-cafe-sf-banner.svg" },
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -4629,7 +4629,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://livwell.com/",
     referralCode: "xred-livwell-denver",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0C08", accentColor: "#58C840", aesthetic: "minimal", tagline: "Colorado's largest. Consistent quality. Colfax Ave.", logoText: "LIVWELL" },
+    brand: { primaryColor: "#101014", accentColor: "#A8B8D8", aesthetic: "minimal", bannerUrl: "/venues/livwell-colfax-denver-banner.svg", tagline: "Colorado's largest. Consistent quality. Colfax Ave.", logoText: "LIVWELL" },
   },
 
   {
@@ -4715,7 +4715,7 @@ export const venues: Venue[] = [
       "https://marriott.cdn.tambourine.com/the-brown-palace-hotel-and-spa/media/thebrownpalacehotelandspaautographcollection-homepage-historicallyrefinedstays-68efb6216c4b9.jpg",
       "https://marriott.cdn.tambourine.com/the-brown-palace-hotel-and-spa/media/thebrownpalacehotelandspa-dining-churchillbar-gallery-newimage-01-694318d85152e.jpg",
     ],
-    brand: { primaryColor: "#0C0A06", accentColor: "#C8A858", aesthetic: "warm-dark", tagline: "Since 1892. Presidential atrium. Denver grand dame.", logoText: "BROWN PALACE", bannerUrl: "https://marriott.cdn.tambourine.com/the-brown-palace-hotel-and-spa/media/thebrownpalacehotelandspa-homepage-historicallyrefinedstays-6924cc074b5a8.jpg" },
+    brand: { primaryColor: "#0D0D12", accentColor: "#8A7AE8", aesthetic: "warm-dark", tagline: "Since 1892. Presidential atrium. Denver grand dame.", logoText: "BROWN PALACE", bannerUrl: "/venues/brown-palace-denver-banner.svg" },
   },
 
   // ─── DENVER RESTAURANTS ───────────────────────────────────────────────────
@@ -4748,7 +4748,7 @@ export const venues: Venue[] = [
       "https://www.riojadenver.com/wp-content/uploads/2020/08/rioja-2653-copy-1.jpg",
       "https://www.riojadenver.com/wp-content/uploads/2020/08/beth-and-jen-Bryan-Grant.jpg",
     ],
-    brand: { primaryColor: "#0C0A06", accentColor: "#C87840", aesthetic: "warm-dark", tagline: "James Beard winner. Handmade pasta. Larimer Square.", logoText: "RIOJA", bannerUrl: "https://www.riojadenver.com/wp-content/uploads/2020/08/rioja-2482.jpg" },
+    brand: { primaryColor: "#120C0C", accentColor: "#E25858", aesthetic: "warm-dark", tagline: "James Beard winner. Handmade pasta. Larimer Square.", logoText: "RIOJA", bannerUrl: "/venues/rioja-denver-banner.svg" },
   },
   {
     id: "beast-and-bottle-denver",
@@ -4779,7 +4779,7 @@ export const venues: Venue[] = [
       "https://beastandbottle.com/wp-content/uploads/2016/08/square_plate_dinner-1-e1476842022785.jpg",
       "https://beastandbottle.com/wp-content/uploads/2016/08/two_cocktails_redbrown-e1476841788746.jpg",
     ],
-    brand: { primaryColor: "#100A04", accentColor: "#C07828", aesthetic: "warm-dark", tagline: "Whole-animal butchery. Colorado farms. Uptown Denver.", logoText: "BEAST + BOTTLE", bannerUrl: "https://beastandbottle.com/wp-content/uploads/2016/08/circle_plate_fruitetc-e1476842125642.jpg" },
+    brand: { primaryColor: "#0A1214", accentColor: "#4AC8C0", aesthetic: "warm-dark", tagline: "Whole-animal butchery. Colorado farms. Uptown Denver.", logoText: "BEAST + BOTTLE", bannerUrl: "/venues/beast-and-bottle-denver-banner.svg" },
   },
 
   {
@@ -4840,9 +4840,9 @@ export const venues: Venue[] = [
     referralCode: "xred-tenerife-radar",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#f1dfb8",
-      accentColor: "#84C51F",
-      aesthetic: "light",
+      primaryColor: "#0A1016",
+      accentColor: "#4A9BD4",
+      aesthetic: "light", bannerUrl: "/venues/tenerife-social-club-radar-banner.svg",
       tagline: "Verify before you move.",
       logoText: "TENERIFE RADAR",
     },
@@ -4939,9 +4939,9 @@ export const venues: Venue[] = [
     referralCode: "xred-marbella-market",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#f4ead2",
-      accentColor: "#84C51F",
-      aesthetic: "light",
+      primaryColor: "#12100A",
+      accentColor: "#D9C08A",
+      aesthetic: "light", bannerUrl: "/venues/marbella-lifestyle-market-banner.svg",
       tagline: "Stay. Eat. Do. Move.",
       logoText: "MARBELLA MARKET",
     },
@@ -5034,9 +5034,9 @@ export const venues: Venue[] = [
     referralCode: "xred-highland-cafe",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#0F1510",
-      accentColor: "#88D95F",
-      aesthetic: "dark",
+      primaryColor: "#0A140E",
+      accentColor: "#4AC878",
+      aesthetic: "dark", bannerUrl: "/venues/highland-cafe-bangkok-banner.svg",
       tagline: "Grassroots Bangkok.",
       logoText: "HIGHLAND CAFE",
     },
@@ -5097,9 +5097,9 @@ export const venues: Venue[] = [
     referralCode: "xred-bloomwell",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#F2EFE7",
-      accentColor: "#84C51F",
-      aesthetic: "light",
+      primaryColor: "#0E1112",
+      accentColor: "#78C8C0",
+      aesthetic: "light", bannerUrl: "/venues/bloomwell-germany-banner.svg",
       tagline: "Medical access context.",
       logoText: "BLOOMWELL",
     },
@@ -5128,9 +5128,9 @@ export const venues: Venue[] = [
     referralCode: "xred-demecan",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#101715",
-      accentColor: "#B6DF5C",
-      aesthetic: "minimal",
+      primaryColor: "#121012",
+      accentColor: "#D0D0D8",
+      aesthetic: "minimal", bannerUrl: "/venues/demecan-germany-banner.svg",
       tagline: "Supply-side signal.",
       logoText: "DEMECAN",
     },
@@ -5191,9 +5191,9 @@ export const venues: Venue[] = [
     referralCode: "xred-cannaline",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#F3EFE3",
-      accentColor: "#84C51F",
-      aesthetic: "light",
+      primaryColor: "#120E08",
+      accentColor: "#C9A227",
+      aesthetic: "light", bannerUrl: "/venues/cannaline-prague-banner.svg",
       tagline: "Hemp and CBD products.",
       logoText: "CANNALINE",
     },
@@ -5222,9 +5222,9 @@ export const venues: Venue[] = [
     referralCode: "xred-czechemp",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#101715",
-      accentColor: "#88D95F",
-      aesthetic: "minimal",
+      primaryColor: "#0E0A14",
+      accentColor: "#A98AE8",
+      aesthetic: "minimal", bannerUrl: "/venues/czechemp-cluster-banner.svg",
       tagline: "Czech hemp infrastructure.",
       logoText: "CZECHEMP",
     },
@@ -5285,9 +5285,9 @@ export const venues: Venue[] = [
     referralCode: "xred-fields-of-green",
     claimStatus: "unclaimed",
     brand: {
-      primaryColor: "#f2efe7",
-      accentColor: "#84C51F",
-      aesthetic: "light",
+      primaryColor: "#0A1214",
+      accentColor: "#4AA8C8",
+      aesthetic: "light", bannerUrl: "/venues/fields-of-green-for-all-banner.svg",
       tagline: "Policy. Rights. Education.",
       logoText: "FIELDS OF GREEN",
     },
@@ -5439,7 +5439,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://bardelpla.cat/",
     referralCode: "xred-bar-del-pla",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#1A1008", accentColor: "#C87830", aesthetic: "warm-dark", tagline: "Catalan tapas. El Born. Local institution.", logoText: "BAR DEL PLA" },
+    brand: { primaryColor: "#14100A", accentColor: "#D9B04A", aesthetic: "warm-dark", bannerUrl: "/venues/bar-del-pla-barcelona-banner.svg", tagline: "Catalan tapas. El Born. Local institution.", logoText: "BAR DEL PLA" },
   },
   {
     id: "bodega-sepulveda-barcelona",
@@ -5497,7 +5497,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.parkingpizza.com/",
     referralCode: "xred-parking-pizza",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#1A0E08", accentColor: "#D45020", aesthetic: "warm-dark", tagline: "Best pizza. Converted garage. Post-session.", logoText: "PARKING PIZZA" },
+    brand: { primaryColor: "#0C1218", accentColor: "#5A9BD4", aesthetic: "warm-dark", bannerUrl: "/venues/parking-pizza-barcelona-banner.svg", tagline: "Best pizza. Converted garage. Post-session.", logoText: "PARKING PIZZA" },
   },
 
   // ─── BARCELONA PREMIUM HOTELS ────────────────────────────────────────────────
@@ -5789,7 +5789,7 @@ export const venues: Venue[] = [
     bookingUrl: undefined,
     referralCode: "xred-casc",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#1A3A2A", accentColor: "#84C51F", aesthetic: "minimal", tagline: "Members-only. Long established. Eixample.", logoText: "CASC" },
+    brand: { primaryColor: "#130A10", accentColor: "#C85A78", aesthetic: "minimal", bannerUrl: "/venues/casc-barcelona-banner.svg", tagline: "Members-only. Long established. Eixample.", logoText: "CASC" },
   },
   {
     id: "club-de-fumadors-barcelona",
@@ -5818,7 +5818,7 @@ export const venues: Venue[] = [
     bookingUrl: undefined,
     referralCode: "xred-fumadors",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#2A1A0A", accentColor: "#C8A040", aesthetic: "warm-dark", tagline: "Eixample. Cosmopolitan. Relaxed.", logoText: "FUMADORS" },
+    brand: { primaryColor: "#0E1410", accentColor: "#7EC87E", aesthetic: "warm-dark", bannerUrl: "/venues/club-de-fumadors-barcelona-banner.svg", tagline: "Eixample. Cosmopolitan. Relaxed.", logoText: "FUMADORS" },
   },
   {
     id: "barcelona-cannabis-club-gracia",
@@ -5847,7 +5847,7 @@ export const venues: Venue[] = [
     bookingUrl: undefined,
     referralCode: "xred-gracia-club",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#1C2A1A", accentColor: "#84C51F", aesthetic: "minimal", tagline: "Gràcia. Local. Creative.", logoText: "GRÀCIA CC" },
+    brand: { primaryColor: "#151008", accentColor: "#C9A227", aesthetic: "minimal", bannerUrl: "/venues/barcelona-cannabis-club-gracia-banner.svg", tagline: "Gràcia. Local. Creative.", logoText: "GRÀCIA CC" },
   },
   {
     id: "the-tree-club-barcelona",
@@ -5905,7 +5905,7 @@ export const venues: Venue[] = [
     bookingUrl: undefined,
     referralCode: "xred-club-420",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#1A0A1A", accentColor: "#C040C0", aesthetic: "dark", tagline: "Sant Antoni. Community. Events.", logoText: "CLUB 420" },
+    brand: { primaryColor: "#160E08", accentColor: "#E0784A", aesthetic: "dark", bannerUrl: "/venues/club-420-barcelona-banner.svg", tagline: "Sant Antoni. Community. Events.", logoText: "CLUB 420" },
   },
 
   // ─── BARCELONA RESTAURANTS ───────────────────────────────────────────────────
@@ -5936,7 +5936,7 @@ export const venues: Venue[] = [
     bookingUrl: undefined,
     referralCode: "xred-calders",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#1A0A00", accentColor: "#D4601A", aesthetic: "warm-dark", tagline: "Vermouth. Bravas. Sant Antoni.", logoText: "CALDERS" },
+    brand: { primaryColor: "#14100A", accentColor: "#D9B04A", aesthetic: "warm-dark", bannerUrl: "/venues/bar-calders-barcelona-banner.svg", tagline: "Vermouth. Bravas. Sant Antoni.", logoText: "CALDERS" },
   },
   {
     id: "cerveceria-catalana-barcelona",
@@ -5965,7 +5965,7 @@ export const venues: Venue[] = [
     bookingUrl: undefined,
     referralCode: "xred-cerveceria-catalana",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A1A2A", accentColor: "#E0A020", aesthetic: "warm-dark", tagline: "Best tapas in Eixample. Full stop.", logoText: "CERVECERÍA CATALANA" },
+    brand: { primaryColor: "#0C1218", accentColor: "#5A9BD4", aesthetic: "warm-dark", bannerUrl: "/venues/cerveceria-catalana-barcelona-banner.svg", tagline: "Best tapas in Eixample. Full stop.", logoText: "CERVECERÍA CATALANA" },
   },
   {
     id: "la-pepita-barcelona",
@@ -5994,7 +5994,7 @@ export const venues: Venue[] = [
     bookingUrl: undefined,
     referralCode: "xred-la-pepita",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#1A0A1A", accentColor: "#E060A0", aesthetic: "light", tagline: "Montaditos. Natural wine. Good vibes.", logoText: "LA PEPITA" },
+    brand: { primaryColor: "#130A10", accentColor: "#C85A78", aesthetic: "light", bannerUrl: "/venues/la-pepita-barcelona-banner.svg", tagline: "Montaditos. Natural wine. Good vibes.", logoText: "LA PEPITA" },
   },
 
   // ─── BARCELONA HOTELS ────────────────────────────────────────────────────────
@@ -6054,7 +6054,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.pullman-barcelona-skipper.com/",
     referralCode: "xred-pullman-skipper",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A1A28", accentColor: "#4080C0", aesthetic: "dark", tagline: "Vila Olímpica. Pool. Marina views.", logoText: "PULLMAN SKIPPER" },
+    brand: { primaryColor: "#0E1410", accentColor: "#7EC87E", aesthetic: "dark", bannerUrl: "/venues/pullman-barcelona-skipper-banner.svg", tagline: "Vila Olímpica. Pool. Marina views.", logoText: "PULLMAN SKIPPER" },
   },
 
   // ─── TENERIFE HOTELS ─────────────────────────────────────────────────────────
@@ -6200,7 +6200,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://www.thefork.com/search#cityId=679953&searchQuery=El+Duende+del+Fuego+Tenerife",
     referralCode: "xred-duende-fuego",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#1A0C06", accentColor: "#D05020", aesthetic: "warm-dark", tagline: "Canarian kitchen. South coast local.", logoText: "EL DUENDE" },
+    brand: { primaryColor: "#141004", accentColor: "#E0C04A", aesthetic: "warm-dark", bannerUrl: "/venues/el-duende-del-fuego-tenerife-banner.svg", tagline: "Canarian kitchen. South coast local.", logoText: "EL DUENDE" },
   },
   {
     id: "kazan-santa-cruz-tenerife",
@@ -6751,7 +6751,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://katagreen.co.th/",
     referralCode: "xred-kata-green",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#081008", accentColor: "#60B830", aesthetic: "minimal", tagline: "Kata Beach. Recovery strains. Calm south coast.", logoText: "KATA GREEN" },
+    brand: { primaryColor: "#141006", accentColor: "#E0B84A", aesthetic: "minimal", bannerUrl: "/venues/kata-green-dispensary-phuket-banner.svg", tagline: "Kata Beach. Recovery strains. Calm south coast.", logoText: "KATA GREEN" },
   },
   {
     id: "amanpuri-phuket",
@@ -7134,7 +7134,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://srithanuorganic.co.th/",
     referralCode: "xred-srithanu-organic",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0A0E08", accentColor: "#88C848", aesthetic: "minimal", tagline: "Organic. Wellness community. Srithanu west coast.", logoText: "SRITHANU ORGANIC" },
+    brand: { primaryColor: "#0C1014", accentColor: "#6FA8DC", aesthetic: "minimal", bannerUrl: "/venues/srithanu-organic-cannabis-phangan-banner.svg", tagline: "Organic. Wellness community. Srithanu west coast.", logoText: "SRITHANU ORGANIC" },
   },
   {
     id: "haad-tien-beach-resort-phangan",
@@ -7246,7 +7246,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://bloomchiangmai.com/",
     referralCode: "xred-bloom-cm",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0C100A", accentColor: "#90B840", aesthetic: "warm-dark", tagline: "Old City. Lanna architecture. Northern Thai strains.", logoText: "BLOOM CANNABIS" },
+    brand: { primaryColor: "#140C08", accentColor: "#E08A4A", aesthetic: "warm-dark", bannerUrl: "/venues/bloom-cannabis-old-city-chiang-mai-banner.svg", tagline: "Old City. Lanna architecture. Northern Thai strains.", logoText: "BLOOM CANNABIS" },
   },
   {
     id: "rosewood-chiang-mai",
@@ -8026,7 +8026,7 @@ export const venues: Venue[] = [
     bookingUrl: "https://lokal-dlouha.ambi.cz/en/",
     referralCode: "xred-lokal-prague",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#1A1008", accentColor: "#D4A030", aesthetic: "warm-dark", tagline: "Tank Pilsner. Schnitzel. Czech pub done properly.", logoText: "LOKÁL" },
+    brand: { primaryColor: "#100E0C", accentColor: "#D9B88A", aesthetic: "warm-dark", bannerUrl: "/venues/lokal-prague-banner.svg", tagline: "Tank Pilsner. Schnitzel. Czech pub done properly.", logoText: "LOKÁL" },
   },
 
   // ─── CAPE TOWN (SOUTH AFRICA) HOTELS ─────────────────────────────────────────
@@ -8284,7 +8284,7 @@ export const venues: Venue[] = [
     partnerUrl: "https://cannacabana.com/",
     referralCode: "xred-canna-cabana",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#0F3A2A", accentColor: "#F4C542", aesthetic: "warm-dark", tagline: "Broad range, practical retail.", logoText: "CANNA CABANA" },
+    brand: { primaryColor: "#0E1014", accentColor: "#7AA8D8", aesthetic: "warm-dark", bannerUrl: "/venues/canna-cabana-toronto-banner.svg", tagline: "Broad range, practical retail.", logoText: "CANNA CABANA" },
   },
   {
     id: "village-bloomery-vancouver",
@@ -8509,7 +8509,7 @@ export const venues: Venue[] = [
     partnerUrl: "https://vancouver.ca/parks-recreation-culture/seawall.aspx",
     referralCode: "xred-stanley-park",
     claimStatus: "unclaimed",
-    brand: { primaryColor: "#102A22", accentColor: "#7FB35B", aesthetic: "light", tagline: "Water, trees, mountains, reset.", logoText: "STANLEY PARK SEAWALL" },
+    brand: { primaryColor: "#140C0C", accentColor: "#E27868", aesthetic: "light", bannerUrl: "/venues/stanley-park-seawall-vancouver-banner.svg", tagline: "Water, trees, mountains, reset.", logoText: "STANLEY PARK SEAWALL" },
   },
   // ─────────── Netherlands: Den Haag Stay/Eat/Do ───────────
   { id: "hotel-des-indes-den-haag", slug: "hotel-des-indes-den-haag", name: "Hotel Des Indes", cityId: "den-haag", city: "Den Haag", address: "Lange Voorhout 54-56", postcode: "2514 EG", country: "Netherlands", neighborhood: "Centrum", type: "Luxury Hotel", layer: "stay", image: "/cities/den-haag-binnenhof.jpg", description: "A 19th-century palace turned Marriott Luxury Collection landmark, still the diplomatic quarter's most cinematic address. High tea under the chandeliered atrium remains a rite of passage for anyone with a serious weekend in The Hague.", highlights: ["Chandeliered lobby lounge", "Legendary high tea", "Diplomat-quarter setting", "Restored 1858 grand staircase"], bestFor: ["Milestone stays", "Old-world romance", "Business & state travellers"], vibeIds: ["luxury", "quiet", "design"], coordinates: { x: 52, y: 48, lat: 52.0822955, lng: 4.3118638 }, guideNote: "The dignified base for a slow Hague route: coffee at Des Indes, walk five minutes to Mauritshuis, then wander Hofkwartier for an afternoon coffeeshop stop.", openingHours: "24/7 front desk", listingTier: "featured", isFeatured: true, featuredWeight: 88, partnerUrl: "https://www.hoteldesindesthehague.com", bookingUrl: "https://www.hoteldesindesthehague.com", referralCode: "xred-hotel-des-indes", claimStatus: "unclaimed" },
